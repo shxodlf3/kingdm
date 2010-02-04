@@ -1,4 +1,7 @@
-﻿Version 1.1.0 Beta 2
+﻿Version 1.2.0 Beta 3
+	
+
+Version 1.1.0 Beta 2
 
 	Fixed: Incorrectly showing other players when Hide Others is enabled.
 	Added: A minimize button for the main window.

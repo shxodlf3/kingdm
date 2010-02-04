@@ -28,8 +28,14 @@ using System.Windows.Forms;
 
 namespace KingsDamageMeter.Forms
 {
+    /// <summary>
+    /// A class that represents an ignore list form.
+    /// </summary>
     public partial class IgnoreListForm : Form
     {
+        /// <summary>
+        /// A class that represents an ignore list form.
+        /// </summary>
         public IgnoreListForm()
         {
             InitializeComponent();

@@ -227,7 +227,7 @@ namespace KingsDamageMeter
             if (matches.Count > 0)
             {
                 string name = matches[0].Groups[_NameGroupName].Value;
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetNumber();
+                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
                 
                 if (DamageInflicted != null)
                 {
@@ -242,7 +242,7 @@ namespace KingsDamageMeter
             if (matches.Count > 0)
             {
                 string name = matches[0].Groups[_NameGroupName].Value;
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetNumber();
+                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
 
                 if (CriticalInflicted != null)
                 {
@@ -280,7 +280,7 @@ namespace KingsDamageMeter
             matches = _SkillDamageInflictedRegex.Matches(line);
             if (matches.Count > 0)
             {
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetNumber();
+                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
                 string skill = matches[0].Groups[_SkillGroupName].Value;
 
                 if (_Dots.ContainsKey(skill))

@@ -23,7 +23,10 @@ namespace KingsDamageMeter
 {
     public static class Extensions
     {
-        public static int GetNumber(this string expression)
+        /// <summary>
+        /// Get all digits from a specified string.
+        /// </summary>
+        public static int GetDigits(this string expression)
         {
             if (String.IsNullOrEmpty(expression))
             {

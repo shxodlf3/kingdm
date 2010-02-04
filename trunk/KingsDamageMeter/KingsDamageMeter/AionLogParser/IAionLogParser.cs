@@ -30,6 +30,7 @@ namespace KingsDamageMeter
 
         event EventHandler FileNotFound;
         event DamageInflictedEventHandler DamageInflicted;
+        event DamageInflictedEventHandler CriticalInflicted;
 
         void Start(string file);
         void Stop();

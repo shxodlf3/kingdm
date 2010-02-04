@@ -26,6 +26,9 @@ using System.Linq;
 
 namespace KingsDamageMeter.Controls
 {
+    /// <summary>
+    /// A class that represents a player scroll viewer.
+    /// </summary>
     public partial class PlayerScrollViewer : UserControl
     {
         private bool _HideOthers = false;
@@ -37,6 +40,9 @@ namespace KingsDamageMeter.Controls
 
         public event EventHandler IgnoreListChanged;
 
+        /// <summary>
+        /// Gets or sets the player names that will be ignored.
+        /// </summary>
         public StringCollection IgnoreList
         {
             get
@@ -55,11 +61,18 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// A class that represents a player scroll viewer.
+        /// </summary>
         public PlayerScrollViewer()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Add a player to the scroll viewer.
+        /// </summary>
+        /// <param name="name">The name of the player</param>
         public void AddPlayer(string name)
         {
             if (!String.IsNullOrEmpty(name))
@@ -85,6 +98,10 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Remove a player from the scroll viewer.
+        /// </summary>
+        /// <param name="name">The name of the player</param>
         public void RemovePlayer(string name)
         {
             if (PlayerExists(name))
@@ -98,6 +115,11 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Update a player's damage.
+        /// </summary>
+        /// <param name="name">The name of the player</param>
+        /// <param name="damage">The total damage the player has dealt</param>
         public void UpdatePlayerDamage(string name, int damage)
         {
             if (PlayerExists(name))
@@ -115,11 +137,20 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Indicates whether the player already exists in the scroll viewer.
+        /// </summary>
+        /// <param name="name">The name of the player</param>
+        /// <returns>bool</returns>
         public bool PlayerExists(string name)
         {
             return _Players.ContainsKey(name);
         }
 
+        /// <summary>
+        /// Adds a player to the ignore list.
+        /// </summary>
+        /// <param name="name">The name of the player</param>
         public void IgnorePlayer(string name)
         {
             if (!String.IsNullOrEmpty(name))

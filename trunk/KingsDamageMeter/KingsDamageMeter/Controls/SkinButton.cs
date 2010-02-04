@@ -25,6 +25,9 @@ using System.IO;
 
 namespace KingsDamageMeter.Controls
 {
+    /// <summary>
+    /// A class that represents a skinnable button.
+    /// </summary>
     public class SkinButton : Image
     {
         private string _MouseUpImageLocation;
@@ -39,6 +42,9 @@ namespace KingsDamageMeter.Controls
         private event EventHandler MouseOverImageLoaded;
         private event EventHandler MouseDownImageLoaded;
 
+        /// <summary>
+        /// Gets or sets the image to draw when the MouseUp event occurs.
+        /// </summary>
         public string MouseUpImage
         {
             get
@@ -57,6 +63,9 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the image to draw when the MouseOver event occurs.
+        /// </summary>
         public string MouseOverImage
         {
             get
@@ -75,6 +84,9 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the image to draw when the MouseDown event occurs.
+        /// </summary>
         public string MouseDownImage
         {
             get
@@ -93,6 +105,9 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Gets the status of images.
+        /// </summary>
         public bool ImagesLoaded
         {
             get
@@ -105,6 +120,9 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// A class that represents a skinnable button.
+        /// </summary>
         public SkinButton()
         {
             Width = 20;

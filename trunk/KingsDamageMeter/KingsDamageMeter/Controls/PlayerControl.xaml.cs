@@ -25,6 +25,9 @@ using System.ComponentModel;
 
 namespace KingsDamageMeter.Controls
 {
+    /// <summary>
+    /// A class that represents a player control.
+    /// </summary>
     public partial class PlayerControl : UserControl
     {
         private int _Damage = 0;
@@ -41,6 +44,9 @@ namespace KingsDamageMeter.Controls
         private event EventHandler DamageChanged;
         private event EventHandler DamagePercentChanged;
 
+        /// <summary>
+        /// Gets or sets the player's name.
+        /// </summary>
         public string PlayerName
         {
             get
@@ -59,6 +65,9 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the damage the player has dealt.
+        /// </summary>
         public int Damage
         {
             get
@@ -87,6 +96,9 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the percent value or the damage the player has dealt compared to other players.
+        /// </summary>
         public double DamagePercent
         {
             get
@@ -105,6 +117,9 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Gets the damage per second.
+        /// </summary>
         public int DamagePerSecond
         {
             get
@@ -113,6 +128,9 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// Gets the peak damage per second.
+        /// </summary>
         public int PeakDps
         {
             get
@@ -121,6 +139,9 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        /// <summary>
+        /// A class that represents a player control.
+        /// </summary>
         public PlayerControl()
         {
             InitializeComponent();
@@ -172,11 +193,6 @@ namespace KingsDamageMeter.Controls
             message += _BiggestHit + " biggest hit";
 
             ToolTip = message;
-        }
-
-        private void DamageBar_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            
         }
 
         private void _DamageTimer_Tick(object sender, EventArgs e)
