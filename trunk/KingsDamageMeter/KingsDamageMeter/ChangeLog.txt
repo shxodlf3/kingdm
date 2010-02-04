@@ -1,0 +1,10 @@
+﻿Version 1.1.0 Beta 2
+
+	Fixed: Incorrectly showing other players when Hide Others is enabled.
+	Added: A minimize button for the main window.
+	Fixed: Critical hits now show up in damage.
+	Added: Tracking for damage per second.
+	Added: Better support for DoTs.
+	Added: Sorting for player view by damage and name.
+	Added: Name, Total Damage, Dps, Peak Dps and Biggest Hit to player tooltip.
+	Fixed: Made the ToolTip background darker so the text is easier to see.

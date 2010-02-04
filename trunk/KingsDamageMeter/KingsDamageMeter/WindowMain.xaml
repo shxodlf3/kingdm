@@ -1,0 +1,28 @@
+﻿<Window x:Class="KingsDamageMeter.WindowMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:KingsDamageMeter.Controls"
+    Title="KingsDamageMeter" Height="221" Width="224" WindowStyle="None" Foreground="White" ResizeMode="NoResize" AllowsTransparency="True" MaxWidth="240" MaxHeight="293" Topmost="True" Icon="/KingsDamageMeter;component/Bomb.ico" MouseDown="Window_MouseDown" MouseMove="Window_MouseMove" MouseUp="Window_MouseUp" Closing="Window_Closing">
+    <Window.Background>
+        <ImageBrush ImageSource="./Themes/BlackPearl/Images/MainFormBackground.bmp" TileMode="Tile" />
+    </Window.Background>
+    <Grid HorizontalAlignment="Stretch" ShowGridLines="False">
+        <local:PlayerScrollViewer x:Name="PlayerViewer" Margin="8,15,10,18" />
+        <Slider Height="22" Margin="12,0,102,3.175" Name="OpacitySlider" VerticalAlignment="Bottom" Minimum="0.3" Maximum="1" LargeChange="0.1" TickFrequency="0.01" TickPlacement="None" ValueChanged="OpacitySlider_ValueChanged" Value="1" Style="{StaticResource PerfectSlider}" SmallChange="0.01" ToolTip="Opacity" />
+        <CheckBox Height="16" Margin="0,0,10,6.175" Name="CheckTopMost" VerticalAlignment="Bottom" FlowDirection="RightToLeft" Foreground="Gold" FontSize="9" FontFamily="Verdana" Checked="CheckTopMost_Checked" Unchecked="CheckTopMost_Unchecked" IsChecked="True" HorizontalAlignment="Right" Width="16" ToolTip="Top Most"></CheckBox>
+        <local:SkinButton HorizontalAlignment="Right" Width="23" MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButton.bmp" x:Name="CloseButton" Margin="0,8,10,0" MouseUp="CloseButton_MouseUp" ToolTip="Close" Height="20" VerticalAlignment="Top" />
+        <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButton.bmp" x:Name="MinimizeButton" ToolTip="Minimize" Margin="0,8,68,0" MouseUp="MinimizeButton_MouseUp" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Width="20" />
+        <local:SkinButton HorizontalAlignment="Right" Width="23" Margin="0,8,39,0" MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButton.bmp" x:Name="MenuButton" MouseUp="MenuButton_MouseUp" ToolTip="Options" Height="20" VerticalAlignment="Top">
+            <local:SkinButton.ContextMenu>
+                <ContextMenu Name="MainContextMenu" Foreground="Gold" HasDropShadow="True" FontFamily="Verdana" FontSize="9">
+                    <MenuItem Name="MainContextMenuLocateLog" Header="Locate Log..." Click="MainContextMenuLocateLog_Click" />
+                    <MenuItem Name="MainContextMenuIgnoreList" Header="Ignore List..." Click="MainContextMenuIgnoreList_Click" />
+                    <Separator />
+                    <MenuItem Name="MainContextMenuHelp" Header="Help" Click="MainContextMenuHelp_Click" />
+                    <MenuItem Name="MainContextMenuAbout" Header="About" Click="MainContextMenuAbout_Click" />
+                </ContextMenu>
+            </local:SkinButton.ContextMenu>
+        </local:SkinButton>
+        <Label Height="26" Margin="9,2,0,0" Name="LabelMain" VerticalAlignment="Top" Style="{DynamicResource TitleLabel}" FontFamily="Verdana" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="66">KDM</Label>
+    </Grid>
+</Window>
