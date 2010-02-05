@@ -189,15 +189,15 @@ namespace KingsDamageMeter
                     {
                         while (_Running)
                         {
-                            if (_StreamReader != null)
-                            {
-                                _NewLine = _StreamReader.ReadLine();
+                            _NewLine = _StreamReader.ReadLine();
 
-                                if (!String.IsNullOrEmpty(_NewLine))
-                                {
-                                    ParseLine(_NewLine);
-                                }
+                            if (!String.IsNullOrEmpty(_NewLine))
+                            {
+                                ParseLine(_NewLine);
                             }
+
+                            // Oops yah, it was eating up cpu without this.
+                            Thread.Sleep(1);
                         }
                     }
                 }

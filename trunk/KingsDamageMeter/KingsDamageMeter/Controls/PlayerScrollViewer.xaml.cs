@@ -112,6 +112,7 @@ namespace KingsDamageMeter.Controls
                 }
 
                 _Players.Remove(name);
+                UpdatePercents();
             }
         }
 

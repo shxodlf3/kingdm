@@ -1,5 +1,5 @@
 ﻿Version 1.2.0 Beta 3
-	
+	Fixed: Damage percentages will now properly update when a player is removed or ignored.
 
 Version 1.1.0 Beta 2
 
