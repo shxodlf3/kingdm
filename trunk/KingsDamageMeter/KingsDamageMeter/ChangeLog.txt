@@ -1,5 +1,6 @@
-﻿Version 1.2.0 Beta 3
+﻿Version 1.1.1 Beta 2
 	Fixed: Damage percentages will now properly update when a player is removed or ignored.
+	Fixed: AionLogParser should no longer unnecessarily use up cpu.
 
 Version 1.1.0 Beta 2
 
