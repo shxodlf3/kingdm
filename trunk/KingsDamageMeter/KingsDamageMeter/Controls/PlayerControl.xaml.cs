@@ -222,16 +222,16 @@ namespace KingsDamageMeter.Controls
             if (_SecondsSinceStart > 0)
             {
                 _DamagePerSecond = _Damage / _SecondsSinceStart;
+
+                if (_DamagePerSecond > _PeakDps)
+                {
+                    _PeakDps = _DamagePerSecond;
+                }
             }
 
             else
             {
                 _DamagePerSecond = _Damage;
-            }
-
-            if (_DamagePerSecond > _PeakDps)
-            {
-                _PeakDps = _DamagePerSecond;
             }
 
             _SecondsSinceStart += 1;

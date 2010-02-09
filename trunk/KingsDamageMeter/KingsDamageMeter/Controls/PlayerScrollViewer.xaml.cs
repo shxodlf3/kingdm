@@ -67,6 +67,19 @@ namespace KingsDamageMeter.Controls
         public PlayerScrollViewer()
         {
             InitializeComponent();
+            SetMainContextMenuHeaders();
+        }
+
+        private void SetMainContextMenuHeaders()
+        {
+            MenuItemCopyYou.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuCopyYou;
+            MenuItemCopyTop.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuCopyAll;
+            MenuItemHideOthers.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuHideOthers;
+            MenuItemRemove.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuRemove;
+            MenuItemIgnore.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuIgnore;
+            MenuItemSortByName.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuSortName;
+            MenuItemSortByDamage.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuSortDamage;
+            MenuItemClear.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuClearAll;
         }
 
         /// <summary>
@@ -79,7 +92,7 @@ namespace KingsDamageMeter.Controls
             {
                 CreateIgnoreList();
 
-                if (_IgnoreList.Contains(name))
+                if (_IgnoreList.Contains(name) && name != "You")
                 {
                     return;
                 }
@@ -90,6 +103,12 @@ namespace KingsDamageMeter.Controls
                 p.DamagePercent = 0;
                 p.MouseEnter += OnPlayerControlMouseEnter;
                 _Players.Add(name, p);
+
+                if (name == "You")
+                {
+                    PlayerPanel.Children.Add(p);
+                    return;
+                }
 
                 if (!_HideOthers)
                 {

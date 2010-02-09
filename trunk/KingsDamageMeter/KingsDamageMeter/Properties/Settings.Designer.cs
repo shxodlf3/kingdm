@@ -105,5 +105,29 @@ namespace KingsDamageMeter.Properties {
                 this["HelpFilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("196")]
+        public int WindowMainWidth {
+            get {
+                return ((int)(this["WindowMainWidth"]));
+            }
+            set {
+                this["WindowMainWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("105")]
+        public int WindowMainHeight {
+            get {
+                return ((int)(this["WindowMainHeight"]));
+            }
+            set {
+                this["WindowMainHeight"] = value;
+            }
+        }
     }
 }

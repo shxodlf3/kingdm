@@ -23,5 +23,11 @@
     <Setting Name="HelpFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">Documentation.pdf</Value>
     </Setting>
+    <Setting Name="WindowMainWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">196</Value>
+    </Setting>
+    <Setting Name="WindowMainHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">105</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

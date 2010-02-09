@@ -157,7 +157,6 @@ namespace KingsDamageMeter.Controls
 
         protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
         {
-            
             base.OnMouseDown(e);
 
             if (ImagesLoaded)

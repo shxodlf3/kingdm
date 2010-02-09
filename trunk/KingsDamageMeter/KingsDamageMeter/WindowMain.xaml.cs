@@ -59,12 +59,40 @@ namespace KingsDamageMeter
             Topmost = KingsDamageMeter.Properties.Settings.Default.WindowMainTopMost;
             CheckTopMost.IsChecked = Topmost;
             PlayerViewer.IgnoreList = KingsDamageMeter.Properties.Settings.Default.IgnoreList;
+
+            SetToolTips();
+            SetMainContextMenuHeaders();
+
+            int width = KingsDamageMeter.Properties.Settings.Default.WindowMainWidth;
+            int height = KingsDamageMeter.Properties.Settings.Default.WindowMainHeight;
+            Width = (width < MinWidth) ? MinWidth : width;
+            Height = (height < MinHeight) ? MinHeight : height;
+        }
+
+        private void SetToolTips()
+        {
+            MinimizeButton.ToolTip = KingsDamageMeter.Languages.En.Default.MinimizeToolTip;
+            MenuButton.ToolTip = KingsDamageMeter.Languages.En.Default.OptionsToolTip;
+            CloseButton.ToolTip = KingsDamageMeter.Languages.En.Default.CloseToolTip;
+            OpacitySlider.ToolTip = KingsDamageMeter.Languages.En.Default.OpacityToolTip;
+            CheckTopMost.ToolTip = KingsDamageMeter.Languages.En.Default.TopMostToolTip;
+            ResizeThumb.ToolTip = KingsDamageMeter.Languages.En.Default.ResizeToolTip;
+        }
+
+        private void SetMainContextMenuHeaders()
+        {
+            MainContextMenuLocateLog.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuLocateLog;
+            MainContextMenuIgnoreList.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuIgnoreList;
+            MainContextMenuHelp.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuHelp;
+            MainContextMenuAbout.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuAbout;
         }
 
         private void SaveSettings()
         {
             KingsDamageMeter.Properties.Settings.Default.WindowMainX = Left;
             KingsDamageMeter.Properties.Settings.Default.WindowMainY = Top;
+            KingsDamageMeter.Properties.Settings.Default.WindowMainWidth = (int)Width;
+            KingsDamageMeter.Properties.Settings.Default.WindowMainHeight = (int)Height;
             KingsDamageMeter.Properties.Settings.Default.WindowMainOpacity = Opacity;
             KingsDamageMeter.Properties.Settings.Default.WindowMainTopMost = Topmost;
 
@@ -209,6 +237,15 @@ namespace KingsDamageMeter
         private void OnPlayerViewerIgnoreListChanged(object sender, EventArgs e)
         {
             KingsDamageMeter.Properties.Settings.Default.IgnoreList = PlayerViewer.IgnoreList;
+        }
+
+        private void ThumbResize_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            double width = Width + e.HorizontalChange;
+            double height = Height + e.VerticalChange;
+
+            Width = (width < MinWidth) ? MinWidth : width;
+            Height = (height < MinHeight) ? MinHeight : height;
         }
     }
 }

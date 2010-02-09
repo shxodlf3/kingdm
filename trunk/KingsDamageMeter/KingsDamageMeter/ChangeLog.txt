@@ -1,4 +1,10 @@
-﻿Version 1.1.1 Beta 2
+﻿Version 1.2.0 Beta 3
+	Added: Multi-language support.
+	Fixed: "You" will now be added even if removed while "Hide Others" is enabled.
+	Added: A resize thumb for the main window.
+	Fixed: Many other interface adjustments and additions.
+
+Version 1.1.1 Beta 2
 	Fixed: Damage percentages will now properly update when a player is removed or ignored.
 	Fixed: AionLogParser should no longer unnecessarily use up cpu.
 
