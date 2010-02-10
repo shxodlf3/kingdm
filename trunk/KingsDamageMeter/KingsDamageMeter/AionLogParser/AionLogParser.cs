@@ -33,9 +33,11 @@ namespace KingsDamageMeter
         private bool _Running = false;
         private FileStream _FileStream;
         private StreamReader _StreamReader;
-        private string _NewLine = String.Empty;
+
+        private string _TimeFormat = KingsDamageMeter.Properties.Settings.Default.LogTimeFormat;
 
         private Dictionary<string, string> _Dots = new Dictionary<string, string>();
+        private Dictionary<string, string> _Pets = new Dictionary<string,string>();
 
         private Thread _Worker;
         private object _LockObject = new object();
@@ -43,11 +45,19 @@ namespace KingsDamageMeter
         private string _NameGroupName = "name";
         private string _DamageGroupName = "damage";
         private string _SkillGroupName = "skill";
+        private string _PetGroupName = "pet";
+        private string _NpcGroupName = "npc";
+        private string _TimeGroupName = "time";
 
-        private Regex _DamageInflictedRegex = new Regex(@": (?<name>[a-zA-Z]+) inflicted (?<damage>[^a-zA-Z]+) damage", RegexOptions.Compiled);
-        private Regex _CriticalInflictedRegex = new Regex(@": Critical Hit! (?<name>[a-zA-Z]+) inflicted (?<damage>[^a-zA-Z]+) critical damage", RegexOptions.Compiled);
-        private Regex _ContinuousInflictedRegex = new Regex(@": (?<name>[a-zA-Z]+) inflicted continuous damage on (?<target>.+) by using (?<skill>.+)\.", RegexOptions.Compiled);
-        private Regex _SkillDamageInflictedRegex = new Regex(@": (?<target>.+) received (?<damage>[^a-zA-Z]+) damage due to the effect of (?<skill>.+)\.", RegexOptions.Compiled);
+        private Regex _DamageInflictedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>[a-zA-Z]+) inflicted (?<damage>[^a-zA-Z]+) damage", RegexOptions.Compiled);
+        private Regex _CriticalInflictedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : Critical Hit! (?<name>[a-zA-Z]+) inflicted (?<damage>[^a-zA-Z]+) critical damage", RegexOptions.Compiled);
+        private Regex _ContinuousInflictedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>[a-zA-Z]+) inflicted continuous damage on (?<target>.+) by using (?<skill>.+)\.", RegexOptions.Compiled);
+        private Regex _SkillDamageInflictedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<target>.+) received (?<damage>[^a-zA-Z]+) damage due to the effect of (?<skill>.+)\.", RegexOptions.Compiled);
+        private Regex _JoinedGroupRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>[a-zA-Z]+) has joined your group\.", RegexOptions.Compiled);
+        private Regex _LeftGroupRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>[a-zA-Z]+) has left your group\.", RegexOptions.Compiled);
+        private Regex _PetSummonedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>[a-zA-Z]+) summoned (?<pet>(([a-zA-Z]+)\s)+)by using", RegexOptions.Compiled);
+        private Regex _NpcInflictedDamageRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<npc>(([a-zA-Z]+)\s)+)inflicted (?<damage>[^a-zA-Z]+) damage", RegexOptions.Compiled);
+        private Regex _DamageReceivedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>[a-zA-Z]+) received (?<damage>[^a-zA-Z]+) damage", RegexOptions.Compiled);
         private Regex _ChatRegex = new Regex(@"\[charname:", RegexOptions.Compiled);
 
         /// <summary>
@@ -64,6 +74,21 @@ namespace KingsDamageMeter
         /// Occurs when the parser finds critical damage inflicted.
         /// </summary>
         public event DamageInflictedEventHandler CriticalInflicted;
+
+        /// <summary>
+        /// Occurs when a player joins the group.
+        /// </summary>
+        public event PlayerEventHandler PlayerJoinedGroup;
+
+        /// <summary>
+        /// Occurs when a player leaved the group.
+        /// </summary>
+        public event PlayerEventHandler PlayerLeftGroup;
+
+        /// <summary>
+        /// Occurs when a player receives damage.
+        /// </summary>
+        public event DamageInflictedEventHandler DamageReceived;
 
         /// <summary>
         /// Gets the running status of the parser.
@@ -189,11 +214,11 @@ namespace KingsDamageMeter
                     {
                         while (_Running)
                         {
-                            _NewLine = _StreamReader.ReadLine();
+                            string line = _StreamReader.ReadLine();
 
-                            if (!String.IsNullOrEmpty(_NewLine))
+                            if (!String.IsNullOrEmpty(line))
                             {
-                                ParseLine(_NewLine);
+                                ParseLine(line);
                             }
 
                             // Oops yah, it was eating up cpu without this.
@@ -228,10 +253,11 @@ namespace KingsDamageMeter
             {
                 string name = matches[0].Groups[_NameGroupName].Value;
                 int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
                 
                 if (DamageInflicted != null)
                 {
-                    DamageInflicted(this, new DamageInflictedEventArgs(name, damage));
+                    DamageInflicted(this, new DamageEventArgs(time, name, damage));
                 }
 
                 return;
@@ -243,10 +269,57 @@ namespace KingsDamageMeter
             {
                 string name = matches[0].Groups[_NameGroupName].Value;
                 int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
 
                 if (CriticalInflicted != null)
                 {
-                    CriticalInflicted(this, new DamageInflictedEventArgs(name, damage));
+                    CriticalInflicted(this, new DamageEventArgs(time, name, damage));
+                }
+
+                return;
+            }
+
+            // Match damage received by a player.
+            matches = _DamageReceivedRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                string name = matches[0].Groups[_NameGroupName].Value;
+                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+
+                if (DamageReceived != null)
+                {
+                    DamageReceived(this, new DamageEventArgs(time, name, damage));
+                }
+
+                return;
+            }
+
+            // Match player joining group.
+            matches = _JoinedGroupRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                string name = matches[0].Groups[_NameGroupName].Value;
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+
+                if (PlayerJoinedGroup != null)
+                {
+                    PlayerJoinedGroup(this, new PlayerEventArgs(time, name));
+                }
+
+                return;
+            }
+
+            // Match player leaving group.
+            matches = _LeftGroupRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                string name = matches[0].Groups[_NameGroupName].Value;
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+
+                if (PlayerLeftGroup != null)
+                {
+                    PlayerLeftGroup(this, new PlayerEventArgs(time, name));
                 }
 
                 return;
@@ -282,6 +355,7 @@ namespace KingsDamageMeter
             {
                 int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
                 string skill = matches[0].Groups[_SkillGroupName].Value;
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
 
                 if (_Dots.ContainsKey(skill))
                 {
@@ -289,11 +363,51 @@ namespace KingsDamageMeter
 
                     if (DamageInflicted != null)
                     {
-                        DamageInflicted(this, new DamageInflictedEventArgs(name, damage));
+                        DamageInflicted(this, new DamageEventArgs(time, name, damage));
                     }
                 }
 
                 return;
+            }
+
+            // Match a summoned pet.
+            matches = _PetSummonedRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                string name = matches[0].Groups[_NameGroupName].Value;
+                string pet = matches[0].Groups[_PetGroupName].Value;
+
+                if (_Pets.ContainsKey(pet))
+                {
+                    if (_Pets[pet] != name)
+                    {
+                        _Pets[pet] = name;
+                    }
+                }
+
+                else
+                {
+                    _Pets.Add(pet, name);
+                }
+            }
+
+            // Matches npc damage. Checked against pets that have been summoned (_Pets). This will match ALL npc damage.
+            matches = _NpcInflictedDamageRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                string npc = matches[0].Groups[_NpcGroupName].Value;
+                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+
+                if (_Pets.ContainsKey(npc))
+                {
+                    string name = _Pets[npc];
+
+                    if (DamageInflicted != null)
+                    {
+                        DamageInflicted(this, new DamageEventArgs(time, name, damage));
+                    }
+                }
             }
         }
     }

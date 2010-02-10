@@ -9,8 +9,12 @@
                 <ContextMenu Name="MainContextMenu" Opened="MainContextMenu_Opened" FontFamily="Verdana" FontSize="9">
                     <MenuItem Name="MenuItemCopyYou" Header="Copy You" Click="MenuItemCopyYou_Click" />
                     <MenuItem Name="MenuItemCopyTop" Header="Copy All" Click="MenuItemCopyTop_Click" />
-                    <MenuItem Name="MenuItemHideOthers" Header="Hide Others" IsCheckable="True" Click="MenuItemHideOthers_Click" />
                     <Separator />
+                    <MenuItem Name="MenuItemHideOthers" Header="Hide Others" IsCheckable="True" Click="MenuItemHideOthers_Click" />
+                    <MenuItem Name="MenuItemGroupOnly" Header="Group Only" IsCheckable="True" Click="MenuItemGroupOnly_Click" />
+                    <MenuItem Name="MenuItemAddGroupMemberByName" Header="Add Member by Name" Click="MenuItemAddGroupMemberByName_Click" />
+                    <Separator />
+                    <MenuItem Name="MenuItemGroupMember" Header="Group Member" IsCheckable="True" Click="MenuItemGroupMember_Click" />
                     <MenuItem Name="MenuItemRemove" Header="Remove" Click="MenuItemRemove_Click" />
                     <MenuItem Name="MenuItemIgnore" Header="Ignore" Click="MenuItemIgnore_Click" />
                     <Separator />

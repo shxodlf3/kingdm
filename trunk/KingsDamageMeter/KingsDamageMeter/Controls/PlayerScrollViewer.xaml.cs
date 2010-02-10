@@ -24,6 +24,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 
+using KingsDamageMeter.Forms;
+
 namespace KingsDamageMeter.Controls
 {
     /// <summary>
@@ -32,6 +34,7 @@ namespace KingsDamageMeter.Controls
     public partial class PlayerScrollViewer : UserControl
     {
         private bool _HideOthers = false;
+        private bool _GroupOnly = true;
 
         private Dictionary<string, PlayerControl> _Players = new Dictionary<string, PlayerControl>();
         private StringCollection _IgnoreList = new StringCollection();
@@ -39,6 +42,50 @@ namespace KingsDamageMeter.Controls
         private PlayerControl _WorkingPlayer;
 
         public event EventHandler IgnoreListChanged;
+        public event EventHandler HideOthersChanged;
+        public event EventHandler GroupOnlyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool HideAllOthers
+        {
+            get
+            {
+                return _HideOthers;
+            }
+
+            set
+            {
+                _HideOthers = value;
+
+                if (HideOthersChanged != null)
+                {
+                    HideOthersChanged(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool GroupOnly
+        {
+            get
+            {
+                return _GroupOnly;
+            }
+
+            set
+            {
+                _GroupOnly = value;
+
+                if (GroupOnlyChanged != null)
+                {
+                    GroupOnlyChanged(this, EventArgs.Empty);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the player names that will be ignored.
@@ -68,18 +115,23 @@ namespace KingsDamageMeter.Controls
         {
             InitializeComponent();
             SetMainContextMenuHeaders();
+
+            HideOthersChanged += OnHideOthersChanged;
+            GroupOnlyChanged += OnGroupOnlyChanged;
         }
 
         private void SetMainContextMenuHeaders()
         {
             MenuItemCopyYou.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuCopyYou;
             MenuItemCopyTop.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuCopyAll;
+            MenuItemGroupOnly.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuGroupOnly;
             MenuItemHideOthers.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuHideOthers;
             MenuItemRemove.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuRemove;
             MenuItemIgnore.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuIgnore;
             MenuItemSortByName.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuSortName;
             MenuItemSortByDamage.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuSortDamage;
             MenuItemClear.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuClearAll;
+            MenuItemGroupMember.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuGroupMember;
         }
 
         /// <summary>
@@ -102,10 +154,12 @@ namespace KingsDamageMeter.Controls
                 p.Damage = 0;
                 p.DamagePercent = 0;
                 p.MouseEnter += OnPlayerControlMouseEnter;
+
                 _Players.Add(name, p);
 
                 if (name == "You")
                 {
+                    _Players[name].GroupMember = true;
                     PlayerPanel.Children.Add(p);
                     return;
                 }
@@ -114,6 +168,57 @@ namespace KingsDamageMeter.Controls
                 {
                     PlayerPanel.Children.Add(p);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Add or update an existing player as a group member.
+        /// </summary>
+        /// <param name="name">The name of the player</param>
+        public void AddGroupMember(string name)
+        {
+            if (!String.IsNullOrEmpty(name))
+            {
+                CreateIgnoreList();
+
+                if (_IgnoreList.Contains(name) && name != "You")
+                {
+                    return;
+                }
+
+                if (_Players.ContainsKey(name))
+                {
+                    _Players[name].GroupMember = true;
+                }
+
+                else
+                {
+                    PlayerControl p = new PlayerControl();
+                    p.PlayerName = name;
+                    p.Damage = 0;
+                    p.DamagePercent = 0;
+                    p.GroupMember = true;
+                    p.MouseEnter += OnPlayerControlMouseEnter;
+
+                    _Players.Add(name, p);
+
+                    if (!_HideOthers)
+                    {
+                        PlayerPanel.Children.Add(p);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        public void RemoveGroupMember(string name)
+        {
+            if (_Players.ContainsKey(name))
+            {
+                _Players[name].GroupMember = false;
             }
         }
 
@@ -192,13 +297,41 @@ namespace KingsDamageMeter.Controls
 
             foreach (PlayerControl p in _Players.Values)
             {
-                total += p.Damage;
+                if (_GroupOnly)
+                {
+                    if (p.GroupMember)
+                    {
+                        total += p.Damage;
+                    }
+                }
+
+                else
+                {
+                    total += p.Damage;
+                }
             }
 
             foreach (PlayerControl p in _Players.Values)
             {
                 double percent = (double)((double)(p.Damage - total) / total) + 1;
-                p.DamagePercent = percent;
+
+                if (_GroupOnly)
+                {
+                    if (p.GroupMember)
+                    {
+                        p.DamagePercent = percent;
+                    }
+
+                    else
+                    {
+                        p.DamagePercent = 0;
+                    }
+                }
+
+                else
+                {
+                    p.DamagePercent = percent;
+                }
             }
         }
 
@@ -228,9 +361,28 @@ namespace KingsDamageMeter.Controls
         {
             foreach (PlayerControl p in _Players.Values)
             {
-                if (!PlayerPanel.Children.Contains(p))
+                if (!PlayerPanel.Children.Contains(p) && !_HideOthers)
                 {
+                    if (_GroupOnly && !p.GroupMember)
+                    {
+                        continue;
+                    }
+
                     PlayerPanel.Children.Add(p);
+                }
+            }
+        }
+
+        private void HideAllButGroup()
+        {
+            foreach (PlayerControl p in _Players.Values)
+            {
+                if (PlayerPanel.Children.Contains(p))
+                {
+                    if (p.PlayerName != "You" && !p.GroupMember)
+                    {
+                        PlayerPanel.Children.Remove(p);
+                    }
                 }
             }
         }
@@ -250,25 +402,57 @@ namespace KingsDamageMeter.Controls
 
         private void SortByName()
         {
+            if (_HideOthers)
+            {
+                return;
+            }
+
             PlayerPanel.Children.Clear();
 
             var players = (from player in _Players orderby player.Value.PlayerName ascending select player.Value);
 
             foreach (PlayerControl player in players)
             {
-                PlayerPanel.Children.Add(player);
+                if (_GroupOnly)
+                {
+                    if (player.GroupMember)
+                    {
+                        PlayerPanel.Children.Add(player);
+                    }
+                }
+
+                else
+                {
+                    PlayerPanel.Children.Add(player);
+                }
             }
         }
 
         private void SortByDamage()
         {
+            if (_HideOthers)
+            {
+                return;
+            }
+
             PlayerPanel.Children.Clear();
 
             var players = (from player in _Players orderby player.Value.Damage descending select player.Value);
 
             foreach (PlayerControl player in players)
             {
-                PlayerPanel.Children.Add(player);
+                if (_GroupOnly)
+                {
+                    if (player.GroupMember)
+                    {
+                        PlayerPanel.Children.Add(player);
+                    }
+                }
+
+                else
+                {
+                    PlayerPanel.Children.Add(player);
+                }
             }
         }
 
@@ -279,15 +463,41 @@ namespace KingsDamageMeter.Controls
 
         private void MenuItemHideOthers_Click(object sender, RoutedEventArgs e)
         {
-            if (MenuItemHideOthers.IsChecked)
+            DoHideOthers();
+        }
+
+        private void MenuItemGroupOnly_Click(object sender, RoutedEventArgs e)
+        {
+            DoGroupOnly();
+            UpdatePercents();
+        }
+
+        private void DoHideOthers()
+        {
+            _HideOthers = MenuItemHideOthers.IsChecked;
+
+            if (_HideOthers)
             {
-                _HideOthers = true;
                 HideOthers();
             }
 
             else
             {
-                _HideOthers = false;
+                ShowOthers();
+            }
+        }
+
+        private void DoGroupOnly()
+        {
+            _GroupOnly = MenuItemGroupOnly.IsChecked;
+
+            if (_GroupOnly)
+            {
+                HideAllButGroup();
+            }
+
+            else
+            {
                 ShowOthers();
             }
         }
@@ -316,6 +526,7 @@ namespace KingsDamageMeter.Controls
         private void MainContextMenu_Opened(object sender, RoutedEventArgs e)
         {
             _WorkingPlayer = _SelectedPlayer;
+            MenuItemGroupMember.IsChecked = _WorkingPlayer.GroupMember;
         }
 
         private void MenuItemCopyTop_Click(object sender, RoutedEventArgs e)
@@ -348,6 +559,46 @@ namespace KingsDamageMeter.Controls
         private void MenuItemSortByDamage_Click(object sender, RoutedEventArgs e)
         {
             SortByDamage();
+        }
+
+        protected void OnHideOthersChanged(object sender, EventArgs e)
+        {
+            DoHideOthers();
+        }
+
+        protected void OnGroupOnlyChanged(object sender, EventArgs e)
+        {
+            DoGroupOnly();
+            UpdatePercents();
+        }
+
+        private void MenuItemGroupMember_Click(object sender, RoutedEventArgs e)
+        {
+            if (_WorkingPlayer != null)
+            {
+                if (_WorkingPlayer.PlayerName != "You")
+                {
+                    _WorkingPlayer.GroupMember = MenuItemGroupMember.IsChecked;
+                }
+
+                else
+                {
+                    _WorkingPlayer.GroupMember = true;
+                }
+            }
+
+            DoGroupOnly();
+            UpdatePercents();
+        }
+
+        private void MenuItemAddGroupMemberByName_Click(object sender, RoutedEventArgs e)
+        {
+            AddToGroupDialog d = new AddToGroupDialog();
+
+            if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                AddGroupMember(d.PlayerName);
+            }
         }
     }
 }

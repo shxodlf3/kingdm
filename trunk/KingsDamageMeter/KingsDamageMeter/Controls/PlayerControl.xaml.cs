@@ -40,9 +40,11 @@ namespace KingsDamageMeter.Controls
         private int _DamagePerSecond = 0;
         private int _SecondsSinceStart = 0;
         private int _BiggestHit = 0;
+        private bool _GroupMember = false;
 
-        private event EventHandler DamageChanged;
-        private event EventHandler DamagePercentChanged;
+        public event EventHandler DamageChanged;
+        public event EventHandler DamagePercentChanged;
+        public event EventHandler GroupMemberChanged;
 
         /// <summary>
         /// Gets or sets the player's name.
@@ -139,15 +141,35 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        public bool GroupMember
+        {
+            get
+            {
+                return _GroupMember;
+            }
+
+            set
+            {
+                _GroupMember = value;
+
+                if (GroupMemberChanged != null)
+                {
+                    GroupMemberChanged(this, EventArgs.Empty);
+                }
+            }
+        }
+
         /// <summary>
         /// A class that represents a player control.
         /// </summary>
         public PlayerControl()
         {
             InitializeComponent();
+            SetStyle();
 
             DamageChanged += OnDamageChanged;
             DamagePercentChanged += OnDamagePercentChanged;
+            GroupMemberChanged += OnGroupMemberChanged;
 
             _DamageTimer.Interval = 10;
             _DamageTimer.Tick += _DamageTimer_Tick;
@@ -158,20 +180,22 @@ namespace KingsDamageMeter.Controls
             _DurationTimer.Start();
         }
 
+        private void SetStyle()
+        {
+            if (_GroupMember)
+            {
+                Style = (Style)FindResource("GroupControlTemplate");
+            }
+
+            else
+            {
+                Style = (Style)FindResource("PlayerControlTemplate");
+            }
+        }
+
         public new string ToString()
         {
-            return String.Format("({0} {1}, {2} dps ({3}))", PlayerName, Damage, _PeakDps, DamagePercent.ToString("0%"));
-        }
-
-        private void OnDamageChanged(object sender, EventArgs e)
-        {
-            _TimeSinceDamage = DateTime.Now;
-            LabelDamage.Content = _Damage.ToString();
-        }
-
-        private void OnDamagePercentChanged(object sender, EventArgs e)
-        {
-            DamageBar.Value = _DamagePercent * 100;
+            return String.Format("({0} {1}, {2} dps ({3}))", PlayerName, Damage, _DamagePerSecond, DamagePercent.ToString("0%"));
         }
 
         private void UpdateToolTip()
@@ -219,7 +243,7 @@ namespace KingsDamageMeter.Controls
 
         private void _DurationTimer_Tick(object sender, EventArgs e)
         {
-            if (_SecondsSinceStart > 0)
+            if (_SecondsSinceStart > 5)
             {
                 _DamagePerSecond = _Damage / _SecondsSinceStart;
 
@@ -240,6 +264,22 @@ namespace KingsDamageMeter.Controls
         private void UserControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             UpdateToolTip();
+        }
+
+        protected void OnDamageChanged(object sender, EventArgs e)
+        {
+            _TimeSinceDamage = DateTime.Now;
+            LabelDamage.Content = _Damage.ToString();
+        }
+
+        protected void OnDamagePercentChanged(object sender, EventArgs e)
+        {
+            DamageBar.Value = _DamagePercent * 100;
+        }
+
+        protected void OnGroupMemberChanged(object sender, EventArgs e)
+        {
+            SetStyle();
         }
     }
 }

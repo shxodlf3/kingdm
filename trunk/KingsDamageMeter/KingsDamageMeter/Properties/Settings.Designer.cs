@@ -129,5 +129,41 @@ namespace KingsDamageMeter.Properties {
                 this["WindowMainHeight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("yyyy.MM.dd hh:mm:ss")]
+        public string LogTimeFormat {
+            get {
+                return ((string)(this["LogTimeFormat"]));
+            }
+            set {
+                this["LogTimeFormat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool GroupOnly {
+            get {
+                return ((bool)(this["GroupOnly"]));
+            }
+            set {
+                this["GroupOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HideOthers {
+            get {
+                return ((bool)(this["HideOthers"]));
+            }
+            set {
+                this["HideOthers"] = value;
+            }
+        }
     }
 }

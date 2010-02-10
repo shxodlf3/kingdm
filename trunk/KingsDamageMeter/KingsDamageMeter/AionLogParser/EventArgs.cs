@@ -22,9 +22,30 @@ using System;
 namespace KingsDamageMeter
 {
     /// <summary>
+    /// 
+    /// </summary>
+    public class LogEventArgs : EventArgs
+    {
+        private DateTime _Time;
+
+        public DateTime Time
+        {
+            get
+            {
+                return _Time;
+            }
+        }
+
+        public LogEventArgs(DateTime time)
+        {
+            _Time = time;
+        }
+    }
+
+    /// <summary>
     /// Provides data for the KingsDamageMeter.AionLogParser.DamageInflicted event.
     /// </summary>
-    public class DamageInflictedEventArgs : EventArgs
+    public class DamageEventArgs : LogEventArgs
     {
         private string _Name;
         private int _Damage;
@@ -56,10 +77,31 @@ namespace KingsDamageMeter
         /// </summary>
         /// <param name="name">The name of the player inflicting damage.</param>
         /// <param name="damage">The amount of damage inflicted.</param>
-        public DamageInflictedEventArgs(string name, int damage)
+        public DamageEventArgs(DateTime time, string name, int damage) : base(time)
         {
             _Name = name;
             _Damage = damage;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class PlayerEventArgs : LogEventArgs
+    {
+        private string _Name;
+
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+        }
+
+        public PlayerEventArgs(DateTime time, string name) : base(time)
+        {
+            _Name = name;
         }
     }
 }

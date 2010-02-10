@@ -55,6 +55,7 @@ namespace KingsDamageMeter.Forms
             this.TextPlayer.Name = "TextPlayer";
             this.TextPlayer.Size = new System.Drawing.Size(100, 20);
             this.TextPlayer.TabIndex = 0;
+            this.TextPlayer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextPlayer_KeyDown);
             // 
             // ButtonFind
             // 

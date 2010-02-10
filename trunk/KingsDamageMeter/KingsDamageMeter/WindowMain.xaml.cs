@@ -36,15 +36,19 @@ namespace KingsDamageMeter
 
         private AionLogParser _LogParser = new AionLogParser();
 
-        private delegate void LogParserDamageInflicted_Callback(object sender, DamageInflictedEventArgs e);
+        private delegate void DamageInflicted_Callback(object sender, DamageEventArgs e);
+        private delegate void PlayerJoinedGroup_Callback(object sender, PlayerEventArgs e);
+        private delegate void PlayerLeftGroup_Callback(object sender, PlayerEventArgs e);
 
         public WindowMain()
         {
             InitializeComponent();
             LoadSettings();
-            _LogParser.FileNotFound += OnLogParserFileNotFound;
-            _LogParser.DamageInflicted += OnLogParserDamageInflicted;
-            _LogParser.CriticalInflicted += OnLogParserDamageInflicted;
+            _LogParser.FileNotFound += OnFileNotFound;
+            _LogParser.DamageInflicted += OnDamageInflicted;
+            _LogParser.CriticalInflicted += OnDamageInflicted;
+            _LogParser.PlayerJoinedGroup += OnPlayerJoinedGroup;
+            _LogParser.PlayerLeftGroup += OnPlayerLeftGroup;
             _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
             PlayerViewer.IgnoreListChanged += OnPlayerViewerIgnoreListChanged;
         }
@@ -59,6 +63,8 @@ namespace KingsDamageMeter
             Topmost = KingsDamageMeter.Properties.Settings.Default.WindowMainTopMost;
             CheckTopMost.IsChecked = Topmost;
             PlayerViewer.IgnoreList = KingsDamageMeter.Properties.Settings.Default.IgnoreList;
+            PlayerViewer.HideAllOthers = KingsDamageMeter.Properties.Settings.Default.HideOthers;
+            PlayerViewer.GroupOnly = KingsDamageMeter.Properties.Settings.Default.GroupOnly;
 
             SetToolTips();
             SetMainContextMenuHeaders();
@@ -95,6 +101,9 @@ namespace KingsDamageMeter
             KingsDamageMeter.Properties.Settings.Default.WindowMainHeight = (int)Height;
             KingsDamageMeter.Properties.Settings.Default.WindowMainOpacity = Opacity;
             KingsDamageMeter.Properties.Settings.Default.WindowMainTopMost = Topmost;
+
+            KingsDamageMeter.Properties.Settings.Default.HideOthers = PlayerViewer.HideAllOthers;
+            KingsDamageMeter.Properties.Settings.Default.GroupOnly = PlayerViewer.GroupOnly;
 
             KingsDamageMeter.Properties.Settings.Default.Save();
         }
@@ -214,12 +223,12 @@ namespace KingsDamageMeter
 
         #endregion
 
-        private void OnLogParserDamageInflicted(object sender, DamageInflictedEventArgs e)
+        private void OnDamageInflicted(object sender, DamageEventArgs e)
         {
-            Dispatcher.Invoke(new LogParserDamageInflicted_Callback(DoLogParserDamageInflicted), sender, e);
+            Dispatcher.Invoke(new DamageInflicted_Callback(DoDamageInflicted), sender, e);
         }
 
-        private void DoLogParserDamageInflicted(object sender, DamageInflictedEventArgs e)
+        private void DoDamageInflicted(object sender, DamageEventArgs e)
         {
             if (!PlayerViewer.PlayerExists(e.Name))
             {
@@ -229,7 +238,27 @@ namespace KingsDamageMeter
             PlayerViewer.UpdatePlayerDamage(e.Name, e.Damage);
         }
 
-        private void OnLogParserFileNotFound(object sender, EventArgs e)
+        private void OnPlayerJoinedGroup(object sender, PlayerEventArgs e)
+        {
+            Dispatcher.Invoke(new PlayerJoinedGroup_Callback(DoPlayerJoinedGroup), sender, e);
+        }
+
+        private void DoPlayerJoinedGroup(object sender, PlayerEventArgs e)
+        {
+            PlayerViewer.AddGroupMember(e.Name);
+        }
+
+        private void OnPlayerLeftGroup(object sender, PlayerEventArgs e)
+        {
+            Dispatcher.Invoke(new PlayerJoinedGroup_Callback(DoPlayerLeftGroup), sender, e);
+        }
+
+        private void DoPlayerLeftGroup(object sender, PlayerEventArgs e)
+        {
+            PlayerViewer.RemoveGroupMember(e.Name);
+        }
+
+        private void OnFileNotFound(object sender, EventArgs e)
         {
             MessageBox.Show("Unable to find log file.", "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }

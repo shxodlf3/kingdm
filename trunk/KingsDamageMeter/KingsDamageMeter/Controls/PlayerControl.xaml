@@ -1,7 +1,45 @@
 ﻿<UserControl x:Class="KingsDamageMeter.Controls.PlayerControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Height="40" Width="160" Style="{DynamicResource PlayerControlTemplate}" MouseEnter="UserControl_MouseEnter">
+    Height="40" Width="160" MouseEnter="UserControl_MouseEnter">
+    <UserControl.Resources>
+        <Style x:Key="PlayerControlTemplate">
+            <Style.Triggers>
+                <Trigger Property="UserControl.IsMouseOver" Value="True">
+                    <Setter Property="UserControl.Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="./../Themes/BlackPearl/Images/PlayerBackground_Hover.bmp" Stretch="Fill" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="UserControl.IsMouseOver" Value="False">
+                    <Setter Property="UserControl.Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="./../Themes/BlackPearl/Images/PlayerBackground.bmp" Stretch="Fill" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="GroupControlTemplate">
+            <Style.Triggers>
+                <Trigger Property="UserControl.IsMouseOver" Value="True">
+                    <Setter Property="UserControl.Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="./../Themes/BlackPearl/Images/GroupMemberBackground_MouseOver.bmp" Stretch="Fill" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="UserControl.IsMouseOver" Value="False">
+                    <Setter Property="UserControl.Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="./../Themes/BlackPearl/Images/GroupMemberBackground.bmp" Stretch="Fill" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />

@@ -60,12 +60,31 @@ namespace KingsDamageMeter.Forms
         {
             if (ListIgnored.Items.Count > 0)
             {
+                if (ListIgnored.SelectedItem == null)
+                {
+                    return;
+                }
+
                 KingsDamageMeter.Properties.Settings.Default.IgnoreList.Remove(ListIgnored.SelectedItem.ToString());
                 ListIgnored.Items.Remove(ListIgnored.SelectedItem);
             }
         }
 
         private void ButtonFind_Click(object sender, EventArgs e)
+        {
+            SearchList();
+        }
+
+        private void TextPlayer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                SearchList();
+            }
+        }
+
+        private void SearchList()
         {
             int index = ListIgnored.FindString(TextPlayer.Text);
 

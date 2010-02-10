@@ -1,0 +1,78 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KingsDamageMeter.Languages" GeneratedClassName="En">
+  <Profiles />
+  <Settings>
+    <Setting Name="MinimizeToolTip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Minimize</Value>
+    </Setting>
+    <Setting Name="OptionsToolTip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Options</Value>
+    </Setting>
+    <Setting Name="CloseToolTip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Close</Value>
+    </Setting>
+    <Setting Name="OpacityToolTip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Opacity</Value>
+    </Setting>
+    <Setting Name="TopMostToolTip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">TopMost</Value>
+    </Setting>
+    <Setting Name="ResizeToolTip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Resize</Value>
+    </Setting>
+    <Setting Name="OptionsMenuLocateLog" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Locate Log...</Value>
+    </Setting>
+    <Setting Name="OptionsMenuIgnoreList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ignore List...</Value>
+    </Setting>
+    <Setting Name="OptionsMenuHelp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Help</Value>
+    </Setting>
+    <Setting Name="OptionsMenuAbout" Type="System.String" Scope="User">
+      <Value Profile="(Default)">About</Value>
+    </Setting>
+    <Setting Name="PlayerMenuCopyYou" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Copy You</Value>
+    </Setting>
+    <Setting Name="PlayerMenuCopyAll" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Copy All</Value>
+    </Setting>
+    <Setting Name="PlayerMenuHideOthers" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Hide Others</Value>
+    </Setting>
+    <Setting Name="PlayerMenuRemove" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Remove</Value>
+    </Setting>
+    <Setting Name="PlayerMenuIgnore" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ignore</Value>
+    </Setting>
+    <Setting Name="PlayerMenuSortName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sort by Name</Value>
+    </Setting>
+    <Setting Name="PlayerMenuSortDamage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sort by Damage</Value>
+    </Setting>
+    <Setting Name="PlayerMenuClearAll" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Clear All</Value>
+    </Setting>
+    <Setting Name="PlayerMenuGroupOnly" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Group Only</Value>
+    </Setting>
+    <Setting Name="PlayerMenuGroupMember" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Group Member</Value>
+    </Setting>
+    <Setting Name="OKButton" Type="System.String" Scope="User">
+      <Value Profile="(Default)">OK</Value>
+    </Setting>
+    <Setting Name="CancelButton" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Cancel</Value>
+    </Setting>
+    <Setting Name="AddGroupMemberTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Add Group Member</Value>
+    </Setting>
+    <Setting Name="InvalidNameMessage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Invalid name.</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

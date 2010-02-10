@@ -56,5 +56,21 @@ namespace KingsDamageMeter
                 return 0;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static DateTime GetTime(this string expression, string format)
+        {
+            try
+            {
+                return DateTime.ParseExact(expression, format, null);
+            }
+
+            catch
+            {
+                return DateTime.Now;
+            }
+        }
     }
 }

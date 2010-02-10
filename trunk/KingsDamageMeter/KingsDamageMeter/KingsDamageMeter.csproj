@@ -171,6 +171,12 @@
     <Compile Include="Forms\IgnoreListForm.designer.cs">
       <DependentUpon>IgnoreListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddToGroupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddToGroupDialog.Designer.cs">
+      <DependentUpon>AddToGroupDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Languages\En.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -195,6 +201,9 @@
     <EmbeddedResource Include="Forms\IgnoreListForm.resx">
       <DependentUpon>IgnoreListForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddToGroupDialog.resx">
+      <DependentUpon>AddToGroupDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -217,15 +226,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\BlackPearl\Images\CloseButtonHover.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\BlackPearl\Images\DragButton.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\BlackPearl\Images\DragButtonClick.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\BlackPearl\Images\DragButtonHover.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\BlackPearl\Images\MainFormBackground.bmp" />
@@ -305,6 +305,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\BlackPearl\Images\Thumb.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\BlackPearl\Images\GroupMemberBackground.bmp" />
+    <Resource Include="Themes\BlackPearl\Images\GroupMemberBackground_MouseOver.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

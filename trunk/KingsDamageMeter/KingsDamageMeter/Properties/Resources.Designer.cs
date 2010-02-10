@@ -88,23 +88,16 @@ namespace KingsDamageMeter.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap DragButton {
+        internal static System.Drawing.Bitmap GroupMemberBackground {
             get {
-                object obj = ResourceManager.GetObject("DragButton", resourceCulture);
+                object obj = ResourceManager.GetObject("GroupMemberBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap DragButtonClick {
+        internal static System.Drawing.Bitmap GroupMemberBackground_MouseOver {
             get {
-                object obj = ResourceManager.GetObject("DragButtonClick", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap DragButtonHover {
-            get {
-                object obj = ResourceManager.GetObject("DragButtonHover", resourceCulture);
+                object obj = ResourceManager.GetObject("GroupMemberBackground_MouseOver", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,16 +1,23 @@
-﻿Version 1.1.2 Beta 2
+﻿Version 1.2.0 Beta 3
+	Added: Group member tracking. (Understatement)
+	Fixed: Players will now receive credit for the damage their pets inflict.
+	Fixed: "Copy" now shows the current DPS in place of the Peak DPS.
+	Fixed: A bug in the ignore list editor that could crash the program.
+	Fixed: The text field on the ignore list editor now accepts the "Enter" key.
+	Fixed: Peak DPS will not be calculated until at least 5 seconds of activity.
+
+Version 1.1.2 Beta 2
 	Added: Multi-language support.
 	Fixed: "You" will now be added even if removed while "Hide Others" is enabled.
 	Added: A resize thumb for the main window.
 	Fixed: Many other interface adjustments and additions.
-    Fixed: Peak DPS will now be more reliable.
+	Fixed: Peak DPS will now be more reliable.
 
 Version 1.1.1 Beta 2
 	Fixed: Damage percentages will now properly update when a player is removed or ignored.
 	Fixed: AionLogParser should no longer unnecessarily use up cpu.
 
 Version 1.1.0 Beta 2
-
 	Fixed: Incorrectly showing other players when Hide Others is enabled.
 	Added: A minimize button for the main window.
 	Fixed: Critical hits now show up in damage.
