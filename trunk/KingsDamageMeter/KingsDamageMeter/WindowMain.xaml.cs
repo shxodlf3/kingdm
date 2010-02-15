@@ -31,48 +31,57 @@ namespace KingsDamageMeter
 {
     public partial class WindowMain : Window
     {
+        public WindowMain()
+        {
+            InitializeComponent();
+            LoadSettings();
+            InitializeLogParser();
+            SetToolTips();
+            SetMainContextMenuHeaders();
+
+            PlayerViewer.IgnoreListChanged += OnPlayerViewerIgnoreListChanged;
+        }
+
         private bool _Dragging = false;
         private Point _MousePoint;
 
         private AionLogParser _LogParser = new AionLogParser();
 
-        private delegate void DamageInflicted_Callback(object sender, DamageEventArgs e);
+        private delegate void DamageInflicted_Callback(object sender, PlayerDamageEventArgs e);
         private delegate void PlayerJoinedGroup_Callback(object sender, PlayerEventArgs e);
         private delegate void PlayerLeftGroup_Callback(object sender, PlayerEventArgs e);
 
-        public WindowMain()
-        {
-            InitializeComponent();
-            LoadSettings();
-            _LogParser.FileNotFound += OnFileNotFound;
-            _LogParser.DamageInflicted += OnDamageInflicted;
-            _LogParser.CriticalInflicted += OnDamageInflicted;
-            _LogParser.PlayerJoinedGroup += OnPlayerJoinedGroup;
-            _LogParser.PlayerLeftGroup += OnPlayerLeftGroup;
-            _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
-            PlayerViewer.IgnoreListChanged += OnPlayerViewerIgnoreListChanged;
-        }
+        #region Initialization
 
         private void LoadSettings()
         {
             MainContextMenuLocateLog.ToolTip = KingsDamageMeter.Properties.Settings.Default.AionLogPath;
+
             Left = KingsDamageMeter.Properties.Settings.Default.WindowMainX;
             Top = KingsDamageMeter.Properties.Settings.Default.WindowMainY;
             Opacity = KingsDamageMeter.Properties.Settings.Default.WindowMainOpacity;
             OpacitySlider.Value = Opacity;
             Topmost = KingsDamageMeter.Properties.Settings.Default.WindowMainTopMost;
             CheckTopMost.IsChecked = Topmost;
-            PlayerViewer.IgnoreList = KingsDamageMeter.Properties.Settings.Default.IgnoreList;
-            PlayerViewer.HideAllOthers = KingsDamageMeter.Properties.Settings.Default.HideOthers;
-            PlayerViewer.GroupOnly = KingsDamageMeter.Properties.Settings.Default.GroupOnly;
-
-            SetToolTips();
-            SetMainContextMenuHeaders();
 
             int width = KingsDamageMeter.Properties.Settings.Default.WindowMainWidth;
             int height = KingsDamageMeter.Properties.Settings.Default.WindowMainHeight;
             Width = (width < MinWidth) ? MinWidth : width;
             Height = (height < MinHeight) ? MinHeight : height;
+
+            PlayerViewer.IgnoreList = KingsDamageMeter.Properties.Settings.Default.IgnoreList;
+            PlayerViewer.HideAllOthers = KingsDamageMeter.Properties.Settings.Default.HideOthers;
+            PlayerViewer.GroupOnly = KingsDamageMeter.Properties.Settings.Default.GroupOnly;
+        }
+
+        private void InitializeLogParser()
+        {
+            _LogParser.FileNotFound += OnFileNotFound;
+            _LogParser.DamageInflicted += OnDamageInflicted;
+            _LogParser.CriticalInflicted += OnDamageInflicted;
+            _LogParser.PlayerJoinedGroup += OnPlayerJoinedGroup;
+            _LogParser.PlayerLeftGroup += OnPlayerLeftGroup;
+            _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
         }
 
         private void SetToolTips()
@@ -91,6 +100,7 @@ namespace KingsDamageMeter
             MainContextMenuIgnoreList.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuIgnoreList;
             MainContextMenuHelp.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuHelp;
             MainContextMenuAbout.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuAbout;
+            MainContextMenuResetDamage.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuResetDamage;
         }
 
         private void SaveSettings()
@@ -107,6 +117,8 @@ namespace KingsDamageMeter
 
             KingsDamageMeter.Properties.Settings.Default.Save();
         }
+
+        #endregion
 
         #region Window Events
 
@@ -144,6 +156,8 @@ namespace KingsDamageMeter
 
         #endregion
 
+        #region Control Events
+
         private void OpacitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Opacity = OpacitySlider.Value;
@@ -174,7 +188,18 @@ namespace KingsDamageMeter
             MainContextMenu.IsOpen = true;
         }
 
-        #region MainContextMenu
+        private void ThumbResize_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            double width = Width + e.HorizontalChange;
+            double height = Height + e.VerticalChange;
+
+            Width = (width < MinWidth) ? MinWidth : width;
+            Height = (height < MinHeight) ? MinHeight : height;
+        }
+
+        #endregion
+
+        #region MainContextMenu Events
 
         private void MainContextMenuIgnoreList_Click(object sender, RoutedEventArgs e)
         {
@@ -223,12 +248,19 @@ namespace KingsDamageMeter
 
         #endregion
 
-        private void OnDamageInflicted(object sender, DamageEventArgs e)
+        #region LogParser Events
+
+        private void OnFileNotFound(object sender, EventArgs e)
+        {
+            MessageBox.Show("Unable to find log file.", "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
+        private void OnDamageInflicted(object sender, PlayerDamageEventArgs e)
         {
             Dispatcher.Invoke(new DamageInflicted_Callback(DoDamageInflicted), sender, e);
         }
 
-        private void DoDamageInflicted(object sender, DamageEventArgs e)
+        private void DoDamageInflicted(object sender, PlayerDamageEventArgs e)
         {
             if (!PlayerViewer.PlayerExists(e.Name))
             {
@@ -258,23 +290,16 @@ namespace KingsDamageMeter
             PlayerViewer.RemoveGroupMember(e.Name);
         }
 
-        private void OnFileNotFound(object sender, EventArgs e)
-        {
-            MessageBox.Show("Unable to find log file.", "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }
-
         private void OnPlayerViewerIgnoreListChanged(object sender, EventArgs e)
         {
             KingsDamageMeter.Properties.Settings.Default.IgnoreList = PlayerViewer.IgnoreList;
         }
 
-        private void ThumbResize_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
-        {
-            double width = Width + e.HorizontalChange;
-            double height = Height + e.VerticalChange;
+        #endregion
 
-            Width = (width < MinWidth) ? MinWidth : width;
-            Height = (height < MinHeight) ? MinHeight : height;
+        private void MainContextMenuResetDamage_Click(object sender, RoutedEventArgs e)
+        {
+            PlayerViewer.ResetDamage();
         }
     }
 }

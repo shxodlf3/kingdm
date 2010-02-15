@@ -126,6 +126,7 @@ namespace KingsDamageMeter.Controls
             MenuItemCopyTop.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuCopyAll;
             MenuItemGroupOnly.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuGroupOnly;
             MenuItemHideOthers.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuHideOthers;
+            MenuItemAddGroupMemberByName.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuAddMemberByName;
             MenuItemRemove.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuRemove;
             MenuItemIgnore.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuIgnore;
             MenuItemSortByName.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuSortName;
@@ -202,7 +203,7 @@ namespace KingsDamageMeter.Controls
 
                     _Players.Add(name, p);
 
-                    if (!_HideOthers)
+                    if (!_HideOthers && !_GroupOnly)
                     {
                         PlayerPanel.Children.Add(p);
                     }
@@ -288,6 +289,19 @@ namespace KingsDamageMeter.Controls
                 {
                     IgnoreListChanged(this, EventArgs.Empty);
                 }
+            }
+        }
+
+        public void ResetDamage()
+        {
+            if (_Players == null)
+            {
+                return;
+            }
+
+            foreach (PlayerControl p in _Players.Values)
+            {
+                p.Reset();
             }
         }
 
@@ -526,7 +540,11 @@ namespace KingsDamageMeter.Controls
         private void MainContextMenu_Opened(object sender, RoutedEventArgs e)
         {
             _WorkingPlayer = _SelectedPlayer;
-            MenuItemGroupMember.IsChecked = _WorkingPlayer.GroupMember;
+
+            if (_WorkingPlayer != null)
+            {
+                MenuItemGroupMember.IsChecked = _WorkingPlayer.GroupMember;
+            }
         }
 
         private void MenuItemCopyTop_Click(object sender, RoutedEventArgs e)

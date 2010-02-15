@@ -74,5 +74,11 @@
     <Setting Name="InvalidNameMessage" Type="System.String" Scope="User">
       <Value Profile="(Default)">Invalid name.</Value>
     </Setting>
+    <Setting Name="OptionsMenuResetDamage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Reset Damage</Value>
+    </Setting>
+    <Setting Name="PlayerMenuAddMemberByName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Add Member by Name</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

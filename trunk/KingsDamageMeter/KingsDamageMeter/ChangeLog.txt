@@ -1,4 +1,11 @@
-﻿Version 1.2.0 Beta 3
+﻿Version 1.2.1 Beta 3
+	Fixed: Player and pet damage should now be properly parsed from the log.
+	Added: A rounded border to the interface.
+	Added: You can now reset every one's damage and dps from the Options Menu without clearing them from the player list.
+	Fixed: A bug caused the program to crash when the main context menu opened with no players in the player view.
+	Fixed: A bug caused the program to crash if you remove a player from the group that has 0% contributed damage.
+
+Version 1.2.0 Beta 3
 	Added: Group member tracking. (Understatement)
 	Fixed: Players will now receive credit for the damage their pets inflict.
 	Fixed: "Copy" now shows the current DPS in place of the Peak DPS.

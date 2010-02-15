@@ -310,6 +310,9 @@
     <Resource Include="Themes\BlackPearl\Images\GroupMemberBackground.bmp" />
     <Resource Include="Themes\BlackPearl\Images\GroupMemberBackground_MouseOver.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Regex.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

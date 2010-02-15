@@ -22,7 +22,7 @@ namespace KingsDamageMeter
     /// <summary>
     /// Represents the method that will handle the KingsDamageMeter.AionLogParser.DamageInflicted event of a KingsDamageMeter.AionLogParser
     /// </summary>
-    public delegate void DamageInflictedEventHandler(object sender, DamageEventArgs e);
+    public delegate void DamageInflictedEventHandler(object sender, PlayerDamageEventArgs e);
 
     public delegate void PlayerEventHandler(object sender, PlayerEventArgs e);
 }
