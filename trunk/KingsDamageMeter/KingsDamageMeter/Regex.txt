@@ -1,0 +1,60 @@
+This file isn't required to build. This is my work on the regular expressions.
+
+
+---------------------------------------------------------------------
+inflicted
+(?<time>[^a-zA-Z]+) : (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<target>.+)\.
+
+2010.02.09 00:01:06 : Jackofspades inflicted 212 damage on Steel Rake Lookout. 
+2010.02.09 00:01:39 : Wind Servant inflicted 282 damage on Steel Rake Lookout.
+
+---------------------------------------------------------------------
+inflicted
+(?<time>[^a-zA-Z]+) : (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<target>.+).+by using (?<skill>.+)\.
+
+2010.02.09 00:01:12 : Jackofspades inflicted 391 damage on Steel Rake Lookout by using Swift Edge V. 
+2010.02.09 00:01:16 : Jackofspades inflicted 253 damage on Steel Rake Lookout and caused the pattern engraving effect by using Fang Strike III. 
+
+---------------------------------------------------------------------
+critical
+(?<time>[^a-zA-Z]+) : Critical Hit! (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) critical damage on (?<target>.+)\.
+
+2010.01.22 07:27:24 : Critical Hit! You inflicted 220 critical damage on Obsidian Kalgolem. 
+
+---------------------------------------------------------------------
+received
+(?<time>[^a-zA-Z]+) : (?<name>.+) received (?<damage>[^a-zA-Z]+) damage from (?<target>.+)\.
+
+2010.02.09 00:02:10 : Jackofspades received 445 damage from Patrol Tog. 
+
+---------------------------------------------------------------------
+received
+(?<time>[^a-zA-Z]+) : (?<name>.+) received (?<damage>[^a-zA-Z]+) damage due to the effect of (?<skill>.+)\.
+
+2010.02.09 00:01:18 : Steel Rake Lookout received 531 damage due to the effect of Cyclone of Wrath I. 
+
+---------------------------------------------------------------------
+continuous
+(?<time>[^a-zA-Z]+) : (?<name>.+) inflicted continuous damage on (?<target>.+).+by using (?<skill>.+)\.
+
+2010.02.09 00:04:19 : You inflicted continuous damage on Steel Rake Shaman by using Chastisement I. 
+2010.02.09 00:03:24 : You inflicted continuous damage on Steel Rake Elite Vaegir by using Earth's Wrath II. 
+
+---------------------------------------------------------------------
+continuous
+(?<time>[^a-zA-Z]+) : (?<name>.+) used (?<skill>.+) to inflict the continuous damage effect on (?<target>.+)\.
+
+2010.02.09 00:01:37 : Wilbur used Chain of Earth IV to inflict the continuous damage effect on Steel Rake Lookout. 
+
+---------------------------------------------------------------------
+summoned
+(?<time>[^a-zA-Z]+) : (?<name>.+) summoned (?<pet>.+) by using (?<skill>.+) to let it attack (?<target>.+)\.
+
+2010.02.09 00:03:27 : You summoned Holy Servant by using Summon Holy Servant III to let it attack Steel Rake Elite Vaegir. 
+
+---------------------------------------------------------------------
+summoned
+(?<time>[^a-zA-Z]+) : (?<name>.+) has summoned (?<pet>.+) to attack (?<target>.+) by using (?<skill>.+)\.
+
+2010.02.09 00:02:53 : Wilbur has summoned Water Energy to attack Kobold Worker by using Summon Water Energy II. 
+2010.02.09 00:03:32 : Wilbur has summoned Fire Energy to attack Steel Rake Elite Vaegir by using Summon Fire Energy IV. 
