@@ -3,8 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:KingsDamageMeter.Controls"
     x:Name="PlayerScrollViewerGrid" HorizontalContentAlignment="Left" MinWidth="190" MinHeight="48">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="BorderBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="#CCC" Offset="0.4" />
+            <GradientStop Color="#888" Offset="1" />
+        </LinearGradientBrush>
+    </UserControl.Resources>
     <Grid>
-        <ScrollViewer Style="{DynamicResource PlayerScrollViewer}" BorderThickness="1" BorderBrush="Silver" Background="Transparent">
+        <ScrollViewer Style="{DynamicResource PlayerScrollViewer}" BorderThickness="1" BorderBrush="{StaticResource BorderBrush}" Background="Transparent">
             <ScrollViewer.ContextMenu>
                 <ContextMenu Name="MainContextMenu" Opened="MainContextMenu_Opened" FontFamily="Verdana" FontSize="9">
                     <MenuItem Name="MenuItemCopyYou" Header="Copy You" Click="MenuItemCopyYou_Click" />
@@ -21,6 +27,7 @@
                     <MenuItem Name="MenuItemSortByName" Header="Sort By Name" Click="MenuItemSortByName_Click" />
                     <MenuItem Name="MenuItemSortByDamage" Header="Sort By Damage" Click="MenuItemSortByDamage_Click" />
                     <Separator />
+                    <MenuItem Name="MenuItemResetDamage" Header="Reset Damage" Click="MenuItemResetDamage_Click" />
                     <MenuItem Name="MenuItemClear" Header="Clear All" Click="MenuItemClear_Click" />
                 </ContextMenu>
             </ScrollViewer.ContextMenu>

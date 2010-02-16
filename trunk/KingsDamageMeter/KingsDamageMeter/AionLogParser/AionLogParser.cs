@@ -50,18 +50,18 @@ namespace KingsDamageMeter
         private string _TimeGroupName = "time";
         private string _TargetGroupName = "target";
 
-        private Regex _DamageInflictedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<target>.+)\.", RegexOptions.Compiled);
-        private Regex _DamageInflictedSkillRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<target>.+).+by using (?<skill>.+)\.", RegexOptions.Compiled);
-        private Regex _CriticalInflictedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : Critical Hit! (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) critical damage on (?<target>.+)\.", RegexOptions.Compiled);
-        private Regex _ContinuousInflictedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>.+) inflicted continuous damage on (?<target>.+).+by using (?<skill>.+)\.", RegexOptions.Compiled);
-        private Regex _OtherContinuousInflictedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>.+) used (?<skill>.+) to inflict the continuous damage effect on (?<target>.+)\.", RegexOptions.Compiled);
-        private Regex _SkillDamageInflictedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<target>.+) received (?<damage>[^a-zA-Z]+) damage due to the effect of (?<skill>.+)\.", RegexOptions.Compiled);
-        private Regex _JoinedGroupRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>.+) has joined your group\.", RegexOptions.Compiled);
-        private Regex _LeftGroupRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>.+) has left your group\.", RegexOptions.Compiled);
-        private Regex _PetSummonedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>.+) summoned (?<pet>.+) by using (?<skill>.+) to let it attack (?<target>.+)\.", RegexOptions.Compiled);
-        private Regex _OtherPetSummonedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>.+) has summoned (?<pet>.+) to attack (?<target>.+) by using (?<skill>.+)\.", RegexOptions.Compiled);
-        private Regex _DamageReceivedRegex = new Regex(@"(?<time>[^a-zA-Z]+) : (?<name>[a-zA-Z]+) received (?<damage>[^a-zA-Z]+) damage", RegexOptions.Compiled);
-        private Regex _ChatRegex = new Regex(@"\[charname:", RegexOptions.Compiled);
+        private Regex _DamageInflictedRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.DamageInflicted, RegexOptions.Compiled);
+        private Regex _DamageInflictedSkillRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.DamageInflictedSkill, RegexOptions.Compiled);
+        private Regex _CriticalInflictedRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.CriticalInflicted, RegexOptions.Compiled);
+        private Regex _ContinuousInflictedRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.ContinuousInflicted, RegexOptions.Compiled);
+        private Regex _OtherContinuousInflictedRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.OtherContinuousInflicted, RegexOptions.Compiled);
+        private Regex _SkillDamageInflictedRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.SkillDamageInflicted, RegexOptions.Compiled);
+        private Regex _JoinedGroupRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.JoinedGroup, RegexOptions.Compiled);
+        private Regex _LeftGroupRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.LeftGroup, RegexOptions.Compiled);
+        private Regex _PetSummonedRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.PetSummoned, RegexOptions.Compiled);
+        private Regex _OtherPetSummonedRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.OtherPetSummoned, RegexOptions.Compiled);
+        private Regex _DamageReceivedRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.DamageReceived, RegexOptions.Compiled);
+        private Regex _ChatRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.Chat, RegexOptions.Compiled);
 
         /// <summary>
         /// Occurs when KingsDamageMeter.AionLogParser is unable to find the specified log file.

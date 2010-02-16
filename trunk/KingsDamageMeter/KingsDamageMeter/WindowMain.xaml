@@ -29,27 +29,26 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="25" />
                         <ColumnDefinition Width="25" />
-                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="25" />
                     </Grid.ColumnDefinitions>
                     <local:PlayerScrollViewer x:Name="PlayerViewer" Grid.Row="1" Grid.ColumnSpan="11" Margin="5,3" />
                     <Slider Name="OpacitySlider" VerticalAlignment="Center" Minimum="0.3" Maximum="1" LargeChange="0.1" TickFrequency="0.01" TickPlacement="None" ValueChanged="OpacitySlider_ValueChanged" Value="1" Style="{StaticResource PerfectSlider}" SmallChange="0.01" ToolTip="Opacity" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Margin="10,0,5,0" />
                     <CheckBox Name="CheckTopMost" VerticalAlignment="Center" FlowDirection="RightToLeft" Foreground="Gold" FontSize="9" FontFamily="Verdana" Checked="CheckTopMost_Checked" Unchecked="CheckTopMost_Unchecked" IsChecked="True" ToolTip="Top Most" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" Margin="5,0" />
-                    <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButton.bmp" x:Name="CloseButton" MouseUp="CloseButton_MouseUp" ToolTip="Close" Grid.Column="7" Width="23" Height="23" HorizontalAlignment="Left" />
-                    <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButton.bmp" x:Name="MinimizeButton" ToolTip="Minimize" MouseUp="MinimizeButton_MouseUp" Grid.Column="5" Width="23" Height="23" />
-                    <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButton.bmp" x:Name="MenuButton" MouseUp="MenuButton_MouseUp" ToolTip="Options" Grid.Column="6" Width="23" Height="23">
+                    <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButton.bmp" x:Name="CloseButton" MouseUp="CloseButton_MouseUp" ToolTip="Close" Grid.Column="7" Width="20" Height="20" HorizontalAlignment="Left" />
+                    <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButton.bmp" x:Name="MinimizeButton" ToolTip="Minimize" MouseUp="MinimizeButton_MouseUp" Grid.Column="5" Width="20" Height="20" />
+                    <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButton.bmp" x:Name="MenuButton" MouseUp="MenuButton_MouseUp" ToolTip="Options" Grid.Column="6" Width="20" Height="20">
                        <local:SkinButton.ContextMenu>
                             <ContextMenu x:Name="MainContextMenu" Foreground="Gold" HasDropShadow="True" FontFamily="Verdana" FontSize="9">
                                 <MenuItem Name="MainContextMenuLocateLog" Header="Locate Log..." Click="MainContextMenuLocateLog_Click" />
                                 <MenuItem Name="MainContextMenuIgnoreList" Header="Ignore List..." Click="MainContextMenuIgnoreList_Click" />
-                                <Separator />
-                                <MenuItem Name="MainContextMenuResetDamage" Header="Reset Damage" Click="MainContextMenuResetDamage_Click" />
                                 <Separator />
                                 <MenuItem Name="MainContextMenuHelp" Header="Help" Click="MainContextMenuHelp_Click" />
                                 <MenuItem Name="MainContextMenuAbout" Header="About" Click="MainContextMenuAbout_Click" />
                             </ContextMenu>
                         </local:SkinButton.ContextMenu>
                     </local:SkinButton>
-                    <Label Name="LabelMain" Style="{DynamicResource TitleLabel}" FontFamily="Verdana" FontWeight="Bold" Grid.ColumnSpan="5" Margin="8,0" VerticalContentAlignment="Center">KDM</Label>
+                    <local:SkinButton x:Name="PowerButton" MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/OnButtonPress.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp" Width="20" Height="20" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" MouseUp="PowerButton_MouseUp" ToolTip="Running" />
+                    <Label Name="LabelMain" Style="{DynamicResource TitleLabel}" FontFamily="Verdana" FontWeight="Bold" Grid.ColumnSpan="4" Margin="4,0,8,0" VerticalContentAlignment="Center" Grid.Column="1">KDM</Label>
                     <Thumb Grid.Column="7" Grid.Row="2" Cursor="SizeNWSE" Name="ResizeThumb" DragDelta="ThumbResize_DragDelta" OverridesDefaultStyle="False" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="15" Height="15" ToolTip="Resize" />
                 </Grid>
             </Border>

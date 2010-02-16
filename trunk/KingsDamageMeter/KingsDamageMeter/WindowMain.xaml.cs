@@ -86,21 +86,21 @@ namespace KingsDamageMeter
 
         private void SetToolTips()
         {
-            MinimizeButton.ToolTip = KingsDamageMeter.Languages.En.Default.MinimizeToolTip;
-            MenuButton.ToolTip = KingsDamageMeter.Languages.En.Default.OptionsToolTip;
-            CloseButton.ToolTip = KingsDamageMeter.Languages.En.Default.CloseToolTip;
-            OpacitySlider.ToolTip = KingsDamageMeter.Languages.En.Default.OpacityToolTip;
-            CheckTopMost.ToolTip = KingsDamageMeter.Languages.En.Default.TopMostToolTip;
-            ResizeThumb.ToolTip = KingsDamageMeter.Languages.En.Default.ResizeToolTip;
+            PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.MainRunning;
+            MinimizeButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.MinimizeToolTip;
+            MenuButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.OptionsToolTip;
+            CloseButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.CloseToolTip;
+            OpacitySlider.ToolTip = KingsDamageMeter.Languages.Gui.Default.OpacityToolTip;
+            CheckTopMost.ToolTip = KingsDamageMeter.Languages.Gui.Default.TopMostToolTip;
+            ResizeThumb.ToolTip = KingsDamageMeter.Languages.Gui.Default.ResizeToolTip;
         }
 
         private void SetMainContextMenuHeaders()
         {
-            MainContextMenuLocateLog.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuLocateLog;
-            MainContextMenuIgnoreList.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuIgnoreList;
-            MainContextMenuHelp.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuHelp;
-            MainContextMenuAbout.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuAbout;
-            MainContextMenuResetDamage.Header = KingsDamageMeter.Languages.En.Default.OptionsMenuResetDamage;
+            MainContextMenuLocateLog.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuLocateLog;
+            MainContextMenuIgnoreList.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuIgnoreList;
+            MainContextMenuHelp.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuHelp;
+            MainContextMenuAbout.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuAbout;
         }
 
         private void SaveSettings()
@@ -240,6 +240,11 @@ namespace KingsDamageMeter
 
             if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                if (_LogParser.Running)
+                {
+                    _LogParser.Stop();
+                }
+
                 KingsDamageMeter.Properties.Settings.Default.AionLogPath = d.FileName;
                 _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
                 MainContextMenuLocateLog.ToolTip = KingsDamageMeter.Properties.Settings.Default.AionLogPath;
@@ -297,9 +302,25 @@ namespace KingsDamageMeter
 
         #endregion
 
-        private void MainContextMenuResetDamage_Click(object sender, RoutedEventArgs e)
+        private void PowerButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            PlayerViewer.ResetDamage();
+            if (_LogParser.Running)
+            {
+                _LogParser.Stop();
+                PowerButton.MouseDownImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButtonPress.bmp";
+                PowerButton.MouseOverImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp";
+                PowerButton.MouseUpImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp";
+                PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.MainDisabled;
+            }
+
+            else
+            {
+                _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
+                PowerButton.MouseDownImage = "pack://application:,,,/Themes/BlackPearl/Images/OnButtonPress.bmp";
+                PowerButton.MouseOverImage = "pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp";
+                PowerButton.MouseUpImage = "pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp";
+                PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.MainRunning;
+            }
         }
     }
 }

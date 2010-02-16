@@ -37,7 +37,7 @@ namespace KingsDamageMeter.Controls
         {
             InitializeComponent();
             SetStyle();
-            //InitializeTimers();
+            InitializeTimers();
 
             DamageChanged += OnDamageChanged;
             DamagePercentChanged += OnDamagePercentChanged;
@@ -259,17 +259,17 @@ namespace KingsDamageMeter.Controls
 
             message += PlayerName;
             message += Environment.NewLine;
-            message += _Damage + " total";
+            message += _Damage + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipTotal;
             message += Environment.NewLine;
             message += _DamagePercent.ToString("0%");
             message += Environment.NewLine;
             message += Environment.NewLine;
-            message += _DamagePerSecond + " dps";
+            message += _DamagePerSecond + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipDps;
             message += Environment.NewLine;
-            message += _PeakDps + " peak";
+            message += _PeakDps + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipPeak;
             message += Environment.NewLine;
             message += Environment.NewLine;
-            message += _BiggestHit + " biggest hit";
+            message += _BiggestHit + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipBiggestHit;
 
             ToolTip = message;
         }
@@ -298,7 +298,7 @@ namespace KingsDamageMeter.Controls
 
         private void _DurationTimer_Tick(object sender, EventArgs e)
         {
-            if (_SecondsSinceStart > 10)
+            if (_SecondsSinceStart > 3)
             {
                 _DamagePerSecond = _Damage / _SecondsSinceStart;
 

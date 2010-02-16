@@ -1,9 +1,14 @@
-﻿Version 1.2.1 Beta 3
-	Fixed: Player and pet damage should now be properly parsed from the log.
-	Added: A rounded border to the interface.
+﻿Version 1.3.0 Beta 4
 	Added: You can now reset every one's damage and dps from the Options Menu without clearing them from the player list.
+	Added: A rounded border to the interface.
+	Added: A power on/off button that starts and stops the parser.
+	Added: "Reset All Damage" to the player context menu. This resets every one's statistics without having to clear them from the player list.
+	Fixed: Player and pet damage should now be properly parsed from the log.
 	Fixed: A bug caused the program to crash when the main context menu opened with no players in the player view.
 	Fixed: A bug caused the program to crash if you remove a player from the group that has 0% contributed damage.
+	Fixed: New players should no longer appear while "Group Only" is checked.
+	Fixed: The parser will now start when you "Locate Log" like it's supposed to.
+	Fixed: The regular expressions now exist in kingsdamagemeter.exe.config for translations to support other client languages.
 
 Version 1.2.0 Beta 3
 	Added: Group member tracking. (Understatement)

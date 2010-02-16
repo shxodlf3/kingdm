@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KingsDamageMeter.Languages" GeneratedClassName="Regex">
+  <Profiles />
+  <Settings>
+    <Setting Name="DamageInflicted" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;name&gt;.+) inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage on (?&lt;target&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="DamageInflictedSkill" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;name&gt;.+) inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage on (?&lt;target&gt;.+).+by using (?&lt;skill&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="CriticalInflicted" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : Critical Hit! (?&lt;name&gt;.+) inflicted (?&lt;damage&gt;[^a-zA-Z]+) critical damage on (?&lt;target&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="ContinuousInflicted" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;name&gt;.+) inflicted continuous damage on (?&lt;target&gt;.+).+by using (?&lt;skill&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="OtherContinuousInflicted" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;name&gt;.+) used (?&lt;skill&gt;.+) to inflict the continuous damage effect on (?&lt;target&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="SkillDamageInflicted" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;target&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+) damage due to the effect of (?&lt;skill&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="JoinedGroup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;name&gt;.+) has joined your group\.</Value>
+    </Setting>
+    <Setting Name="LeftGroup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;name&gt;.+) has left your group\.</Value>
+    </Setting>
+    <Setting Name="PetSummoned" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;name&gt;.+) summoned (?&lt;pet&gt;.+) by using (?&lt;skill&gt;.+) to let it attack (?&lt;target&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="OtherPetSummoned" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;name&gt;.+) has summoned (?&lt;pet&gt;.+) to attack (?&lt;target&gt;.+) by using (?&lt;skill&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="DamageReceived" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;time&gt;[^a-zA-Z]+) : (?&lt;name&gt;[a-zA-Z]+) received (?&lt;damage&gt;[^a-zA-Z]+) damage</Value>
+    </Setting>
+    <Setting Name="Chat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\[charname:</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

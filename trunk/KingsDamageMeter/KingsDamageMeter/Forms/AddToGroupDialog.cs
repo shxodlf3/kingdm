@@ -10,10 +10,10 @@ namespace KingsDamageMeter.Forms
         {
             InitializeComponent();
 
-            Text = KingsDamageMeter.Languages.En.Default.AddGroupMemberTitle;
-            OKButton.Text = KingsDamageMeter.Languages.En.Default.OKButton;
-            CancelButton.Text = KingsDamageMeter.Languages.En.Default.CancelButton;
-            _InvlaidNameMessage = KingsDamageMeter.Languages.En.Default.InvalidNameMessage;
+            Text = KingsDamageMeter.Languages.Gui.Default.AddGroupMemberTitle;
+            OKButton.Text = KingsDamageMeter.Languages.Gui.Default.OKButton;
+            CancelButton.Text = KingsDamageMeter.Languages.Gui.Default.CancelButton;
+            _InvlaidNameMessage = KingsDamageMeter.Languages.Gui.Default.InvalidNameMessage;
         }
 
         private Regex _NameRegex = new Regex(@"^[a-zA-Z]+$");

@@ -15,6 +15,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <ApplicationIcon>Bomb.ico</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,8 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationVersion>1.3.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -177,10 +177,15 @@
     <Compile Include="Forms\AddToGroupDialog.Designer.cs">
       <DependentUpon>AddToGroupDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Languages\En.Designer.cs">
+    <Compile Include="Languages\Gui.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>En.settings</DependentUpon>
+      <DependentUpon>Gui.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\Regex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Regex.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -257,9 +262,13 @@
     <None Include="ChangeLog.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Languages\En.settings">
+    <None Include="Languages\Gui.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>En.Designer.cs</LastGenOutput>
+      <LastGenOutput>Gui.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Languages\Regex.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Regex.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +321,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Regex.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\BlackPearl\Images\OffButton.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\BlackPearl\Images\OffButtonPress.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\BlackPearl\Images\OnButton.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\BlackPearl\Images\OnButtonPress.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

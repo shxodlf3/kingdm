@@ -122,17 +122,18 @@ namespace KingsDamageMeter.Controls
 
         private void SetMainContextMenuHeaders()
         {
-            MenuItemCopyYou.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuCopyYou;
-            MenuItemCopyTop.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuCopyAll;
-            MenuItemGroupOnly.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuGroupOnly;
-            MenuItemHideOthers.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuHideOthers;
-            MenuItemAddGroupMemberByName.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuAddMemberByName;
-            MenuItemRemove.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuRemove;
-            MenuItemIgnore.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuIgnore;
-            MenuItemSortByName.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuSortName;
-            MenuItemSortByDamage.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuSortDamage;
-            MenuItemClear.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuClearAll;
-            MenuItemGroupMember.Header = KingsDamageMeter.Languages.En.Default.PlayerMenuGroupMember;
+            MenuItemCopyYou.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuCopyYou;
+            MenuItemCopyTop.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuCopyAll;
+            MenuItemGroupOnly.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuGroupOnly;
+            MenuItemHideOthers.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuHideOthers;
+            MenuItemAddGroupMemberByName.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuAddMemberByName;
+            MenuItemRemove.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuRemove;
+            MenuItemIgnore.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuIgnore;
+            MenuItemSortByName.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuSortName;
+            MenuItemSortByDamage.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuSortDamage;
+            MenuItemResetDamage.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuResetDamage;
+            MenuItemClear.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuClearAll;
+            MenuItemGroupMember.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuGroupMember;
         }
 
         /// <summary>
@@ -165,7 +166,7 @@ namespace KingsDamageMeter.Controls
                     return;
                 }
 
-                if (!_HideOthers)
+                if (!_HideOthers && !_GroupOnly)
                 {
                     PlayerPanel.Children.Add(p);
                 }
@@ -203,7 +204,7 @@ namespace KingsDamageMeter.Controls
 
                     _Players.Add(name, p);
 
-                    if (!_HideOthers && !_GroupOnly)
+                    if (!_HideOthers)
                     {
                         PlayerPanel.Children.Add(p);
                     }
@@ -617,6 +618,11 @@ namespace KingsDamageMeter.Controls
             {
                 AddGroupMember(d.PlayerName);
             }
+        }
+
+        private void MenuItemResetDamage_Click(object sender, RoutedEventArgs e)
+        {
+            ResetDamage();
         }
     }
 }

@@ -73,7 +73,7 @@ namespace KingsDamageMeter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\NCSoft\\Aion\\Chat.log")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\NCSoft\\Aion\\Chat.log")]
         public string AionLogPath {
             get {
                 return ((string)(this["AionLogPath"]));
