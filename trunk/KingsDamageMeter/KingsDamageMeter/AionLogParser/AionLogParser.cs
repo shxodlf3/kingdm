@@ -195,7 +195,7 @@ namespace KingsDamageMeter
         {
             if (stream != null)
             {
-                return new StreamReader(stream);
+                return new StreamReader(stream, System.Text.Encoding.Default);
             }
 
             else
@@ -251,7 +251,7 @@ namespace KingsDamageMeter
             }
 
             // Match normal damage being inflicted..
-            matches = _DamageInflictedRegex.Matches(line);
+            matches = _DamageInflictedSkillRegex.Matches(line);
             if (matches.Count > 0)
             {
                 string name = matches[0].Groups[_NameGroupName].Value;
@@ -283,7 +283,7 @@ namespace KingsDamageMeter
             }
 
             // Match normal damage being inflicted..
-            matches = _DamageInflictedSkillRegex.Matches(line);
+            matches = _DamageInflictedRegex.Matches(line);
             if (matches.Count > 0)
             {
                 string name = matches[0].Groups[_NameGroupName].Value;
