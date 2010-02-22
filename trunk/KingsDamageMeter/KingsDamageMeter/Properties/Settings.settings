@@ -38,5 +38,11 @@
     <Setting Name="HideOthers" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="Debug" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DebugFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Debug.log</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

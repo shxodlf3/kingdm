@@ -47,7 +47,7 @@
                             </ContextMenu>
                         </local:SkinButton.ContextMenu>
                     </local:SkinButton>
-                    <local:SkinButton x:Name="PowerButton" MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/OnButtonPress.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp" Width="20" Height="20" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" MouseUp="PowerButton_MouseUp" ToolTip="Running" />
+                    <local:SkinButton x:Name="PowerButton" MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/OnButtonPress.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp" Width="20" Height="20" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" MouseUp="PowerButton_MouseUp" />
                     <Label Name="LabelMain" Style="{DynamicResource TitleLabel}" FontFamily="Verdana" FontWeight="Bold" Grid.ColumnSpan="4" Margin="4,0,8,0" VerticalContentAlignment="Center" Grid.Column="1">KDM</Label>
                     <Thumb Grid.Column="7" Grid.Row="2" Cursor="SizeNWSE" Name="ResizeThumb" DragDelta="ThumbResize_DragDelta" OverridesDefaultStyle="False" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="15" Height="15" ToolTip="Resize" />
                 </Grid>

@@ -38,6 +38,11 @@ namespace KingsDamageMeter
 
         public LogEventArgs(DateTime time)
         {
+            if (time == null)
+            {
+                time = DateTime.Now;
+            }
+
             _Time = time;
         }
     }
@@ -68,6 +73,11 @@ namespace KingsDamageMeter
         public PlayerDamageEventArgs(DateTime time, string name, int damage)
             : base(time, name)
         {
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+
             _Damage = damage;
         }
     }
@@ -90,6 +100,11 @@ namespace KingsDamageMeter
         public PlayerEventArgs(DateTime time, string name)
             : base(time)
         {
+            if (String.IsNullOrEmpty(name))
+            {
+                name = "Unknown Player";
+            }
+
             _Name = name;
         }
     }
@@ -118,6 +133,15 @@ namespace KingsDamageMeter
         public PetEventArgs(DateTime time, string name, string owner)
             : base(time)
         {
+            if (String.IsNullOrEmpty(name))
+            {
+                name = "Unknown Pet";
+            }
+            if (String.IsNullOrEmpty(owner))
+            {
+                owner = "Unknown Owner";
+            }
+
             _Name = name;
             _Owner = owner;
         }
@@ -138,6 +162,11 @@ namespace KingsDamageMeter
         public PetDamageEventArgs(DateTime time, string name, string owner, int damage)
             : base(time, name, owner)
         {
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+
             _Damage = damage;
         }
     }

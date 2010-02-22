@@ -41,6 +41,10 @@ namespace KingsDamageMeter.Controls
         private PlayerControl _SelectedPlayer;
         private PlayerControl _WorkingPlayer;
 
+        private string _YouAlias = KingsDamageMeter.Languages.Regex.Default.YouAlias;
+
+        private PlayerSortType _LastSortType = PlayerSortType.None;
+
         public event EventHandler IgnoreListChanged;
         public event EventHandler HideOthersChanged;
         public event EventHandler GroupOnlyChanged;
@@ -146,7 +150,7 @@ namespace KingsDamageMeter.Controls
             {
                 CreateIgnoreList();
 
-                if (_IgnoreList.Contains(name) && name != "You")
+                if (_IgnoreList.Contains(name) && name != _YouAlias)
                 {
                     return;
                 }
@@ -159,7 +163,7 @@ namespace KingsDamageMeter.Controls
 
                 _Players.Add(name, p);
 
-                if (name == "You")
+                if (name == _YouAlias)
                 {
                     _Players[name].GroupMember = true;
                     PlayerPanel.Children.Add(p);
@@ -183,7 +187,7 @@ namespace KingsDamageMeter.Controls
             {
                 CreateIgnoreList();
 
-                if (_IgnoreList.Contains(name) && name != "You")
+                if (_IgnoreList.Contains(name) && name != _YouAlias)
                 {
                     return;
                 }
@@ -328,7 +332,17 @@ namespace KingsDamageMeter.Controls
 
             foreach (PlayerControl p in _Players.Values)
             {
-                double percent = (double)((double)(p.Damage - total) / total) + 1;
+                double percent;
+
+                try
+                {
+                    percent = (double)((double)(p.Damage - total) / total) + 1;
+                }
+
+                catch
+                {
+                    percent = 0;
+                }
 
                 if (_GroupOnly)
                 {
@@ -364,7 +378,7 @@ namespace KingsDamageMeter.Controls
             {
                 if (PlayerPanel.Children.Contains(p))
                 {
-                    if (p.PlayerName != "You")
+                    if (p.PlayerName != _YouAlias)
                     {
                         PlayerPanel.Children.Remove(p);
                     }
@@ -394,7 +408,7 @@ namespace KingsDamageMeter.Controls
             {
                 if (PlayerPanel.Children.Contains(p))
                 {
-                    if (p.PlayerName != "You" && !p.GroupMember)
+                    if (p.PlayerName != _YouAlias && !p.GroupMember)
                     {
                         PlayerPanel.Children.Remove(p);
                     }
@@ -441,6 +455,8 @@ namespace KingsDamageMeter.Controls
                     PlayerPanel.Children.Add(player);
                 }
             }
+
+            _LastSortType = PlayerSortType.Name;
         }
 
         private void SortByDamage()
@@ -468,6 +484,25 @@ namespace KingsDamageMeter.Controls
                 {
                     PlayerPanel.Children.Add(player);
                 }
+            }
+
+            _LastSortType = PlayerSortType.Damage;
+        }
+
+        private void SortByLast()
+        {
+            switch (_LastSortType)
+            {
+                case PlayerSortType.Damage:
+                    SortByDamage();
+                    break;
+
+                case PlayerSortType.Name:
+                    SortByName();
+                    break;
+
+                default:
+                    break;
             }
         }
 
@@ -552,10 +587,14 @@ namespace KingsDamageMeter.Controls
         {
             string result = String.Empty;
 
-            foreach (PlayerControl p in _Players.Values)
+            foreach (object o in PlayerPanel.Children)
             {
-                double percent = (double)p.DamagePercent * 100;
-                result += p.ToString() + " ";
+                if (o == typeof(PlayerControl))
+                {
+                    PlayerControl p = (PlayerControl)o;
+                    double percent = (double)p.DamagePercent * 100;
+                    result += p.ToString() + " ";
+                }
             }
 
             Clipboard.SetText(result);
@@ -563,9 +602,9 @@ namespace KingsDamageMeter.Controls
 
         private void MenuItemCopyYou_Click(object sender, RoutedEventArgs e)
         {
-            if (_Players.ContainsKey("You"))
+            if (_Players.ContainsKey(_YouAlias))
             {
-                PlayerControl p = _Players["You"];
+                PlayerControl p = _Players[_YouAlias];
                 Clipboard.SetText(p.ToString());
             }
         }
@@ -595,7 +634,7 @@ namespace KingsDamageMeter.Controls
         {
             if (_WorkingPlayer != null)
             {
-                if (_WorkingPlayer.PlayerName != "You")
+                if (_WorkingPlayer.PlayerName != _YouAlias)
                 {
                     _WorkingPlayer.GroupMember = MenuItemGroupMember.IsChecked;
                 }

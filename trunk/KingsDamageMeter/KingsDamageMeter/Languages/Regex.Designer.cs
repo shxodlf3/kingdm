@@ -25,146 +25,6 @@ namespace KingsDamageMeter.Languages {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<ta" +
-            "rget>.+)\\.")]
-        public string DamageInflicted {
-            get {
-                return ((string)(this["DamageInflicted"]));
-            }
-            set {
-                this["DamageInflicted"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<ta" +
-            "rget>.+).+by using (?<skill>.+)\\.")]
-        public string DamageInflictedSkill {
-            get {
-                return ((string)(this["DamageInflictedSkill"]));
-            }
-            set {
-                this["DamageInflictedSkill"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : Critical Hit! (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) c" +
-            "ritical damage on (?<target>.+)\\.")]
-        public string CriticalInflicted {
-            get {
-                return ((string)(this["CriticalInflicted"]));
-            }
-            set {
-                this["CriticalInflicted"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<name>.+) inflicted continuous damage on (?<target>.+).+b" +
-            "y using (?<skill>.+)\\.")]
-        public string ContinuousInflicted {
-            get {
-                return ((string)(this["ContinuousInflicted"]));
-            }
-            set {
-                this["ContinuousInflicted"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<name>.+) used (?<skill>.+) to inflict the continuous dam" +
-            "age effect on (?<target>.+)\\.")]
-        public string OtherContinuousInflicted {
-            get {
-                return ((string)(this["OtherContinuousInflicted"]));
-            }
-            set {
-                this["OtherContinuousInflicted"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<target>.+) received (?<damage>[^a-zA-Z]+) damage due to " +
-            "the effect of (?<skill>.+)\\.")]
-        public string SkillDamageInflicted {
-            get {
-                return ((string)(this["SkillDamageInflicted"]));
-            }
-            set {
-                this["SkillDamageInflicted"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<name>.+) has joined your group\\.")]
-        public string JoinedGroup {
-            get {
-                return ((string)(this["JoinedGroup"]));
-            }
-            set {
-                this["JoinedGroup"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<name>.+) has left your group\\.")]
-        public string LeftGroup {
-            get {
-                return ((string)(this["LeftGroup"]));
-            }
-            set {
-                this["LeftGroup"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<name>.+) summoned (?<pet>.+) by using (?<skill>.+) to le" +
-            "t it attack (?<target>.+)\\.")]
-        public string PetSummoned {
-            get {
-                return ((string)(this["PetSummoned"]));
-            }
-            set {
-                this["PetSummoned"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<name>.+) has summoned (?<pet>.+) to attack (?<target>.+)" +
-            " by using (?<skill>.+)\\.")]
-        public string OtherPetSummoned {
-            get {
-                return ((string)(this["OtherPetSummoned"]));
-            }
-            set {
-                this["OtherPetSummoned"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : (?<name>[a-zA-Z]+) received (?<damage>[^a-zA-Z]+) damage")]
-        public string DamageReceived {
-            get {
-                return ((string)(this["DamageReceived"]));
-            }
-            set {
-                this["DamageReceived"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\\[charname:")]
         public string Chat {
             get {
@@ -172,6 +32,241 @@ namespace KingsDamageMeter.Languages {
             }
             set {
                 this["Chat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You inflicted (?<damage>[^a-zA-Z]+) damage on (?<target>.+)\\.")]
+        public string YouInflictedRegex {
+            get {
+                return ((string)(this["YouInflictedRegex"]));
+            }
+            set {
+                this["YouInflictedRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You inflicted (?<damage>[^a-zA-Z]+) damage( and the rune carve effect)? on (?<tar" +
+            "get>.+) by using (?<skill>.+)\\.")]
+        public string YouInflictedSkillRegex {
+            get {
+                return ((string)(this["YouInflictedSkillRegex"]));
+            }
+            set {
+                this["YouInflictedSkillRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Critical Hit! You inflicted (?<damage>[^a-zA-Z]+) critical damage on (?<target>.+" +
+            ")\\.")]
+        public string YouCriticalRegex {
+            get {
+                return ((string)(this["YouCriticalRegex"]));
+            }
+            set {
+                this["YouCriticalRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<target>.+) received (?<damage>[^a-zA-Z]+)( poisoning)? damage after you used (" +
+            "?<effect>.+)\\.")]
+        public string YouEffectDamageRegex {
+            get {
+                return ((string)(this["YouEffectDamageRegex"]));
+            }
+            set {
+                this["YouEffectDamageRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<target>.+)\\.")]
+        public string OtherInflictedRegex {
+            get {
+                return ((string)(this["OtherInflictedRegex"]));
+            }
+            set {
+                this["OtherInflictedRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<target>.+)( and caused t" +
+            "he pattern engraving effect)? by using (?<skill>.+)\\.")]
+        public string OtherInflictedSkillRegex {
+            get {
+                return ((string)(this["OtherInflictedSkillRegex"]));
+            }
+            set {
+                this["OtherInflictedSkillRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You received (?<damage>[^a-zA-Z]+) damage from (?<target>.+)\\.")]
+        public string YouReceivedRegex {
+            get {
+                return ((string)(this["YouReceivedRegex"]));
+            }
+            set {
+                this["YouReceivedRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) received (?<damage>[^a-zA-Z]+) damage from (?<target>.+)\\.")]
+        public string OtherReceivedRegex {
+            get {
+                return ((string)(this["OtherReceivedRegex"]));
+            }
+            set {
+                this["OtherReceivedRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) received (?<damage>[^a-zA-Z]+) damage due to the effect of (?<skill>." +
+            "+)\\.")]
+        public string OtherReceivedSkillRegex {
+            get {
+                return ((string)(this["OtherReceivedSkillRegex"]));
+            }
+            set {
+                this["OtherReceivedSkillRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You inflicted continuous damage on (?<target>.+) by using (?<skill>.+)\\.")]
+        public string YouContinuousRegex {
+            get {
+                return ((string)(this["YouContinuousRegex"]));
+            }
+            set {
+                this["YouContinuousRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) used (?<skill>.+) to inflict the continuous damage effect on (?<targe" +
+            "t>.+)\\.")]
+        public string OtherContinuousRegex {
+            get {
+                return ((string)(this["OtherContinuousRegex"]));
+            }
+            set {
+                this["OtherContinuousRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You summoned (?<pet>.+) by using (?<skill>.+)\\.")]
+        public string YouSummonedRegex {
+            get {
+                return ((string)(this["YouSummonedRegex"]));
+            }
+            set {
+                this["YouSummonedRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You summoned (?<pet>.+) by using (?<skill>.+) to let it attack (?<target>.+)\\.")]
+        public string YouSummonedAttackRegex {
+            get {
+                return ((string)(this["YouSummonedAttackRegex"]));
+            }
+            set {
+                this["YouSummonedAttackRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) summoned (?<pet>.+) by using (?<skill>.+)\\.")]
+        public string OtherSummonedRegex {
+            get {
+                return ((string)(this["OtherSummonedRegex"]));
+            }
+            set {
+                this["OtherSummonedRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) has summoned (?<pet>.+) to attack (?<target>.+) by using (?<skill>.+)" +
+            "\\.")]
+        public string OtherSummonedAttackRegex {
+            get {
+                return ((string)(this["OtherSummonedAttackRegex"]));
+            }
+            set {
+                this["OtherSummonedAttackRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<time>[^a-zA-Z]+) : ")]
+        public string TimestampRegex {
+            get {
+                return ((string)(this["TimestampRegex"]));
+            }
+            set {
+                this["TimestampRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You")]
+        public string YouAlias {
+            get {
+                return ((string)(this["YouAlias"]));
+            }
+            set {
+                this["YouAlias"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) has joined your group\\.")]
+        public string JoinedGroupRegex {
+            get {
+                return ((string)(this["JoinedGroupRegex"]));
+            }
+            set {
+                this["JoinedGroupRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) has left your group\\.")]
+        public string LeftGroupRegex {
+            get {
+                return ((string)(this["LeftGroupRegex"]));
+            }
+            set {
+                this["LeftGroupRegex"] = value;
             }
         }
     }

@@ -24,6 +24,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.IO;
 using System.Diagnostics;
+using System.Collections;
 
 using KingsDamageMeter.Forms;
 
@@ -38,7 +39,7 @@ namespace KingsDamageMeter
             InitializeLogParser();
             SetToolTips();
             SetMainContextMenuHeaders();
-
+            
             PlayerViewer.IgnoreListChanged += OnPlayerViewerIgnoreListChanged;
         }
 
@@ -81,12 +82,14 @@ namespace KingsDamageMeter
             _LogParser.CriticalInflicted += OnDamageInflicted;
             _LogParser.PlayerJoinedGroup += OnPlayerJoinedGroup;
             _LogParser.PlayerLeftGroup += OnPlayerLeftGroup;
+            _LogParser.Started += OnParserStarted;
+            _LogParser.Stopped += OnParserStopped;
             _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
         }
 
         private void SetToolTips()
         {
-            PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.MainRunning;
+            PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.RunningToolTip;
             MinimizeButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.MinimizeToolTip;
             MenuButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.OptionsToolTip;
             CloseButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.CloseToolTip;
@@ -220,7 +223,7 @@ namespace KingsDamageMeter
 
             else
             {
-                MessageBox.Show("Cannot find '" + path + "'", "Oops");
+                MessageBox.Show("Cannot find '" + path + "'", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 
@@ -257,7 +260,7 @@ namespace KingsDamageMeter
 
         private void OnFileNotFound(object sender, EventArgs e)
         {
-            MessageBox.Show("Unable to find log file.", "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            MessageBox.Show(KingsDamageMeter.Languages.Gui.Default.OpenLogError, "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
         private void OnDamageInflicted(object sender, PlayerDamageEventArgs e)
@@ -300,6 +303,16 @@ namespace KingsDamageMeter
             KingsDamageMeter.Properties.Settings.Default.IgnoreList = PlayerViewer.IgnoreList;
         }
 
+        private void OnParserStarted(object sender, EventArgs e)
+        {
+            TogglePowerButton();
+        }
+
+        private void OnParserStopped(object sender, EventArgs e)
+        {
+            TogglePowerButton();
+        }
+
         #endregion
 
         private void PowerButton_MouseUp(object sender, MouseButtonEventArgs e)
@@ -307,19 +320,30 @@ namespace KingsDamageMeter
             if (_LogParser.Running)
             {
                 _LogParser.Stop();
-                PowerButton.MouseDownImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButtonPress.bmp";
-                PowerButton.MouseOverImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp";
-                PowerButton.MouseUpImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp";
-                PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.MainDisabled;
             }
 
             else
             {
                 _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
+            }
+        }
+
+        private void TogglePowerButton()
+        {
+            if (_LogParser.Running)
+            {
                 PowerButton.MouseDownImage = "pack://application:,,,/Themes/BlackPearl/Images/OnButtonPress.bmp";
                 PowerButton.MouseOverImage = "pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp";
                 PowerButton.MouseUpImage = "pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp";
-                PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.MainRunning;
+                PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.RunningToolTip;
+            }
+
+            else
+            {
+                PowerButton.MouseDownImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButtonPress.bmp";
+                PowerButton.MouseOverImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp";
+                PowerButton.MouseUpImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp";
+                PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.DisabledToolTip;
             }
         }
     }

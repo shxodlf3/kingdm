@@ -24,6 +24,8 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
+using KingsDamageMeter.Forms;
+
 namespace KingsDamageMeter
 {
     /// <summary>
@@ -31,5 +33,29 @@ namespace KingsDamageMeter
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+            DebugLogger.Write(Environment.NewLine + "Started KDM " + DateTime.Now.ToString());
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            try
+            {
+                Exception ex = (Exception)e.ExceptionObject;
+
+                ExceptionForm f = new ExceptionForm();
+                string exception = ex.Message + Environment.NewLine + ex.StackTrace;
+                DebugLogger.Write("Unhandled Exception: " + exception);
+                f.Exception = exception;
+                f.ShowDialog();
+            }
+
+            finally
+            {
+                Application.Current.Shutdown();
+            }
+        }
     }
 }

@@ -338,24 +338,24 @@ namespace KingsDamageMeter.Languages {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Running")]
-        public string MainRunning {
+        public string RunningToolTip {
             get {
-                return ((string)(this["MainRunning"]));
+                return ((string)(this["RunningToolTip"]));
             }
             set {
-                this["MainRunning"] = value;
+                this["RunningToolTip"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Disabled")]
-        public string MainDisabled {
+        public string DisabledToolTip {
             get {
-                return ((string)(this["MainDisabled"]));
+                return ((string)(this["DisabledToolTip"]));
             }
             set {
-                this["MainDisabled"] = value;
+                this["DisabledToolTip"] = value;
             }
         }
         
@@ -404,6 +404,19 @@ namespace KingsDamageMeter.Languages {
             }
             set {
                 this["PlayerToolTipBiggestHit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Unable to locate chat log. Please refer to the documentation for instructions on " +
+            "setting up Aion to create the log or click \"Options -> Locate Log...\"")]
+        public string OpenLogError {
+            get {
+                return ((string)(this["OpenLogError"]));
+            }
+            set {
+                this["OpenLogError"] = value;
             }
         }
     }

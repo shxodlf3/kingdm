@@ -208,7 +208,7 @@ namespace KingsDamageMeter.Controls
 
         public new string ToString()
         {
-            return String.Format("({0} {1}, {2} dps ({3}))", PlayerName, Damage, _DamagePerSecond, DamagePercent.ToString("0%"));
+            return String.Format("({0} {1} ({2}))", PlayerName, Damage, DamagePercent.ToString("0%"));
         }
 
         private void InitializeTimers()

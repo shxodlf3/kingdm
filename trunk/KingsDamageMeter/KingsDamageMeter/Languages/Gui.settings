@@ -80,10 +80,10 @@
     <Setting Name="PlayerMenuAddMemberByName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Add Member by Name</Value>
     </Setting>
-    <Setting Name="MainRunning" Type="System.String" Scope="User">
+    <Setting Name="RunningToolTip" Type="System.String" Scope="User">
       <Value Profile="(Default)">Running</Value>
     </Setting>
-    <Setting Name="MainDisabled" Type="System.String" Scope="User">
+    <Setting Name="DisabledToolTip" Type="System.String" Scope="User">
       <Value Profile="(Default)">Disabled</Value>
     </Setting>
     <Setting Name="PlayerToolTipTotal" Type="System.String" Scope="User">
@@ -97,6 +97,9 @@
     </Setting>
     <Setting Name="PlayerToolTipBiggestHit" Type="System.String" Scope="User">
       <Value Profile="(Default)">biggest hit</Value>
+    </Setting>
+    <Setting Name="OpenLogError" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Unable to locate chat log. Please refer to the documentation for instructions on setting up Aion to create the log or click "Options -&gt; Locate Log..."</Value>
     </Setting>
   </Settings>
 </SettingsFile>
