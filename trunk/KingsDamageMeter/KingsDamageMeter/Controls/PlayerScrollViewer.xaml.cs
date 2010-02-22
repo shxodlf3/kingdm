@@ -589,7 +589,7 @@ namespace KingsDamageMeter.Controls
 
             foreach (object o in PlayerPanel.Children)
             {
-                if (o == typeof(PlayerControl))
+                if (o is PlayerControl)
                 {
                     PlayerControl p = (PlayerControl)o;
                     double percent = (double)p.DamagePercent * 100;
