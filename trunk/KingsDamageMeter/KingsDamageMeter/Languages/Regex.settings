@@ -62,5 +62,11 @@
     <Setting Name="LeftGroupRegex" Type="System.String" Scope="User">
       <Value Profile="(Default)">(?&lt;name&gt;.+) has left your group\.</Value>
     </Setting>
+    <Setting Name="YouGainedExpRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">You have gained (?&lt;exp&gt;[^a-zA-Z]+) EXP from (?&lt;target&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="YouEarnedKinahRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">You have earned (?&lt;kinah&gt;[^a-zA-Z]+) Kinah.</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

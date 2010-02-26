@@ -47,6 +47,54 @@ namespace KingsDamageMeter
         }
     }
 
+    public class ExpEventArgs : LogEventArgs
+    {
+        private int _Exp;
+
+        public int Exp
+        {
+            get
+            {
+                return _Exp;
+            }
+        }
+
+        public ExpEventArgs(DateTime time, int exp)
+            : base(time)
+        {
+            if (exp < 0)
+            {
+                exp = 0;
+            }
+
+            _Exp = exp;
+        }
+    }
+
+    public class KinahEventArgs : LogEventArgs
+    {
+        private int _Kinah;
+
+        public int Kinah
+        {
+            get
+            {
+                return _Kinah;
+            }
+        }
+
+        public KinahEventArgs(DateTime time, int kinah)
+            : base(time)
+        {
+            if (kinah < 0)
+            {
+                kinah = 0;
+            }
+
+            _Kinah = kinah;
+        }
+    }
+
     /// <summary>
     /// Provides data for the KingsDamageMeter.AionLogParser.DamageInflicted event.
     /// </summary>
@@ -79,6 +127,30 @@ namespace KingsDamageMeter
             }
 
             _Damage = damage;
+        }
+    }
+
+    public class PlayerSkillDamageEventArgs : PlayerDamageEventArgs
+    {
+        private string _Skill;
+
+        public string Skill
+        {
+            get
+            {
+                return _Skill;
+            }
+        }
+
+        public PlayerSkillDamageEventArgs(DateTime time, string name, int damage, string skill)
+            : base(time, name, damage)
+        {
+            if (String.IsNullOrEmpty(skill))
+            {
+                skill = "Unknown";
+            }
+
+            _Skill = skill;
         }
     }
 

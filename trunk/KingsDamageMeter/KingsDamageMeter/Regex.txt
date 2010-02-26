@@ -30,6 +30,18 @@ Critical Hit! You inflicted 220 critical damage on Obsidian Kalgolem.
 Ice Airon received 78 poisoning damage after you used Apply Poison I Effect.
 
 ---------------------------------------------------------------------
+-- You Earned Kinah
+You have earned (?<kinah>[^a-zA-Z]+) Kinah.
+
+You have earned 232 Kinah.
+
+---------------------------------------------------------------------
+-- You Gained EXP
+You have gained (?<exp>[^a-zA-Z]+) EXP from (?<target>.+)\.
+
+You have gained 44,678 EXP from Hill Sparkle.
+
+---------------------------------------------------------------------
 -- Other Inflicted
 (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<target>.+)\.
 

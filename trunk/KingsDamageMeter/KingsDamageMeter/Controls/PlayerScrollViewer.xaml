@@ -20,6 +20,7 @@
                     <MenuItem Name="MenuItemGroupOnly" Header="Group Only" IsCheckable="True" Click="MenuItemGroupOnly_Click" />
                     <MenuItem Name="MenuItemAddGroupMemberByName" Header="Add Member by Name" Click="MenuItemAddGroupMemberByName_Click" />
                     <Separator />
+                    <MenuItem Name="MenuItemViewSkills" Header="View Skills" Click="MenuItemViewSkills_Click" />
                     <MenuItem Name="MenuItemGroupMember" Header="Group Member" IsCheckable="True" Click="MenuItemGroupMember_Click" />
                     <MenuItem Name="MenuItemRemove" Header="Remove" Click="MenuItemRemove_Click" />
                     <MenuItem Name="MenuItemIgnore" Header="Ignore" Click="MenuItemIgnore_Click" />

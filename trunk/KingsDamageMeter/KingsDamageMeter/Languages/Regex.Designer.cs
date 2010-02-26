@@ -269,5 +269,29 @@ namespace KingsDamageMeter.Languages {
                 this["LeftGroupRegex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You have gained (?<exp>[^a-zA-Z]+) EXP from (?<target>.+)\\.")]
+        public string YouGainedExpRegex {
+            get {
+                return ((string)(this["YouGainedExpRegex"]));
+            }
+            set {
+                this["YouGainedExpRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You have earned (?<kinah>[^a-zA-Z]+) Kinah.")]
+        public string YouEarnedKinahRegex {
+            get {
+                return ((string)(this["YouEarnedKinahRegex"]));
+            }
+            set {
+                this["YouEarnedKinahRegex"] = value;
+            }
+        }
     }
 }

@@ -174,6 +174,11 @@ namespace KingsDamageMeter.Controls
                 {
                     PlayerPanel.Children.Add(p);
                 }
+
+                if (_LastSortType == PlayerSortType.Name)
+                {
+                    SortByName();
+                }
             }
         }
 
@@ -212,6 +217,11 @@ namespace KingsDamageMeter.Controls
                     {
                         PlayerPanel.Children.Add(p);
                     }
+                }
+
+                if (_LastSortType == PlayerSortType.Name)
+                {
+                    SortByName();
                 }
             }
         }
@@ -253,6 +263,11 @@ namespace KingsDamageMeter.Controls
         /// <param name="damage">The total damage the player has dealt</param>
         public void UpdatePlayerDamage(string name, int damage)
         {
+            UpdatePlayerDamage(name, damage, "White Damage");
+        }
+
+        public void UpdatePlayerDamage(string name, int damage, string skill)
+        {
             if (PlayerExists(name))
             {
                 CreateIgnoreList();
@@ -263,8 +278,30 @@ namespace KingsDamageMeter.Controls
                     return;
                 }
 
+                _Players[name].Skills.Incriment(skill, damage);
                 _Players[name].Damage += damage;
                 UpdatePercents();
+
+                if (_LastSortType == PlayerSortType.Damage)
+                {
+                    SortByDamage();
+                }
+            }
+        }
+
+        public void UpdateExp(int exp)
+        {
+            if (PlayerExists(_YouAlias))
+            {
+                _Players[_YouAlias].ExpGained += exp;
+            }
+        }
+
+        public void UpdateKinah(int kinah)
+        {
+            if (PlayerExists(_YouAlias))
+            {
+                _Players[_YouAlias].KinahEarned += kinah;
             }
         }
 
@@ -307,6 +344,7 @@ namespace KingsDamageMeter.Controls
             foreach (PlayerControl p in _Players.Values)
             {
                 p.Reset();
+                p.Skills.Clear();
             }
         }
 
@@ -435,7 +473,7 @@ namespace KingsDamageMeter.Controls
             {
                 return;
             }
-
+            
             PlayerPanel.Children.Clear();
 
             var players = (from player in _Players orderby player.Value.PlayerName ascending select player.Value);
@@ -662,6 +700,17 @@ namespace KingsDamageMeter.Controls
         private void MenuItemResetDamage_Click(object sender, RoutedEventArgs e)
         {
             ResetDamage();
+        }
+
+        private void MenuItemViewSkills_Click(object sender, RoutedEventArgs e)
+        {
+            if (_WorkingPlayer != null)
+            {
+                SkillsForm s = new SkillsForm();
+                s.Text = _WorkingPlayer.PlayerName + " - Breakdown";
+                s.Populate(_WorkingPlayer.Skills, _WorkingPlayer.Damage);
+                s.ShowDialog();
+            }
         }
     }
 }

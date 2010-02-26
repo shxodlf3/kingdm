@@ -419,5 +419,29 @@ namespace KingsDamageMeter.Languages {
                 this["OpenLogError"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("xp hour")]
+        public string PlayerToolTipExp {
+            get {
+                return ((string)(this["PlayerToolTipExp"]));
+            }
+            set {
+                this["PlayerToolTipExp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("kinah hour")]
+        public string PlayerToolTipKinah {
+            get {
+                return ((string)(this["PlayerToolTipKinah"]));
+            }
+            set {
+                this["PlayerToolTipKinah"] = value;
+            }
+        }
     }
 }

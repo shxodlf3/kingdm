@@ -147,6 +147,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Combat\SkillCollection.cs" />
     <Compile Include="Controls\Constants.cs" />
     <Compile Include="DebugLogger.cs" />
     <Compile Include="Extensions.cs" />
@@ -185,6 +186,13 @@
     <Compile Include="Forms\AddToGroupDialog.Designer.cs">
       <DependentUpon>AddToGroupDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SkillsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SkillsForm.Designer.cs">
+      <DependentUpon>SkillsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SkillSorter.cs" />
     <Compile Include="Languages\Gui.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -219,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddToGroupDialog.resx">
       <DependentUpon>AddToGroupDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SkillsForm.resx">
+      <DependentUpon>SkillsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

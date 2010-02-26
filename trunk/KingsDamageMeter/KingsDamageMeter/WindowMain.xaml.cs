@@ -49,8 +49,12 @@ namespace KingsDamageMeter
         private AionLogParser _LogParser = new AionLogParser();
 
         private delegate void DamageInflicted_Callback(object sender, PlayerDamageEventArgs e);
+        private delegate void CriticalInflicted_Callback(object sender, PlayerDamageEventArgs e);
+        private delegate void SkillDamageInflicted_Callback(object sender, PlayerSkillDamageEventArgs e);
         private delegate void PlayerJoinedGroup_Callback(object sender, PlayerEventArgs e);
         private delegate void PlayerLeftGroup_Callback(object sender, PlayerEventArgs e);
+        private delegate void ExpGained_Callback(object sender, ExpEventArgs e);
+        private delegate void KinahEarned_Callback(object sender, KinahEventArgs e);
 
         #region Initialization
 
@@ -79,9 +83,12 @@ namespace KingsDamageMeter
         {
             _LogParser.FileNotFound += OnFileNotFound;
             _LogParser.DamageInflicted += OnDamageInflicted;
-            _LogParser.CriticalInflicted += OnDamageInflicted;
+            _LogParser.CriticalInflicted += OnCriticalDamageInflicted;
+            _LogParser.SkillDamageInflicted += OnSkillDamageInflicted;
             _LogParser.PlayerJoinedGroup += OnPlayerJoinedGroup;
             _LogParser.PlayerLeftGroup += OnPlayerLeftGroup;
+            _LogParser.ExpGained += OnExpGained;
+            _LogParser.KinahEarned += OnKinahEarned;
             _LogParser.Started += OnParserStarted;
             _LogParser.Stopped += OnParserStopped;
             _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
@@ -278,6 +285,36 @@ namespace KingsDamageMeter
             PlayerViewer.UpdatePlayerDamage(e.Name, e.Damage);
         }
 
+        private void OnSkillDamageInflicted(object sender, PlayerSkillDamageEventArgs e)
+        {
+            Dispatcher.Invoke(new SkillDamageInflicted_Callback(DoSkillDamageInflicted), sender, e);
+        }
+
+        private void DoSkillDamageInflicted(object sender, PlayerSkillDamageEventArgs e)
+        {
+            if (!PlayerViewer.PlayerExists(e.Name))
+            {
+                PlayerViewer.AddPlayer(e.Name);
+            }
+
+            PlayerViewer.UpdatePlayerDamage(e.Name, e.Damage, e.Skill);
+        }
+
+        private void OnCriticalDamageInflicted(object sender, PlayerDamageEventArgs e)
+        {
+            Dispatcher.Invoke(new CriticalInflicted_Callback(DoCriticalDamageInflicted), sender, e);
+        }
+
+        private void DoCriticalDamageInflicted(object sender, PlayerDamageEventArgs e)
+        {
+            if (!PlayerViewer.PlayerExists(e.Name))
+            {
+                PlayerViewer.AddPlayer(e.Name);
+            }
+
+            PlayerViewer.UpdatePlayerDamage(e.Name, e.Damage);
+        }
+
         private void OnPlayerJoinedGroup(object sender, PlayerEventArgs e)
         {
             Dispatcher.Invoke(new PlayerJoinedGroup_Callback(DoPlayerJoinedGroup), sender, e);
@@ -296,6 +333,26 @@ namespace KingsDamageMeter
         private void DoPlayerLeftGroup(object sender, PlayerEventArgs e)
         {
             PlayerViewer.RemoveGroupMember(e.Name);
+        }
+
+        private void OnExpGained(object sender, ExpEventArgs e)
+        {
+            Dispatcher.Invoke(new ExpGained_Callback(DoExpGained), sender, e);
+        }
+
+        private void DoExpGained(object sender, ExpEventArgs e)
+        {
+            PlayerViewer.UpdateExp(e.Exp);
+        }
+
+        private void OnKinahEarned(object sender, KinahEventArgs e)
+        {
+            Dispatcher.Invoke(new KinahEarned_Callback(DoKinahEarned), sender, e);
+        }
+
+        private void DoKinahEarned(object sender, KinahEventArgs e)
+        {
+            PlayerViewer.UpdateKinah(e.Kinah);
         }
 
         private void OnPlayerViewerIgnoreListChanged(object sender, EventArgs e)

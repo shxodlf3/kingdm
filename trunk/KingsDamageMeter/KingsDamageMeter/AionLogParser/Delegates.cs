@@ -24,5 +24,11 @@ namespace KingsDamageMeter
     /// </summary>
     public delegate void DamageInflictedEventHandler(object sender, PlayerDamageEventArgs e);
 
+    public delegate void SkillDamageInflictedEventHandler(object sender, PlayerSkillDamageEventArgs e);
+
     public delegate void PlayerEventHandler(object sender, PlayerEventArgs e);
+
+    public delegate void ExpEventHandler(object sender, ExpEventArgs e);
+
+    public delegate void KinahEventHandler(object sender, KinahEventArgs e);
 }

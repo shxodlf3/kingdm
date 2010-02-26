@@ -58,6 +58,8 @@ namespace KingsDamageMeter
         private string _TimeGroupName = "time";
         private string _TargetGroupName = "target";
         private string _EffectGroupName = "effect";
+        private string _ExpGroupName = "exp";
+        private string _KinahGroupName = "kinah";
 
         private string _TimestampRegex;
         private Regex _ChatRegex;
@@ -78,6 +80,8 @@ namespace KingsDamageMeter
         private Regex _OtherSummonedAttackRegex;
         private Regex _JoinedGroupRegex;
         private Regex _LeftGroupRegex;
+        private Regex _YouGainedExpRegex;
+        private Regex _YouEarnedKinahRegex;
 
         /// <summary>
         /// Occurs when the parser is starting.
@@ -115,6 +119,11 @@ namespace KingsDamageMeter
         public event DamageInflictedEventHandler CriticalInflicted;
 
         /// <summary>
+        /// Occurs when a player deals damage with a particular skill.
+        /// </summary>
+        public event SkillDamageInflictedEventHandler SkillDamageInflicted;
+
+        /// <summary>
         /// Occurs when a player joins the group.
         /// </summary>
         public event PlayerEventHandler PlayerJoinedGroup;
@@ -128,6 +137,16 @@ namespace KingsDamageMeter
         /// Occurs when a player receives damage.
         /// </summary>
         public event DamageInflictedEventHandler DamageReceived;
+
+        /// <summary>
+        /// Occurs when you gain experience.
+        /// </summary>
+        public event ExpEventHandler ExpGained;
+
+        /// <summary>
+        /// Occurs when you earn kinah.
+        /// </summary>
+        public event KinahEventHandler KinahEarned;
 
         private void Initialize()
         {
@@ -152,6 +171,8 @@ namespace KingsDamageMeter
             _OtherSummonedAttackRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherSummonedAttackRegex, RegexOptions.Compiled);
             _JoinedGroupRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.JoinedGroupRegex, RegexOptions.Compiled);
             _LeftGroupRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.LeftGroupRegex, RegexOptions.Compiled);
+            _YouGainedExpRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouGainedExpRegex, RegexOptions.Compiled);
+            _YouEarnedKinahRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouEarnedKinahRegex, RegexOptions.Compiled);
         }
 
         /// <summary>
@@ -339,6 +360,25 @@ namespace KingsDamageMeter
             }
 
             bool matched = false;
+            string regex = String.Empty;
+
+            matches = _YouInflictedSkillRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                string target = matches[0].Groups[_TargetGroupName].Value;
+                string skill = matches[0].Groups[_SkillGroupName].Value;
+
+                if (SkillDamageInflicted != null)
+                {
+                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _YouAlias, damage, skill));
+                }
+
+                matched = true;
+                regex = "_YouInflictedSkillRegex";
+                goto End;
+            }
 
             matches = _YouInflictedRegex.Matches(line);
             if (matches.Count > 0)
@@ -353,23 +393,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
-                goto End;
-            }
-
-            matches = _YouInflictedSkillRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-
-                if (DamageInflicted != null)
-                {
-                    DamageInflicted(this, new PlayerDamageEventArgs(time, _YouAlias, damage));
-                }
-
-                matched = true;
+                regex = "_YouInflictedRegex";
                 goto End;
             }
 
@@ -386,6 +410,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_YouCriticalRegex";
                 goto End;
             }
 
@@ -397,12 +422,13 @@ namespace KingsDamageMeter
                 string target = matches[0].Groups[_TargetGroupName].Value;
                 string effect = matches[0].Groups[_EffectGroupName].Value;
 
-                if (DamageInflicted != null)
+                if (SkillDamageInflicted != null)
                 {
-                    DamageInflicted(this, new PlayerDamageEventArgs(time, _YouAlias, damage));
+                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _YouAlias, damage, effect));
                 }
 
                 matched = true;
+                regex = "_YouEffectDamageRegex";
                 goto End;
             }
 
@@ -419,6 +445,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_YouReceivedRegex";
                 goto End;
             }
 
@@ -443,6 +470,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_YouContinuousRegex";
                 goto End;
             }
 
@@ -468,6 +496,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_YouSummonedAttackRegex";
                 goto End;
             }
 
@@ -493,44 +522,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
-                goto End;
-            }
-
-            matches = _OtherInflictedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-
-                if (String.IsNullOrEmpty(name))
-                {
-                    return;
-                }
-
-                if (name.Contains(" "))
-                {
-                    if (_Pets.ContainsKey(name))
-                    {
-                        name = _Pets[name];
-
-                        if (DamageInflicted != null)
-                        {
-                            DamageInflicted(this, new PlayerDamageEventArgs(time, name, damage));
-                        }
-                    }
-                }
-
-                else
-                {
-                    if (DamageInflicted != null)
-                    {
-                        DamageInflicted(this, new PlayerDamageEventArgs(time, name, damage));
-                    }
-                }
-
-                matched = true;
+                regex = "_YouSummonedRegex";
                 goto End;
             }
 
@@ -554,9 +546,49 @@ namespace KingsDamageMeter
                     {
                         name = _Pets[name];
 
-                        if (DamageInflicted != null)
+                        if (SkillDamageInflicted != null)
                         {
-                            DamageInflicted(this, new PlayerDamageEventArgs(time, name, damage));
+                            SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, skill));
+                        }
+                    }
+                }
+
+                else
+                {
+                    if (SkillDamageInflicted != null)
+                    {
+                        SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, skill));
+                    }
+                }
+
+                matched = true;
+                regex = "_OtherInflictedSkillRegex";
+                goto End;
+            }
+
+            matches = _OtherInflictedRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                string name = matches[0].Groups[_NameGroupName].Value;
+                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                string target = matches[0].Groups[_TargetGroupName].Value;
+
+                if (String.IsNullOrEmpty(name))
+                {
+                    return;
+                }
+
+                if (name.Contains(" "))
+                {
+                    if (_Pets.ContainsKey(name))
+                    {
+                        string pet = name;
+                        name = _Pets[pet];
+
+                        if (SkillDamageInflicted != null)
+                        {
+                            SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, pet));
                         }
                     }
                 }
@@ -570,6 +602,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_OtherInflictedRegex";
                 goto End;
             }
 
@@ -582,6 +615,7 @@ namespace KingsDamageMeter
                 string target = matches[0].Groups[_TargetGroupName].Value;
 
                 matched = true;
+                regex = "_OtherReceivedRegex";
                 goto End;
             }
 
@@ -601,7 +635,7 @@ namespace KingsDamageMeter
                         {
                             if (DamageInflicted != null)
                             {
-                                DamageInflicted(this, new PlayerDamageEventArgs(time, _Pets[_Dots[skill]], damage));
+                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]], damage, skill));
                             }
                         }
                     }
@@ -610,12 +644,13 @@ namespace KingsDamageMeter
                     {
                         if (DamageInflicted != null)
                         {
-                            DamageInflicted(this, new PlayerDamageEventArgs(time, _Dots[skill], damage));
+                            SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Dots[skill], damage, skill));
                         }
                     }
                 }
 
                 matched = true;
+                regex = "_OtherReceivedSkillRegex";
                 goto End;
             }
 
@@ -641,6 +676,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_OtherContinuousRegex";
                 goto End;
             }
 
@@ -667,6 +703,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_OtherSummonedAttackRegex";
                 goto End;
             }
 
@@ -692,6 +729,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_OtherSummonedRegex";
                 goto End;
             }
 
@@ -707,6 +745,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_JoinedGroupRegex";
                 goto End;
             }
 
@@ -722,6 +761,40 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
+                regex = "_LeftGroupRegex";
+                goto End;
+            }
+
+            matches = _YouGainedExpRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                int exp = matches[0].Groups[_ExpGroupName].Value.GetDigits();
+                string target = matches[0].Groups[_TargetGroupName].Value;
+
+                if (ExpGained != null)
+                {
+                    ExpGained(this, new ExpEventArgs(time, exp));
+                }
+
+                matched = true;
+                regex = "_YouGainedExpRegex";
+                goto End;
+            }
+
+            matches = _YouEarnedKinahRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                int kinah = matches[0].Groups[_KinahGroupName].Value.GetDigits();
+
+                if (KinahEarned != null)
+                {
+                    KinahEarned(this, new KinahEventArgs(time, kinah));
+                }
+
+                matched = true;
+                regex = "_YouEarnedKinahRegex";
                 goto End;
             }
 
@@ -734,7 +807,7 @@ namespace KingsDamageMeter
 
             else
             {
-                DebugLogger.Write("Matched: (\"" + line + "\")");
+                DebugLogger.Write(regex + ": (\"" + line + "\")");
             }
         }
     }

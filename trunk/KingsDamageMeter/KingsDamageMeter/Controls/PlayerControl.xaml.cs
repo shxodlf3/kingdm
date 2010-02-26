@@ -23,6 +23,8 @@ using System.Windows.Controls;
 using System.Drawing;
 using System.ComponentModel;
 
+using KingsDamageMeter.Combat;
+
 namespace KingsDamageMeter.Controls
 {
     /// <summary>
@@ -57,15 +59,20 @@ namespace KingsDamageMeter.Controls
         private int _Damage = 0;
         private int _DamageTaken = 0;
         private double _DamagePercent = 0;
+        private int _ExpGained = 0;
+        private int _KinahEarned = 0;
 
         private System.Windows.Forms.Timer _DamageTimer = new System.Windows.Forms.Timer();
         private System.Windows.Forms.Timer _DurationTimer = new System.Windows.Forms.Timer();
+        private DateTime _StartTime = DateTime.Now;
         private DateTime _TimeSinceDamage = DateTime.Now;
         private int _PeakDps = 0;
         private int _DamagePerSecond = 0;
         private int _SecondsSinceStart = 0;
         private int _BiggestHit = 0;
         private bool _GroupMember = false;
+
+        private SkillCollection _Skills = new SkillCollection();
 
         public event EventHandler DamageChanged;
         public event EventHandler DamageTakenChanged;
@@ -84,7 +91,7 @@ namespace KingsDamageMeter.Controls
 
             set
             {
-                if (value == "You")
+                if (value == KingsDamageMeter.Languages.Regex.Default.YouAlias)
                 {
                     LabelName.FontWeight = FontWeights.Bold;
                 }
@@ -140,6 +147,32 @@ namespace KingsDamageMeter.Controls
                 {
                     DamageTakenChanged(this, EventArgs.Empty);
                 }
+            }
+        }
+
+        public int ExpGained
+        {
+            get
+            {
+                return _ExpGained;
+            }
+
+            set
+            {
+                _ExpGained = value;
+            }
+        }
+
+        public int KinahEarned
+        {
+            get
+            {
+                return _KinahEarned;
+            }
+
+            set
+            {
+                _KinahEarned = value;
             }
         }
 
@@ -203,6 +236,14 @@ namespace KingsDamageMeter.Controls
                 {
                     GroupMemberChanged(this, EventArgs.Empty);
                 }
+            }
+        }
+
+        public SkillCollection Skills
+        {
+            get
+            {
+                return _Skills;
             }
         }
 
@@ -270,6 +311,22 @@ namespace KingsDamageMeter.Controls
             message += Environment.NewLine;
             message += Environment.NewLine;
             message += _BiggestHit + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipBiggestHit;
+
+            TimeSpan span = DateTime.Now - _StartTime;
+
+            if (_ExpGained > 0)
+            {
+                message += Environment.NewLine;
+                double exp = (_ExpGained / span.TotalSeconds) * 3600;
+                message += exp.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipExp;
+            }
+
+            if (_KinahEarned > 0)
+            {
+                message += Environment.NewLine;
+                double kinah = (_KinahEarned / span.TotalSeconds) * 3600;
+                message += kinah.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipKinah;
+            }
 
             ToolTip = message;
         }
