@@ -33,7 +33,7 @@
       <Value Profile="(Default)">yyyy.MM.dd hh:mm:ss</Value>
     </Setting>
     <Setting Name="GroupOnly" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="HideOthers" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

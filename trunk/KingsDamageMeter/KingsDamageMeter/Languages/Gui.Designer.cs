@@ -73,7 +73,7 @@ namespace KingsDamageMeter.Languages {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("TopMost")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Top Most")]
         public string TopMostToolTip {
             get {
                 return ((string)(this["TopMostToolTip"]));
@@ -205,54 +205,6 @@ namespace KingsDamageMeter.Languages {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Sort by Name")]
-        public string PlayerMenuSortName {
-            get {
-                return ((string)(this["PlayerMenuSortName"]));
-            }
-            set {
-                this["PlayerMenuSortName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Sort by Damage")]
-        public string PlayerMenuSortDamage {
-            get {
-                return ((string)(this["PlayerMenuSortDamage"]));
-            }
-            set {
-                this["PlayerMenuSortDamage"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Clear All")]
-        public string PlayerMenuClearAll {
-            get {
-                return ((string)(this["PlayerMenuClearAll"]));
-            }
-            set {
-                this["PlayerMenuClearAll"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Group Only")]
-        public string PlayerMenuGroupOnly {
-            get {
-                return ((string)(this["PlayerMenuGroupOnly"]));
-            }
-            set {
-                this["PlayerMenuGroupOnly"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Group Member")]
         public string PlayerMenuGroupMember {
             get {
@@ -301,25 +253,14 @@ namespace KingsDamageMeter.Languages {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Invalid name.")]
+        [global::System.Configuration.DefaultSettingValueAttribute("This is an invalid name. Valid names begin with a Capital letter and contain no s" +
+            "paces or symbols.")]
         public string InvalidNameMessage {
             get {
                 return ((string)(this["InvalidNameMessage"]));
             }
             set {
                 this["InvalidNameMessage"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Reset All Damage")]
-        public string PlayerMenuResetDamage {
-            get {
-                return ((string)(this["PlayerMenuResetDamage"]));
-            }
-            set {
-                this["PlayerMenuResetDamage"] = value;
             }
         }
         
@@ -441,6 +382,198 @@ namespace KingsDamageMeter.Languages {
             }
             set {
                 this["PlayerToolTipKinah"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White Damage")]
+        public string WhiteDamage {
+            get {
+                return ((string)(this["WhiteDamage"]));
+            }
+            set {
+                this["WhiteDamage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Breakdown")]
+        public string Breakdown {
+            get {
+                return ((string)(this["Breakdown"]));
+            }
+            set {
+                this["Breakdown"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Main View")]
+        public string OptionsMenuView {
+            get {
+                return ((string)(this["OptionsMenuView"]));
+            }
+            set {
+                this["OptionsMenuView"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Damage")]
+        public string OptionsMenuDamage {
+            get {
+                return ((string)(this["OptionsMenuDamage"]));
+            }
+            set {
+                this["OptionsMenuDamage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Dps")]
+        public string OptionsMenuDps {
+            get {
+                return ((string)(this["OptionsMenuDps"]));
+            }
+            set {
+                this["OptionsMenuDps"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Percent")]
+        public string OptionsMenuPercent {
+            get {
+                return ((string)(this["OptionsMenuPercent"]));
+            }
+            set {
+                this["OptionsMenuPercent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Experience")]
+        public string OptionsMenuExperience {
+            get {
+                return ((string)(this["OptionsMenuExperience"]));
+            }
+            set {
+                this["OptionsMenuExperience"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Kinah")]
+        public string OptionsMenuKinah {
+            get {
+                return ((string)(this["OptionsMenuKinah"]));
+            }
+            set {
+                this["OptionsMenuKinah"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Sorting")]
+        public string OptionsMenuSorting {
+            get {
+                return ((string)(this["OptionsMenuSorting"]));
+            }
+            set {
+                this["OptionsMenuSorting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Name")]
+        public string OptionsMenuName {
+            get {
+                return ((string)(this["OptionsMenuName"]));
+            }
+            set {
+                this["OptionsMenuName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Reset Damage")]
+        public string OptionsMenuResetDamage {
+            get {
+                return ((string)(this["OptionsMenuResetDamage"]));
+            }
+            set {
+                this["OptionsMenuResetDamage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Clear All")]
+        public string OptionsMenuClearAll {
+            get {
+                return ((string)(this["OptionsMenuClearAll"]));
+            }
+            set {
+                this["OptionsMenuClearAll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("View Skills")]
+        public string PlayerMenuViewSkills {
+            get {
+                return ((string)(this["PlayerMenuViewSkills"]));
+            }
+            set {
+                this["PlayerMenuViewSkills"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%n %d")]
+        public string ShortCopyFormat {
+            get {
+                return ((string)(this["ShortCopyFormat"]));
+            }
+            set {
+                this["ShortCopyFormat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%n %d (%s dps)(%p%)")]
+        public string LongCopyFormat {
+            get {
+                return ((string)(this["LongCopyFormat"]));
+            }
+            set {
+                this["LongCopyFormat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Group Only")]
+        public string PlayerMenuGroupOnly {
+            get {
+                return ((string)(this["PlayerMenuGroupOnly"]));
+            }
+            set {
+                this["PlayerMenuGroupOnly"] = value;
             }
         }
     }

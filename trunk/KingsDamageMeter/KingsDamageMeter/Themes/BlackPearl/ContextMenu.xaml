@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <!-- Brushes -->
     <SolidColorBrush x:Key="ContextMenuWindowBackgroundBrush" Color="#fff" />
     <SolidColorBrush x:Key="ContextMenuSolidBorderBrush" Color="#999" />
     <ImageBrush x:Key="ContextMenuWindowBackgroundImageBrush" ImageSource="./../../Themes/BlackPearl/Images/MainFormBackground.bmp" TileMode="Tile" />
-    
+
     <!-- Styles -->
     <Style TargetType="{x:Type ContextMenu}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>

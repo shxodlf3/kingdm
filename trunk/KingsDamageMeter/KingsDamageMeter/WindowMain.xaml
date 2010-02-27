@@ -38,9 +38,23 @@
                     <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButton.bmp" x:Name="MinimizeButton" ToolTip="Minimize" MouseUp="MinimizeButton_MouseUp" Grid.Column="5" Width="20" Height="20" />
                     <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonClick.bmp" MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonHover.bmp" MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButton.bmp" x:Name="MenuButton" MouseUp="MenuButton_MouseUp" ToolTip="Options" Grid.Column="6" Width="20" Height="20">
                        <local:SkinButton.ContextMenu>
-                            <ContextMenu x:Name="MainContextMenu" Foreground="Gold" HasDropShadow="True" FontFamily="Verdana" FontSize="9">
+                            <ContextMenu x:Name="MainContextMenu" HasDropShadow="True" FontFamily="Verdana" FontSize="9" Opened="MainContextMenu_Opened">
                                 <MenuItem Name="MainContextMenuLocateLog" Header="Locate Log..." Click="MainContextMenuLocateLog_Click" />
                                 <MenuItem Name="MainContextMenuIgnoreList" Header="Ignore List..." Click="MainContextMenuIgnoreList_Click" />
+                                <Separator />
+                                <MenuItem Name="MainContextView"  Header="Main View">
+                                    <MenuItem Name="MainContextViewDamage" Header="Damage" IsCheckable="True" Click="MainContextViewDamage_Click" />
+                                    <MenuItem Name="MainContextViewDps" Header="Dps" IsCheckable="True" Click="MainContextViewDps_Click" />
+                                    <MenuItem Name="MainContextViewPercent" Header="Percent" IsCheckable="True" Click="MainContextViewPercent_Click" />
+                                    <MenuItem Name="MainContextViewExperience" Header="Experience" IsCheckable="True" Click="MainContextViewExperience_Click" />
+                                    <MenuItem Name="MainContextViewKinah" Header="Kinah" IsCheckable="True" Click="MainContextViewKinah_Click" />
+                                </MenuItem>
+                                <MenuItem Name="MainContextSorting" Header="Sorting">
+                                    <MenuItem Name="MainContextSortByName" Header="By Name" IsCheckable="True" Click="MainContextSortByName_Click" />
+                                    <MenuItem Name="MainContextSortByDamage" Header="By Damage" IsCheckable="True" Click="MainContextSortByDamage_Click" />
+                                </MenuItem>
+                                <MenuItem Name="MainContextResetDamage" Header="Reset Damage" Click="MainContextResetDamage_Click" />
+                                <MenuItem Name="MainContextClearAll" Header="Clear All" Click="MainContextClearAll_Click" />
                                 <Separator />
                                 <MenuItem Name="MainContextMenuHelp" Header="Help" Click="MainContextMenuHelp_Click" />
                                 <MenuItem Name="MainContextMenuAbout" Header="About" Click="MainContextMenuAbout_Click" />

@@ -50,7 +50,7 @@
             <ColumnDefinition Width="65*" />
         </Grid.ColumnDefinitions>
         <Label Name="LabelName" Foreground="Gold" FontFamily="Verdana" FlowDirection="LeftToRight" FontSize="9" VerticalContentAlignment="Center" />
-        <Label Name="LabelDamage" Foreground="Gold" FlowDirection="RightToLeft" FontFamily="Verdana" FontSize="9" VerticalContentAlignment="Center" Grid.Column="1" />
+        <Label Name="LabelDamage" Foreground="Gold" FontFamily="Verdana" FontSize="9" VerticalContentAlignment="Center" Grid.Column="1" HorizontalContentAlignment="Right" />
         <ProgressBar Name="DamageBar" VerticalAlignment="Center" Value="50" Maximum="100" SmallChange="1" LargeChange="10" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,0" />
     </Grid>
 </UserControl>

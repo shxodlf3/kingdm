@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/BlackPearl/ContextMenu.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/MenuItem.xaml" />
                 <ResourceDictionary Source="Themes/BlackPearl/ProgressBar.xaml" />
                 <ResourceDictionary Source="Themes/BlackPearl/Slider.xaml" />
                 <ResourceDictionary Source="Themes/BlackPearl/PlayerControl.xaml" />

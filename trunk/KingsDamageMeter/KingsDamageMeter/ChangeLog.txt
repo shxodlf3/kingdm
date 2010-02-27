@@ -1,6 +1,9 @@
 ﻿Version 1.4.0 Beta 6
 	Added: Right click on a player and "View Skills" will now show a breakdown of their skills and how much damage each contributes.
 	Added: The "You" tooltip will now show how much xp and kinah you are gaining per hour. (if applicable)
+	Added: Players windows can now display a different primary statistic. Damage, Percent, DPS, Experience and Kinah.
+	Fixed: Moved some menu items to the main options menu.
+	Fixed: Added some formatting to the numbers.
 
 Version 1.3.5 Beta 5
 	Added: Debug logging functionality. Disabled by default, this log can provide information vital for development and debugging.

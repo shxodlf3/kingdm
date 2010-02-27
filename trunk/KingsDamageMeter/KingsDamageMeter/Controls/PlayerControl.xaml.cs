@@ -21,7 +21,6 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Drawing;
-using System.ComponentModel;
 
 using KingsDamageMeter.Combat;
 
@@ -44,16 +43,9 @@ namespace KingsDamageMeter.Controls
             DamageChanged += OnDamageChanged;
             DamagePercentChanged += OnDamagePercentChanged;
             GroupMemberChanged += OnGroupMemberChanged;
-        }
-
-        public void Reset()
-        {
-            Damage = 0;
-            DamageTaken = 0;
-            DamagePercent = 0;
-            _DamagePerSecond = 0;
-            _SecondsSinceStart = 0;
-            ResetTimers();
+            ExpGainedChanged += OnExpGainedChanged;
+            KinahEarnedChanged += OnKinahEarnedChanged;
+            DisplayTypeChanged += OnDisplayTypeChanged;
         }
 
         private int _Damage = 0;
@@ -61,6 +53,7 @@ namespace KingsDamageMeter.Controls
         private double _DamagePercent = 0;
         private int _ExpGained = 0;
         private int _KinahEarned = 0;
+        private DisplayType _DisplayType = DisplayType.Damage;
 
         private System.Windows.Forms.Timer _DamageTimer = new System.Windows.Forms.Timer();
         private System.Windows.Forms.Timer _DurationTimer = new System.Windows.Forms.Timer();
@@ -71,6 +64,8 @@ namespace KingsDamageMeter.Controls
         private int _SecondsSinceStart = 0;
         private int _BiggestHit = 0;
         private bool _GroupMember = false;
+        private double _ExpPerHour = 0;
+        private double _KinahPerHour = 0;
 
         private SkillCollection _Skills = new SkillCollection();
 
@@ -78,6 +73,9 @@ namespace KingsDamageMeter.Controls
         public event EventHandler DamageTakenChanged;
         public event EventHandler DamagePercentChanged;
         public event EventHandler GroupMemberChanged;
+        public event EventHandler ExpGainedChanged;
+        public event EventHandler KinahEarnedChanged;
+        public event EventHandler DisplayTypeChanged;
 
         /// <summary>
         /// Gets or sets the player's name.
@@ -160,6 +158,11 @@ namespace KingsDamageMeter.Controls
             set
             {
                 _ExpGained = value;
+
+                if (ExpGainedChanged != null)
+                {
+                    ExpGainedChanged(this, EventArgs.Empty);
+                }
             }
         }
 
@@ -173,6 +176,27 @@ namespace KingsDamageMeter.Controls
             set
             {
                 _KinahEarned = value;
+
+                if (KinahEarnedChanged != null)
+                {
+                    KinahEarnedChanged(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        public double ExpPerHour
+        {
+            get
+            {
+                return _ExpPerHour;
+            }
+        }
+
+        public double KinahPerHour
+        {
+            get
+            {
+                return _KinahPerHour;
             }
         }
 
@@ -247,9 +271,43 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        public DisplayType DisplayType
+        {
+            get
+            {
+                return _DisplayType;
+            }
+
+            set
+            {
+                _DisplayType = value;
+
+                if (DisplayTypeChanged != null)
+                {
+                    DisplayTypeChanged(this, EventArgs.Empty);
+                }
+            }
+        }
+
         public new string ToString()
         {
             return String.Format("({0} {1} ({2}))", PlayerName, Damage, DamagePercent.ToString("0%"));
+        }
+
+        public string ToString(PlayerFormatOptions options)
+        {
+            return Format.Player(PlayerName, Damage.ToString("0,0"), DamagePerSecond.ToString("0,0"), DamagePercent.ToString("0%"), options);
+        }
+
+        public void Reset()
+        {
+            Damage = 0;
+            DamageTaken = 0;
+            DamagePercent = 0;
+            _DamagePerSecond = 0;
+            _SecondsSinceStart = 0;
+            ResetTimers();
+            _Skills.Clear();
         }
 
         private void InitializeTimers()
@@ -270,7 +328,6 @@ namespace KingsDamageMeter.Controls
 
             _DurationTimer.Interval = 1000;
             _DurationTimer.Tick += _DurationTimer_Tick;
-            //_DurationTimer.Start();
         }
 
         private void ResetTimers()
@@ -300,32 +357,28 @@ namespace KingsDamageMeter.Controls
 
             message += PlayerName;
             message += Environment.NewLine;
-            message += _Damage + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipTotal;
+            message += _Damage.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipTotal;
             message += Environment.NewLine;
             message += _DamagePercent.ToString("0%");
             message += Environment.NewLine;
             message += Environment.NewLine;
-            message += _DamagePerSecond + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipDps;
+            message += _DamagePerSecond.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipDps;
             message += Environment.NewLine;
-            message += _PeakDps + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipPeak;
+            message += _PeakDps.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipPeak;
             message += Environment.NewLine;
             message += Environment.NewLine;
-            message += _BiggestHit + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipBiggestHit;
-
-            TimeSpan span = DateTime.Now - _StartTime;
+            message += _BiggestHit.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipBiggestHit;
 
             if (_ExpGained > 0)
             {
                 message += Environment.NewLine;
-                double exp = (_ExpGained / span.TotalSeconds) * 3600;
-                message += exp.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipExp;
+                message += _ExpPerHour.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipExp;
             }
 
             if (_KinahEarned > 0)
             {
                 message += Environment.NewLine;
-                double kinah = (_KinahEarned / span.TotalSeconds) * 3600;
-                message += kinah.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipKinah;
+                message += _KinahPerHour.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipKinah;
             }
 
             ToolTip = message;
@@ -376,10 +429,59 @@ namespace KingsDamageMeter.Controls
         protected void OnDamageChanged(object sender, EventArgs e)
         {
             _TimeSinceDamage = DateTime.Now;
-            LabelDamage.Content = _Damage.ToString();
+            UpdateDisplay();
         }
 
         protected void OnDamagePercentChanged(object sender, EventArgs e)
+        {
+            UpdateDamageBar();
+            UpdateDisplay();
+        }
+
+        protected void OnGroupMemberChanged(object sender, EventArgs e)
+        {
+            SetStyle();
+        }
+
+        protected void OnExpGainedChanged(object sender, EventArgs e)
+        {
+            UpdateExpPerHour();
+            UpdateDisplay();
+        }
+
+        protected void OnKinahEarnedChanged(object sender, EventArgs e)
+        {
+            UpdateKinahPerHour();
+            UpdateDisplay();
+        }
+
+        private void UpdateDisplay()
+        {
+            switch (_DisplayType)
+            {
+                case DisplayType.DamagePerSecond:
+                    LabelDamage.Content = _DamagePerSecond.ToString("0,0");
+                    break;
+
+                case DisplayType.Experience:
+                    LabelDamage.Content = _ExpPerHour.ToString("0,0");
+                    break;
+
+                case DisplayType.Kinah:
+                    LabelDamage.Content = _KinahPerHour.ToString("0,0");
+                    break;
+
+                case DisplayType.Percent:
+                    LabelDamage.Content = _DamagePercent.ToString("0%");
+                    break;
+
+                default:
+                    LabelDamage.Content = _Damage.ToString("0,0");
+                    break;
+            }
+        }
+
+        private void UpdateDamageBar()
         {
             if (_DamagePercent > 0)
             {
@@ -392,9 +494,39 @@ namespace KingsDamageMeter.Controls
             }
         }
 
-        protected void OnGroupMemberChanged(object sender, EventArgs e)
+        private void UpdateExpPerHour()
         {
-            SetStyle();
+            if (_ExpGained > 0)
+            {
+                TimeSpan span = DateTime.Now - _StartTime;
+                double exp = (_ExpGained / span.TotalSeconds) * 3600;
+                _ExpPerHour = (exp > 0) ? exp : 0;
+            }
+
+            else
+            {
+                _ExpPerHour = 0;
+            }
+        }
+
+        private void UpdateKinahPerHour()
+        {
+            if (_KinahEarned > 0)
+            {
+                TimeSpan span = DateTime.Now - _StartTime;
+                double kinah = (_KinahEarned / span.TotalSeconds) * 3600;
+                _KinahPerHour = (kinah > 0) ? kinah : 0;
+            }
+
+            else
+            {
+                _KinahPerHour = 0;
+            }
+        }
+
+        private void OnDisplayTypeChanged(object sender, EventArgs e)
+        {
+            UpdateDisplay();
         }
     }
 }

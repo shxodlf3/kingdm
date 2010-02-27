@@ -45,9 +45,12 @@ namespace KingsDamageMeter.Controls
 
         private PlayerSortType _LastSortType = PlayerSortType.None;
 
+        private DisplayType _DisplayType = DisplayType.Damage;
+
         public event EventHandler IgnoreListChanged;
         public event EventHandler HideOthersChanged;
         public event EventHandler GroupOnlyChanged;
+        public event EventHandler DisplayTypeChanged;
 
         /// <summary>
         /// 
@@ -112,6 +115,24 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        public DisplayType DisplayType
+        {
+            get
+            {
+                return _DisplayType;
+            }
+
+            set
+            {
+                _DisplayType = value;
+
+                if (DisplayTypeChanged != null)
+                {
+                    DisplayTypeChanged(this, EventArgs.Empty);
+                }
+            }
+        }
+
         /// <summary>
         /// A class that represents a player scroll viewer.
         /// </summary>
@@ -122,6 +143,7 @@ namespace KingsDamageMeter.Controls
 
             HideOthersChanged += OnHideOthersChanged;
             GroupOnlyChanged += OnGroupOnlyChanged;
+            DisplayTypeChanged += OnDisplayTypeChanged;
         }
 
         private void SetMainContextMenuHeaders()
@@ -133,11 +155,8 @@ namespace KingsDamageMeter.Controls
             MenuItemAddGroupMemberByName.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuAddMemberByName;
             MenuItemRemove.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuRemove;
             MenuItemIgnore.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuIgnore;
-            MenuItemSortByName.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuSortName;
-            MenuItemSortByDamage.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuSortDamage;
-            MenuItemResetDamage.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuResetDamage;
-            MenuItemClear.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuClearAll;
             MenuItemGroupMember.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuGroupMember;
+            MenuItemViewSkills.Header = KingsDamageMeter.Languages.Gui.Default.PlayerMenuViewSkills;
         }
 
         /// <summary>
@@ -263,7 +282,7 @@ namespace KingsDamageMeter.Controls
         /// <param name="damage">The total damage the player has dealt</param>
         public void UpdatePlayerDamage(string name, int damage)
         {
-            UpdatePlayerDamage(name, damage, "White Damage");
+            UpdatePlayerDamage(name, damage, KingsDamageMeter.Languages.Gui.Default.WhiteDamage);
         }
 
         public void UpdatePlayerDamage(string name, int damage, string skill)
@@ -454,7 +473,7 @@ namespace KingsDamageMeter.Controls
             }
         }
 
-        private void ClearAll()
+        public void ClearAll()
         {
             foreach (PlayerControl p in _Players.Values)
             {
@@ -467,7 +486,7 @@ namespace KingsDamageMeter.Controls
             _Players.Clear();
         }
 
-        private void SortByName()
+        public void SortByName()
         {
             if (_HideOthers)
             {
@@ -497,7 +516,7 @@ namespace KingsDamageMeter.Controls
             _LastSortType = PlayerSortType.Name;
         }
 
-        private void SortByDamage()
+        public void SortByDamage()
         {
             if (_HideOthers)
             {
@@ -527,37 +546,9 @@ namespace KingsDamageMeter.Controls
             _LastSortType = PlayerSortType.Damage;
         }
 
-        private void SortByLast()
-        {
-            switch (_LastSortType)
-            {
-                case PlayerSortType.Damage:
-                    SortByDamage();
-                    break;
-
-                case PlayerSortType.Name:
-                    SortByName();
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        private void MenuItemClear_Click(object sender, RoutedEventArgs e)
-        {
-            ClearAll();
-        }
-
         private void MenuItemHideOthers_Click(object sender, RoutedEventArgs e)
         {
             DoHideOthers();
-        }
-
-        private void MenuItemGroupOnly_Click(object sender, RoutedEventArgs e)
-        {
-            DoGroupOnly();
-            UpdatePercents();
         }
 
         private void DoHideOthers()
@@ -577,8 +568,6 @@ namespace KingsDamageMeter.Controls
 
         private void DoGroupOnly()
         {
-            _GroupOnly = MenuItemGroupOnly.IsChecked;
-
             if (_GroupOnly)
             {
                 HideAllButGroup();
@@ -647,16 +636,6 @@ namespace KingsDamageMeter.Controls
             }
         }
 
-        private void MenuItemSortByName_Click(object sender, RoutedEventArgs e)
-        {
-            SortByName();
-        }
-
-        private void MenuItemSortByDamage_Click(object sender, RoutedEventArgs e)
-        {
-            SortByDamage();
-        }
-
         protected void OnHideOthersChanged(object sender, EventArgs e)
         {
             DoHideOthers();
@@ -697,20 +676,36 @@ namespace KingsDamageMeter.Controls
             }
         }
 
-        private void MenuItemResetDamage_Click(object sender, RoutedEventArgs e)
-        {
-            ResetDamage();
-        }
-
         private void MenuItemViewSkills_Click(object sender, RoutedEventArgs e)
         {
             if (_WorkingPlayer != null)
             {
                 SkillsForm s = new SkillsForm();
-                s.Text = _WorkingPlayer.PlayerName + " - Breakdown";
+                s.Text = _WorkingPlayer.PlayerName + " - " + KingsDamageMeter.Languages.Gui.Default.Breakdown;
                 s.Populate(_WorkingPlayer.Skills, _WorkingPlayer.Damage);
                 s.ShowDialog();
             }
+        }
+
+        protected void OnDisplayTypeChanged(object sender, EventArgs e)
+        {
+            SetDisplayType();
+        }
+
+        private void SetDisplayType()
+        {
+            foreach (PlayerControl p in _Players.Values)
+            {
+                p.DisplayType = _DisplayType;
+            }
+        }
+
+        private void MenuItemGroupOnly_Click(object sender, RoutedEventArgs e)
+        {
+            _GroupOnly = MenuItemGroupOnly.IsChecked;
+
+            DoGroupOnly();
+            UpdatePercents();
         }
     }
 }

@@ -15,7 +15,7 @@
       <Value Profile="(Default)">Opacity</Value>
     </Setting>
     <Setting Name="TopMostToolTip" Type="System.String" Scope="User">
-      <Value Profile="(Default)">TopMost</Value>
+      <Value Profile="(Default)">Top Most</Value>
     </Setting>
     <Setting Name="ResizeToolTip" Type="System.String" Scope="User">
       <Value Profile="(Default)">Resize</Value>
@@ -47,18 +47,6 @@
     <Setting Name="PlayerMenuIgnore" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ignore</Value>
     </Setting>
-    <Setting Name="PlayerMenuSortName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Sort by Name</Value>
-    </Setting>
-    <Setting Name="PlayerMenuSortDamage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Sort by Damage</Value>
-    </Setting>
-    <Setting Name="PlayerMenuClearAll" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Clear All</Value>
-    </Setting>
-    <Setting Name="PlayerMenuGroupOnly" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Group Only</Value>
-    </Setting>
     <Setting Name="PlayerMenuGroupMember" Type="System.String" Scope="User">
       <Value Profile="(Default)">Group Member</Value>
     </Setting>
@@ -72,10 +60,7 @@
       <Value Profile="(Default)">Add Group Member</Value>
     </Setting>
     <Setting Name="InvalidNameMessage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Invalid name.</Value>
-    </Setting>
-    <Setting Name="PlayerMenuResetDamage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Reset All Damage</Value>
+      <Value Profile="(Default)">This is an invalid name. Valid names begin with a Capital letter and contain no spaces or symbols.</Value>
     </Setting>
     <Setting Name="PlayerMenuAddMemberByName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Add Member by Name</Value>
@@ -106,6 +91,54 @@
     </Setting>
     <Setting Name="PlayerToolTipKinah" Type="System.String" Scope="User">
       <Value Profile="(Default)">kinah hour</Value>
+    </Setting>
+    <Setting Name="WhiteDamage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">White Damage</Value>
+    </Setting>
+    <Setting Name="Breakdown" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Breakdown</Value>
+    </Setting>
+    <Setting Name="OptionsMenuView" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Main View</Value>
+    </Setting>
+    <Setting Name="OptionsMenuDamage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Damage</Value>
+    </Setting>
+    <Setting Name="OptionsMenuDps" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Dps</Value>
+    </Setting>
+    <Setting Name="OptionsMenuPercent" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Percent</Value>
+    </Setting>
+    <Setting Name="OptionsMenuExperience" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Experience</Value>
+    </Setting>
+    <Setting Name="OptionsMenuKinah" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Kinah</Value>
+    </Setting>
+    <Setting Name="OptionsMenuSorting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sorting</Value>
+    </Setting>
+    <Setting Name="OptionsMenuName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Name</Value>
+    </Setting>
+    <Setting Name="OptionsMenuResetDamage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Reset Damage</Value>
+    </Setting>
+    <Setting Name="OptionsMenuClearAll" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Clear All</Value>
+    </Setting>
+    <Setting Name="PlayerMenuViewSkills" Type="System.String" Scope="User">
+      <Value Profile="(Default)">View Skills</Value>
+    </Setting>
+    <Setting Name="ShortCopyFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%n %d</Value>
+    </Setting>
+    <Setting Name="LongCopyFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%n %d (%s dps)(%p%)</Value>
+    </Setting>
+    <Setting Name="PlayerMenuGroupOnly" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Group Only</Value>
     </Setting>
   </Settings>
 </SettingsFile>

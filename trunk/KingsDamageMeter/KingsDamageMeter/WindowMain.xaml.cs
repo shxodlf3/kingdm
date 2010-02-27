@@ -27,6 +27,7 @@ using System.Diagnostics;
 using System.Collections;
 
 using KingsDamageMeter.Forms;
+using KingsDamageMeter.Controls;
 
 namespace KingsDamageMeter
 {
@@ -47,6 +48,9 @@ namespace KingsDamageMeter
         private Point _MousePoint;
 
         private AionLogParser _LogParser = new AionLogParser();
+
+        private PlayerSortType _PlayerSortType = PlayerSortType.None;
+        private DisplayType _MainDisplayType = DisplayType.Damage;
 
         private delegate void DamageInflicted_Callback(object sender, PlayerDamageEventArgs e);
         private delegate void CriticalInflicted_Callback(object sender, PlayerDamageEventArgs e);
@@ -77,6 +81,9 @@ namespace KingsDamageMeter
             PlayerViewer.IgnoreList = KingsDamageMeter.Properties.Settings.Default.IgnoreList;
             PlayerViewer.HideAllOthers = KingsDamageMeter.Properties.Settings.Default.HideOthers;
             PlayerViewer.GroupOnly = KingsDamageMeter.Properties.Settings.Default.GroupOnly;
+
+            Format.Short = KingsDamageMeter.Languages.Gui.Default.ShortCopyFormat;
+            Format.Long = KingsDamageMeter.Languages.Gui.Default.LongCopyFormat;
         }
 
         private void InitializeLogParser()
@@ -109,6 +116,17 @@ namespace KingsDamageMeter
         {
             MainContextMenuLocateLog.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuLocateLog;
             MainContextMenuIgnoreList.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuIgnoreList;
+            MainContextView.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuView;
+            MainContextViewDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuDamage;
+            MainContextViewDps.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuDps;
+            MainContextViewPercent.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuPercent;
+            MainContextViewExperience.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuExperience;
+            MainContextViewKinah.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuKinah;
+            MainContextSorting.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuSorting;
+            MainContextSortByName.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuName;
+            MainContextSortByDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuDamage;
+            MainContextResetDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuResetDamage;
+            MainContextClearAll.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuClearAll;
             MainContextMenuHelp.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuHelp;
             MainContextMenuAbout.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuAbout;
         }
@@ -124,6 +142,9 @@ namespace KingsDamageMeter
 
             KingsDamageMeter.Properties.Settings.Default.HideOthers = PlayerViewer.HideAllOthers;
             KingsDamageMeter.Properties.Settings.Default.GroupOnly = PlayerViewer.GroupOnly;
+
+            KingsDamageMeter.Languages.Gui.Default.ShortCopyFormat = Format.Short;
+            KingsDamageMeter.Languages.Gui.Default.LongCopyFormat = Format.Long;
 
             KingsDamageMeter.Properties.Settings.Default.Save();
         }
@@ -211,6 +232,18 @@ namespace KingsDamageMeter
 
         #region MainContextMenu Events
 
+        private void MainContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            MainContextSortByDamage.IsChecked = (_PlayerSortType == PlayerSortType.Damage);
+            MainContextSortByName.IsChecked = (_PlayerSortType == PlayerSortType.Name);
+
+            MainContextViewDamage.IsChecked = (_MainDisplayType == DisplayType.Damage);
+            MainContextViewDps.IsChecked = (_MainDisplayType == DisplayType.DamagePerSecond);
+            MainContextViewExperience.IsChecked = (_MainDisplayType == DisplayType.Experience);
+            MainContextViewKinah.IsChecked = (_MainDisplayType == DisplayType.Kinah);
+            MainContextViewPercent.IsChecked = (_MainDisplayType == DisplayType.Percent);
+        }
+
         private void MainContextMenuIgnoreList_Click(object sender, RoutedEventArgs e)
         {
             IgnoreListForm i = new IgnoreListForm();
@@ -259,6 +292,58 @@ namespace KingsDamageMeter
                 _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
                 MainContextMenuLocateLog.ToolTip = KingsDamageMeter.Properties.Settings.Default.AionLogPath;
             }
+        }
+
+        private void MainContextSortByName_Click(object sender, RoutedEventArgs e)
+        {
+            _PlayerSortType = PlayerSortType.Name;
+            PlayerViewer.SortByName();
+        }
+
+        private void MainContextSortByDamage_Click(object sender, RoutedEventArgs e)
+        {
+            _PlayerSortType = PlayerSortType.Damage;
+            PlayerViewer.SortByDamage();
+        }
+
+        private void MainContextResetDamage_Click(object sender, RoutedEventArgs e)
+        {
+            PlayerViewer.ResetDamage();
+        }
+
+        private void MainContextClearAll_Click(object sender, RoutedEventArgs e)
+        {
+            PlayerViewer.ClearAll();
+        }
+
+        private void MainContextViewDamage_Click(object sender, RoutedEventArgs e)
+        {
+            _MainDisplayType = DisplayType.Damage;
+            PlayerViewer.DisplayType = DisplayType.Damage;
+        }
+
+        private void MainContextViewDps_Click(object sender, RoutedEventArgs e)
+        {
+            _MainDisplayType = DisplayType.DamagePerSecond;
+            PlayerViewer.DisplayType = DisplayType.DamagePerSecond;
+        }
+
+        private void MainContextViewPercent_Click(object sender, RoutedEventArgs e)
+        {
+            _MainDisplayType = DisplayType.Percent;
+            PlayerViewer.DisplayType = DisplayType.Percent;
+        }
+
+        private void MainContextViewExperience_Click(object sender, RoutedEventArgs e)
+        {
+            _MainDisplayType = DisplayType.Experience;
+            PlayerViewer.DisplayType = DisplayType.Experience;
+        }
+
+        private void MainContextViewKinah_Click(object sender, RoutedEventArgs e)
+        {
+            _MainDisplayType = DisplayType.Kinah;
+            PlayerViewer.DisplayType = DisplayType.Kinah;
         }
 
         #endregion

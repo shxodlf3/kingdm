@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="Combat\SkillCollection.cs" />
     <Compile Include="Controls\Constants.cs" />
+    <Compile Include="Controls\Format.cs" />
     <Compile Include="DebugLogger.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Forms\AboutForm.cs">

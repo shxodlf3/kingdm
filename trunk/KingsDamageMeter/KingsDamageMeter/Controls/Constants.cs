@@ -11,4 +11,20 @@ namespace KingsDamageMeter.Controls
         Name,
         Damage
     }
+
+    public enum DisplayType
+    {
+        None,
+        Damage,
+        DamagePerSecond,
+        Percent,
+        Experience,
+        Kinah
+    }
+
+    public enum PlayerFormatOptions
+    {
+        Short,
+        Long
+    }
 }
