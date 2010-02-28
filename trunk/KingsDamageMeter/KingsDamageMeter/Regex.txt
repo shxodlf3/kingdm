@@ -18,6 +18,13 @@ You inflicted 255 damage on Ice Airon by using Pain Rune II.
 You inflicted 103 damage and the rune carve effect on Ice Airon by using Rune Carve II.
 
 ---------------------------------------------------------------------
+-- You Inflicted Bleed
+
+(?<target>.+) is bleeding because You used (?<skill>.+)\.
+
+Kobold Worker is bleeding because You used Slash Artery I.
+
+---------------------------------------------------------------------
 -- You Critical
 Critical Hit! You inflicted (?<damage>[^a-zA-Z]+) critical damage on (?<target>.+)\.
 
@@ -28,6 +35,12 @@ Critical Hit! You inflicted 220 critical damage on Obsidian Kalgolem.
 (?<target>.+) received (?<damage>[^a-zA-Z]+)( poisoning)? damage after you used (?<effect>.+)\.
 
 Ice Airon received 78 poisoning damage after you used Apply Poison I Effect.
+
+---------------------------------------------------------------------
+-- You Gained Effect
+You received the effect by using (?<effect>.+)\.
+
+You received the effect by using Promise of Wind I.
 
 ---------------------------------------------------------------------
 -- You Earned Kinah
@@ -55,6 +68,13 @@ Jackofspades inflicted 391 damage on Steel Rake Lookout by using Swift Edge V.
 Jackofspades inflicted 253 damage on Steel Rake Lookout and caused the pattern engraving effect by using Fang Strike III. 
 
 ---------------------------------------------------------------------
+-- Other Ifnlicted Bleed
+
+(?<target>.+) is bleeding because (?<name>.+) used (?<skill>.+)\.
+
+Kobold Worker is bleeding because Zarthos used Wind Cut Down II.
+
+---------------------------------------------------------------------
 -- You Received
 You received (?<damage>[^a-zA-Z]+) damage from (?<target>.+)\.
 
@@ -71,6 +91,13 @@ Jackofspades received 445 damage from Patrol Tog.
 (?<name>.+) received (?<damage>[^a-zA-Z]+) damage due to the effect of (?<skill>.+)\.
 
 Steel Rake Lookout received 531 damage due to the effect of Cyclone of Wrath I. 
+
+---------------------------------------------------------------------
+-- Other Received Bleed
+
+(?<name>.+) received (?<damage>[^a-zA-Z]+) bleeding damage after you used (?<skill>.+)\.
+
+Kobold Worker received 338 bleeding damage after you used Wind Cut Down II.
 
 ---------------------------------------------------------------------
 -- You Continuous

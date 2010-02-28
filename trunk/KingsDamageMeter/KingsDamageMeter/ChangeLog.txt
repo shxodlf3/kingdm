@@ -1,9 +1,15 @@
 ﻿Version 1.4.0 Beta 6
 	Added: Right click on a player and "View Skills" will now show a breakdown of their skills and how much damage each contributes.
 	Added: The "You" tooltip will now show how much xp and kinah you are gaining per hour. (if applicable)
-	Added: Players windows can now display a different primary statistic. Damage, Percent, DPS, Experience and Kinah.
+	Added: Player windows can now display a different primary statistic. Damage, Percent, DPS, Experience and Kinah.
+	Added: The You alias can now be changed from the options menu.
+	Added: The zip package now comes with a basic system.ovr file.
+	Fixed: Sorting will now continue as the list is updated.
 	Fixed: Moved some menu items to the main options menu.
 	Fixed: Added some formatting to the numbers.
+	Fixed: Reset Damage is now Reset Counts because it now applies to more than just damage.
+	Fixed: Made the checkboxes in the context menus a bit darker.
+	Fixed: Made the Copy All function even shorter.
 
 Version 1.3.5 Beta 5
 	Added: Debug logging functionality. Disabled by default, this log can provide information vital for development and debugging.

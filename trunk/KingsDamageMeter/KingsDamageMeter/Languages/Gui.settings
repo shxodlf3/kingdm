@@ -122,8 +122,8 @@
     <Setting Name="OptionsMenuName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Name</Value>
     </Setting>
-    <Setting Name="OptionsMenuResetDamage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Reset Damage</Value>
+    <Setting Name="OptionsMenuResetCounts" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Reset Counts</Value>
     </Setting>
     <Setting Name="OptionsMenuClearAll" Type="System.String" Scope="User">
       <Value Profile="(Default)">Clear All</Value>
@@ -135,10 +135,31 @@
       <Value Profile="(Default)">%n %d</Value>
     </Setting>
     <Setting Name="LongCopyFormat" Type="System.String" Scope="User">
-      <Value Profile="(Default)">%n %d (%s dps)(%p%)</Value>
+      <Value Profile="(Default)">%n %d (%s dps)(%p)</Value>
     </Setting>
     <Setting Name="PlayerMenuGroupOnly" Type="System.String" Scope="User">
       <Value Profile="(Default)">Group Only</Value>
+    </Setting>
+    <Setting Name="OptionsMenuSetYouAlias" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Set You Alias</Value>
+    </Setting>
+    <Setting Name="NameTakenMessage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A player with this name already exists.</Value>
+    </Setting>
+    <Setting Name="PlayerToolTipDamageTaken" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Damage Taken</Value>
+    </Setting>
+    <Setting Name="SkillColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Skill</Value>
+    </Setting>
+    <Setting Name="DamageColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Damage</Value>
+    </Setting>
+    <Setting Name="PercentColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Percent</Value>
+    </Setting>
+    <Setting Name="HitsColumn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Hits</Value>
     </Setting>
   </Settings>
 </SettingsFile>

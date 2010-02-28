@@ -42,7 +42,8 @@ namespace KingsDamageMeter
         private string _TimeFormat = KingsDamageMeter.Properties.Settings.Default.LogTimeFormat;
 
         private Dictionary<string, string> _Dots = new Dictionary<string, string>();
-        private Dictionary<string, string> _Pets = new Dictionary<string,string>();
+        private Dictionary<string, string> _Pets = new Dictionary<string, string>();
+        private Dictionary<string, string> _Effects = new Dictionary<string, string>();
 
         private Thread _Worker;
         private object _LockObject = new object();
@@ -67,11 +68,15 @@ namespace KingsDamageMeter
         private Regex _YouInflictedSkillRegex;
         private Regex _YouCriticalRegex;
         private Regex _YouEffectDamageRegex;
+        private Regex _YouGainedEffectRegex;
+        private Regex _YouInflictedBleedRegex;
         private Regex _OtherInflictedRegex;
         private Regex _OtherInflictedSkillRegex;
+        private Regex _OtherInflictedBleedRegex;
         private Regex _YouReceivedRegex;
         private Regex _OtherReceivedRegex;
         private Regex _OtherReceivedSkillRegex;
+        private Regex _OtherReceivedBleedRegex;
         private Regex _YouContinuousRegex;
         private Regex _OtherContinuousRegex;
         private Regex _YouSummonedRegex;
@@ -156,13 +161,17 @@ namespace KingsDamageMeter
             _ChatRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.Chat, RegexOptions.Compiled);
             _YouInflictedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouInflictedRegex, RegexOptions.Compiled);
             _YouInflictedSkillRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouInflictedSkillRegex, RegexOptions.Compiled);
+            _YouInflictedBleedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouInflictedBleedRegex, RegexOptions.Compiled);
             _YouCriticalRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouCriticalRegex, RegexOptions.Compiled);
             _YouEffectDamageRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouEffectDamageRegex, RegexOptions.Compiled);
+            _YouGainedEffectRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouGainedEffectRegex, RegexOptions.Compiled);
             _OtherInflictedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherInflictedRegex, RegexOptions.Compiled);
             _OtherInflictedSkillRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherInflictedSkillRegex, RegexOptions.Compiled);
+            _OtherInflictedBleedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherInflictedBleedRegex, RegexOptions.Compiled);
             _YouReceivedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouReceivedRegex, RegexOptions.Compiled);
             _OtherReceivedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherReceivedRegex, RegexOptions.Compiled);
             _OtherReceivedSkillRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherReceivedSkillRegex, RegexOptions.Compiled);
+            _OtherReceivedBleedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherReceivedBleedRegex, RegexOptions.Compiled);
             _YouContinuousRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouContinuousRegex, RegexOptions.Compiled);
             _OtherContinuousRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherContinuousRegex, RegexOptions.Compiled);
             _YouSummonedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouSummonedRegex, RegexOptions.Compiled);
@@ -432,6 +441,30 @@ namespace KingsDamageMeter
                 goto End;
             }
 
+            matches = _YouGainedEffectRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                string effect = matches[0].Groups[_EffectGroupName].Value;
+
+                if (_Effects.ContainsKey(effect))
+                {
+                    if (_Effects[effect] != _YouAlias)
+                    {
+                        _Effects[effect] = _YouAlias;
+                    }
+                }
+
+                else
+                {
+                    _Effects.Add(effect, _YouAlias);
+                }
+
+                matched = true;
+                regex = "_YouGainedEffectRegex";
+                goto End;
+            }
+
             matches = _YouReceivedRegex.Matches(line);
             if (matches.Count > 0)
             {
@@ -455,7 +488,32 @@ namespace KingsDamageMeter
                 DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
                 string target = matches[0].Groups[_TargetGroupName].Value;
                 string skill = matches[0].Groups[_SkillGroupName].Value;
-                
+
+                if (_Dots.ContainsKey(skill))
+                {
+                    if (_Dots[skill] != _YouAlias)
+                    {
+                        _Dots[skill] = _YouAlias;
+                    }
+                }
+
+                else
+                {
+                    _Dots.Add(skill, _YouAlias);
+                }
+
+                matched = true;
+                regex = "_YouContinuousRegex";
+                goto End;
+            }
+
+            matches = _YouInflictedBleedRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                string target = matches[0].Groups[_TargetGroupName].Value;
+                string skill = matches[0].Groups[_SkillGroupName].Value;
+
                 if (_Dots.ContainsKey(skill))
                 {
                     if (_Dots[skill] != _YouAlias)
@@ -633,7 +691,7 @@ namespace KingsDamageMeter
                     {
                         if (_Pets.ContainsKey(_Dots[skill]))
                         {
-                            if (DamageInflicted != null)
+                            if (SkillDamageInflicted != null)
                             {
                                 SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]], damage, skill));
                             }
@@ -642,7 +700,60 @@ namespace KingsDamageMeter
 
                     else
                     {
-                        if (DamageInflicted != null)
+                        if (SkillDamageInflicted != null)
+                        {
+                            SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Dots[skill], damage, skill));
+                        }
+                    }
+                }
+
+                if (_Effects.ContainsKey(skill))
+                {
+                    if (SkillDamageInflicted != null)
+                    {
+                        SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Effects[skill], damage, skill));
+                    }
+                }
+
+
+
+                if (_Effects.ContainsKey(skill.Replace(KingsDamageMeter.Languages.Regex.Default.Effect, "")))
+                {
+                    if (SkillDamageInflicted != null)
+                    {
+                        SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Effects[skill.Replace(KingsDamageMeter.Languages.Regex.Default.Effect, "")], damage, skill));
+                    }
+                }
+
+                matched = true;
+                regex = "_OtherReceivedSkillRegex";
+                goto End;
+            }
+
+            matches = _OtherReceivedBleedRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                string name = matches[0].Groups[_NameGroupName].Value;
+                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                string skill = matches[0].Groups[_SkillGroupName].Value;
+
+                if (_Dots.ContainsKey(skill))
+                {
+                    if (_Dots[skill].Contains(" "))
+                    {
+                        if (_Pets.ContainsKey(_Dots[skill]))
+                        {
+                            if (SkillDamageInflicted != null)
+                            {
+                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]], damage, skill));
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        if (SkillDamageInflicted != null)
                         {
                             SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Dots[skill], damage, skill));
                         }
@@ -650,7 +761,7 @@ namespace KingsDamageMeter
                 }
 
                 matched = true;
-                regex = "_OtherReceivedSkillRegex";
+                regex = "_OtherReceivedBleedRegex";
                 goto End;
             }
 
@@ -680,6 +791,32 @@ namespace KingsDamageMeter
                 goto End;
             }
 
+            matches = _OtherInflictedBleedRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                string name = matches[0].Groups[_NameGroupName].Value;
+                string skill = matches[0].Groups[_SkillGroupName].Value;
+                string target = matches[0].Groups[_TargetGroupName].Value;
+
+                if (_Dots.ContainsKey(skill))
+                {
+                    if (_Dots[skill] != name)
+                    {
+                        _Dots[skill] = name;
+                    }
+                }
+
+                else
+                {
+                    _Dots.Add(skill, name);
+                }
+
+                matched = true;
+                regex = "_OtherInflictedBleedRegex";
+                goto End;
+            }
+
             matches = _OtherSummonedAttackRegex.Matches(line);
             if (matches.Count > 0)
             {
@@ -688,7 +825,7 @@ namespace KingsDamageMeter
                 string target = matches[0].Groups[_TargetGroupName].Value;
                 string skill = matches[0].Groups[_SkillGroupName].Value;
                 string pet = matches[0].Groups[_PetGroupName].Value;
-                
+
                 if (_Pets.ContainsKey(pet))
                 {
                     if (_Pets[pet] != name)
@@ -798,7 +935,7 @@ namespace KingsDamageMeter
                 goto End;
             }
 
-            End:
+        End:
 
             if (!matched)
             {

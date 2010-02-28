@@ -59,6 +59,7 @@ namespace KingsDamageMeter
         private delegate void PlayerLeftGroup_Callback(object sender, PlayerEventArgs e);
         private delegate void ExpGained_Callback(object sender, ExpEventArgs e);
         private delegate void KinahEarned_Callback(object sender, KinahEventArgs e);
+        private delegate void DamageReceived_Callack(object sender, PlayerDamageEventArgs e);
 
         #region Initialization
 
@@ -92,6 +93,7 @@ namespace KingsDamageMeter
             _LogParser.DamageInflicted += OnDamageInflicted;
             _LogParser.CriticalInflicted += OnCriticalDamageInflicted;
             _LogParser.SkillDamageInflicted += OnSkillDamageInflicted;
+            //_LogParser.DamageReceived += OnDamageReceived; Not done yet
             _LogParser.PlayerJoinedGroup += OnPlayerJoinedGroup;
             _LogParser.PlayerLeftGroup += OnPlayerLeftGroup;
             _LogParser.ExpGained += OnExpGained;
@@ -116,6 +118,7 @@ namespace KingsDamageMeter
         {
             MainContextMenuLocateLog.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuLocateLog;
             MainContextMenuIgnoreList.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuIgnoreList;
+            MainContextMenuSetYouAlias.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuSetYouAlias;
             MainContextView.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuView;
             MainContextViewDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuDamage;
             MainContextViewDps.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuDps;
@@ -125,7 +128,7 @@ namespace KingsDamageMeter
             MainContextSorting.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuSorting;
             MainContextSortByName.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuName;
             MainContextSortByDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuDamage;
-            MainContextResetDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuResetDamage;
+            MainContextResetDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuResetCounts;
             MainContextClearAll.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuClearAll;
             MainContextMenuHelp.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuHelp;
             MainContextMenuAbout.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuAbout;
@@ -147,6 +150,8 @@ namespace KingsDamageMeter
             KingsDamageMeter.Languages.Gui.Default.LongCopyFormat = Format.Long;
 
             KingsDamageMeter.Properties.Settings.Default.Save();
+            KingsDamageMeter.Languages.Gui.Default.Save();
+            KingsDamageMeter.Languages.Regex.Default.Save();
         }
 
         #endregion
@@ -250,6 +255,27 @@ namespace KingsDamageMeter
             i.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             i.TopMost = true;
             i.ShowDialog();
+        }
+
+        private void MainContextMenuSetYouAlias_Click(object sender, RoutedEventArgs e)
+        {
+            SetNameDialog d = new SetNameDialog();
+            d.Text = KingsDamageMeter.Languages.Gui.Default.OptionsMenuSetYouAlias;
+            d.PlayerName = KingsDamageMeter.Languages.Regex.Default.YouAlias;
+
+            if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (PlayerViewer.PlayerExists(d.PlayerName))
+                {
+                    MessageBox.Show(KingsDamageMeter.Languages.Gui.Default.NameTakenMessage, "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+
+                else
+                {
+                    PlayerViewer.Rename(d.PlayerName, KingsDamageMeter.Languages.Regex.Default.YouAlias);
+                    KingsDamageMeter.Languages.Regex.Default.YouAlias = d.PlayerName;
+                }
+            }
         }
 
         private void MainContextMenuHelp_Click(object sender, RoutedEventArgs e)
@@ -398,6 +424,21 @@ namespace KingsDamageMeter
             }
 
             PlayerViewer.UpdatePlayerDamage(e.Name, e.Damage);
+        }
+
+        private void OnDamageReceived(object sender, PlayerDamageEventArgs e)
+        {
+            Dispatcher.Invoke(new DamageReceived_Callack(DoDamageReceived), sender, e);
+        }
+
+        private void DoDamageReceived(object sender, PlayerDamageEventArgs e)
+        {
+            if (!PlayerViewer.PlayerExists(e.Name))
+            {
+                PlayerViewer.AddPlayer(e.Name);
+            }
+
+            PlayerViewer.UpdateDamageReceived(e.Name, e.Damage);
         }
 
         private void OnPlayerJoinedGroup(object sender, PlayerEventArgs e)

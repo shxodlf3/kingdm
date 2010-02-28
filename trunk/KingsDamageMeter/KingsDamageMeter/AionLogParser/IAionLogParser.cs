@@ -28,12 +28,19 @@ namespace KingsDamageMeter
             get;
         }
 
+        event EventHandler Starting;
+        event EventHandler Started;
+        event EventHandler Stopping;
+        event EventHandler Stopped;
         event EventHandler FileNotFound;
         event DamageInflictedEventHandler DamageInflicted;
         event DamageInflictedEventHandler CriticalInflicted;
+        event SkillDamageInflictedEventHandler SkillDamageInflicted;
         event PlayerEventHandler PlayerJoinedGroup;
         event PlayerEventHandler PlayerLeftGroup;
         event DamageInflictedEventHandler DamageReceived;
+        event ExpEventHandler ExpGained;
+        event KinahEventHandler KinahEarned;
 
         void Start(string file);
         void Stop();

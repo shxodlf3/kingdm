@@ -507,13 +507,13 @@ namespace KingsDamageMeter.Languages {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Reset Damage")]
-        public string OptionsMenuResetDamage {
+        [global::System.Configuration.DefaultSettingValueAttribute("Reset Counts")]
+        public string OptionsMenuResetCounts {
             get {
-                return ((string)(this["OptionsMenuResetDamage"]));
+                return ((string)(this["OptionsMenuResetCounts"]));
             }
             set {
-                this["OptionsMenuResetDamage"] = value;
+                this["OptionsMenuResetCounts"] = value;
             }
         }
         
@@ -555,7 +555,7 @@ namespace KingsDamageMeter.Languages {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("%n %d (%s dps)(%p%)")]
+        [global::System.Configuration.DefaultSettingValueAttribute("%n %d (%s dps)(%p)")]
         public string LongCopyFormat {
             get {
                 return ((string)(this["LongCopyFormat"]));
@@ -574,6 +574,90 @@ namespace KingsDamageMeter.Languages {
             }
             set {
                 this["PlayerMenuGroupOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Set You Alias")]
+        public string OptionsMenuSetYouAlias {
+            get {
+                return ((string)(this["OptionsMenuSetYouAlias"]));
+            }
+            set {
+                this["OptionsMenuSetYouAlias"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("A player with this name already exists.")]
+        public string NameTakenMessage {
+            get {
+                return ((string)(this["NameTakenMessage"]));
+            }
+            set {
+                this["NameTakenMessage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Damage Taken")]
+        public string PlayerToolTipDamageTaken {
+            get {
+                return ((string)(this["PlayerToolTipDamageTaken"]));
+            }
+            set {
+                this["PlayerToolTipDamageTaken"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Skill")]
+        public string SkillColumn {
+            get {
+                return ((string)(this["SkillColumn"]));
+            }
+            set {
+                this["SkillColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Damage")]
+        public string DamageColumn {
+            get {
+                return ((string)(this["DamageColumn"]));
+            }
+            set {
+                this["DamageColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Percent")]
+        public string PercentColumn {
+            get {
+                return ((string)(this["PercentColumn"]));
+            }
+            set {
+                this["PercentColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Hits")]
+        public string HitsColumn {
+            get {
+                return ((string)(this["HitsColumn"]));
+            }
+            set {
+                this["HitsColumn"] = value;
             }
         }
     }

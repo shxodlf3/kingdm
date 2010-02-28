@@ -68,5 +68,20 @@
     <Setting Name="YouEarnedKinahRegex" Type="System.String" Scope="User">
       <Value Profile="(Default)">You have earned (?&lt;kinah&gt;[^a-zA-Z]+) Kinah.</Value>
     </Setting>
+    <Setting Name="YouInflictedBleedRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;target&gt;.+) is bleeding because You used (?&lt;skill&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="OtherInflictedBleedRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;target&gt;.+) is bleeding because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="OtherReceivedBleedRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;name&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+) bleeding damage after you used (?&lt;skill&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="YouGainedEffectRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">You received the effect by using (?&lt;effect&gt;.+)\.</Value>
+    </Setting>
+    <Setting Name="Effect" Type="System.String" Scope="User">
+      <Value Profile="(Default)"> Effect</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -296,7 +296,7 @@ namespace KingsDamageMeter.Controls
 
         public string ToString(PlayerFormatOptions options)
         {
-            return Format.Player(PlayerName, Damage.ToString("0,0"), DamagePerSecond.ToString("0,0"), DamagePercent.ToString("0%"), options);
+            return Format.Player(PlayerName, Damage.ToString("#,#"), DamagePerSecond.ToString("#,#"), DamagePercent.ToString("0%"), options);
         }
 
         public void Reset()
@@ -357,28 +357,33 @@ namespace KingsDamageMeter.Controls
 
             message += PlayerName;
             message += Environment.NewLine;
-            message += _Damage.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipTotal;
+            message += _Damage.ToString("#,#") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipTotal;
             message += Environment.NewLine;
             message += _DamagePercent.ToString("0%");
             message += Environment.NewLine;
             message += Environment.NewLine;
-            message += _DamagePerSecond.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipDps;
+            message += _DamagePerSecond.ToString("#,#") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipDps;
             message += Environment.NewLine;
-            message += _PeakDps.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipPeak;
+            message += _PeakDps.ToString("#,#") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipPeak;
             message += Environment.NewLine;
             message += Environment.NewLine;
-            message += _BiggestHit.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipBiggestHit;
+            message += _BiggestHit.ToString("#,#") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipBiggestHit;
+
+            /*
+            message += Environment.NewLine;
+            message += _DamageTaken.ToString("#,#") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipDamageTaken;
+            */
 
             if (_ExpGained > 0)
             {
                 message += Environment.NewLine;
-                message += _ExpPerHour.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipExp;
+                message += _ExpPerHour.ToString("#,#") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipExp;
             }
 
             if (_KinahEarned > 0)
             {
                 message += Environment.NewLine;
-                message += _KinahPerHour.ToString("0,0") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipKinah;
+                message += _KinahPerHour.ToString("#,#") + " " + KingsDamageMeter.Languages.Gui.Default.PlayerToolTipKinah;
             }
 
             ToolTip = message;
@@ -460,15 +465,15 @@ namespace KingsDamageMeter.Controls
             switch (_DisplayType)
             {
                 case DisplayType.DamagePerSecond:
-                    LabelDamage.Content = _DamagePerSecond.ToString("0,0");
+                    LabelDamage.Content = _DamagePerSecond.ToString("#,#");
                     break;
 
                 case DisplayType.Experience:
-                    LabelDamage.Content = _ExpPerHour.ToString("0,0");
+                    LabelDamage.Content = _ExpPerHour.ToString("#,#");
                     break;
 
                 case DisplayType.Kinah:
-                    LabelDamage.Content = _KinahPerHour.ToString("0,0");
+                    LabelDamage.Content = _KinahPerHour.ToString("#,#");
                     break;
 
                 case DisplayType.Percent:
@@ -476,7 +481,7 @@ namespace KingsDamageMeter.Controls
                     break;
 
                 default:
-                    LabelDamage.Content = _Damage.ToString("0,0");
+                    LabelDamage.Content = _Damage.ToString("#,#");
                     break;
             }
         }

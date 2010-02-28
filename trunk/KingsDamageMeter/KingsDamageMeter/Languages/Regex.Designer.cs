@@ -293,5 +293,66 @@ namespace KingsDamageMeter.Languages {
                 this["YouEarnedKinahRegex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<target>.+) is bleeding because You used (?<skill>.+)\\.")]
+        public string YouInflictedBleedRegex {
+            get {
+                return ((string)(this["YouInflictedBleedRegex"]));
+            }
+            set {
+                this["YouInflictedBleedRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<target>.+) is bleeding because (?<name>.+) used (?<skill>.+)\\.")]
+        public string OtherInflictedBleedRegex {
+            get {
+                return ((string)(this["OtherInflictedBleedRegex"]));
+            }
+            set {
+                this["OtherInflictedBleedRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) received (?<damage>[^a-zA-Z]+) bleeding damage after you used (?<skil" +
+            "l>.+)\\.")]
+        public string OtherReceivedBleedRegex {
+            get {
+                return ((string)(this["OtherReceivedBleedRegex"]));
+            }
+            set {
+                this["OtherReceivedBleedRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You received the effect by using (?<effect>.+)\\.")]
+        public string YouGainedEffectRegex {
+            get {
+                return ((string)(this["YouGainedEffectRegex"]));
+            }
+            set {
+                this["YouGainedEffectRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(" Effect")]
+        public string Effect {
+            get {
+                return ((string)(this["Effect"]));
+            }
+            set {
+                this["Effect"] = value;
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@
             <ScrollViewer.ContextMenu>
                 <ContextMenu Name="MainContextMenu" Opened="MainContextMenu_Opened" FontFamily="Verdana" FontSize="9">
                     <MenuItem Name="MenuItemCopyYou" Header="Copy You" Click="MenuItemCopyYou_Click" />
-                    <MenuItem Name="MenuItemCopyTop" Header="Copy All" Click="MenuItemCopyTop_Click" />
+                    <MenuItem Name="MenuItemCopyAll" Header="Copy All" Click="MenuItemCopyAll_Click" />
                     <Separator />
                     <MenuItem Name="MenuItemGroupOnly" Header="Group Only" IsCheckable="True" Click="MenuItemGroupOnly_Click" />
                     <MenuItem Name="MenuItemHideOthers" Header="Hide Others" IsCheckable="True" Click="MenuItemHideOthers_Click" />
