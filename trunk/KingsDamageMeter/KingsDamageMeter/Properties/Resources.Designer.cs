@@ -192,5 +192,14 @@ namespace KingsDamageMeter.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to White Damage.
+        /// </summary>
+        internal static string WhiteDamageSkillName {
+            get {
+                return ResourceManager.GetString("WhiteDamageSkillName", resourceCulture);
+            }
+        }
     }
 }

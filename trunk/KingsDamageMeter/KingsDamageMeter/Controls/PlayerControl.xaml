@@ -4,6 +4,16 @@
              xmlns:Converters="clr-namespace:KingsDamageMeter.Converters"
              MinHeight="40" MinWidth="160"
              ToolTip="{Binding ToolTipInfo}">
+    <!--UserControl.ToolTip>
+        <StackPanel>
+            <TextBlock Text="{Binding PlayerName}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Damage}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{Binding PlayerToolTipTotal}"
+            </StackPanel>
+        </StackPanel>
+    </UserControl.ToolTip-->
     <UserControl.Resources>
         <Converters:PlayerNameToFontWeightConverter x:Key="PlayerNameToFontWeightConverter"/>
     </UserControl.Resources>
@@ -59,17 +69,17 @@
     </UserControl.Style>
     <UserControl.ContextMenu>
         <ContextMenu FontSize="9" FontFamily="Verdana">
-            <MenuItem Header="Group Member" 
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:GroupMemeberMenuHeader}" 
                       IsCheckable="True"
                       IsChecked="{Binding IsGroupMember}"/>
-            <MenuItem Header="Remove"
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:RemoveMenuHeader}"
                       Command="{Binding RemovePlayerCommand}"
                       CommandParameter="{Binding}"/>
-            <MenuItem Header="Add to ignore list" 
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:IgnorePlayerMenuHeader}" 
                       Command="{Binding IgnorePlayerCommand}"
                       CommandParameter="{Binding}"/>
             <MenuItem Name="MenuItemViewSkills" 
-                      Header="View Skills" 
+                      Header="{LocText KingsDamageMeter:PlayerControlRes:ViewSkillsMenuHeader}" 
                       Click="MenuItemViewSkills_Click" />
         </ContextMenu>
     </UserControl.ContextMenu>

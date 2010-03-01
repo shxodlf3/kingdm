@@ -20,11 +20,14 @@
 using System;
 using System.Windows;
 using System.ComponentModel;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.IO;
 using System.Diagnostics;
-using KingsDamageMeter.Controls;
+using KingsDamageMeter.Converters;
 using KingsDamageMeter.Forms;
+using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
 
 namespace KingsDamageMeter
@@ -152,7 +155,7 @@ namespace KingsDamageMeter
         private void MenuItemAddGroupMemberByName_Click(object sender, RoutedEventArgs e)
         {
             SetNameDialog d = new SetNameDialog();
-            d.Text = KingsDamageMeter.Languages.Gui.Default.PlayerMenuAddMemberByName;
+            d.Text = WindowMainRes.AddByNameMenuHeader;
 
             if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -163,7 +166,7 @@ namespace KingsDamageMeter
         private void MainContextMenuSetYouAlias_Click(object sender, RoutedEventArgs e)
         {
             SetNameDialog d = new SetNameDialog();
-            d.Text = KingsDamageMeter.Languages.Gui.Default.OptionsMenuSetYouAlias;
+            d.Text = WindowMainRes.SetYouAliasMenuHeader;
             d.PlayerName = KingsDamageMeter.Languages.Regex.Default.YouAlias;
 
             if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -171,7 +174,7 @@ namespace KingsDamageMeter
 
                 if (((WindowMainData)DataContext).PlayerExists(d.PlayerName))
                 {
-                    MessageBox.Show(KingsDamageMeter.Languages.Gui.Default.NameTakenMessage, "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show(WindowMainRes.NameTakenMessage, "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
 
                 else
@@ -183,5 +186,27 @@ namespace KingsDamageMeter
         }
 
         #endregion
+
+        private bool isLoaded;
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(!isLoaded)
+            {
+                var languageSelectedConverter = new IsLanguageSelectedConverter();
+                foreach (var language in ((WindowMainData)DataContext).AvailableLanguages)
+                {
+                    var menuItem = new MenuItem
+                                       {
+                                           Header = language.DisplayName,
+                                           IsCheckable = true
+                                       };
+                    menuItem.SetBinding(MenuItem.IsCheckedProperty,
+                                        new Binding("SelectedLanguage") { Mode = BindingMode.TwoWay, Source = Settings.Default, Converter = languageSelectedConverter, ConverterParameter = language});
+                    MenuItemLanguage.Items.Add(menuItem);
+                }
+                isLoaded = true;
+            }
+        }
+
     }
 }

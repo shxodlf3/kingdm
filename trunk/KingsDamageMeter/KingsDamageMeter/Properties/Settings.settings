@@ -59,5 +59,8 @@
     <Setting Name="HideOthers" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="SelectedLanguage" Type="System.Globalization.CultureInfo" Scope="User">
+      <Value Profile="(Default)">(Default)</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

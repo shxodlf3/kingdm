@@ -20,13 +20,16 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
 using KingsDamageMeter.Controls;
 using KingsDamageMeter.Forms;
+using KingsDamageMeter.Languages;
 using KingsDamageMeter.Properties;
+using WPFLocalizeExtension.Engine;
 
 namespace KingsDamageMeter
 {
@@ -71,13 +74,24 @@ namespace KingsDamageMeter
             {
                 Settings.Default.GroupList = new ObservableCollection<string>();
             }
-            //Settings.Default.IgnoreList.Clear();
+
+            Settings.Default.PropertyChanged += SettingsChnaged;
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
             Settings.Default.Save();
+            Regex.Default.Save();
             base.OnExit(e);
         }
+
+        private void SettingsChnaged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "SelectedLanguage")
+            {
+                LocalizeDictionary.Instance.Culture = Settings.Default.SelectedLanguage;
+            }
+        }
+
     }
 }

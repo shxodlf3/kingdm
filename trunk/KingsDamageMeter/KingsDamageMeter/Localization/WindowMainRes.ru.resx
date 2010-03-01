@@ -117,65 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Bomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Bomb.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AboutMenuHeader" xml:space="preserve">
+    <value>О программе</value>
   </data>
-  <data name="CloseButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\CloseButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddByNameMenuHeader" xml:space="preserve">
+    <value>Добавить по имени</value>
   </data>
-  <data name="CloseButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\CloseButtonClick.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ClearAllMenuHeader" xml:space="preserve">
+    <value>Удалить всё</value>
   </data>
-  <data name="CloseButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\CloseButtonHover.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CloseBtnToolTip" xml:space="preserve">
+    <value>Закрыть</value>
   </data>
-  <data name="GroupMemberBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\GroupMemberBackground.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CopyAllMenuHeader" xml:space="preserve">
+    <value>Копировать все данные</value>
   </data>
-  <data name="GroupMemberBackground_MouseOver" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\GroupMemberBackground_MouseOver.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CopyYouMenuHeader" xml:space="preserve">
+    <value>Копировать свои данные</value>
   </data>
-  <data name="MainFormBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\MainFormBackground.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DamageMainViewMenuHeader" xml:space="preserve">
+    <value>Урон</value>
   </data>
-  <data name="MinimizeButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\MinimizeButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DpsMainViewMenuHeader" xml:space="preserve">
+    <value>Урон в секунду</value>
   </data>
-  <data name="MinimizeButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\MinimizeButtonClick.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ExperienceMainViewMenuHeader" xml:space="preserve">
+    <value>Опыт</value>
   </data>
-  <data name="MinimizeButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\MinimizeButtonHover.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="GroupOnlyMenuHeader" xml:space="preserve">
+    <value>Только группа</value>
   </data>
-  <data name="OffButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OffButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HelpMenuHeader" xml:space="preserve">
+    <value>Помощь</value>
   </data>
-  <data name="OffButtonPress" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OffButtonPress.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HideOthersMenuHeader" xml:space="preserve">
+    <value>Только Ты</value>
   </data>
-  <data name="OnButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OnButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="IgnoreListMenuHeader" xml:space="preserve">
+    <value>Список игнорируемых...</value>
   </data>
-  <data name="OnButtonPress" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OnButtonPress.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="KinahMainViewMenuHeader" xml:space="preserve">
+    <value>Кина</value>
   </data>
-  <data name="OptionsButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OptionsButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LanguageMenuHeader" xml:space="preserve">
+    <value>Язык</value>
   </data>
-  <data name="OptionsButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OptionsButtonClick.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LocateLogMenuHeader" xml:space="preserve">
+    <value>Путь к логам...</value>
   </data>
-  <data name="OptionsButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OptionsButtonHover.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MainViewMenuHeader" xml:space="preserve">
+    <value>Что показывать</value>
   </data>
-  <data name="PlayerBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\PlayerBackground.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MinimizeBtnToolTip" xml:space="preserve">
+    <value>Минимизировать</value>
   </data>
-  <data name="PlayerBackground_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\PlayerBackground_Hover.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NameTakenMessage" xml:space="preserve">
+    <value>Игрок с таким именем уже существует.</value>
   </data>
-  <data name="WhiteDamageSkillName" xml:space="preserve">
-    <value>White Damage</value>
+  <data name="OpacitySliderToolTip" xml:space="preserve">
+    <value>Прозрачность</value>
+  </data>
+  <data name="OpenLogError" xml:space="preserve">
+    <value>Не могу найти файл с логами. Пожалуйста, обратитесь к документации за инструкциями по настройке Aion для создания логов. Или нажмите "{0} -&gt; {1}"</value>
+  </data>
+  <data name="OptionsBtnToolTip" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="PercentMainViewMenuHeader" xml:space="preserve">
+    <value>Процент</value>
+  </data>
+  <data name="PowerOffBtnTooltip" xml:space="preserve">
+    <value>Выключено</value>
+  </data>
+  <data name="PowerOnBtnTooltip" xml:space="preserve">
+    <value>Включено</value>
+  </data>
+  <data name="ResetDamageMenuHeader" xml:space="preserve">
+    <value>Сбросить урон</value>
+  </data>
+  <data name="ResizeThumbToolTip" xml:space="preserve">
+    <value>Изменить размер</value>
+  </data>
+  <data name="SetYouAliasMenuHeader" xml:space="preserve">
+    <value>Переименовать "You"</value>
+  </data>
+  <data name="SortByDamageMenuHeader" xml:space="preserve">
+    <value>Сортировать по урону</value>
+  </data>
+  <data name="SortByDpsMenuHeader" xml:space="preserve">
+    <value>Сортировать по DPS</value>
+  </data>
+  <data name="SortByNameMenuHeader" xml:space="preserve">
+    <value>Сортировать по имени</value>
+  </data>
+  <data name="TopMostCheckBoxToolTip" xml:space="preserve">
+    <value>Поверх всего</value>
   </data>
 </root>

@@ -9,8 +9,8 @@
         MinHeight="102" 
         Left="{Binding WindowMainX, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}"
         Top="{Binding WindowMainY, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}"
-        Height="102" 
-        Width="198" 
+        Height="{Binding WindowMainHeight, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}" 
+        Width="{Binding WindowMainWidth, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}" 
         Topmost="{Binding WindowMainTopMost, Source={x:Static Properties:Settings.Default}}" 
         Opacity="{Binding WindowMainOpacity, Source={x:Static Properties:Settings.Default}}"
         WindowStyle="None" 
@@ -22,7 +22,8 @@
         MouseMove="Window_MouseMove" 
         MouseUp="Window_MouseUp" 
         Closing="Window_Closing" 
-        Background="Transparent">
+        Background="Transparent"
+        Loaded="Window_Loaded">
     <Window.Resources>
         <LinearGradientBrush x:Key="BorderBrush" StartPoint="0,0.5" EndPoint="1,0.5">
             <GradientStop Color="#CCC" Offset="0.4" />
@@ -62,11 +63,13 @@
                                             <Setter Property="MouseUpImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp"/>
                                             <Setter Property="MouseDownImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OnButtonPress.bmp"/>
                                             <Setter Property="MouseOverImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp"/>
+                                            <Setter Property="ToolTip" Value="{LocText KingsDamageMeter:WindowMainRes:PowerOnBtnTooltip}"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding IsEnabled}" Value="False">
                                             <Setter Property="MouseUpImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp"/>
                                             <Setter Property="MouseDownImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OffButtonPress.bmp"/>
                                             <Setter Property="MouseOverImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp"/>
+                                            <Setter Property="ToolTip" Value="{LocText KingsDamageMeter:WindowMainRes:PowerOffBtnTooltip}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -86,7 +89,7 @@
                             <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonClick.bmp" 
                                               MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonHover.bmp" 
                                               MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButton.bmp" 
-                                              ToolTip="Minimize" 
+                                              ToolTip="{LocText KingsDamageMeter:WindowMainRes:MinimizeBtnToolTip}" 
                                               Click="MinimizeButton_Click" 
                                               Grid.Column="5" 
                                               Width="20" Height="20" />
@@ -94,43 +97,61 @@
                                               MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonHover.bmp"
                                               MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButton.bmp"
                                               Click="MenuButton_Click"
-                                              ToolTip="Options"
+                                              ToolTip="{LocText KingsDamageMeter:WindowMainRes:OptionsBtnToolTip}"
                                               Grid.Column="6"
                                               Width="20" Height="20">
                                 <local:SkinButton.ContextMenu>
-                                    <ContextMenu x:Name="MainContextMenu" Foreground="Gold" HasDropShadow="True" FontFamily="Verdana" FontSize="9">
+                                    <ContextMenu x:Name="MainContextMenu" 
+                                                 Foreground="Gold" 
+                                                 HasDropShadow="True" 
+                                                 FontFamily="Verdana" 
+                                                 FontSize="9"
+                                                 DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=PlacementTarget.DataContext}">
                                         <MenuItem Name="MainContextMenuLocateLog" 
-                                                  Header="Locate Log..." 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:LocateLogMenuHeader}" 
                                                   Click="MainContextMenuLocateLog_Click"
                                                   ToolTip="{Binding AionLogPath, Source={x:Static Properties:Settings.Default}}"/>
-                                        <MenuItem Name="MainContextMenuIgnoreList" Header="Ignore List..." Click="MainContextMenuIgnoreList_Click" />
-                                        <MenuItem Name="MainContextMenuSetYouAlias" Header="Set You Alias" Click="MainContextMenuSetYouAlias_Click" />
+                                        <MenuItem Name="MainContextMenuIgnoreList" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:IgnoreListMenuHeader}" 
+                                                  Click="MainContextMenuIgnoreList_Click" />
+                                        <MenuItem Name="MainContextMenuSetYouAlias" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:SetYouAliasMenuHeader}" 
+                                                  Click="MainContextMenuSetYouAlias_Click" />
                                         <Separator />
-                                        <MenuItem Name="MainContextView"  Header="Main View">
+                                        <MenuItem Name="MainContextView"  
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:MainViewMenuHeader}">
                                             <MenuItem Name="MainContextViewDamage" 
-                                                      Header="Damage" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:DamageMainViewMenuHeader}" 
                                                       IsCheckable="True" 
                                                       IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Damage}}" />
                                             <MenuItem Name="MainContextViewDps" 
-                                                      Header="Dps" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:DpsMainViewMenuHeader}" 
                                                       IsCheckable="True" 
                                                       IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.DamagePerSecond}}" />
                                             <MenuItem Name="MainContextViewPercent" 
-                                                      Header="Percent" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:PercentMainViewMenuHeader}" 
                                                       IsCheckable="True" 
                                                       IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Percent}}" />
                                             <MenuItem Name="MainContextViewExperience" 
-                                                      Header="Experience" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:ExperienceMainViewMenuHeader}" 
                                                       IsCheckable="True" 
                                                       IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}" />
                                             <MenuItem Name="MainContextViewKinah" 
-                                                      Header="Kinah" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:KinahMainViewMenuHeader}" 
                                                       IsCheckable="True" 
                                                       IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}" />
                                         </MenuItem>
                                         <Separator />
-                                        <MenuItem Name="MainContextMenuHelp" Header="Help" Click="MainContextMenuHelp_Click" />
-                                        <MenuItem Name="MainContextMenuAbout" Header="About" Click="MainContextMenuAbout_Click" />
+                                        <!-- Here is we place language selection. But menu fill is implemented in WindowMain.xaml.cs -->
+                                        <MenuItem Name="MenuItemLanguage"
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:LanguageMenuHeader}"/>
+                                        <Separator />
+                                        <MenuItem Name="MainContextMenuHelp" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:HelpMenuHeader}" 
+                                                  Click="MainContextMenuHelp_Click"/>
+                                        <MenuItem Name="MainContextMenuAbout" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:AboutMenuHeader}" 
+                                                  Click="MainContextMenuAbout_Click" />
                                     </ContextMenu>
                                 </local:SkinButton.ContextMenu>
                             </local:SkinButton>
@@ -139,7 +160,7 @@
                                               MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButtonHover.bmp"
                                               MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButton.bmp"
                                               Click="CloseButton_Click"
-                                              ToolTip="Close"
+                                              ToolTip="{LocText KingsDamageMeter:WindowMainRes:CloseBtnToolTip}"
                                               Width="20"
                                               Height="20"
                                               HorizontalAlignment="Left"/>
@@ -154,37 +175,39 @@
                                               HorizontalAlignment="Stretch">
                                     <ScrollViewer.ContextMenu>
                                         <ContextMenu Name="MainContextMenu" FontFamily="Verdana" FontSize="9">
-                                            <MenuItem Name="MenuItemCopyYou" Header="Copy You" />
-                                            <MenuItem Name="MenuItemCopyAll" Header="Copy All" />
+                                            <MenuItem Name="MenuItemCopyYou" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:CopyYouMenuHeader}" />
+                                            <MenuItem Name="MenuItemCopyTop" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:CopyAllMenuHeader}" />
                                             <Separator />
-                                            <MenuItem Header="Hide Others" 
+                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:HideOthersMenuHeader}" 
                                                       IsCheckable="True" 
                                                       IsChecked="{Binding IsHideOthers, Source={x:Static Properties:Settings.Default}}"/>
-                                            <MenuItem Header="Group Only" 
+                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:GroupOnlyMenuHeader}" 
                                                       IsCheckable="True" 
                                                       IsChecked="{Binding IsGroupOnly, Source={x:Static Properties:Settings.Default}}"/>
                                             <MenuItem Name="MenuItemAddGroupMemberByName" 
-                                                      Header="Add Member by Name" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:AddByNameMenuHeader}" 
                                                       Click="MenuItemAddGroupMemberByName_Click"/>
                                             <Separator />
                                             <MenuItem Name="MenuItemSortByName"
-                                                      Header="Sort By Name" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByNameMenuHeader}" 
                                                       IsCheckable="True"
                                                       IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.Name}}"/>
                                             <MenuItem Name="MenuItemSortByDamage" 
-                                                      Header="Sort By Damage" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByDamageMenuHeader}" 
                                                       IsCheckable="True"
                                                       IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.Damage}}"/>
                                             <MenuItem Name="MenuItemSortByDPS" 
-                                                      Header="Sort By DPS" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByDpsMenuHeader}" 
                                                       IsCheckable="True"
                                                       IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.DamagePerSecond}}"/>
                                             <Separator />
                                             <MenuItem Name="MenuItemResetDamage" 
-                                                      Header="Reset Damage" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:ResetDamageMenuHeader}" 
                                                       Command="{Binding ResetDamageCommand}"/>
                                             <MenuItem Name="MenuItemClear" 
-                                                      Header="Clear All"
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:ClearAllMenuHeader}"
                                                       Command="{Binding ClearAllCommand}"/>
                                         </ContextMenu>
                                     </ScrollViewer.ContextMenu>
@@ -220,7 +243,7 @@
                                 Value="{Binding WindowMainOpacity, Source={x:Static Properties:Settings.Default}}" 
                                 Style="{StaticResource PerfectSlider}" 
                                 SmallChange="0.01" 
-                                ToolTip="Opacity" 
+                                ToolTip="{LocText KingsDamageMeter:WindowMainRes:OpacitySliderToolTip}" 
                                 HorizontalAlignment="Stretch" Margin="10,0,5,0" />
                         <CheckBox Grid.Column="1"
                                   Name="CheckTopMost"
@@ -230,7 +253,7 @@
                                   FontSize="9"
                                   FontFamily="Verdana"
                                   IsChecked="{Binding WindowMainTopMost, Source={x:Static Properties:Settings.Default}}"
-                                  ToolTip="Top Most"
+                                  ToolTip="{LocText KingsDamageMeter:WindowMainRes:TopMostCheckBoxToolTip}"
                                   HorizontalAlignment="Center" Margin="5,0" />
                         <Thumb Grid.Column="2"
                                Cursor="SizeNWSE"
@@ -240,7 +263,8 @@
                                HorizontalAlignment="Right" 
                                VerticalAlignment="Bottom" 
                                Width="15" 
-                               Height="15" ToolTip="Resize" />
+                               Height="15" 
+                               ToolTip="{LocText KingsDamageMeter:WindowMainRes:ResizeThumbToolTip}" />
                     </Grid>
                 </Grid>
             </Border>

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Timers;
 using KingsDamageMeter.Combat;
+using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
 
 namespace KingsDamageMeter.Controls
@@ -272,13 +273,13 @@ namespace KingsDamageMeter.Controls
                 var message = new StringBuilder();
 
                 message.AppendLine(PlayerName);
-                message.AppendLine(Damage + " " + Languages.Gui.Default.PlayerToolTipTotal);
+                message.AppendLine(Damage + " " + PlayerToolTipRes.PlayerToolTipTotal);
                 message.AppendLine(DamagePercent.ToString("0%"));
                 message.AppendLine();
-                message.AppendLine(DamagePerSecond + " " + Languages.Gui.Default.PlayerToolTipDps);
-                message.AppendLine(PeakDps + " " + Languages.Gui.Default.PlayerToolTipPeak);
+                message.AppendLine(DamagePerSecond + " " + PlayerToolTipRes.PlayerToolTipDps);
+                message.AppendLine(PeakDps + " " + PlayerToolTipRes.PlayerToolTipPeak);
                 message.AppendLine();
-                message.Append(BiggestHit + " " + Languages.Gui.Default.PlayerToolTipBiggestHit);
+                message.Append(BiggestHit + " " + PlayerToolTipRes.PlayerToolTipBiggestHit);
 
                 if(Kinah > 0 || Exp > 0)
                 {
@@ -287,12 +288,12 @@ namespace KingsDamageMeter.Controls
                 if(Kinah > 0)
                 {
                     message.AppendLine();
-                    message.Append(Kinah + " " + Languages.Gui.Default.PlayerToolTipKinah);
+                    message.Append(Kinah + " " + PlayerToolTipRes.PlayerToolTipKinah);
                 }
                 if (Exp > 0)
                 {
                     message.AppendLine();
-                    message.Append(ExpInHour + " " + Languages.Gui.Default.PlayerToolTipExp);
+                    message.Append(ExpInHour + " " + PlayerToolTipRes.PlayerToolTipExpInHour);
                 }
 
                 return message.ToString();

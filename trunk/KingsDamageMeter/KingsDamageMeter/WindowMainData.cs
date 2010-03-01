@@ -1,12 +1,19 @@
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Timers;
 using System.Windows;
 using System.Windows.Data;
 using KingsDamageMeter.Controls;
 using KingsDamageMeter.Languages;
+using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
+using WPFLocalizeExtension.Engine;
+using Timer=System.Timers.Timer;
 
 namespace KingsDamageMeter
 {
@@ -39,7 +46,7 @@ namespace KingsDamageMeter
 
         public SafeNotifiedCollection<Player> Players { get; private set; }
 
-        //private DateTime? TimeWhenFightIsStarted { get; set; }
+        public ObservableCollection<CultureInfo> AvailableLanguages { get; private set; }
         #endregion
 
         #region Commands
@@ -83,16 +90,30 @@ namespace KingsDamageMeter
             }
         }
 
+        private RelayCommand<CultureInfo> selectLanguageCommand;
+        public RelayCommand<CultureInfo> SelectLanguageCommand
+        {
+            get
+            {
+                if (selectLanguageCommand == null)
+                {
+                    selectLanguageCommand = new RelayCommand<CultureInfo>(SelectLanguage);
+                }
+                return selectLanguageCommand;
+            }
+        }
+
         #endregion
 
         public WindowMainData()
         {
+            Players = new SafeNotifiedCollection<Player>();
+            AvailableLanguages = new ObservableCollection<CultureInfo>();
+            Settings.Default.PropertyChanged += OnSettingsChanged;
+
             InitializeLogParser();
             InitializeTimers();
-
-            Players = new SafeNotifiedCollection<Player>();
-
-            Settings.Default.PropertyChanged += OnSettingsChanged;
+            DetectAvailableLanguages();
         }
 
         private void InitializeTimers()
@@ -149,7 +170,7 @@ namespace KingsDamageMeter
 
         private static void OnFileNotFound(object sender, EventArgs e)
         {
-            MessageBox.Show(Gui.Default.OpenLogError, "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            MessageBox.Show(string.Format(WindowMainRes.OpenLogError, WindowMainRes.OptionsBtnToolTip, WindowMainRes.LocateLogMenuHeader), "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
 
@@ -162,7 +183,7 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerDamage(e.Name, e.Damage, Gui.Default.WhiteDamage);
+                UpdatePlayerDamage(e.Name, e.Damage, Resources.WhiteDamageSkillName);
             }
         }
 
@@ -333,7 +354,7 @@ namespace KingsDamageMeter
         /// </summary>
         public void AddPlayer(string name, bool isGroupMember)
         {
-            if (Settings.Default.IgnoreList.Contains(name))
+            if (Settings.Default.IgnoreList.Contains(name) || Players.Any(o=>o.PlayerName == name))
             {
                 return;
             }
@@ -442,7 +463,11 @@ namespace KingsDamageMeter
 
         private void UpdateSort()
         {
-            // Null reference exception here when I closed the app. Difficult to reproduce.
+            // Think timer is elapsed while exit. This should be fix the problem.
+            if (Application.Current == null)
+            {
+                return;
+            }
             if (!Application.Current.Dispatcher.CheckAccess())
             {
                 Application.Current.Dispatcher.Invoke(new Action(UpdateSort));
@@ -532,13 +557,37 @@ namespace KingsDamageMeter
             }
         }
 
-        public void CopyPlayerToClipboard(string name)
+        private void DetectAvailableLanguages()
         {
-            var player = Players.FirstOrDefault(o => o.PlayerName == name);
-            if (player != null)
+            var dirs = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+            var allCultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+
+            AvailableLanguages.Add(allCultures.First(o=>o.Name == "en")); //Default language
+            foreach (var dir in dirs)
             {
+                string dirName = Path.GetFileName(dir);
+                var availableCulture = allCultures.FirstOrDefault(o => o.Name == dirName);
+                if(availableCulture != null)
+                {
+                    AvailableLanguages.Add(availableCulture);
+                }
+            }
+
+            if (Settings.Default.SelectedLanguage == CultureInfo.InvariantCulture)
+            {
+                SelectLanguage(Thread.CurrentThread.CurrentUICulture);
+            }
+            else
+            {
+                SelectLanguage(Settings.Default.SelectedLanguage);
                 
             }
+        }
+
+        private void SelectLanguage(CultureInfo language)
+        {
+            var findedLanguage = AvailableLanguages.FirstOrDefault(o => o.Equals(language) || (language.Parent != null && o.Equals(language.Parent)));
+            Settings.Default.SelectedLanguage = findedLanguage ?? AvailableLanguages[0];
         }
 
         #endregion

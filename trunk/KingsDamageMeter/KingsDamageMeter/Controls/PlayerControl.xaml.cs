@@ -24,6 +24,7 @@ using System.Windows.Controls;
 using System.Drawing;
 using System.ComponentModel;
 using KingsDamageMeter.Forms;
+using KingsDamageMeter.Localization;
 
 namespace KingsDamageMeter.Controls
 {
@@ -43,7 +44,7 @@ namespace KingsDamageMeter.Controls
         private void MenuItemViewSkills_Click(object sender, RoutedEventArgs e)
         {
             SkillsForm s = new SkillsForm();
-            s.Text = ((Player)DataContext).PlayerName + " - " + KingsDamageMeter.Languages.Gui.Default.Breakdown;
+            s.Text = string.Format(SkillsFormRes.WindowTitle, ((Player) DataContext).PlayerName);
             s.Populate(((Player)DataContext).Skills, ((Player)DataContext).Damage);
             s.ShowDialog();
         }

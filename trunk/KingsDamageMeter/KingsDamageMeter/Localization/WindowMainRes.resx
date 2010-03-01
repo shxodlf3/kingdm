@@ -117,65 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Bomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Bomb.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AboutMenuHeader" xml:space="preserve">
+    <value>About</value>
   </data>
-  <data name="CloseButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\CloseButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddByNameMenuHeader" xml:space="preserve">
+    <value>Add Member by Name</value>
   </data>
-  <data name="CloseButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\CloseButtonClick.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ClearAllMenuHeader" xml:space="preserve">
+    <value>Clear All</value>
   </data>
-  <data name="CloseButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\CloseButtonHover.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CloseBtnToolTip" xml:space="preserve">
+    <value>Close</value>
   </data>
-  <data name="GroupMemberBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\GroupMemberBackground.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CopyAllMenuHeader" xml:space="preserve">
+    <value>Copy All</value>
   </data>
-  <data name="GroupMemberBackground_MouseOver" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\GroupMemberBackground_MouseOver.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CopyYouMenuHeader" xml:space="preserve">
+    <value>Copy You</value>
   </data>
-  <data name="MainFormBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\MainFormBackground.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DamageMainViewMenuHeader" xml:space="preserve">
+    <value>Damage</value>
   </data>
-  <data name="MinimizeButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\MinimizeButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DpsMainViewMenuHeader" xml:space="preserve">
+    <value>Dps</value>
   </data>
-  <data name="MinimizeButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\MinimizeButtonClick.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ExperienceMainViewMenuHeader" xml:space="preserve">
+    <value>Experience</value>
   </data>
-  <data name="MinimizeButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\MinimizeButtonHover.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="GroupOnlyMenuHeader" xml:space="preserve">
+    <value>Group Only</value>
   </data>
-  <data name="OffButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OffButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HelpMenuHeader" xml:space="preserve">
+    <value>Help</value>
   </data>
-  <data name="OffButtonPress" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OffButtonPress.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HideOthersMenuHeader" xml:space="preserve">
+    <value>Hide Others</value>
   </data>
-  <data name="OnButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OnButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="IgnoreListMenuHeader" xml:space="preserve">
+    <value>Ignore List...</value>
   </data>
-  <data name="OnButtonPress" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OnButtonPress.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="KinahMainViewMenuHeader" xml:space="preserve">
+    <value>Kinah</value>
   </data>
-  <data name="OptionsButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OptionsButton.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LanguageMenuHeader" xml:space="preserve">
+    <value>Language</value>
   </data>
-  <data name="OptionsButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OptionsButtonClick.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LocateLogMenuHeader" xml:space="preserve">
+    <value>Locate Log...</value>
   </data>
-  <data name="OptionsButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\OptionsButtonHover.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MainViewMenuHeader" xml:space="preserve">
+    <value>Main View</value>
   </data>
-  <data name="PlayerBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\PlayerBackground.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MinimizeBtnToolTip" xml:space="preserve">
+    <value>Minimize</value>
   </data>
-  <data name="PlayerBackground_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Themes\BlackPearl\Images\PlayerBackground_Hover.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NameTakenMessage" xml:space="preserve">
+    <value>A player with this name already exists.</value>
   </data>
-  <data name="WhiteDamageSkillName" xml:space="preserve">
-    <value>White Damage</value>
+  <data name="OpacitySliderToolTip" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
+  <data name="OpenLogError" xml:space="preserve">
+    <value>Unable to locate chat log. Please refer to the documentation for instructions on setting up Aion to create the log or click "{0} -&gt; {1}"</value>
+  </data>
+  <data name="OptionsBtnToolTip" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="PercentMainViewMenuHeader" xml:space="preserve">
+    <value>Percent</value>
+  </data>
+  <data name="PowerOffBtnTooltip" xml:space="preserve">
+    <value>Power Off</value>
+  </data>
+  <data name="PowerOnBtnTooltip" xml:space="preserve">
+    <value>Power On</value>
+  </data>
+  <data name="ResetDamageMenuHeader" xml:space="preserve">
+    <value>Reset Damage</value>
+  </data>
+  <data name="ResizeThumbToolTip" xml:space="preserve">
+    <value>Resize</value>
+  </data>
+  <data name="SetYouAliasMenuHeader" xml:space="preserve">
+    <value>Set You Alias</value>
+  </data>
+  <data name="SortByDamageMenuHeader" xml:space="preserve">
+    <value>Sort By Damage</value>
+  </data>
+  <data name="SortByDpsMenuHeader" xml:space="preserve">
+    <value>Sort By DPS</value>
+  </data>
+  <data name="SortByNameMenuHeader" xml:space="preserve">
+    <value>Sort By Name</value>
+  </data>
+  <data name="TopMostCheckBoxToolTip" xml:space="preserve">
+    <value>Top Most</value>
   </data>
 </root>

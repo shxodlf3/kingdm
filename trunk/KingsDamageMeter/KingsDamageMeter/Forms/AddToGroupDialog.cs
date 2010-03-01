@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using KingsDamageMeter.Localization;
 
 namespace KingsDamageMeter.Forms
 {
@@ -10,10 +11,10 @@ namespace KingsDamageMeter.Forms
         {
             InitializeComponent();
 
-            Text = KingsDamageMeter.Languages.Gui.Default.AddGroupMemberTitle;
-            OKButton.Text = KingsDamageMeter.Languages.Gui.Default.OKButton;
-            CancelButton.Text = KingsDamageMeter.Languages.Gui.Default.CancelButton;
-            _InvlaidNameMessage = KingsDamageMeter.Languages.Gui.Default.InvalidNameMessage;
+            Text = AddToGroupRes.WindowTitle;
+            OKButton.Text = AddToGroupRes.OKButton;
+            CancelButton.Text = AddToGroupRes.CancelButton;
+            _InvlaidNameMessage = AddToGroupRes.InvalidNameMessage;
         }
 
         private Regex _NameRegex = new Regex(@"^[a-zA-Z]+$");

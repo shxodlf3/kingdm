@@ -248,5 +248,17 @@ namespace KingsDamageMeter.Properties {
                 this["HideOthers"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(Default)")]
+        public global::System.Globalization.CultureInfo SelectedLanguage {
+            get {
+                return ((global::System.Globalization.CultureInfo)(this["SelectedLanguage"]));
+            }
+            set {
+                this["SelectedLanguage"] = value;
+            }
+        }
     }
 }

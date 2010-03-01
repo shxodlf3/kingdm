@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2ED927CC-AF2E-4190-AF56-7B18F8C2B8AC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -74,6 +74,10 @@
     </Reference>
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WPFLocalizeExtension, Version=1.0.0.0, Culture=neutral, PublicKeyToken=944ebedf95bf2bc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\WPFLocalizeExtension.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +154,7 @@
     <Compile Include="Controls\PlayerSortType.cs" />
     <Compile Include="Controls\RelayCommand.cs" />
     <Compile Include="Converters\DisplayTypeToBoolConverter.cs" />
+    <Compile Include="Converters\IsLanguageSelectedConverter.cs" />
     <Compile Include="Converters\PlayerNameToFontWeightConverter.cs" />
     <Compile Include="Converters\PlayerSortTypeToBoolConverter.cs" />
     <Compile Include="DebugLogger.cs" />
@@ -199,15 +204,35 @@
       <DependentUpon>SkillsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SkillSorter.cs" />
-    <Compile Include="Languages\Gui.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Gui.settings</DependentUpon>
-    </Compile>
     <Compile Include="Languages\Regex.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Regex.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\AddToGroupRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddToGroupRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\PlayerControlRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayerControlRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\PlayerToolTipRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayerToolTipRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\SkillsFormRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SkillsFormRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\WindowMainRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WindowMainRes.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -246,6 +271,46 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SkillsForm.resx">
       <DependentUpon>SkillsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\AddToGroupRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddToGroupRes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\AddToGroupRes.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\PlayerToolTipRes.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\SkillsFormRes.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\PlayerToolTipRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlayerToolTipRes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\SkillsFormRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SkillsFormRes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\WindowMainRes.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\PlayerControlRes.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\PlayerControlRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlayerControlRes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\WindowMainRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WindowMainRes.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -301,10 +366,6 @@
   <ItemGroup>
     <None Include="ChangeLog.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Languages\Gui.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Gui.Designer.cs</LastGenOutput>
     </None>
     <None Include="Languages\Regex.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
