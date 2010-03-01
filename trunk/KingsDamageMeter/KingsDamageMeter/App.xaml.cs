@@ -24,6 +24,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using KingsDamageMeter.Controls;
 using KingsDamageMeter.Forms;
@@ -90,6 +91,7 @@ namespace KingsDamageMeter
             if(e.PropertyName == "SelectedLanguage")
             {
                 LocalizeDictionary.Instance.Culture = Settings.Default.SelectedLanguage;
+                Thread.CurrentThread.CurrentUICulture = Settings.Default.SelectedLanguage;
             }
         }
 
