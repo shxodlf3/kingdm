@@ -100,9 +100,14 @@ namespace KingsDamageMeter.Controls
 
                     NotifyPropertyChanged("Damage");
                     NotifyPropertyChanged("DisplayData");
-                    NotifyPropertyChanged("ToolTipInfo");
+                    NotifyPropertyChanged("DamageFormatted");
                 }
             }
+        }
+
+        public string DamageFormatted
+        {
+            get { return Damage.ToString("#,#"); }
         }
 
         private int biggestHit;
@@ -115,9 +120,14 @@ namespace KingsDamageMeter.Controls
                 {
                     biggestHit = value;
                     NotifyPropertyChanged("BiggestHit");
-                    NotifyPropertyChanged("ToolTipInfo");
+                    NotifyPropertyChanged("BiggestHitFormatted");
                 }
             }
+        }
+
+        public string BiggestHitFormatted
+        {
+            get { return BiggestHit.ToString("#,#"); }
         }
 
         private int exp;
@@ -130,9 +140,15 @@ namespace KingsDamageMeter.Controls
                 {
                     exp = value;
                     NotifyPropertyChanged("Exp");
-                    NotifyPropertyChanged("ToolTipInfo");
+                    NotifyPropertyChanged("ExpFormatted");
+                    NotifyPropertyChanged("ExpPerHourFormatted");
                 }
             }
+        }
+
+        public string ExpFormatted
+        {
+            get { return Exp.ToString("#,#"); }
         }
 
         private int kinah;
@@ -145,9 +161,14 @@ namespace KingsDamageMeter.Controls
                 {
                     kinah = value;
                     NotifyPropertyChanged("Kinah");
-                    NotifyPropertyChanged("ToolTipInfo");
+                    NotifyPropertyChanged("KinahFormatted");
                 }
             }
+        }
+
+        public string KinahFormatted
+        {
+            get { return Kinah.ToString("#,#"); }
         }
 
         private int damageTaken;
@@ -212,6 +233,11 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        public string DamagePerSecondFormatted
+        {
+            get { return DamagePerSecond.ToString("#,#"); }
+        }
+
         private double fightTime;
         public double FightTime
         {
@@ -223,7 +249,7 @@ namespace KingsDamageMeter.Controls
                     fightTime = value;
                     NotifyPropertyChanged("FightTime");
                     NotifyPropertyChanged("DamagePerSecond");
-                    NotifyPropertyChanged("ToolTipInfo");
+                    NotifyPropertyChanged("DamagePerSecondFormatted");
                 }
             }
         }
@@ -238,9 +264,14 @@ namespace KingsDamageMeter.Controls
                 {
                     peakDps = value;
                     NotifyPropertyChanged("PeakDps");
-                    NotifyPropertyChanged("ToolTipInfo");
+                    NotifyPropertyChanged("PeakDpsFormatted");
                 }
             }
+        }
+
+        public string PeakDpsFormatted
+        {
+            get { return PeakDps.ToString("#,#"); }
         }
 
         private bool isGroupMember;
@@ -316,6 +347,11 @@ namespace KingsDamageMeter.Controls
                 TimeSpan span = DateTime.Now - startTime;
                 return (int)((Exp / span.TotalSeconds) * 3600);
             }
+        }
+
+        public string ExpPerHourFormatted
+        {
+            get { return ExpPerHour.ToString("#,#"); }
         }
 
         public SkillCollection Skills { get; private set; }

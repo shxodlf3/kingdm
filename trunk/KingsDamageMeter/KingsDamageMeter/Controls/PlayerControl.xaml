@@ -7,25 +7,25 @@
         <StackPanel>
             <TextBlock Text="{Binding PlayerName}"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Damage}"/>
+                <TextBlock Text="{Binding DamageFormatted}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipTotal}"/>
             </StackPanel>
             <TextBlock Text="{Binding DamagePercentFormatted}"/>
             <TextBlock/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding DamagePerSecond}"/>
+                <TextBlock Text="{Binding DamagePerSecondFormatted}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipDps}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding PeakDps}"/>
+                <TextBlock Text="{Binding PeakDpsFormatted}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipPeak}"/>
             </StackPanel>
             <TextBlock/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding BiggestHit}"/>
+                <TextBlock Text="{Binding BiggestHitFormatted}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipBiggestHit}"/>
             </StackPanel>
@@ -53,7 +53,7 @@
                         </Style.Triggers>
                     </Style>
                 </StackPanel.Style>
-                <TextBlock Text="{Binding Kinah}"/>
+                <TextBlock Text="{Binding KinahFormatted}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipKinah}"/>
             </StackPanel>
@@ -67,7 +67,7 @@
                         </Style.Triggers>
                     </Style>
                 </StackPanel.Style>
-                <TextBlock Text="{Binding ExpPerHour}"/>
+                <TextBlock Text="{Binding ExpPerHourFormatted}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipExpPerHour}"/>
             </StackPanel>
