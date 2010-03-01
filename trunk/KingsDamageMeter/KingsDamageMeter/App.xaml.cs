@@ -76,7 +76,7 @@ namespace KingsDamageMeter
                 Settings.Default.GroupList = new ObservableCollection<string>();
             }
 
-            Settings.Default.PropertyChanged += SettingsChnaged;
+            Settings.Default.PropertyChanged += SettingsChanged;
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -86,7 +86,7 @@ namespace KingsDamageMeter
             base.OnExit(e);
         }
 
-        private void SettingsChnaged(object sender, PropertyChangedEventArgs e)
+        private void SettingsChanged(object sender, PropertyChangedEventArgs e)
         {
             if(e.PropertyName == "SelectedLanguage")
             {
