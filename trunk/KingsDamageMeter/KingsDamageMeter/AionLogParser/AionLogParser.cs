@@ -48,7 +48,7 @@ namespace KingsDamageMeter
         private Thread _Worker;
         private object _LockObject = new object();
 
-        private string _YouAlias;
+        //_YouAlias;
 
         private string _LogPath = String.Empty;
 
@@ -155,7 +155,7 @@ namespace KingsDamageMeter
 
         private void Initialize()
         {
-            _YouAlias = KingsDamageMeter.Languages.Regex.Default.YouAlias;
+            //_YouAlias = KingsDamageMeter.Languages.Regex.Default.YouAlias;
 
             _TimestampRegex = @KingsDamageMeter.Languages.Regex.Default.TimestampRegex;
             _ChatRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.Chat, RegexOptions.Compiled);
@@ -381,7 +381,7 @@ namespace KingsDamageMeter
 
                 if (SkillDamageInflicted != null)
                 {
-                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _YouAlias, damage, skill));
+                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, Languages.Regex.Default.YouAlias, damage, skill));
                 }
 
                 matched = true;
@@ -398,7 +398,7 @@ namespace KingsDamageMeter
 
                 if (DamageInflicted != null)
                 {
-                    DamageInflicted(this, new PlayerDamageEventArgs(time, _YouAlias, damage));
+                    DamageInflicted(this, new PlayerDamageEventArgs(time, Languages.Regex.Default.YouAlias, damage));
                 }
 
                 matched = true;
@@ -415,7 +415,7 @@ namespace KingsDamageMeter
 
                 if (CriticalInflicted != null)
                 {
-                    CriticalInflicted(this, new PlayerDamageEventArgs(time, _YouAlias, damage));
+                    CriticalInflicted(this, new PlayerDamageEventArgs(time, Languages.Regex.Default.YouAlias, damage));
                 }
 
                 matched = true;
@@ -433,7 +433,7 @@ namespace KingsDamageMeter
 
                 if (SkillDamageInflicted != null)
                 {
-                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _YouAlias, damage, effect));
+                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, Languages.Regex.Default.YouAlias, damage, effect));
                 }
 
                 matched = true;
@@ -449,15 +449,15 @@ namespace KingsDamageMeter
 
                 if (_Effects.ContainsKey(effect))
                 {
-                    if (_Effects[effect] != _YouAlias)
+                    if (_Effects[effect] != Languages.Regex.Default.YouAlias)
                     {
-                        _Effects[effect] = _YouAlias;
+                        _Effects[effect] = Languages.Regex.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Effects.Add(effect, _YouAlias);
+                    _Effects.Add(effect, Languages.Regex.Default.YouAlias);
                 }
 
                 matched = true;
@@ -491,15 +491,15 @@ namespace KingsDamageMeter
 
                 if (_Dots.ContainsKey(skill))
                 {
-                    if (_Dots[skill] != _YouAlias)
+                    if (_Dots[skill] != Languages.Regex.Default.YouAlias)
                     {
-                        _Dots[skill] = _YouAlias;
+                        _Dots[skill] = Languages.Regex.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Dots.Add(skill, _YouAlias);
+                    _Dots.Add(skill, Languages.Regex.Default.YouAlias);
                 }
 
                 matched = true;
@@ -516,15 +516,15 @@ namespace KingsDamageMeter
 
                 if (_Dots.ContainsKey(skill))
                 {
-                    if (_Dots[skill] != _YouAlias)
+                    if (_Dots[skill] != Languages.Regex.Default.YouAlias)
                     {
-                        _Dots[skill] = _YouAlias;
+                        _Dots[skill] = Languages.Regex.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Dots.Add(skill, _YouAlias);
+                    _Dots.Add(skill, Languages.Regex.Default.YouAlias);
                 }
 
                 matched = true;
@@ -542,15 +542,15 @@ namespace KingsDamageMeter
 
                 if (_Pets.ContainsKey(pet))
                 {
-                    if (_Pets[pet] != _YouAlias)
+                    if (_Pets[pet] != Languages.Regex.Default.YouAlias)
                     {
-                        _Pets[pet] = _YouAlias;
+                        _Pets[pet] = Languages.Regex.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Pets.Add(pet, _YouAlias);
+                    _Pets.Add(pet, Languages.Regex.Default.YouAlias);
                 }
 
                 matched = true;
@@ -568,15 +568,15 @@ namespace KingsDamageMeter
 
                 if (_Pets.ContainsKey(pet))
                 {
-                    if (_Pets[pet] != _YouAlias)
+                    if (_Pets[pet] != Languages.Regex.Default.YouAlias)
                     {
-                        _Pets[pet] = _YouAlias;
+                        _Pets[pet] = Languages.Regex.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Pets.Add(pet, _YouAlias);
+                    _Pets.Add(pet, Languages.Regex.Default.YouAlias);
                 }
 
                 matched = true;
@@ -714,8 +714,6 @@ namespace KingsDamageMeter
                         SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Effects[skill], damage, skill));
                     }
                 }
-
-
 
                 if (_Effects.ContainsKey(skill.Replace(KingsDamageMeter.Languages.Regex.Default.Effect, "")))
                 {

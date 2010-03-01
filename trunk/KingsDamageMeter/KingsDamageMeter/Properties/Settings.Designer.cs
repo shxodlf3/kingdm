@@ -13,7 +13,7 @@ namespace KingsDamageMeter.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "9.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -85,12 +85,23 @@ namespace KingsDamageMeter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection IgnoreList {
+        public global::System.Collections.ObjectModel.ObservableCollection<string> IgnoreList {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["IgnoreList"]));
+                return ((global::System.Collections.ObjectModel.ObservableCollection<string>)(this["IgnoreList"]));
             }
             set {
                 this["IgnoreList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.ObjectModel.ObservableCollection<string> GroupList {
+            get {
+                return ((global::System.Collections.ObjectModel.ObservableCollection<string>)(this["GroupList"]));
+            }
+            set {
+                this["GroupList"] = value;
             }
         }
         
@@ -145,30 +156,6 @@ namespace KingsDamageMeter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool GroupOnly {
-            get {
-                return ((bool)(this["GroupOnly"]));
-            }
-            set {
-                this["GroupOnly"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool HideOthers {
-            get {
-                return ((bool)(this["HideOthers"]));
-            }
-            set {
-                this["HideOthers"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Debug {
             get {
                 return ((bool)(this["Debug"]));
@@ -187,6 +174,78 @@ namespace KingsDamageMeter.Properties {
             }
             set {
                 this["DebugFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsGroupOnly {
+            get {
+                return ((bool)(this["IsGroupOnly"]));
+            }
+            set {
+                this["IsGroupOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public global::KingsDamageMeter.Controls.PlayerSortType SortType {
+            get {
+                return ((global::KingsDamageMeter.Controls.PlayerSortType)(this["SortType"]));
+            }
+            set {
+                this["SortType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Damage")]
+        public global::KingsDamageMeter.Controls.DisplayType DisplayType {
+            get {
+                return ((global::KingsDamageMeter.Controls.DisplayType)(this["DisplayType"]));
+            }
+            set {
+                this["DisplayType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsHideOthers {
+            get {
+                return ((bool)(this["IsHideOthers"]));
+            }
+            set {
+                this["IsHideOthers"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string GroupOnly {
+            get {
+                return ((string)(this["GroupOnly"]));
+            }
+            set {
+                this["GroupOnly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string HideOthers {
+            get {
+                return ((string)(this["HideOthers"]));
+            }
+            set {
+                this["HideOthers"] = value;
             }
         }
     }

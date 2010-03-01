@@ -19,142 +19,27 @@
 
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.IO;
 using System.Diagnostics;
-using System.Collections;
-
-using KingsDamageMeter.Forms;
 using KingsDamageMeter.Controls;
+using KingsDamageMeter.Forms;
+using KingsDamageMeter.Properties;
 
 namespace KingsDamageMeter
 {
-    public partial class WindowMain : Window
+    public partial class WindowMain
     {
         public WindowMain()
         {
             InitializeComponent();
-            LoadSettings();
-            InitializeLogParser();
-            SetToolTips();
-            SetMainContextMenuHeaders();
-            
-            PlayerViewer.IgnoreListChanged += OnPlayerViewerIgnoreListChanged;
+
+            DataContext = new WindowMainData();
         }
 
-        private bool _Dragging = false;
+        private bool _Dragging;
         private Point _MousePoint;
-
-        private AionLogParser _LogParser = new AionLogParser();
-
-        private PlayerSortType _PlayerSortType = PlayerSortType.None;
-        private DisplayType _MainDisplayType = DisplayType.Damage;
-
-        private delegate void DamageInflicted_Callback(object sender, PlayerDamageEventArgs e);
-        private delegate void CriticalInflicted_Callback(object sender, PlayerDamageEventArgs e);
-        private delegate void SkillDamageInflicted_Callback(object sender, PlayerSkillDamageEventArgs e);
-        private delegate void PlayerJoinedGroup_Callback(object sender, PlayerEventArgs e);
-        private delegate void PlayerLeftGroup_Callback(object sender, PlayerEventArgs e);
-        private delegate void ExpGained_Callback(object sender, ExpEventArgs e);
-        private delegate void KinahEarned_Callback(object sender, KinahEventArgs e);
-        private delegate void DamageReceived_Callack(object sender, PlayerDamageEventArgs e);
-
-        #region Initialization
-
-        private void LoadSettings()
-        {
-            MainContextMenuLocateLog.ToolTip = KingsDamageMeter.Properties.Settings.Default.AionLogPath;
-
-            Left = KingsDamageMeter.Properties.Settings.Default.WindowMainX;
-            Top = KingsDamageMeter.Properties.Settings.Default.WindowMainY;
-            Opacity = KingsDamageMeter.Properties.Settings.Default.WindowMainOpacity;
-            OpacitySlider.Value = Opacity;
-            Topmost = KingsDamageMeter.Properties.Settings.Default.WindowMainTopMost;
-            CheckTopMost.IsChecked = Topmost;
-
-            int width = KingsDamageMeter.Properties.Settings.Default.WindowMainWidth;
-            int height = KingsDamageMeter.Properties.Settings.Default.WindowMainHeight;
-            Width = (width < MinWidth) ? MinWidth : width;
-            Height = (height < MinHeight) ? MinHeight : height;
-
-            PlayerViewer.IgnoreList = KingsDamageMeter.Properties.Settings.Default.IgnoreList;
-            PlayerViewer.HideAllOthers = KingsDamageMeter.Properties.Settings.Default.HideOthers;
-            PlayerViewer.GroupOnly = KingsDamageMeter.Properties.Settings.Default.GroupOnly;
-
-            Format.Short = KingsDamageMeter.Languages.Gui.Default.ShortCopyFormat;
-            Format.Long = KingsDamageMeter.Languages.Gui.Default.LongCopyFormat;
-        }
-
-        private void InitializeLogParser()
-        {
-            _LogParser.FileNotFound += OnFileNotFound;
-            _LogParser.DamageInflicted += OnDamageInflicted;
-            _LogParser.CriticalInflicted += OnCriticalDamageInflicted;
-            _LogParser.SkillDamageInflicted += OnSkillDamageInflicted;
-            //_LogParser.DamageReceived += OnDamageReceived; Not done yet
-            _LogParser.PlayerJoinedGroup += OnPlayerJoinedGroup;
-            _LogParser.PlayerLeftGroup += OnPlayerLeftGroup;
-            _LogParser.ExpGained += OnExpGained;
-            _LogParser.KinahEarned += OnKinahEarned;
-            _LogParser.Started += OnParserStarted;
-            _LogParser.Stopped += OnParserStopped;
-            _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
-        }
-
-        private void SetToolTips()
-        {
-            PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.RunningToolTip;
-            MinimizeButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.MinimizeToolTip;
-            MenuButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.OptionsToolTip;
-            CloseButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.CloseToolTip;
-            OpacitySlider.ToolTip = KingsDamageMeter.Languages.Gui.Default.OpacityToolTip;
-            CheckTopMost.ToolTip = KingsDamageMeter.Languages.Gui.Default.TopMostToolTip;
-            ResizeThumb.ToolTip = KingsDamageMeter.Languages.Gui.Default.ResizeToolTip;
-        }
-
-        private void SetMainContextMenuHeaders()
-        {
-            MainContextMenuLocateLog.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuLocateLog;
-            MainContextMenuIgnoreList.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuIgnoreList;
-            MainContextMenuSetYouAlias.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuSetYouAlias;
-            MainContextView.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuView;
-            MainContextViewDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuDamage;
-            MainContextViewDps.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuDps;
-            MainContextViewPercent.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuPercent;
-            MainContextViewExperience.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuExperience;
-            MainContextViewKinah.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuKinah;
-            MainContextSorting.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuSorting;
-            MainContextSortByName.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuName;
-            MainContextSortByDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuDamage;
-            MainContextResetDamage.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuResetCounts;
-            MainContextClearAll.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuClearAll;
-            MainContextMenuHelp.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuHelp;
-            MainContextMenuAbout.Header = KingsDamageMeter.Languages.Gui.Default.OptionsMenuAbout;
-        }
-
-        private void SaveSettings()
-        {
-            KingsDamageMeter.Properties.Settings.Default.WindowMainX = Left;
-            KingsDamageMeter.Properties.Settings.Default.WindowMainY = Top;
-            KingsDamageMeter.Properties.Settings.Default.WindowMainWidth = (int)Width;
-            KingsDamageMeter.Properties.Settings.Default.WindowMainHeight = (int)Height;
-            KingsDamageMeter.Properties.Settings.Default.WindowMainOpacity = Opacity;
-            KingsDamageMeter.Properties.Settings.Default.WindowMainTopMost = Topmost;
-
-            KingsDamageMeter.Properties.Settings.Default.HideOthers = PlayerViewer.HideAllOthers;
-            KingsDamageMeter.Properties.Settings.Default.GroupOnly = PlayerViewer.GroupOnly;
-
-            KingsDamageMeter.Languages.Gui.Default.ShortCopyFormat = Format.Short;
-            KingsDamageMeter.Languages.Gui.Default.LongCopyFormat = Format.Long;
-
-            KingsDamageMeter.Properties.Settings.Default.Save();
-            KingsDamageMeter.Languages.Gui.Default.Save();
-            KingsDamageMeter.Languages.Regex.Default.Save();
-        }
-
-        #endregion
 
         #region Window Events
 
@@ -176,7 +61,7 @@ namespace KingsDamageMeter
 
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_Dragging && _MousePoint != null)
+            if (_Dragging)
             {
                 Point p = e.GetPosition(this);
                 Left += p.X - _MousePoint.X;
@@ -186,40 +71,24 @@ namespace KingsDamageMeter
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            _LogParser.Stop();
-            SaveSettings();
+            ((WindowMainData)DataContext).OnClose();
         }
 
         #endregion
 
         #region Control Events
 
-        private void OpacitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            Opacity = OpacitySlider.Value;
-        }
-
-        private void CheckTopMost_Checked(object sender, RoutedEventArgs e)
-        {
-            Topmost = true;
-        }
-
-        private void CheckTopMost_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Topmost = false;
-        }
-
-        private void CloseButton_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void MinimizeButton_MouseUp(object sender, MouseButtonEventArgs e)
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
-        private void MenuButton_MouseUp(object sender, MouseButtonEventArgs e)
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             MainContextMenu.IsOpen = true;
         }
@@ -237,18 +106,6 @@ namespace KingsDamageMeter
 
         #region MainContextMenu Events
 
-        private void MainContextMenu_Opened(object sender, RoutedEventArgs e)
-        {
-            MainContextSortByDamage.IsChecked = (_PlayerSortType == PlayerSortType.Damage);
-            MainContextSortByName.IsChecked = (_PlayerSortType == PlayerSortType.Name);
-
-            MainContextViewDamage.IsChecked = (_MainDisplayType == DisplayType.Damage);
-            MainContextViewDps.IsChecked = (_MainDisplayType == DisplayType.DamagePerSecond);
-            MainContextViewExperience.IsChecked = (_MainDisplayType == DisplayType.Experience);
-            MainContextViewKinah.IsChecked = (_MainDisplayType == DisplayType.Kinah);
-            MainContextViewPercent.IsChecked = (_MainDisplayType == DisplayType.Percent);
-        }
-
         private void MainContextMenuIgnoreList_Click(object sender, RoutedEventArgs e)
         {
             IgnoreListForm i = new IgnoreListForm();
@@ -257,30 +114,9 @@ namespace KingsDamageMeter
             i.ShowDialog();
         }
 
-        private void MainContextMenuSetYouAlias_Click(object sender, RoutedEventArgs e)
-        {
-            SetNameDialog d = new SetNameDialog();
-            d.Text = KingsDamageMeter.Languages.Gui.Default.OptionsMenuSetYouAlias;
-            d.PlayerName = KingsDamageMeter.Languages.Regex.Default.YouAlias;
-
-            if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (PlayerViewer.PlayerExists(d.PlayerName))
-                {
-                    MessageBox.Show(KingsDamageMeter.Languages.Gui.Default.NameTakenMessage, "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
-
-                else
-                {
-                    PlayerViewer.Rename(d.PlayerName, KingsDamageMeter.Languages.Regex.Default.YouAlias);
-                    KingsDamageMeter.Languages.Regex.Default.YouAlias = d.PlayerName;
-                }
-            }
-        }
-
         private void MainContextMenuHelp_Click(object sender, RoutedEventArgs e)
         {
-            string path = KingsDamageMeter.Properties.Settings.Default.HelpFilePath;
+            string path = Settings.Default.HelpFilePath;
 
             if (File.Exists(path))
             {
@@ -303,231 +139,49 @@ namespace KingsDamageMeter
 
         private void MainContextMenuLocateLog_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog d = new System.Windows.Forms.OpenFileDialog();
-            d.InitialDirectory = "C:\\";
+            var d = new System.Windows.Forms.OpenFileDialog();
+            //d.InitialDirectory = "C:\\";
             d.Filter = "Chat.log (Chat.log)|Chat.log|All files (*.*)|*.*";
 
             if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (_LogParser.Running)
+                ((WindowMainData) DataContext).ChangeLogFile(d.FileName);
+            }
+        }
+        
+        private void MenuItemAddGroupMemberByName_Click(object sender, RoutedEventArgs e)
+        {
+            SetNameDialog d = new SetNameDialog();
+            d.Text = KingsDamageMeter.Languages.Gui.Default.PlayerMenuAddMemberByName;
+
+            if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ((WindowMainData)DataContext).AddPlayer(d.PlayerName, /* isGroupMember = */ true);
+            }
+        }
+
+        private void MainContextMenuSetYouAlias_Click(object sender, RoutedEventArgs e)
+        {
+            SetNameDialog d = new SetNameDialog();
+            d.Text = KingsDamageMeter.Languages.Gui.Default.OptionsMenuSetYouAlias;
+            d.PlayerName = KingsDamageMeter.Languages.Regex.Default.YouAlias;
+
+            if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+
+                if (((WindowMainData)DataContext).PlayerExists(d.PlayerName))
                 {
-                    _LogParser.Stop();
+                    MessageBox.Show(KingsDamageMeter.Languages.Gui.Default.NameTakenMessage, "Oops", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
 
-                KingsDamageMeter.Properties.Settings.Default.AionLogPath = d.FileName;
-                _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
-                MainContextMenuLocateLog.ToolTip = KingsDamageMeter.Properties.Settings.Default.AionLogPath;
+                else
+                {
+                    ((WindowMainData)DataContext).Rename(d.PlayerName, KingsDamageMeter.Languages.Regex.Default.YouAlias);
+                    KingsDamageMeter.Languages.Regex.Default.YouAlias = d.PlayerName;
+                }
             }
-        }
-
-        private void MainContextSortByName_Click(object sender, RoutedEventArgs e)
-        {
-            _PlayerSortType = PlayerSortType.Name;
-            PlayerViewer.SortByName();
-        }
-
-        private void MainContextSortByDamage_Click(object sender, RoutedEventArgs e)
-        {
-            _PlayerSortType = PlayerSortType.Damage;
-            PlayerViewer.SortByDamage();
-        }
-
-        private void MainContextResetDamage_Click(object sender, RoutedEventArgs e)
-        {
-            PlayerViewer.ResetDamage();
-        }
-
-        private void MainContextClearAll_Click(object sender, RoutedEventArgs e)
-        {
-            PlayerViewer.ClearAll();
-        }
-
-        private void MainContextViewDamage_Click(object sender, RoutedEventArgs e)
-        {
-            _MainDisplayType = DisplayType.Damage;
-            PlayerViewer.DisplayType = DisplayType.Damage;
-        }
-
-        private void MainContextViewDps_Click(object sender, RoutedEventArgs e)
-        {
-            _MainDisplayType = DisplayType.DamagePerSecond;
-            PlayerViewer.DisplayType = DisplayType.DamagePerSecond;
-        }
-
-        private void MainContextViewPercent_Click(object sender, RoutedEventArgs e)
-        {
-            _MainDisplayType = DisplayType.Percent;
-            PlayerViewer.DisplayType = DisplayType.Percent;
-        }
-
-        private void MainContextViewExperience_Click(object sender, RoutedEventArgs e)
-        {
-            _MainDisplayType = DisplayType.Experience;
-            PlayerViewer.DisplayType = DisplayType.Experience;
-        }
-
-        private void MainContextViewKinah_Click(object sender, RoutedEventArgs e)
-        {
-            _MainDisplayType = DisplayType.Kinah;
-            PlayerViewer.DisplayType = DisplayType.Kinah;
         }
 
         #endregion
-
-        #region LogParser Events
-
-        private void OnFileNotFound(object sender, EventArgs e)
-        {
-            MessageBox.Show(KingsDamageMeter.Languages.Gui.Default.OpenLogError, "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }
-
-        private void OnDamageInflicted(object sender, PlayerDamageEventArgs e)
-        {
-            Dispatcher.Invoke(new DamageInflicted_Callback(DoDamageInflicted), sender, e);
-        }
-
-        private void DoDamageInflicted(object sender, PlayerDamageEventArgs e)
-        {
-            if (!PlayerViewer.PlayerExists(e.Name))
-            {
-                PlayerViewer.AddPlayer(e.Name);
-            }
-
-            PlayerViewer.UpdatePlayerDamage(e.Name, e.Damage);
-        }
-
-        private void OnSkillDamageInflicted(object sender, PlayerSkillDamageEventArgs e)
-        {
-            Dispatcher.Invoke(new SkillDamageInflicted_Callback(DoSkillDamageInflicted), sender, e);
-        }
-
-        private void DoSkillDamageInflicted(object sender, PlayerSkillDamageEventArgs e)
-        {
-            if (!PlayerViewer.PlayerExists(e.Name))
-            {
-                PlayerViewer.AddPlayer(e.Name);
-            }
-
-            PlayerViewer.UpdatePlayerDamage(e.Name, e.Damage, e.Skill);
-        }
-
-        private void OnCriticalDamageInflicted(object sender, PlayerDamageEventArgs e)
-        {
-            Dispatcher.Invoke(new CriticalInflicted_Callback(DoCriticalDamageInflicted), sender, e);
-        }
-
-        private void DoCriticalDamageInflicted(object sender, PlayerDamageEventArgs e)
-        {
-            if (!PlayerViewer.PlayerExists(e.Name))
-            {
-                PlayerViewer.AddPlayer(e.Name);
-            }
-
-            PlayerViewer.UpdatePlayerDamage(e.Name, e.Damage);
-        }
-
-        private void OnDamageReceived(object sender, PlayerDamageEventArgs e)
-        {
-            Dispatcher.Invoke(new DamageReceived_Callack(DoDamageReceived), sender, e);
-        }
-
-        private void DoDamageReceived(object sender, PlayerDamageEventArgs e)
-        {
-            if (!PlayerViewer.PlayerExists(e.Name))
-            {
-                PlayerViewer.AddPlayer(e.Name);
-            }
-
-            PlayerViewer.UpdateDamageReceived(e.Name, e.Damage);
-        }
-
-        private void OnPlayerJoinedGroup(object sender, PlayerEventArgs e)
-        {
-            Dispatcher.Invoke(new PlayerJoinedGroup_Callback(DoPlayerJoinedGroup), sender, e);
-        }
-
-        private void DoPlayerJoinedGroup(object sender, PlayerEventArgs e)
-        {
-            PlayerViewer.AddGroupMember(e.Name);
-        }
-
-        private void OnPlayerLeftGroup(object sender, PlayerEventArgs e)
-        {
-            Dispatcher.Invoke(new PlayerJoinedGroup_Callback(DoPlayerLeftGroup), sender, e);
-        }
-
-        private void DoPlayerLeftGroup(object sender, PlayerEventArgs e)
-        {
-            PlayerViewer.RemoveGroupMember(e.Name);
-        }
-
-        private void OnExpGained(object sender, ExpEventArgs e)
-        {
-            Dispatcher.Invoke(new ExpGained_Callback(DoExpGained), sender, e);
-        }
-
-        private void DoExpGained(object sender, ExpEventArgs e)
-        {
-            PlayerViewer.UpdateExp(e.Exp);
-        }
-
-        private void OnKinahEarned(object sender, KinahEventArgs e)
-        {
-            Dispatcher.Invoke(new KinahEarned_Callback(DoKinahEarned), sender, e);
-        }
-
-        private void DoKinahEarned(object sender, KinahEventArgs e)
-        {
-            PlayerViewer.UpdateKinah(e.Kinah);
-        }
-
-        private void OnPlayerViewerIgnoreListChanged(object sender, EventArgs e)
-        {
-            KingsDamageMeter.Properties.Settings.Default.IgnoreList = PlayerViewer.IgnoreList;
-        }
-
-        private void OnParserStarted(object sender, EventArgs e)
-        {
-            TogglePowerButton();
-        }
-
-        private void OnParserStopped(object sender, EventArgs e)
-        {
-            TogglePowerButton();
-        }
-
-        #endregion
-
-        private void PowerButton_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (_LogParser.Running)
-            {
-                _LogParser.Stop();
-            }
-
-            else
-            {
-                _LogParser.Start(KingsDamageMeter.Properties.Settings.Default.AionLogPath);
-            }
-        }
-
-        private void TogglePowerButton()
-        {
-            if (_LogParser.Running)
-            {
-                PowerButton.MouseDownImage = "pack://application:,,,/Themes/BlackPearl/Images/OnButtonPress.bmp";
-                PowerButton.MouseOverImage = "pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp";
-                PowerButton.MouseUpImage = "pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp";
-                PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.RunningToolTip;
-            }
-
-            else
-            {
-                PowerButton.MouseDownImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButtonPress.bmp";
-                PowerButton.MouseOverImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp";
-                PowerButton.MouseUpImage = "pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp";
-                PowerButton.ToolTip = KingsDamageMeter.Languages.Gui.Default.DisabledToolTip;
-            }
-        }
     }
 }

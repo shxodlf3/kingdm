@@ -19,12 +19,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
-
+using KingsDamageMeter.Controls;
 using KingsDamageMeter.Forms;
+using KingsDamageMeter.Properties;
 
 namespace KingsDamageMeter
 {
@@ -56,6 +58,26 @@ namespace KingsDamageMeter
             {
                 Application.Current.Shutdown();
             }
+        }
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            if (Settings.Default.IgnoreList == null)
+            {
+                Settings.Default.IgnoreList = new ObservableCollection<string>();
+            }
+            if (Settings.Default.GroupList == null)
+            {
+                Settings.Default.GroupList = new ObservableCollection<string>();
+            }
+            //Settings.Default.IgnoreList.Clear();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            Settings.Default.Save();
+            base.OnExit(e);
         }
     }
 }

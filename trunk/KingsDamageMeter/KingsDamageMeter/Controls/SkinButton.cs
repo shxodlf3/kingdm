@@ -17,94 +17,78 @@
  * 
 \**************************************************************************/
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.IO;
+using System.Windows.Media;
 
 namespace KingsDamageMeter.Controls
 {
     /// <summary>
     /// A class that represents a skinnable button.
     /// </summary>
-    public class SkinButton : Image
+    public class SkinButton : Button
     {
-        private string _MouseUpImageLocation;
-        private string _MouseOverImageLocation;
-        private string _MouseDownImageLocation;
-
-        private BitmapImage _MouseUpImage;
-        private BitmapImage _MouseOverImage;
-        private BitmapImage _MouseDownImage;
-
-        private event EventHandler MouseUpImageLoaded;
-        private event EventHandler MouseOverImageLoaded;
-        private event EventHandler MouseDownImageLoaded;
+        #region MouseUpImage Property
+        
+        public static DependencyProperty MouseUpImageProperty = DependencyProperty.Register(
+            "MouseUpImage",
+            typeof (ImageSource),
+            typeof (SkinButton),
+            new PropertyMetadata(null, MouseUpImageChanged));
 
         /// <summary>
         /// Gets or sets the image to draw when the MouseUp event occurs.
         /// </summary>
-        public string MouseUpImage
+        public ImageSource MouseUpImage
         {
-            get
-            {
-                return _MouseUpImageLocation;
-            }
-
-            set
-            {
-                _MouseUpImageLocation = value;
-
-                if (MouseUpImageLoaded != null)
-                {
-                    MouseUpImageLoaded(this, EventArgs.Empty);
-                }
-            }
+            get { return (ImageSource)GetValue(MouseUpImageProperty); }
+            set { SetValue(MouseUpImageProperty, value); }
         }
+
+        private static void MouseUpImageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var ctrl = (SkinButton) d;
+            ctrl.Content = new Image {Source = ctrl.MouseUpImage};
+        }
+
+        #endregion
+
+        #region MouseOverImage Property
+
+        public static DependencyProperty MouseOverImageProperty = DependencyProperty.Register(
+            "MouseOverImage",
+            typeof(ImageSource),
+            typeof(SkinButton));
 
         /// <summary>
         /// Gets or sets the image to draw when the MouseOver event occurs.
         /// </summary>
-        public string MouseOverImage
+        public ImageSource MouseOverImage
         {
-            get
-            {
-                return _MouseOverImageLocation;
-            }
-
-            set
-            {
-                _MouseOverImageLocation = value;
-
-                if (MouseOverImageLoaded != null)
-                {
-                    MouseOverImageLoaded(this, EventArgs.Empty);
-                }
-            }
+            get { return (ImageSource)GetValue(MouseOverImageProperty); }
+            set { SetValue(MouseOverImageProperty, value); }
         }
+
+        #endregion
+
+        #region MouseDownImage Property
+
+        public static DependencyProperty MouseDownImageProperty = DependencyProperty.Register(
+            "MouseDownImage",
+            typeof(ImageSource),
+            typeof(SkinButton));
 
         /// <summary>
         /// Gets or sets the image to draw when the MouseDown event occurs.
         /// </summary>
-        public string MouseDownImage
+        public ImageSource MouseDownImage
         {
-            get
-            {
-                return _MouseDownImageLocation;
-            }
-
-            set
-            {
-                _MouseDownImageLocation = value;
-
-                if (MouseDownImageLoaded != null)
-                {
-                    MouseDownImageLoaded(this, EventArgs.Empty);
-                }
-            }
+            get { return (ImageSource)GetValue(MouseDownImageProperty); }
+            set { SetValue(MouseDownImageProperty, value); }
         }
 
+        #endregion
+        
         /// <summary>
         /// Gets the status of images.
         /// </summary>
@@ -113,9 +97,9 @@ namespace KingsDamageMeter.Controls
             get
             {
                 bool result = true;
-                result = (_MouseUpImage == null) ? false : result;
-                result = (_MouseOverImage == null) ? false : result;
-                result = (_MouseDownImage == null) ? false : result;
+                result = (MouseUpImage == null) ? false : result;
+                result = (MouseOverImage == null) ? false : result;
+                result = (MouseDownImage == null) ? false : result;
                 return result;
             }
         }
@@ -130,9 +114,9 @@ namespace KingsDamageMeter.Controls
 
             Focusable = true;
 
-            MouseUpImageLoaded += OnMouseUpImageLoaded;
-            MouseOverImageLoaded += OnMouseOverImageLoaded;
-            MouseDownImageLoaded += OnMouseDownImageLoaded;
+            var presenter = new FrameworkElementFactory(typeof (ContentPresenter));
+            presenter.SetValue(ContentProperty, new TemplateBindingExtension(ContentProperty));
+            Template = new ControlTemplate {VisualTree = presenter};
         }
 
         protected override void OnMouseEnter(System.Windows.Input.MouseEventArgs e)
@@ -141,7 +125,7 @@ namespace KingsDamageMeter.Controls
 
             if (ImagesLoaded)
             {
-                Source = _MouseOverImage;
+                Content = new Image {Source = MouseOverImage};
             }
         }
 
@@ -151,7 +135,7 @@ namespace KingsDamageMeter.Controls
 
             if (ImagesLoaded)
             {
-                Source = _MouseUpImage;
+                Content = new Image { Source = MouseUpImage };
             }
         }
 
@@ -161,10 +145,8 @@ namespace KingsDamageMeter.Controls
 
             if (ImagesLoaded)
             {
-                Source = _MouseDownImage;
+                Content = new Image { Source = MouseDownImage };
             }
-
-            e.Handled = true;
         }
 
         protected override void OnMouseUp(System.Windows.Input.MouseButtonEventArgs e)
@@ -173,7 +155,7 @@ namespace KingsDamageMeter.Controls
 
             if (ImagesLoaded)
             {
-                Source = _MouseOverImage;
+                Content = new Image { Source = MouseOverImage };
             }
         }
 
@@ -183,7 +165,7 @@ namespace KingsDamageMeter.Controls
 
             if (ImagesLoaded)
             {
-                Source = _MouseOverImage;
+                Content = new Image { Source = MouseOverImage };
             }
         }
 
@@ -193,24 +175,8 @@ namespace KingsDamageMeter.Controls
 
             if (ImagesLoaded)
             {
-                Source = _MouseUpImage;
+                Content = new Image { Source = MouseUpImage };
             }
-        }
-
-        private void OnMouseUpImageLoaded(object sender, EventArgs e)
-        {
-            _MouseUpImage = new BitmapImage(new Uri(@_MouseUpImageLocation));
-            Source = _MouseUpImage;
-        }
-
-        private void OnMouseOverImageLoaded(object sender, EventArgs e)
-        {
-            _MouseOverImage = new BitmapImage(new Uri(@_MouseOverImageLocation));
-        }
-
-        private void OnMouseDownImageLoaded(object sender, EventArgs e)
-        {
-            _MouseDownImage = new BitmapImage(new Uri(@_MouseDownImageLocation));
         }
     }
 }

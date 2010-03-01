@@ -62,15 +62,12 @@ namespace KingsDamageMeter
         /// </summary>
         public static DateTime GetTime(this string expression, string format)
         {
-            try
+            DateTime dateTime;
+            if (DateTime.TryParse(expression, out dateTime))
             {
-                return DateTime.ParseExact(expression, format, null);
+                return dateTime;
             }
-
-            catch
-            {
-                return DateTime.Now;
-            }
+            return DateTime.Now;
         }
     }
 }

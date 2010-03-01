@@ -375,7 +375,7 @@ namespace KingsDamageMeter.Languages {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("kinah hour")]
+        [global::System.Configuration.DefaultSettingValueAttribute("kinah")]
         public string PlayerToolTipKinah {
             get {
                 return ((string)(this["PlayerToolTipKinah"]));
@@ -538,30 +538,6 @@ namespace KingsDamageMeter.Languages {
             }
             set {
                 this["PlayerMenuViewSkills"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("%n %d")]
-        public string ShortCopyFormat {
-            get {
-                return ((string)(this["ShortCopyFormat"]));
-            }
-            set {
-                this["ShortCopyFormat"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("%n %d (%s dps)(%p)")]
-        public string LongCopyFormat {
-            get {
-                return ((string)(this["LongCopyFormat"]));
-            }
-            set {
-                this["LongCopyFormat"] = value;
             }
         }
         

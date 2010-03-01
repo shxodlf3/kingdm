@@ -14,7 +14,7 @@
         </GradientBrush.GradientStops>
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="ProgressBarSolidBorderBrush" Color="#000" />
+    <SolidColorBrush x:Key="ProgressBarSolidBorderBrush" Color="Transparent" />
 
     <LinearGradientBrush x:Key="ProgressBarDarkBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientBrush.GradientStops>
@@ -44,14 +44,14 @@
                         <Border 
             Name="PART_Track" 
             CornerRadius="2" 
-            Background="{StaticResource ProgressBarPressedBrush}"
+            Background="{StaticResource ProgressBarSolidBorderBrush}"
             BorderBrush="{StaticResource ProgressBarSolidBorderBrush}"
             BorderThickness="1" />
                         <Border 
             Name="PART_Indicator" 
             CornerRadius="2" 
             Background="{StaticResource ProgressBarDarkBrush}" 
-            BorderBrush="{StaticResource ProgressBarNormalBorderBrush}" 
+            BorderBrush="{StaticResource ProgressBarSolidBorderBrush}" 
             BorderThickness="1" 
             HorizontalAlignment="Left" />
                     </Grid>

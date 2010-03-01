@@ -90,7 +90,7 @@
       <Value Profile="(Default)">xp hour</Value>
     </Setting>
     <Setting Name="PlayerToolTipKinah" Type="System.String" Scope="User">
-      <Value Profile="(Default)">kinah hour</Value>
+      <Value Profile="(Default)">kinah</Value>
     </Setting>
     <Setting Name="WhiteDamage" Type="System.String" Scope="User">
       <Value Profile="(Default)">White Damage</Value>
@@ -130,12 +130,6 @@
     </Setting>
     <Setting Name="PlayerMenuViewSkills" Type="System.String" Scope="User">
       <Value Profile="(Default)">View Skills</Value>
-    </Setting>
-    <Setting Name="ShortCopyFormat" Type="System.String" Scope="User">
-      <Value Profile="(Default)">%n %d</Value>
-    </Setting>
-    <Setting Name="LongCopyFormat" Type="System.String" Scope="User">
-      <Value Profile="(Default)">%n %d (%s dps)(%p)</Value>
     </Setting>
     <Setting Name="PlayerMenuGroupOnly" Type="System.String" Scope="User">
       <Value Profile="(Default)">Group Only</Value>

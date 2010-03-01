@@ -17,7 +17,10 @@
     <Setting Name="AionLogPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Program Files\NCSoft\Aion\Chat.log</Value>
     </Setting>
-    <Setting Name="IgnoreList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="IgnoreList" Type="System.Collections.ObjectModel.ObservableCollection`1[System.String]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GroupList" Type="System.Collections.ObjectModel.ObservableCollection`1[System.String]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="HelpFilePath" Type="System.String" Scope="User">
@@ -32,17 +35,29 @@
     <Setting Name="LogTimeFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">yyyy.MM.dd hh:mm:ss</Value>
     </Setting>
-    <Setting Name="GroupOnly" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="HideOthers" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="Debug" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="DebugFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">Debug.log</Value>
+    </Setting>
+    <Setting Name="IsGroupOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SortType" Type="KingsDamageMeter.Controls.PlayerSortType" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="DisplayType" Type="KingsDamageMeter.Controls.DisplayType" Scope="User">
+      <Value Profile="(Default)">Damage</Value>
+    </Setting>
+    <Setting Name="IsHideOthers" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GroupOnly" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HideOthers" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

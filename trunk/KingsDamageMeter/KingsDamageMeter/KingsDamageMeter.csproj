@@ -85,10 +85,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\PlayerScrollViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Themes\BlackPearl\CheckBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,16 +145,15 @@
   <ItemGroup>
     <Compile Include="Combat\Skill.cs" />
     <Compile Include="Combat\SkillCollection.cs" />
-    <Compile Include="Controls\Constants.cs" />
-    <Compile Include="Controls\Format.cs" />
+    <Compile Include="Controls\DisplayType.cs" />
+    <Compile Include="Controls\Player.cs" />
+    <Compile Include="Controls\PlayerSortType.cs" />
+    <Compile Include="Controls\RelayCommand.cs" />
+    <Compile Include="Converters\DisplayTypeToBoolConverter.cs" />
+    <Compile Include="Converters\PlayerNameToFontWeightConverter.cs" />
+    <Compile Include="Converters\PlayerSortTypeToBoolConverter.cs" />
     <Compile Include="DebugLogger.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Forms\AboutForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AboutForm.Designer.cs">
-      <DependentUpon>AboutForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="AionLogParser\AionLogParser.cs" />
     <Compile Include="AionLogParser\Delegates.cs" />
     <Compile Include="AionLogParser\EventArgs.cs" />
@@ -167,8 +162,17 @@
     <Compile Include="Controls\PlayerControl.xaml.cs">
       <DependentUpon>PlayerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PlayerScrollViewer.xaml.cs">
-      <DependentUpon>PlayerScrollViewer.xaml</DependentUpon>
+    <Compile Include="Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddToGroupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddToGroupDialog.Designer.cs">
+      <DependentUpon>AddToGroupDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ExceptionForm.cs">
       <SubType>Form</SubType>
@@ -218,31 +222,43 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SafeNotifiedCollection.cs" />
+    <Compile Include="WindowMainData.cs" />
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddToGroupDialog.resx">
+      <DependentUpon>AddToGroupDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExceptionForm.resx">
       <DependentUpon>ExceptionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\IgnoreListForm.resx">
       <DependentUpon>IgnoreListForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SetNameDialog.resx">
       <DependentUpon>SetNameDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SkillsForm.resx">
       <DependentUpon>SkillsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Documentation.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
@@ -293,9 +309,6 @@
     <None Include="Languages\Regex.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Regex.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="system.ovr">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
