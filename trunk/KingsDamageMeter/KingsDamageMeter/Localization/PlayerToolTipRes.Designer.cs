@@ -81,9 +81,9 @@ namespace KingsDamageMeter.Localization {
         /// <summary>
         ///   Looks up a localized string similar to xp hour.
         /// </summary>
-        internal static string PlayerToolTipExpInHour {
+        internal static string PlayerToolTipExpPerHour {
             get {
-                return ResourceManager.GetString("PlayerToolTipExpInHour", resourceCulture);
+                return ResourceManager.GetString("PlayerToolTipExpPerHour", resourceCulture);
             }
         }
         

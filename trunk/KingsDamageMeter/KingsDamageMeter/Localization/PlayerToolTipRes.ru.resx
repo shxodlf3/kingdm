@@ -123,7 +123,7 @@
   <data name="PlayerToolTipDps" xml:space="preserve">
     <value>урон в секунду</value>
   </data>
-  <data name="PlayerToolTipExpInHour" xml:space="preserve">
+  <data name="PlayerToolTipExpPerHour" xml:space="preserve">
     <value>опыта в час</value>
   </data>
   <data name="PlayerToolTipKinah" xml:space="preserve">

@@ -185,9 +185,14 @@ namespace KingsDamageMeter.Controls
                         damagePercent = value;
                     }
                     NotifyPropertyChanged("DamagePercent");
-                    NotifyPropertyChanged("ToolTipInfo");
+                    NotifyPropertyChanged("DamagePercentFormatted");
                 }
             }
+        }
+
+        public string DamagePercentFormatted
+        {
+            get { return DamagePercent.ToString("0%"); }
         }
 
         public int DamagePerSecond
@@ -293,17 +298,21 @@ namespace KingsDamageMeter.Controls
                 if (Exp > 0)
                 {
                     message.AppendLine();
-                    message.Append(ExpInHour + " " + PlayerToolTipRes.PlayerToolTipExpInHour);
+                    message.Append(ExpPerHour + " " + PlayerToolTipRes.PlayerToolTipExpPerHour);
                 }
 
                 return message.ToString();
             }
         }
 
-        public int ExpInHour
+        public int ExpPerHour
         {
             get
             {
+                if(Exp == 0)
+                {
+                    return 0;
+                }
                 TimeSpan span = DateTime.Now - startTime;
                 return (int)((Exp / span.TotalSeconds) * 3600);
             }

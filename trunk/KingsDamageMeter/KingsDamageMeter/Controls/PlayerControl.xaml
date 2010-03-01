@@ -2,18 +2,77 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Converters="clr-namespace:KingsDamageMeter.Converters"
-             MinHeight="40" MinWidth="160"
-             ToolTip="{Binding ToolTipInfo}">
-    <!--UserControl.ToolTip>
+             MinHeight="40" MinWidth="160">
+    <UserControl.ToolTip>
         <StackPanel>
             <TextBlock Text="{Binding PlayerName}"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding Damage}"/>
                 <TextBlock Text=" "/>
-                <TextBlock Text="{Binding PlayerToolTipTotal}"
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipTotal}"/>
+            </StackPanel>
+            <TextBlock Text="{Binding DamagePercentFormatted}"/>
+            <TextBlock/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding DamagePerSecond}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipDps}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding PeakDps}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipPeak}"/>
+            </StackPanel>
+            <TextBlock/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding BiggestHit}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipBiggestHit}"/>
+            </StackPanel>
+            <TextBlock>
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Kinah}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ExpPerHour}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Kinah}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Text="{Binding Kinah}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipKinah}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ExpPerHour}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Text="{Binding ExpPerHour}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipExpPerHour}"/>
             </StackPanel>
         </StackPanel>
-    </UserControl.ToolTip-->
+    </UserControl.ToolTip>
     <UserControl.Resources>
         <Converters:PlayerNameToFontWeightConverter x:Key="PlayerNameToFontWeightConverter"/>
     </UserControl.Resources>
