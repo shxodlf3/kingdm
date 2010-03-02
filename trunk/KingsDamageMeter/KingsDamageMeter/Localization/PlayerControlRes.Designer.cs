@@ -61,6 +61,69 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear List.
+        /// </summary>
+        internal static string ClearListMenuHeader {
+            get {
+                return ResourceManager.GetString("ClearListMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alliance Chat.
+        /// </summary>
+        internal static string CopyMacroAllianceMenuHeader {
+            get {
+                return ResourceManager.GetString("CopyMacroAllianceMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group Chat.
+        /// </summary>
+        internal static string CopyMacroGroupMenuHeader {
+            get {
+                return ResourceManager.GetString("CopyMacroGroupMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legion Chat.
+        /// </summary>
+        internal static string CopyMacroLegionMenuHeader {
+            get {
+                return ResourceManager.GetString("CopyMacroLegionMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local Chat.
+        /// </summary>
+        internal static string CopyMacroLocalMenuHeader {
+            get {
+                return ResourceManager.GetString("CopyMacroLocalMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Macro.
+        /// </summary>
+        internal static string CopyMacroMenuHeader {
+            get {
+                return ResourceManager.GetString("CopyMacroMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        internal static string CopyMenuHeader {
+            get {
+                return ResourceManager.GetString("CopyMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group Member.
         /// </summary>
         internal static string GroupMemeberMenuHeader {
@@ -70,7 +133,7 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add to ignore list.
+        ///   Looks up a localized string similar to Ignore.
         /// </summary>
         internal static string IgnorePlayerMenuHeader {
             get {
@@ -88,7 +151,16 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Skills.
+        ///   Looks up a localized string similar to Reset Counts.
+        /// </summary>
+        internal static string ResetCountsMenuHeader {
+            get {
+                return ResourceManager.GetString("ResetCountsMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skills....
         /// </summary>
         internal static string ViewSkillsMenuHeader {
             get {

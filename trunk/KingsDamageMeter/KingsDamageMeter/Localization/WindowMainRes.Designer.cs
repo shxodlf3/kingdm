@@ -70,7 +70,7 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Member by Name.
+        ///   Looks up a localized string similar to Add Group Member....
         /// </summary>
         internal static string AddByNameMenuHeader {
             get {
@@ -286,11 +286,11 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset Damage.
+        ///   Looks up a localized string similar to Reset Counts.
         /// </summary>
-        internal static string ResetDamageMenuHeader {
+        internal static string ResetCountsMenuHeader {
             get {
-                return ResourceManager.GetString("ResetDamageMenuHeader", resourceCulture);
+                return ResourceManager.GetString("ResetCountsMenuHeader", resourceCulture);
             }
         }
         
@@ -304,7 +304,7 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set You Alias.
+        ///   Looks up a localized string similar to You Alias....
         /// </summary>
         internal static string SetYouAliasMenuHeader {
             get {
@@ -313,7 +313,7 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sort By Damage.
+        ///   Looks up a localized string similar to Damage.
         /// </summary>
         internal static string SortByDamageMenuHeader {
             get {
@@ -322,7 +322,7 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sort By DPS.
+        ///   Looks up a localized string similar to DPS.
         /// </summary>
         internal static string SortByDpsMenuHeader {
             get {
@@ -331,11 +331,20 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sort By Name.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string SortByNameMenuHeader {
             get {
                 return ResourceManager.GetString("SortByNameMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorting.
+        /// </summary>
+        internal static string SortingMenuHeader {
+            get {
+                return ResourceManager.GetString("SortingMenuHeader", resourceCulture);
             }
         }
         

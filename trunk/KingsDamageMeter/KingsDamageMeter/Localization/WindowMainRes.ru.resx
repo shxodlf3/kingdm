@@ -192,8 +192,8 @@
   <data name="PowerOnBtnTooltip" xml:space="preserve">
     <value>Включено</value>
   </data>
-  <data name="ResetDamageMenuHeader" xml:space="preserve">
-    <value>Сбросить урон</value>
+  <data name="ResetCountsMenuHeader" xml:space="preserve">
+    <value>Reset Counts</value>
   </data>
   <data name="ResizeThumbToolTip" xml:space="preserve">
     <value>Изменить размер</value>
@@ -209,6 +209,9 @@
   </data>
   <data name="SortByNameMenuHeader" xml:space="preserve">
     <value>Сортировать по имени</value>
+  </data>
+  <data name="SortingMenuHeader" xml:space="preserve">
+    <value>Sorting</value>
   </data>
   <data name="TopMostCheckBoxToolTip" xml:space="preserve">
     <value>Поверх всего</value>

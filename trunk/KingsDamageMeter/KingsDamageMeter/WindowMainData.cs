@@ -64,16 +64,16 @@ namespace KingsDamageMeter
             }
         }
 
-        private ObjectRelayCommand resetDamageCommand;
-        public ObjectRelayCommand ResetDamageCommand
+        private ObjectRelayCommand resetCountsCommand;
+        public ObjectRelayCommand ResetCountsCommand
         {
             get
             {
-                if (resetDamageCommand == null)
+                if (resetCountsCommand == null)
                 {
-                    resetDamageCommand = new ObjectRelayCommand(o => ResetDamage());
+                    resetCountsCommand = new ObjectRelayCommand(o => ResetDamage());
                 }
-                return resetDamageCommand;
+                return resetCountsCommand;
             }
         }
 

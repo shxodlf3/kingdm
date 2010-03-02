@@ -141,11 +141,34 @@
                                                       IsCheckable="True" 
                                                       IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}" />
                                         </MenuItem>
+                                        <MenuItem Name="MainContextSorting"
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:SortingMenuHeader}">
+                                            <MenuItem Name="MenuItemSortByName"
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByNameMenuHeader}" 
+                                                      IsCheckable="True"
+                                                      IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.Name}}"/>
+                                            <MenuItem Name="MenuItemSortByDamage" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByDamageMenuHeader}" 
+                                                      IsCheckable="True"
+                                                      IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.Damage}}"/>
+                                            <MenuItem Name="MenuItemSortByDPS" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByDpsMenuHeader}" 
+                                                      IsCheckable="True"
+                                                      IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.DamagePerSecond}}"/>
+                                        </MenuItem>
+                                        <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:HideOthersMenuHeader}" 
+                                                      IsCheckable="True" 
+                                                      IsChecked="{Binding IsHideOthers, Source={x:Static Properties:Settings.Default}}"/>
+                                        <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:GroupOnlyMenuHeader}" 
+                                                      IsCheckable="True" 
+                                                      IsChecked="{Binding IsGroupOnly, Source={x:Static Properties:Settings.Default}}"/>
+                                        <MenuItem Name="MenuItemAddGroupMemberByName" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:AddByNameMenuHeader}" 
+                                                      Click="MenuItemAddGroupMemberByName_Click"/>
                                         <Separator />
                                         <!-- Here is we place language selection. But menu fill is implemented in WindowMain.xaml.cs -->
                                         <MenuItem Name="MenuItemLanguage"
                                                   Header="{LocText KingsDamageMeter:WindowMainRes:LanguageMenuHeader}"/>
-                                        <Separator />
                                         <MenuItem Name="MainContextMenuHelp" 
                                                   Header="{LocText KingsDamageMeter:WindowMainRes:HelpMenuHeader}" 
                                                   Click="MainContextMenuHelp_Click"/>
@@ -175,37 +198,9 @@
                                               HorizontalAlignment="Stretch">
                                     <ScrollViewer.ContextMenu>
                                         <ContextMenu Name="MainContextMenu" FontFamily="Verdana" FontSize="9">
-                                            <MenuItem Name="MenuItemCopyYou" 
-                                                      Header="{LocText KingsDamageMeter:WindowMainRes:CopyYouMenuHeader}" />
-                                            <MenuItem Name="MenuItemCopyTop" 
-                                                      Header="{LocText KingsDamageMeter:WindowMainRes:CopyAllMenuHeader}" />
-                                            <Separator />
-                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:HideOthersMenuHeader}" 
-                                                      IsCheckable="True" 
-                                                      IsChecked="{Binding IsHideOthers, Source={x:Static Properties:Settings.Default}}"/>
-                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:GroupOnlyMenuHeader}" 
-                                                      IsCheckable="True" 
-                                                      IsChecked="{Binding IsGroupOnly, Source={x:Static Properties:Settings.Default}}"/>
-                                            <MenuItem Name="MenuItemAddGroupMemberByName" 
-                                                      Header="{LocText KingsDamageMeter:WindowMainRes:AddByNameMenuHeader}" 
-                                                      Click="MenuItemAddGroupMemberByName_Click"/>
-                                            <Separator />
-                                            <MenuItem Name="MenuItemSortByName"
-                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByNameMenuHeader}" 
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.Name}}"/>
-                                            <MenuItem Name="MenuItemSortByDamage" 
-                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByDamageMenuHeader}" 
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.Damage}}"/>
-                                            <MenuItem Name="MenuItemSortByDPS" 
-                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByDpsMenuHeader}" 
-                                                      IsCheckable="True"
-                                                      IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.DamagePerSecond}}"/>
-                                            <Separator />
-                                            <MenuItem Name="MenuItemResetDamage" 
-                                                      Header="{LocText KingsDamageMeter:WindowMainRes:ResetDamageMenuHeader}" 
-                                                      Command="{Binding ResetDamageCommand}"/>
+                                            <MenuItem Name="MenuItemResetCounts" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:ResetCountsMenuHeader}"
+                                                      Command="{Binding ResetCountsCommand}"/>
                                             <MenuItem Name="MenuItemClear" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:ClearAllMenuHeader}"
                                                       Command="{Binding ClearAllCommand}"/>

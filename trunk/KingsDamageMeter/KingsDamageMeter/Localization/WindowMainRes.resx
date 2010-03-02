@@ -121,7 +121,7 @@
     <value>About</value>
   </data>
   <data name="AddByNameMenuHeader" xml:space="preserve">
-    <value>Add Member by Name</value>
+    <value>Add Group Member...</value>
   </data>
   <data name="ClearAllMenuHeader" xml:space="preserve">
     <value>Clear List</value>
@@ -192,23 +192,26 @@
   <data name="PowerOnBtnTooltip" xml:space="preserve">
     <value>Power On</value>
   </data>
-  <data name="ResetDamageMenuHeader" xml:space="preserve">
-    <value>Reset Damage</value>
+  <data name="ResetCountsMenuHeader" xml:space="preserve">
+    <value>Reset Counts</value>
   </data>
   <data name="ResizeThumbToolTip" xml:space="preserve">
     <value>Resize</value>
   </data>
   <data name="SetYouAliasMenuHeader" xml:space="preserve">
-    <value>Set You Alias</value>
+    <value>You Alias...</value>
   </data>
   <data name="SortByDamageMenuHeader" xml:space="preserve">
-    <value>Sort By Damage</value>
+    <value>Damage</value>
   </data>
   <data name="SortByDpsMenuHeader" xml:space="preserve">
-    <value>Sort By DPS</value>
+    <value>DPS</value>
   </data>
   <data name="SortByNameMenuHeader" xml:space="preserve">
-    <value>Sort By Name</value>
+    <value>Name</value>
+  </data>
+  <data name="SortingMenuHeader" xml:space="preserve">
+    <value>Sorting</value>
   </data>
   <data name="TopMostCheckBoxToolTip" xml:space="preserve">
     <value>Top Most</value>

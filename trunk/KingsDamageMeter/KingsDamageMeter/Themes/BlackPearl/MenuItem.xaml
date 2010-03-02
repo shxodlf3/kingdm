@@ -110,7 +110,7 @@
     <SolidColorBrush x:Key="MenuItemLightBorderBrush" Color="#AAA" />
 
     <!-- Misc Brushes -->
-    <SolidColorBrush x:Key="MenuItemGlyphBrush" Color="#444" />
+    <SolidColorBrush x:Key="MenuItemGlyphBrush" Color="#555" />
     <SolidColorBrush x:Key="MenuItemLightColorBrush" Color="#DDD" />
 
     <!-- Styles -->
