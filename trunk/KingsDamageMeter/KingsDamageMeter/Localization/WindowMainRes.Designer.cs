@@ -79,15 +79,6 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear List.
-        /// </summary>
-        internal static string ClearAllMenuHeader {
-            get {
-                return ResourceManager.GetString("ClearAllMenuHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         internal static string CloseBtnToolTip {
@@ -282,15 +273,6 @@ namespace KingsDamageMeter.Localization {
         internal static string PowerOnBtnTooltip {
             get {
                 return ResourceManager.GetString("PowerOnBtnTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reset Counts.
-        /// </summary>
-        internal static string ResetCountsMenuHeader {
-            get {
-                return ResourceManager.GetString("ResetCountsMenuHeader", resourceCulture);
             }
         }
         

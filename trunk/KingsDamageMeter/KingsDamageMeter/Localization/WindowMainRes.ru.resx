@@ -123,9 +123,6 @@
   <data name="AddByNameMenuHeader" xml:space="preserve">
     <value>Добавить по имени</value>
   </data>
-  <data name="ClearAllMenuHeader" xml:space="preserve">
-    <value>Удалить всё</value>
-  </data>
   <data name="CloseBtnToolTip" xml:space="preserve">
     <value>Закрыть</value>
   </data>
@@ -191,9 +188,6 @@
   </data>
   <data name="PowerOnBtnTooltip" xml:space="preserve">
     <value>Включено</value>
-  </data>
-  <data name="ResetCountsMenuHeader" xml:space="preserve">
-    <value>Обнулить данные</value>
   </data>
   <data name="ResizeThumbToolTip" xml:space="preserve">
     <value>Изменить размер</value>

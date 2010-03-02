@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="Combat\Skill.cs" />
     <Compile Include="Combat\SkillCollection.cs" />
+    <Compile Include="Controls\Commands.cs" />
     <Compile Include="Controls\DisplayType.cs" />
     <Compile Include="Controls\Player.cs" />
     <Compile Include="Controls\PlayerSortType.cs" />

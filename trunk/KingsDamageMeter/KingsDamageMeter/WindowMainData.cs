@@ -142,7 +142,7 @@ namespace KingsDamageMeter
             {
                 case "IsGroupOnly":
                 case "IsHideOthers":
-                    UpdateFilter();
+                    SetFilter();
                     UpdatePercents();
                     break;
                 case "SortType":
@@ -358,6 +358,14 @@ namespace KingsDamageMeter
             {
                 return;
             }
+            if(Settings.Default.IsHideOthers && name != Settings.Default.YouAlias)
+            {
+                return;
+            }
+            if (Settings.Default.IsGroupOnly && !Settings.Default.GroupList.Contains(name))
+            {
+                return;
+            }
 
             if (!String.IsNullOrEmpty(name))
             {
@@ -366,11 +374,11 @@ namespace KingsDamageMeter
                     PlayerName = name,
                     IsGroupMember = isGroupMember
                 };
-                p.RemoveMe += RemovePlayer;
+                //p.RemoveMe += RemovePlayer;
 
                 Players.Add(p);
 
-                UpdateFilter();
+                //SetFilter();
                 if (name == Settings.Default.YouAlias || Settings.Default.GroupList.Contains(name))
                 {
                     p.IsGroupMember = true;
@@ -405,9 +413,9 @@ namespace KingsDamageMeter
             return Players.Any(o => o.PlayerName == name);
         }
 
-        private void UpdateFilter()
+        private void SetFilter()
         {
-            ICollectionView view = CollectionViewSource.GetDefaultView(Players);
+            /*ICollectionView view = CollectionViewSource.GetDefaultView(Players);
             if (view != null)
             {
                 if (Settings.Default.IsHideOthers)
@@ -421,6 +429,27 @@ namespace KingsDamageMeter
                 else
                 {
                     view.Filter = null;
+                }
+            }*/
+            if (Settings.Default.IsHideOthers)
+            {
+                //ToList() here is copy data to temp list for allow to us delete permission for Players collection
+                foreach (var player in Players.ToList())
+                {
+                    if(player.PlayerName != Settings.Default.YouAlias)
+                    {
+                        Players.Remove(player);
+                    }
+                }
+            }
+            else if(Settings.Default.IsGroupOnly)
+            {
+                foreach (var player in Players.ToList())
+                {
+                    if (!player.IsGroupMember)
+                    {
+                        Players.Remove(player);
+                    }
                 }
             }
         }
@@ -522,7 +551,7 @@ namespace KingsDamageMeter
             }
         }
 
-        private void ResetDamage()
+        public void ResetDamage()
         {
             foreach (var player in Players)
             {
@@ -543,7 +572,7 @@ namespace KingsDamageMeter
             NotifyPropertyChanged("IsEnabled");
         }
 
-        private void ClearAll()
+        public void ClearAll()
         {
             Players.Clear();
         }

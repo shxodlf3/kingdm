@@ -118,25 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClearListMenuHeader" xml:space="preserve">
-    <value>Clear List</value>
+    <value>Удалить всё</value>
   </data>
   <data name="CopyMacroAllianceMenuHeader" xml:space="preserve">
-    <value>Alliance Chat</value>
+    <value>В чат альянса</value>
   </data>
   <data name="CopyMacroGroupMenuHeader" xml:space="preserve">
-    <value>Group Chat</value>
+    <value>В групповой чат</value>
   </data>
   <data name="CopyMacroLegionMenuHeader" xml:space="preserve">
-    <value>Legion Chat</value>
+    <value>В чат легиона</value>
   </data>
   <data name="CopyMacroLocalMenuHeader" xml:space="preserve">
     <value>Local Chat</value>
   </data>
   <data name="CopyMacroMenuHeader" xml:space="preserve">
-    <value>Copy Macro</value>
+    <value>Копировать для макроса</value>
   </data>
   <data name="CopyMenuHeader" xml:space="preserve">
-    <value>Copy</value>
+    <value>Копировать себя</value>
   </data>
   <data name="GroupMemeberMenuHeader" xml:space="preserve">
     <value>Член группы</value>
@@ -148,7 +148,7 @@
     <value>Удалить</value>
   </data>
   <data name="ResetCountsMenuHeader" xml:space="preserve">
-    <value>Reset Counts</value>
+    <value>Обнулить данные</value>
   </data>
   <data name="ViewSkillsMenuHeader" xml:space="preserve">
     <value>Открыть список умений</value>

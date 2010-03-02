@@ -358,7 +358,7 @@ namespace KingsDamageMeter.Controls
         public SkillCollection Skills { get; private set; }
 
         #endregion
-
+/*
         #region RemovePlayerCommand
 
         public event Action<Player> RemoveMe;
@@ -408,7 +408,7 @@ namespace KingsDamageMeter.Controls
         }
 
         #endregion
-
+*/
         public void Reset()
         {
             Damage = 0;

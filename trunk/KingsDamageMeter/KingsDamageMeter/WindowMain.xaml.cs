@@ -25,6 +25,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.IO;
 using System.Diagnostics;
+using KingsDamageMeter.Controls;
 using KingsDamageMeter.Converters;
 using KingsDamageMeter.Forms;
 using KingsDamageMeter.Localization;
@@ -204,9 +205,52 @@ namespace KingsDamageMeter
                                         new Binding("SelectedLanguage") { Mode = BindingMode.TwoWay, Source = Settings.Default, Converter = languageSelectedConverter, ConverterParameter = language});
                     MenuItemLanguage.Items.Add(menuItem);
                 }
+
+                //This is for static commands initialization declared in Commands.cs
+                playersItemsControl.Focus();
+                ////////////////////////////////////////////////////////////////////
                 isLoaded = true;
             }
         }
 
+        private void ClearAllCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            ((WindowMainData) DataContext).ClearAll();
+        }
+
+        private void ClearAllCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void ResetCountsCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            ((WindowMainData)DataContext).ResetDamage();
+        }
+
+        private void ResetCountsCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void RemovePlayerCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            ((WindowMainData)DataContext).RemovePlayer((Player)e.Parameter);
+        }
+
+        private void RemovePlayerCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = e.Parameter != null && e.Parameter is Player;
+        }
+
+        private void IgnorePlayerCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            ((WindowMainData)DataContext).IgnorePlayer((Player)e.Parameter);
+        }
+
+        private void IgnorePlayerCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = e.Parameter != null && e.Parameter is Player;
+        }
     }
 }

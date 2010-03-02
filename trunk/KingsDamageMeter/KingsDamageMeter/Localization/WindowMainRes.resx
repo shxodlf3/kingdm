@@ -123,9 +123,6 @@
   <data name="AddByNameMenuHeader" xml:space="preserve">
     <value>Add Group Member...</value>
   </data>
-  <data name="ClearAllMenuHeader" xml:space="preserve">
-    <value>Clear List</value>
-  </data>
   <data name="CloseBtnToolTip" xml:space="preserve">
     <value>Close</value>
   </data>
@@ -191,9 +188,6 @@
   </data>
   <data name="PowerOnBtnTooltip" xml:space="preserve">
     <value>Power On</value>
-  </data>
-  <data name="ResetCountsMenuHeader" xml:space="preserve">
-    <value>Reset Counts</value>
   </data>
   <data name="ResizeThumbToolTip" xml:space="preserve">
     <value>Resize</value>

@@ -227,30 +227,6 @@ namespace KingsDamageMeter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string GroupOnly {
-            get {
-                return ((string)(this["GroupOnly"]));
-            }
-            set {
-                this["GroupOnly"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string HideOthers {
-            get {
-                return ((string)(this["HideOthers"]));
-            }
-            set {
-                this["HideOthers"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("(Default)")]
         public global::System.Globalization.CultureInfo SelectedLanguage {
             get {
