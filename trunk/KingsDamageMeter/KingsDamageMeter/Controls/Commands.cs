@@ -6,5 +6,6 @@
         public static ObjectRelayCommand ResetCountsCommand { get; set; }
         public static RelayCommand<Player> RemovePlayerCommand { get; set; }
         public static RelayCommand<Player> IgnorePlayerCommand { get; set; }
+        public static RelayCommand<ClipboardCopyType> CopyToClipboardCommand { get; set; }
     }
 }

@@ -169,14 +169,14 @@
                                                       IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.DamagePerSecond}}"/>
                                         </MenuItem>
                                         <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:HideOthersMenuHeader}" 
-                                                      IsCheckable="True" 
-                                                      IsChecked="{Binding IsHideOthers, Source={x:Static Properties:Settings.Default}}"/>
+                                                  IsCheckable="True" 
+                                                  IsChecked="{Binding IsHideOthers, Source={x:Static Properties:Settings.Default}}"/>
                                         <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:GroupOnlyMenuHeader}" 
-                                                      IsCheckable="True" 
-                                                      IsChecked="{Binding IsGroupOnly, Source={x:Static Properties:Settings.Default}}"/>
+                                                  IsCheckable="True" 
+                                                  IsChecked="{Binding IsGroupOnly, Source={x:Static Properties:Settings.Default}}"/>
                                         <MenuItem Name="MenuItemAddGroupMemberByName" 
-                                                      Header="{LocText KingsDamageMeter:WindowMainRes:AddByNameMenuHeader}" 
-                                                      Click="MenuItemAddGroupMemberByName_Click"/>
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:AddByNameMenuHeader}"
+                                                  Click="MenuItemAddGroupMemberByName_Click"/>
                                         <Separator />
                                         <!-- Here is we place language selection. But menu fill is implemented in WindowMain.xaml.cs -->
                                         <MenuItem Name="MenuItemLanguage"

@@ -135,6 +135,9 @@
   <data name="CopyMenuHeader" xml:space="preserve">
     <value>Копировать себя</value>
   </data>
+  <data name="FriendMenuHeader" xml:space="preserve">
+    <value>Друг</value>
+  </data>
   <data name="GroupMemeberMenuHeader" xml:space="preserve">
     <value>Член группы</value>
   </data>

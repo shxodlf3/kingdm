@@ -4,29 +4,40 @@
              xmlns:Converters="clr-namespace:KingsDamageMeter.Converters"
              xmlns:Controls="clr-namespace:KingsDamageMeter.Controls"
              MinHeight="40" MinWidth="160">
+    <UserControl.Resources>
+        <Converters:DetectYouConverter x:Key="DetectYouConverter"/>
+        <Converters:DataToFormattedDataConverter x:Key="DataToFormattedDataConverter"/>
+        <Style x:Key="DisabledYouMenuItemStyle" TargetType="{x:Type MenuItem}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding PlayerName, Mode=OneWay, Converter={StaticResource DetectYouConverter}}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <UserControl.ToolTip>
         <StackPanel>
             <TextBlock Text="{Binding PlayerName}"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding DamageFormatted}"/>
+                <TextBlock Text="{Binding Damage, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipTotal}"/>
             </StackPanel>
-            <TextBlock Text="{Binding DamagePercentFormatted}"/>
+            <TextBlock Text="{Binding DamagePercent, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"/>
             <TextBlock/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding DamagePerSecondFormatted}"/>
+                <TextBlock Text="{Binding DamagePerSecond, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipDps}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding PeakDpsFormatted}"/>
+                <TextBlock Text="{Binding PeakDps, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipPeak}"/>
             </StackPanel>
             <TextBlock/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding BiggestHitFormatted}"/>
+                <TextBlock Text="{Binding BiggestHit, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipBiggestHit}"/>
             </StackPanel>
@@ -38,6 +49,9 @@
                                 <Setter Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding ExpPerHour}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Ap}" Value="0">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -54,7 +68,7 @@
                         </Style.Triggers>
                     </Style>
                 </StackPanel.Style>
-                <TextBlock Text="{Binding KinahFormatted}"/>
+                <TextBlock Text="{Binding Kinah, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Kinah}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipKinah}"/>
             </StackPanel>
@@ -68,15 +82,26 @@
                         </Style.Triggers>
                     </Style>
                 </StackPanel.Style>
-                <TextBlock Text="{Binding ExpPerHourFormatted}"/>
+                <TextBlock Text="{Binding ExpPerHour, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Experience}}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipExpPerHour}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Ap}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Text="{Binding Ap, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.AbyssPoints}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipExpPerHour}"/>
             </StackPanel>
         </StackPanel>
     </UserControl.ToolTip>
-    <UserControl.Resources>
-        <Converters:PlayerNameToFontWeightConverter x:Key="PlayerNameToFontWeightConverter"/>
-    </UserControl.Resources>
     <UserControl.Style>
         <Style TargetType="{x:Type UserControl}">
             <Style.Triggers>
@@ -129,11 +154,19 @@
     </UserControl.Style>
     <UserControl.ContextMenu>
         <ContextMenu FontSize="9" FontFamily="Verdana">
-            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMenuHeader}" />
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMenuHeader}" 
+                      Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
+                      CommandParameter="{x:Static Controls:ClipboardCopyType.OnlyYou}"/>
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroMenuHeader}">
-                <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroGroupMenuHeader}" />
-                <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroAllianceMenuHeader}" />
-                <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroLegionMenuHeader}" />
+                <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroGroupMenuHeader}"
+                      Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
+                      CommandParameter="{x:Static Controls:ClipboardCopyType.ToPartyChat}"/>
+                <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroAllianceMenuHeader}"
+                      Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
+                      CommandParameter="{x:Static Controls:ClipboardCopyType.ToAllianceChat}"/>
+                <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroLegionMenuHeader}"
+                      Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
+                      CommandParameter="{x:Static Controls:ClipboardCopyType.ToLegionChat}"/>
             </MenuItem>
             <Separator />
             <MenuItem Name="MenuItemViewSkills" 
@@ -141,13 +174,28 @@
                       Click="MenuItemViewSkills_Click" />
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:GroupMemeberMenuHeader}" 
                       IsCheckable="True"
-                      IsChecked="{Binding IsGroupMember}"/>
+                      IsChecked="{Binding IsGroupMember}">
+                <MenuItem.Style>
+                    <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource DisabledYouMenuItemStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsFriend}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:FriendMenuHeader}" 
+                      IsCheckable="True"
+                      IsChecked="{Binding IsFriend}"
+                      Style="{StaticResource DisabledYouMenuItemStyle}"/>
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:RemoveMenuHeader}"
                       Command="{x:Static Controls:Commands.RemovePlayerCommand}"
                       CommandParameter="{Binding}"/>
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:IgnorePlayerMenuHeader}" 
                       Command="{x:Static Controls:Commands.IgnorePlayerCommand}"
-                      CommandParameter="{Binding}"/>
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource DisabledYouMenuItemStyle}"/>
             <Separator />
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:ResetCountsMenuHeader}"
                       Command="{x:Static Controls:Commands.ResetCountsCommand}"/>
@@ -168,8 +216,17 @@
                FontFamily="Verdana" 
                FlowDirection="LeftToRight" 
                FontSize="9"
-               Content="{Binding PlayerName}"
-               FontWeight="{Binding PlayerName, Mode=OneWay, Converter={StaticResource PlayerNameToFontWeightConverter}}"/>
+               Content="{Binding PlayerName}">
+            <Label.Style>
+                <Style TargetType="{x:Type Label}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding PlayerName, Mode=OneWay, Converter={StaticResource DetectYouConverter}}" Value="True">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
         <Label Grid.Column="1"
                    Foreground="Gold" 
                    HorizontalAlignment="Right"

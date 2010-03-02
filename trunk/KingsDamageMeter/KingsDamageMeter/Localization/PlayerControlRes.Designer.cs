@@ -115,6 +115,15 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Friend.
+        /// </summary>
+        internal static string FriendMenuHeader {
+            get {
+                return ResourceManager.GetString("FriendMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group Member.
         /// </summary>
         internal static string GroupMemeberMenuHeader {

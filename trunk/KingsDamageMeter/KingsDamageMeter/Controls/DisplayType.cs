@@ -7,6 +7,7 @@ namespace KingsDamageMeter.Controls
         DamagePerSecond,
         Percent,
         Experience,
-        Kinah
+        Kinah,
+        AbyssPoints
     }
 }

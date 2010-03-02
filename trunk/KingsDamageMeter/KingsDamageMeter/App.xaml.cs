@@ -71,9 +71,9 @@ namespace KingsDamageMeter
             {
                 Settings.Default.IgnoreList = new ObservableCollection<string>();
             }
-            if (Settings.Default.GroupList == null)
+            if (Settings.Default.FriendList == null)
             {
-                Settings.Default.GroupList = new ObservableCollection<string>();
+                Settings.Default.FriendList = new ObservableCollection<string>();
             }
 
             Settings.Default.PropertyChanged += SettingsChanged;
@@ -92,6 +92,20 @@ namespace KingsDamageMeter
             {
                 LocalizeDictionary.Instance.Culture = Settings.Default.SelectedLanguage;
                 Thread.CurrentThread.CurrentUICulture = Settings.Default.SelectedLanguage;
+            }
+            else if(e.PropertyName == "IsHideOthers")
+            {
+                if(Settings.Default.IsHideOthers)
+                {
+                    Settings.Default.IsGroupOnly = false;
+                }
+            }
+            else if (e.PropertyName == "IsGroupOnly")
+            {
+                if (Settings.Default.IsGroupOnly)
+                {
+                    Settings.Default.IsHideOthers = false;
+                }
             }
         }
 

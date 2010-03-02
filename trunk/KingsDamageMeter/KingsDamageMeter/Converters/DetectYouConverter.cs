@@ -1,12 +1,11 @@
 using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 using KingsDamageMeter.Properties;
 
 namespace KingsDamageMeter.Converters
 {
-    public class PlayerNameToFontWeightConverter : IValueConverter
+    public class DetectYouConverter : IValueConverter
     {
         #region Implementation of IValueConverter
 
@@ -16,10 +15,10 @@ namespace KingsDamageMeter.Converters
             {
                 if(((string)value) == Settings.Default.YouAlias)
                 {
-                    return FontWeights.Bold;
+                    return true;
                 }
             }
-            return FontWeights.Normal;
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -20,7 +20,7 @@
     <Setting Name="IgnoreList" Type="System.Collections.ObjectModel.ObservableCollection`1[System.String]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="GroupList" Type="System.Collections.ObjectModel.ObservableCollection`1[System.String]" Scope="User">
+    <Setting Name="FriendList" Type="System.Collections.ObjectModel.ObservableCollection`1[System.String]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="HelpFilePath" Type="System.String" Scope="User">

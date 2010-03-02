@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Timers;
 using System.Windows;
@@ -123,6 +124,7 @@ namespace KingsDamageMeter
             Commands.ResetCountsCommand = new ObjectRelayCommand(o => ResetDamage());
             Commands.RemovePlayerCommand = new RelayCommand<Player>(RemovePlayer, player => player != null);
             Commands.IgnorePlayerCommand = new RelayCommand<Player>(IgnorePlayer, player => player != null);
+            Commands.CopyToClipboardCommand = new RelayCommand<ClipboardCopyType>(CopyToClipboard);
         }
 
         private void InitializeTimers()
@@ -174,6 +176,8 @@ namespace KingsDamageMeter
             _LogParser.Stopped += delegate { NotifyPropertyChanged("IsEnabled"); };
             _LogParser.ExpGained += OnExpGained;
             _LogParser.KinahEarned += OnKinahEarned;
+            _LogParser.KinahSpent += OnKinahSpent;
+            _LogParser.AbyssPointsGained += OnAbyssPointsGained;
             _LogParser.Start(Settings.Default.AionLogPath);
         }
 
@@ -257,7 +261,33 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerKinah(Settings.Default.YouAlias, e.Kinah);
+                UpdatePlayerKinah(Settings.Default.YouAlias, e.Kinah, /* isEarned = */ true);
+            }
+        }
+
+        private void OnKinahSpent(object sender, KinahEventArgs e)
+        {
+            if (!Application.Current.Dispatcher.CheckAccess())
+            {
+                Application.Current.Dispatcher.Invoke(new Action<object, KinahEventArgs>(OnKinahSpent),
+                                                      sender, e);
+            }
+            else
+            {
+                UpdatePlayerKinah(Settings.Default.YouAlias, e.Kinah, false);
+            }
+        }
+
+        private void OnAbyssPointsGained(object sender, AbyssPointsEventArgs e)
+        {
+            if (!Application.Current.Dispatcher.CheckAccess())
+            {
+                Application.Current.Dispatcher.Invoke(new Action<object, AbyssPointsEventArgs>(OnAbyssPointsGained),
+                                                      sender, e);
+            }
+            else
+            {
+                UpdatePlayerAp(Settings.Default.YouAlias, e.Points);
             }
         }
 
@@ -339,7 +369,7 @@ namespace KingsDamageMeter
             }
         }
 
-        public void UpdatePlayerKinah(string name, int kinah)
+        public void UpdatePlayerKinah(string name, int kinah, bool isEarned)
         {
             if (Settings.Default.IgnoreList.Contains(name))
             {
@@ -354,7 +384,26 @@ namespace KingsDamageMeter
             var player = Players.FirstOrDefault(o => o.PlayerName == name);
             if (player != null)
             {
-                player.Kinah += kinah;
+                player.Kinah += isEarned ? kinah : -kinah;
+            }
+        }
+
+        private void UpdatePlayerAp(string name, int points)
+        {
+            if (Settings.Default.IgnoreList.Contains(name))
+            {
+                return;
+            }
+
+            if (!PlayerExists(name))
+            {
+                AddPlayer(name, false);
+            }
+
+            var player = Players.FirstOrDefault(o => o.PlayerName == name);
+            if (player != null)
+            {
+                player.Ap += points;
             }
         }
 
@@ -363,15 +412,20 @@ namespace KingsDamageMeter
         /// </summary>
         public void AddPlayer(string name, bool isGroupMember)
         {
-            if (Settings.Default.IgnoreList.Contains(name) || Players.Any(o=>o.PlayerName == name))
+            if (Settings.Default.IgnoreList.Contains(name))
             {
+                return;
+            }
+            if (isGroupMember && Players.Any(o => o.PlayerName == name))
+            {
+                Players.First(o => o.PlayerName == name).IsGroupMember = true;
                 return;
             }
             if(Settings.Default.IsHideOthers && name != Settings.Default.YouAlias)
             {
                 return;
             }
-            if (Settings.Default.IsGroupOnly && !Settings.Default.GroupList.Contains(name))
+            if (Settings.Default.IsGroupOnly && !isGroupMember)
             {
                 return;
             }
@@ -383,12 +437,11 @@ namespace KingsDamageMeter
                     PlayerName = name,
                     IsGroupMember = isGroupMember
                 };
-                //p.RemoveMe += RemovePlayer;
 
                 Players.Add(p);
 
                 //SetFilter();
-                if (name == Settings.Default.YouAlias || Settings.Default.GroupList.Contains(name))
+                if (name == Settings.Default.YouAlias || Settings.Default.FriendList.Contains(name))
                 {
                     p.IsGroupMember = true;
                     return;
@@ -404,6 +457,11 @@ namespace KingsDamageMeter
 
         private void IgnorePlayer(Player player)
         {
+            if(player.PlayerName == Settings.Default.YouAlias)
+            {
+                return;
+            }
+
             if (!Settings.Default.IgnoreList.Contains(player.PlayerName))
             {
                 Settings.Default.IgnoreList.Add(player.PlayerName);
@@ -536,6 +594,11 @@ namespace KingsDamageMeter
 
         private void RemoveGroupMember(string name)
         {
+            if(Settings.Default.FriendList.Contains(name))
+            {
+                return;
+            }
+
             var player = Players.FirstOrDefault(o => o.PlayerName == name);
             if (player != null)
             {
@@ -611,6 +674,40 @@ namespace KingsDamageMeter
         {
             var findedLanguage = AvailableLanguages.FirstOrDefault(o => o.Equals(language) || (language.Parent != null && o.Equals(language.Parent)));
             Settings.Default.SelectedLanguage = findedLanguage ?? AvailableLanguages[0];
+        }
+
+        private void CopyToClipboard(ClipboardCopyType copyType)
+        {
+            if(copyType == ClipboardCopyType.OnlyYou)
+            {
+                var you = Players.FirstOrDefault(o => o.PlayerName == Settings.Default.YouAlias);
+                if (you != null)
+                {
+                    Clipboard.SetText(Settings.Default.YouAlias + " " + you.Damage);
+                }
+            }
+            else
+            {
+                string chatPrefix = string.Empty;
+                switch (copyType)
+                {
+                    case ClipboardCopyType.ToPartyChat:
+                        chatPrefix = "/p";
+                        break;
+                    case ClipboardCopyType.ToAllianceChat:
+                        chatPrefix = "/a";
+                        break;
+                    case ClipboardCopyType.ToLegionChat:
+                        chatPrefix = "/l";
+                        break;
+                }
+                var sb = new StringBuilder();
+                foreach (var player in Players)
+                {
+                    sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage, Environment.NewLine);
+                }
+                Clipboard.SetText(sb.ToString());
+            }
         }
 
         #endregion

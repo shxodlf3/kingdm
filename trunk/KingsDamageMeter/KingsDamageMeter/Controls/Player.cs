@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Text;
-using System.Timers;
+using System.Threading;
 using KingsDamageMeter.Combat;
+using KingsDamageMeter.Converters;
 using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
+using Timer=System.Timers.Timer;
 
 namespace KingsDamageMeter.Controls
 {
@@ -57,15 +59,15 @@ namespace KingsDamageMeter.Controls
                 switch (Settings.Default.DisplayType)
                 {
                     case DisplayType.Damage:
-                        return DamageFormatted;
+                        return (string)DataToFormattedDataConverter.Instance.Convert(Damage, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
                     case DisplayType.DamagePerSecond:
-                        return DamagePerSecondFormatted;
+                        return (string)DataToFormattedDataConverter.Instance.Convert(DamagePerSecond, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
                     case DisplayType.Percent:
-                        return DamagePercentFormatted;
+                        return (string)DataToFormattedDataConverter.Instance.Convert(DamagePercent, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
                     case DisplayType.Experience:
-                        return ExpFormatted;
+                        return (string)DataToFormattedDataConverter.Instance.Convert(Exp, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
                     case DisplayType.Kinah:
-                        return KinahFormatted;
+                        return (string)DataToFormattedDataConverter.Instance.Convert(Kinah, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
                     default:
                         return string.Empty;
                 }
@@ -101,14 +103,8 @@ namespace KingsDamageMeter.Controls
 
                     NotifyPropertyChanged("Damage");
                     NotifyPropertyChanged("DisplayData");
-                    NotifyPropertyChanged("DamageFormatted");
                 }
             }
-        }
-
-        public string DamageFormatted
-        {
-            get { return Damage.ToString("#,#"); }
         }
 
         private int biggestHit;
@@ -121,14 +117,8 @@ namespace KingsDamageMeter.Controls
                 {
                     biggestHit = value;
                     NotifyPropertyChanged("BiggestHit");
-                    NotifyPropertyChanged("BiggestHitFormatted");
                 }
             }
-        }
-
-        public string BiggestHitFormatted
-        {
-            get { return BiggestHit.ToString("#,#"); }
         }
 
         private int exp;
@@ -141,15 +131,8 @@ namespace KingsDamageMeter.Controls
                 {
                     exp = value;
                     NotifyPropertyChanged("Exp");
-                    NotifyPropertyChanged("ExpFormatted");
-                    NotifyPropertyChanged("ExpPerHourFormatted");
                 }
             }
-        }
-
-        public string ExpFormatted
-        {
-            get { return Exp.ToString("#,#"); }
         }
 
         private int kinah;
@@ -162,14 +145,8 @@ namespace KingsDamageMeter.Controls
                 {
                     kinah = value;
                     NotifyPropertyChanged("Kinah");
-                    NotifyPropertyChanged("KinahFormatted");
                 }
             }
-        }
-
-        public string KinahFormatted
-        {
-            get { return Kinah.ToString("#,#"); }
         }
 
         private int damageTaken;
@@ -207,14 +184,8 @@ namespace KingsDamageMeter.Controls
                         damagePercent = value;
                     }
                     NotifyPropertyChanged("DamagePercent");
-                    NotifyPropertyChanged("DamagePercentFormatted");
                 }
             }
-        }
-
-        public string DamagePercentFormatted
-        {
-            get { return DamagePercent.ToString("0%"); }
         }
 
         public int DamagePerSecond
@@ -234,11 +205,6 @@ namespace KingsDamageMeter.Controls
             }
         }
 
-        public string DamagePerSecondFormatted
-        {
-            get { return DamagePerSecond.ToString("#,#"); }
-        }
-
         private double fightTime;
         public double FightTime
         {
@@ -250,7 +216,6 @@ namespace KingsDamageMeter.Controls
                     fightTime = value;
                     NotifyPropertyChanged("FightTime");
                     NotifyPropertyChanged("DamagePerSecond");
-                    NotifyPropertyChanged("DamagePerSecondFormatted");
                 }
             }
         }
@@ -265,14 +230,22 @@ namespace KingsDamageMeter.Controls
                 {
                     peakDps = value;
                     NotifyPropertyChanged("PeakDps");
-                    NotifyPropertyChanged("PeakDpsFormatted");
                 }
             }
         }
 
-        public string PeakDpsFormatted
+        private int ap;
+        public int Ap
         {
-            get { return PeakDps.ToString("#,#"); }
+            get { return ap; }
+            set
+            {
+                if(ap != value)
+                {
+                    ap = value;
+                    NotifyPropertyChanged("Ap");
+                }
+            }
         }
 
         private bool isGroupMember;
@@ -284,56 +257,33 @@ namespace KingsDamageMeter.Controls
                 if (isGroupMember != value)
                 {
                     isGroupMember = value;
-                    if (value)
-                    {
-                        if (!Settings.Default.GroupList.Contains(PlayerName))
-                        {
-                            Settings.Default.GroupList.Add(PlayerName);
-                        }
-                    }
-                    else
-                    {
-                        if (Settings.Default.GroupList.Contains(PlayerName))
-                        {
-                            Settings.Default.GroupList.Remove(PlayerName);
-                        }
-                    }
                     NotifyPropertyChanged("IsGroupMember");
                 }
             }
         }
 
-        public string ToolTipInfo
+        public bool IsFriend
         {
-            get
+            get { return PlayerName == Settings.Default.YouAlias || Settings.Default.FriendList.Contains(PlayerName); }
+            set
             {
-                var message = new StringBuilder();
-
-                message.AppendLine(PlayerName);
-                message.AppendLine(Damage + " " + PlayerToolTipRes.PlayerToolTipTotal);
-                message.AppendLine(DamagePercent.ToString("0%"));
-                message.AppendLine();
-                message.AppendLine(DamagePerSecond + " " + PlayerToolTipRes.PlayerToolTipDps);
-                message.AppendLine(PeakDps + " " + PlayerToolTipRes.PlayerToolTipPeak);
-                message.AppendLine();
-                message.Append(BiggestHit + " " + PlayerToolTipRes.PlayerToolTipBiggestHit);
-
-                if (Kinah > 0 || Exp > 0)
+                if (value)
                 {
-                    message.AppendLine();
+                    IsGroupMember = true;
+                    if (!Settings.Default.FriendList.Contains(PlayerName))
+                    {
+                        Settings.Default.FriendList.Add(PlayerName);
+                    }
                 }
-                if (Kinah > 0)
+                else
                 {
-                    message.AppendLine();
-                    message.Append(Kinah + " " + PlayerToolTipRes.PlayerToolTipKinah);
+                    if (Settings.Default.FriendList.Contains(PlayerName))
+                    {
+                        Settings.Default.FriendList.Remove(PlayerName);
+                    }
                 }
-                if (Exp > 0)
-                {
-                    message.AppendLine();
-                    message.Append(ExpPerHour + " " + PlayerToolTipRes.PlayerToolTipExpPerHour);
-                }
-
-                return message.ToString();
+                NotifyPropertyChanged("IsFriend");
+                NotifyPropertyChanged("IsGroupMember");
             }
         }
 
@@ -358,57 +308,7 @@ namespace KingsDamageMeter.Controls
         public SkillCollection Skills { get; private set; }
 
         #endregion
-/*
-        #region RemovePlayerCommand
 
-        public event Action<Player> RemoveMe;
-
-        private ObjectRelayCommand removePlayerCommand;
-        public ObjectRelayCommand RemovePlayerCommand
-        {
-            get
-            {
-                if (removePlayerCommand == null)
-                {
-                    removePlayerCommand = new ObjectRelayCommand(o => RemovePlayer());
-                }
-                return removePlayerCommand;
-            }
-        }
-
-        private void RemovePlayer()
-        {
-            if (RemoveMe != null)
-            {
-                RemoveMe(this);
-            }
-        }
-
-        #endregion
-
-        #region IgnorePlayerCommand
-
-        private ObjectRelayCommand ignorePlayerCommand;
-        public ObjectRelayCommand IgnorePlayerCommand
-        {
-            get
-            {
-                if (ignorePlayerCommand == null)
-                {
-                    ignorePlayerCommand = new ObjectRelayCommand(o => IgnorePlayer());
-                }
-                return ignorePlayerCommand;
-            }
-        }
-
-        private void IgnorePlayer()
-        {
-            Settings.Default.IgnoreList.Add(PlayerName);
-            RemovePlayer();
-        }
-
-        #endregion
-*/
         public void Reset()
         {
             Damage = 0;
@@ -418,6 +318,7 @@ namespace KingsDamageMeter.Controls
             PeakDps = 0;
             Exp = 0;
             Kinah = 0;
+            Ap = 0;
 
             startTime = DateTime.Now;
             Skills.Clear();

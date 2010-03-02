@@ -149,14 +149,16 @@
   <ItemGroup>
     <Compile Include="Combat\Skill.cs" />
     <Compile Include="Combat\SkillCollection.cs" />
+    <Compile Include="Controls\ClipboardCopyType.cs" />
     <Compile Include="Controls\Commands.cs" />
     <Compile Include="Controls\DisplayType.cs" />
     <Compile Include="Controls\Player.cs" />
     <Compile Include="Controls\PlayerSortType.cs" />
     <Compile Include="Controls\RelayCommand.cs" />
+    <Compile Include="Converters\DataToFormattedDataConverter.cs" />
     <Compile Include="Converters\DisplayTypeToBoolConverter.cs" />
     <Compile Include="Converters\IsLanguageSelectedConverter.cs" />
-    <Compile Include="Converters\PlayerNameToFontWeightConverter.cs" />
+    <Compile Include="Converters\DetectYouConverter.cs" />
     <Compile Include="Converters\PlayerSortTypeToBoolConverter.cs" />
     <Compile Include="DebugLogger.cs" />
     <Compile Include="Extensions.cs" />

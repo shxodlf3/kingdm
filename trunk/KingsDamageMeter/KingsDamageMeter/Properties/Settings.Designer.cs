@@ -96,12 +96,12 @@ namespace KingsDamageMeter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.ObjectModel.ObservableCollection<string> GroupList {
+        public global::System.Collections.ObjectModel.ObservableCollection<string> FriendList {
             get {
-                return ((global::System.Collections.ObjectModel.ObservableCollection<string>)(this["GroupList"]));
+                return ((global::System.Collections.ObjectModel.ObservableCollection<string>)(this["FriendList"]));
             }
             set {
-                this["GroupList"] = value;
+                this["FriendList"] = value;
             }
         }
         
