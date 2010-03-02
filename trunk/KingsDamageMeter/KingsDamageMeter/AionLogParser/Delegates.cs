@@ -31,4 +31,6 @@ namespace KingsDamageMeter
     public delegate void ExpEventHandler(object sender, ExpEventArgs e);
 
     public delegate void KinahEventHandler(object sender, KinahEventArgs e);
+
+    public delegate void AbyssPointsEventHandler(object sender, AbyssPointsEventArgs e);
 }

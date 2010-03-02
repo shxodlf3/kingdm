@@ -63,7 +63,7 @@
       <Value Profile="(Default)">You have gained (?&lt;exp&gt;[^a-zA-Z]+) EXP from (?&lt;target&gt;.+)\.</Value>
     </Setting>
     <Setting Name="YouEarnedKinahRegex" Type="System.String" Scope="User">
-      <Value Profile="(Default)">You have earned (?&lt;kinah&gt;[^a-zA-Z]+) Kinah.</Value>
+      <Value Profile="(Default)">You have earned (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\.</Value>
     </Setting>
     <Setting Name="YouInflictedBleedRegex" Type="System.String" Scope="User">
       <Value Profile="(Default)">(?&lt;target&gt;.+) is bleeding because You used (?&lt;skill&gt;.+)\.</Value>
@@ -82,6 +82,12 @@
     </Setting>
     <Setting Name="KickedFromGroupRegex" Type="System.String" Scope="User">
       <Value Profile="(Default)">(?&lt;name&gt;.+) has been kicked out of your group\.</Value>
+    </Setting>
+    <Setting Name="YouSpentKinahRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">You spent (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\.</Value>
+    </Setting>
+    <Setting Name="YouGainedApRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">You have gained (?&lt;ap&gt;[^a-zA-Z]+) Abyss Points\.</Value>
     </Setting>
   </Settings>
 </SettingsFile>

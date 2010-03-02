@@ -55,6 +55,18 @@ You have gained (?<exp>[^a-zA-Z]+) EXP from (?<target>.+)\.
 You have gained 44,678 EXP from Hill Sparkle.
 
 ---------------------------------------------------------------------
+-- You Spent Kinah
+You spent (?<kinah>[^a-zA-Z]+) Kinah\.
+
+You spent 200 Kinah. 
+
+---------------------------------------------------------------------
+-- You Gained Abyss Points
+You have gained (?<ap>[^a-zA-Z]+) Abyss Points\.
+
+You have gained 11 Abyss Points. 
+
+---------------------------------------------------------------------
 -- Other Inflicted
 (?<name>.+) inflicted (?<damage>[^a-zA-Z]+) damage on (?<target>.+)\.
 

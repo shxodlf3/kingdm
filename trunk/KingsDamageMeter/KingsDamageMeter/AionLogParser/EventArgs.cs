@@ -95,6 +95,30 @@ namespace KingsDamageMeter
         }
     }
 
+    public class AbyssPointsEventArgs : LogEventArgs
+    {
+        private int _Points;
+
+        public int Points
+        {
+            get
+            {
+                return _Points;
+            }
+        }
+
+        public AbyssPointsEventArgs(DateTime time, int points)
+            : base(time)
+        {
+            if (points < 0)
+            {
+                points = 0;
+            }
+
+            _Points = points;
+        }
+    }
+
     /// <summary>
     /// Provides data for the KingsDamageMeter.AionLogParser.DamageInflicted event.
     /// </summary>

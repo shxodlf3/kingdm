@@ -83,6 +83,7 @@ namespace KingsDamageMeter
         private string _EffectGroupName = "effect";
         private string _ExpGroupName = "exp";
         private string _KinahGroupName = "kinah";
+        private string _ApGroupName = "ap";
 
         private string _TimestampRegex;
         private Regex _ChatRegex;
@@ -110,6 +111,8 @@ namespace KingsDamageMeter
         private Regex _KickedFromGroupRegex;
         private Regex _YouGainedExpRegex;
         private Regex _YouEarnedKinahRegex;
+        private Regex _YouSpentKinahRegex;
+        private Regex _YouGainedApRegex;
 
         /// <summary>
         /// Occurs when the parser is starting.
@@ -176,10 +179,18 @@ namespace KingsDamageMeter
         /// </summary>
         public event KinahEventHandler KinahEarned;
 
+        /// <summary>
+        /// Occurs when you spend kinah.
+        /// </summary>
+        public event KinahEventHandler KinahSpent;
+
+        /// <summary>
+        /// Occurs when you gain abyss points.
+        /// </summary>
+        public event AbyssPointsEventHandler AbyssPointsGained;
+
         private void Initialize()
         {
-            //_YouAlias = KingsDamageMeter.Settings.Default.YouAlias;
-
             _TimestampRegex = @KingsDamageMeter.Languages.Regex.Default.TimestampRegex;
             _ChatRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.Chat, RegexOptions.Compiled);
             _YouInflictedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouInflictedRegex, RegexOptions.Compiled);
@@ -206,6 +217,8 @@ namespace KingsDamageMeter
             _KickedFromGroupRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.KickedFromGroupRegex, RegexOptions.Compiled);
             _YouGainedExpRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouGainedExpRegex, RegexOptions.Compiled);
             _YouEarnedKinahRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouEarnedKinahRegex, RegexOptions.Compiled);
+            _YouSpentKinahRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouSpentKinahRegex, RegexOptions.Compiled);
+            _YouGainedApRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouGainedApRegex, RegexOptions.Compiled);
         }
 
         /// <summary>
@@ -970,6 +983,38 @@ namespace KingsDamageMeter
 
                 matched = true;
                 regex = "_YouEarnedKinahRegex";
+                goto End;
+            }
+
+            matches = _YouSpentKinahRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                int kinah = matches[0].Groups[_KinahGroupName].Value.GetDigits();
+
+                if (KinahSpent != null)
+                {
+                    KinahSpent(this, new KinahEventArgs(time, kinah));
+                }
+
+                matched = true;
+                regex = "_YouSpentKinahRegex";
+                goto End;
+            }
+
+            matches = _YouGainedApRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                int ap = matches[0].Groups[_ApGroupName].Value.GetDigits();
+
+                if (AbyssPointsGained != null)
+                {
+                    AbyssPointsGained(this, new AbyssPointsEventArgs(time, ap));
+                }
+
+                matched = true;
+                regex = "_YouGainedApRegex";
                 goto End;
             }
 

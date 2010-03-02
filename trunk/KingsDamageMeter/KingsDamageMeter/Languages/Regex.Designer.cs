@@ -272,7 +272,7 @@ namespace KingsDamageMeter.Languages {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("You have earned (?<kinah>[^a-zA-Z]+) Kinah.")]
+        [global::System.Configuration.DefaultSettingValueAttribute("You have earned (?<kinah>[^a-zA-Z]+) Kinah\\.")]
         public string YouEarnedKinahRegex {
             get {
                 return ((string)(this["YouEarnedKinahRegex"]));
@@ -352,6 +352,30 @@ namespace KingsDamageMeter.Languages {
             }
             set {
                 this["KickedFromGroupRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You spent (?<kinah>[^a-zA-Z]+) Kinah\\.")]
+        public string YouSpentKinahRegex {
+            get {
+                return ((string)(this["YouSpentKinahRegex"]));
+            }
+            set {
+                this["YouSpentKinahRegex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You have gained (?<ap>[^a-zA-Z]+) Abyss Points\\.")]
+        public string YouGainedApRegex {
+            get {
+                return ((string)(this["YouGainedApRegex"]));
+            }
+            set {
+                this["YouGainedApRegex"] = value;
             }
         }
     }
