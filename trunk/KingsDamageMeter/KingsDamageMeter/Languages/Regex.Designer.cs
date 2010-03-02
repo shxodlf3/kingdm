@@ -236,18 +236,6 @@ namespace KingsDamageMeter.Languages {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("You")]
-        public string YouAlias {
-            get {
-                return ((string)(this["YouAlias"]));
-            }
-            set {
-                this["YouAlias"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) has joined your group\\.")]
         public string JoinedGroupRegex {
             get {

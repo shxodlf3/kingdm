@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using KingsDamageMeter.Languages;
+using KingsDamageMeter.Properties;
 
 namespace KingsDamageMeter.Converters
 {
@@ -14,7 +14,7 @@ namespace KingsDamageMeter.Converters
         {
             if (value is string)
             {
-                if(((string)value) == Regex.Default.YouAlias)
+                if(((string)value) == Settings.Default.YouAlias)
                 {
                     return FontWeights.Bold;
                 }

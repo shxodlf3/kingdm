@@ -260,5 +260,17 @@ namespace KingsDamageMeter.Properties {
                 this["SelectedLanguage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("You")]
+        public string YouAlias {
+            get {
+                return ((string)(this["YouAlias"]));
+            }
+            set {
+                this["YouAlias"] = value;
+            }
+        }
     }
 }

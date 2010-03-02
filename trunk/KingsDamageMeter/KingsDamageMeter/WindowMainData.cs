@@ -235,7 +235,7 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerExp(Regex.Default.YouAlias, e.Exp);
+                UpdatePlayerExp(Settings.Default.YouAlias, e.Exp);
             }
         }
 
@@ -248,7 +248,7 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerKinah(Regex.Default.YouAlias, e.Kinah);
+                UpdatePlayerKinah(Settings.Default.YouAlias, e.Kinah);
             }
         }
 
@@ -371,7 +371,7 @@ namespace KingsDamageMeter
                 Players.Add(p);
 
                 UpdateFilter();
-                if (name == Regex.Default.YouAlias || Settings.Default.GroupList.Contains(name))
+                if (name == Settings.Default.YouAlias || Settings.Default.GroupList.Contains(name))
                 {
                     p.IsGroupMember = true;
                     return;
@@ -412,7 +412,7 @@ namespace KingsDamageMeter
             {
                 if (Settings.Default.IsHideOthers)
                 {
-                    view.Filter = o => ((Player)o).PlayerName == Regex.Default.YouAlias;
+                    view.Filter = o => ((Player)o).PlayerName == Settings.Default.YouAlias;
                 }
                 else if (Settings.Default.IsGroupOnly)
                 {

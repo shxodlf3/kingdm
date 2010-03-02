@@ -18,10 +18,13 @@
 \**************************************************************************/
 
 using System;
+using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Threading;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using KingsDamageMeter.Properties;
 
 namespace KingsDamageMeter
 {
@@ -33,6 +36,25 @@ namespace KingsDamageMeter
         public AionLogParser()
         {
             Initialize();
+            _OldYouAlias = Settings.Default.YouAlias;
+            Settings.Default.PropertyChanged += SettingsChanged;
+        }
+
+        private void SettingsChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "YouAlias")
+            {
+                //Here we change name of old YouAlias
+                foreach (var pet in _Pets)
+                {
+                    if (pet.Value == _OldYouAlias)
+                    {
+                        _Pets[pet.Key] = Settings.Default.YouAlias;
+                        _OldYouAlias = Settings.Default.YouAlias;
+                        break;
+                    }
+                }
+            }
         }
 
         private bool _Running = false;
@@ -48,7 +70,7 @@ namespace KingsDamageMeter
         private Thread _Worker;
         private object _LockObject = new object();
 
-        //_YouAlias;
+        private string _OldYouAlias;
 
         private string _LogPath = String.Empty;
 
@@ -156,7 +178,7 @@ namespace KingsDamageMeter
 
         private void Initialize()
         {
-            //_YouAlias = KingsDamageMeter.Languages.Regex.Default.YouAlias;
+            //_YouAlias = KingsDamageMeter.Settings.Default.YouAlias;
 
             _TimestampRegex = @KingsDamageMeter.Languages.Regex.Default.TimestampRegex;
             _ChatRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.Chat, RegexOptions.Compiled);
@@ -383,7 +405,7 @@ namespace KingsDamageMeter
 
                 if (SkillDamageInflicted != null)
                 {
-                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, Languages.Regex.Default.YouAlias, damage, skill));
+                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, damage, skill));
                 }
 
                 matched = true;
@@ -400,7 +422,7 @@ namespace KingsDamageMeter
 
                 if (DamageInflicted != null)
                 {
-                    DamageInflicted(this, new PlayerDamageEventArgs(time, Languages.Regex.Default.YouAlias, damage));
+                    DamageInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, damage));
                 }
 
                 matched = true;
@@ -417,7 +439,7 @@ namespace KingsDamageMeter
 
                 if (CriticalInflicted != null)
                 {
-                    CriticalInflicted(this, new PlayerDamageEventArgs(time, Languages.Regex.Default.YouAlias, damage));
+                    CriticalInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, damage));
                 }
 
                 matched = true;
@@ -435,7 +457,7 @@ namespace KingsDamageMeter
 
                 if (SkillDamageInflicted != null)
                 {
-                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, Languages.Regex.Default.YouAlias, damage, effect));
+                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, damage, effect));
                 }
 
                 matched = true;
@@ -451,15 +473,15 @@ namespace KingsDamageMeter
 
                 if (_Effects.ContainsKey(effect))
                 {
-                    if (_Effects[effect] != Languages.Regex.Default.YouAlias)
+                    if (_Effects[effect] != Settings.Default.YouAlias)
                     {
-                        _Effects[effect] = Languages.Regex.Default.YouAlias;
+                        _Effects[effect] = Settings.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Effects.Add(effect, Languages.Regex.Default.YouAlias);
+                    _Effects.Add(effect, Settings.Default.YouAlias);
                 }
 
                 matched = true;
@@ -493,15 +515,15 @@ namespace KingsDamageMeter
 
                 if (_Dots.ContainsKey(skill))
                 {
-                    if (_Dots[skill] != Languages.Regex.Default.YouAlias)
+                    if (_Dots[skill] != Settings.Default.YouAlias)
                     {
-                        _Dots[skill] = Languages.Regex.Default.YouAlias;
+                        _Dots[skill] = Settings.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Dots.Add(skill, Languages.Regex.Default.YouAlias);
+                    _Dots.Add(skill, Settings.Default.YouAlias);
                 }
 
                 matched = true;
@@ -518,15 +540,15 @@ namespace KingsDamageMeter
 
                 if (_Dots.ContainsKey(skill))
                 {
-                    if (_Dots[skill] != Languages.Regex.Default.YouAlias)
+                    if (_Dots[skill] != Settings.Default.YouAlias)
                     {
-                        _Dots[skill] = Languages.Regex.Default.YouAlias;
+                        _Dots[skill] = Settings.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Dots.Add(skill, Languages.Regex.Default.YouAlias);
+                    _Dots.Add(skill, Settings.Default.YouAlias);
                 }
 
                 matched = true;
@@ -544,15 +566,15 @@ namespace KingsDamageMeter
 
                 if (_Pets.ContainsKey(pet))
                 {
-                    if (_Pets[pet] != Languages.Regex.Default.YouAlias)
+                    if (_Pets[pet] != Settings.Default.YouAlias)
                     {
-                        _Pets[pet] = Languages.Regex.Default.YouAlias;
+                        _Pets[pet] = Settings.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Pets.Add(pet, Languages.Regex.Default.YouAlias);
+                    _Pets.Add(pet, Settings.Default.YouAlias);
                 }
 
                 matched = true;
@@ -570,15 +592,15 @@ namespace KingsDamageMeter
 
                 if (_Pets.ContainsKey(pet))
                 {
-                    if (_Pets[pet] != Languages.Regex.Default.YouAlias)
+                    if (_Pets[pet] != Settings.Default.YouAlias)
                     {
-                        _Pets[pet] = Languages.Regex.Default.YouAlias;
+                        _Pets[pet] = Settings.Default.YouAlias;
                     }
                 }
 
                 else
                 {
-                    _Pets.Add(pet, Languages.Regex.Default.YouAlias);
+                    _Pets.Add(pet, Settings.Default.YouAlias);
                 }
 
                 matched = true;

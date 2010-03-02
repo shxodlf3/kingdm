@@ -167,7 +167,7 @@ namespace KingsDamageMeter
         {
             SetNameDialog d = new SetNameDialog();
             d.Text = WindowMainRes.SetYouAliasMenuHeader;
-            d.PlayerName = KingsDamageMeter.Languages.Regex.Default.YouAlias;
+            d.PlayerName = Settings.Default.YouAlias;
 
             if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -179,8 +179,8 @@ namespace KingsDamageMeter
 
                 else
                 {
-                    ((WindowMainData)DataContext).Rename(d.PlayerName, KingsDamageMeter.Languages.Regex.Default.YouAlias);
-                    KingsDamageMeter.Languages.Regex.Default.YouAlias = d.PlayerName;
+                    ((WindowMainData)DataContext).Rename(d.PlayerName, Settings.Default.YouAlias);
+                    Settings.Default.YouAlias = d.PlayerName;
                 }
             }
         }

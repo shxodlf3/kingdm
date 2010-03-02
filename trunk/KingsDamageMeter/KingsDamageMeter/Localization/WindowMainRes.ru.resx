@@ -145,13 +145,13 @@
     <value>Опыт</value>
   </data>
   <data name="GroupOnlyMenuHeader" xml:space="preserve">
-    <value>Только группа</value>
+    <value>Показывать только группу</value>
   </data>
   <data name="HelpMenuHeader" xml:space="preserve">
     <value>Помощь</value>
   </data>
   <data name="HideOthersMenuHeader" xml:space="preserve">
-    <value>Только Ты</value>
+    <value>Показывать только себя</value>
   </data>
   <data name="IgnoreListMenuHeader" xml:space="preserve">
     <value>Список игнорируемых...</value>
@@ -193,7 +193,7 @@
     <value>Включено</value>
   </data>
   <data name="ResetCountsMenuHeader" xml:space="preserve">
-    <value>Reset Counts</value>
+    <value>Обнулить данные</value>
   </data>
   <data name="ResizeThumbToolTip" xml:space="preserve">
     <value>Изменить размер</value>
@@ -202,16 +202,16 @@
     <value>Переименовать "You"</value>
   </data>
   <data name="SortByDamageMenuHeader" xml:space="preserve">
-    <value>Сортировать по урону</value>
+    <value>По урону</value>
   </data>
   <data name="SortByDpsMenuHeader" xml:space="preserve">
-    <value>Сортировать по DPS</value>
+    <value>По DPS</value>
   </data>
   <data name="SortByNameMenuHeader" xml:space="preserve">
-    <value>Сортировать по имени</value>
+    <value>По имени</value>
   </data>
   <data name="SortingMenuHeader" xml:space="preserve">
-    <value>Sorting</value>
+    <value>Сортировать</value>
   </data>
   <data name="TopMostCheckBoxToolTip" xml:space="preserve">
     <value>Поверх всего</value>
