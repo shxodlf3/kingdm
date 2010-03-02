@@ -129,9 +129,6 @@
   <data name="CopyMacroLegionMenuHeader" xml:space="preserve">
     <value>Legion Chat</value>
   </data>
-  <data name="CopyMacroLocalMenuHeader" xml:space="preserve">
-    <value>Local Chat</value>
-  </data>
   <data name="CopyMacroMenuHeader" xml:space="preserve">
     <value>Copy Macro</value>
   </data>

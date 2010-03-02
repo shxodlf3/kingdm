@@ -97,15 +97,6 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Local Chat.
-        /// </summary>
-        internal static string CopyMacroLocalMenuHeader {
-            get {
-                return ResourceManager.GetString("CopyMacroLocalMenuHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Copy Macro.
         /// </summary>
         internal static string CopyMacroMenuHeader {

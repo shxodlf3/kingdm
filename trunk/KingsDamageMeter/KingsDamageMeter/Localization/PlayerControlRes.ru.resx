@@ -129,9 +129,6 @@
   <data name="CopyMacroLegionMenuHeader" xml:space="preserve">
     <value>В чат легиона</value>
   </data>
-  <data name="CopyMacroLocalMenuHeader" xml:space="preserve">
-    <value>Local Chat</value>
-  </data>
   <data name="CopyMacroMenuHeader" xml:space="preserve">
     <value>Копировать для макроса</value>
   </data>

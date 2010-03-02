@@ -44,7 +44,7 @@ namespace KingsDamageMeter
             get { return _LogParser.Running; }
         }
 
-        public SafeNotifiedCollection<Player> Players { get; private set; }
+        public ObservableCollection<Player> Players { get; private set; }
 
         public ObservableCollection<CultureInfo> AvailableLanguages { get; private set; }
         #endregion
@@ -107,7 +107,7 @@ namespace KingsDamageMeter
 
         public WindowMainData()
         {
-            Players = new SafeNotifiedCollection<Player>();
+            Players = new ObservableCollection<Player>();
             AvailableLanguages = new ObservableCollection<CultureInfo>();
             Settings.Default.PropertyChanged += OnSettingsChanged;
 

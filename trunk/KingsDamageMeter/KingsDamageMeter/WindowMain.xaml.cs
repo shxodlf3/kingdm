@@ -193,13 +193,15 @@ namespace KingsDamageMeter
         {
             if(!isLoaded)
             {
+                var menuStyle = (Style) Resources["NotUncheckedMenuItemStyle"];
                 var languageSelectedConverter = new IsLanguageSelectedConverter();
                 foreach (var language in ((WindowMainData)DataContext).AvailableLanguages)
                 {
                     var menuItem = new MenuItem
                                        {
                                            Header = language.DisplayName,
-                                           IsCheckable = true
+                                           IsCheckable = true,
+                                           Style = menuStyle
                                        };
                     menuItem.SetBinding(MenuItem.IsCheckedProperty,
                                         new Binding("SelectedLanguage") { Mode = BindingMode.TwoWay, Source = Settings.Default, Converter = languageSelectedConverter, ConverterParameter = language});

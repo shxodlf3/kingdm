@@ -31,6 +31,13 @@
         </LinearGradientBrush>
         <Converters:PlayerSortTypeToBoolConverter x:Key="PlayerSortTypeToBoolConverter"/>
         <Converters:DisplayTypeToBoolConverter x:Key="DisplayTypeToBoolConverter"/>
+        <Style x:Key="NotUncheckedMenuItemStyle" TargetType="{x:Type MenuItem}">
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Border CornerRadius="10,10,0,10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
         <Grid HorizontalAlignment="Stretch" ShowGridLines="False">
@@ -123,23 +130,28 @@
                                             <MenuItem Name="MainContextViewDamage" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:DamageMainViewMenuHeader}" 
                                                       IsCheckable="True" 
-                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Damage}}" />
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Damage}}"
+                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
                                             <MenuItem Name="MainContextViewDps" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:DpsMainViewMenuHeader}" 
                                                       IsCheckable="True" 
-                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.DamagePerSecond}}" />
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.DamagePerSecond}}"
+                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
                                             <MenuItem Name="MainContextViewPercent" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:PercentMainViewMenuHeader}" 
                                                       IsCheckable="True" 
-                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Percent}}" />
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Percent}}"
+                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
                                             <MenuItem Name="MainContextViewExperience" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:ExperienceMainViewMenuHeader}" 
                                                       IsCheckable="True" 
-                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}" />
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}"
+                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
                                             <MenuItem Name="MainContextViewKinah" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:KinahMainViewMenuHeader}" 
                                                       IsCheckable="True" 
-                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}" />
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"
+                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
                                         </MenuItem>
                                         <MenuItem Name="MainContextSorting"
                                                   Header="{LocText KingsDamageMeter:WindowMainRes:SortingMenuHeader}">
