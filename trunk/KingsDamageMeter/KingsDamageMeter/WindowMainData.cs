@@ -113,7 +113,16 @@ namespace KingsDamageMeter
 
             InitializeLogParser();
             InitializeTimers();
+            InitializeCommands();
             DetectAvailableLanguages();
+        }
+
+        private void InitializeCommands()
+        {
+            Commands.ClearAllCommand = new ObjectRelayCommand(o=>ClearAll());
+            Commands.ResetCountsCommand = new ObjectRelayCommand(o => ResetDamage());
+            Commands.RemovePlayerCommand = new RelayCommand<Player>(RemovePlayer, player => player != null);
+            Commands.IgnorePlayerCommand = new RelayCommand<Player>(IgnorePlayer, player => player != null);
         }
 
         private void InitializeTimers()
@@ -388,12 +397,12 @@ namespace KingsDamageMeter
             }
         }
 
-        public void RemovePlayer(Player player)
+        private void RemovePlayer(Player player)
         {
             Players.Remove(player);
         }
 
-        public void IgnorePlayer(Player player)
+        private void IgnorePlayer(Player player)
         {
             if (!Settings.Default.IgnoreList.Contains(player.PlayerName))
             {
@@ -525,22 +534,7 @@ namespace KingsDamageMeter
             }
         }
 
-        private void UpdateDps(int fightTime)
-        {
-            if (!Application.Current.Dispatcher.CheckAccess())
-            {
-                Application.Current.Dispatcher.Invoke(new Action<int>(UpdateDps), fightTime);
-            }
-            else
-            {
-                foreach (var player in Players)
-                {
-                    player.FightTime += fightTime;
-                }
-            }
-        }
-
-        public void RemoveGroupMember(string name)
+        private void RemoveGroupMember(string name)
         {
             var player = Players.FirstOrDefault(o => o.PlayerName == name);
             if (player != null)
@@ -551,7 +545,7 @@ namespace KingsDamageMeter
             }
         }
 
-        public void ResetDamage()
+        private void ResetDamage()
         {
             foreach (var player in Players)
             {
@@ -572,7 +566,7 @@ namespace KingsDamageMeter
             NotifyPropertyChanged("IsEnabled");
         }
 
-        public void ClearAll()
+        private void ClearAll()
         {
             Players.Clear();
         }

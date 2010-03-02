@@ -32,12 +32,6 @@
         <Converters:PlayerSortTypeToBoolConverter x:Key="PlayerSortTypeToBoolConverter"/>
         <Converters:DisplayTypeToBoolConverter x:Key="DisplayTypeToBoolConverter"/>
     </Window.Resources>
-    <Window.CommandBindings>
-        <CommandBinding Command="{x:Static local:Commands.ClearAllCommand}" Executed="ClearAllCommandExecuted" CanExecute="ClearAllCommandCanExecute"/>
-        <CommandBinding Command="{x:Static local:Commands.ResetCountsCommand}" Executed="ResetCountsCommandExecuted" CanExecute="ResetCountsCommandCanExecute"/>
-        <CommandBinding Command="{x:Static local:Commands.RemovePlayerCommand}" Executed="RemovePlayerCommandExecuted" CanExecute="RemovePlayerCommandCanExecute"/>
-        <CommandBinding Command="{x:Static local:Commands.IgnorePlayerCommand}" Executed="IgnorePlayerCommandExecuted" CanExecute="IgnorePlayerCommandCanExecute"/>
-    </Window.CommandBindings>
     <Border CornerRadius="10,10,0,10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
         <Grid HorizontalAlignment="Stretch" ShowGridLines="False">
             <Border Name="Mask" CornerRadius="10,10,0,10">

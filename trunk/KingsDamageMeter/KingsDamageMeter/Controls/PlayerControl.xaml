@@ -128,7 +128,8 @@
         </Style>
     </UserControl.Style>
     <UserControl.ContextMenu>
-        <ContextMenu FontSize="9" FontFamily="Verdana">
+        <ContextMenu FontSize="9" FontFamily="Verdana"
+                     PlacementTarget="{Binding ElementName=playerControl}">
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMenuHeader}" />
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroMenuHeader}">
                 <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroLocalMenuHeader}" />
