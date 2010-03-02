@@ -57,20 +57,21 @@ namespace KingsDamageMeter.Controls
                 switch (Settings.Default.DisplayType)
                 {
                     case DisplayType.Damage:
-                        return Damage.ToString("#,#");
+                        return DamageFormatted;
                     case DisplayType.DamagePerSecond:
-                        return DamagePerSecond.ToString();
+                        return DamagePerSecondFormatted;
                     case DisplayType.Percent:
-                        return DamagePercent.ToString("0%");
+                        return DamagePercentFormatted;
                     case DisplayType.Experience:
-                        return Exp.ToString();
+                        return ExpFormatted;
                     case DisplayType.Kinah:
-                        return Kinah.ToString("#,#");
+                        return KinahFormatted;
                     default:
                         return string.Empty;
                 }
             }
         }
+
         private long damage;
         public long Damage
         {
