@@ -42,7 +42,7 @@ namespace KingsDamageMeter.Controls
             get { return playerName; }
             set
             {
-                if(playerName != value)
+                if (playerName != value)
                 {
                     playerName = value;
                     NotifyPropertyChanged("PlayerName");
@@ -78,7 +78,7 @@ namespace KingsDamageMeter.Controls
             get { return damage; }
             set
             {
-                if(damage != value)
+                if (damage != value)
                 {
                     if (value > damage)
                     {
@@ -88,8 +88,8 @@ namespace KingsDamageMeter.Controls
                         {
                             BiggestHit = (int)amount;
                         }
-                    } 
-                    
+                    }
+
                     damage = value;
                     timeSinceLastDamage = DateTime.Now;
                     if (!fightTimer.Enabled)
@@ -117,7 +117,7 @@ namespace KingsDamageMeter.Controls
             get { return biggestHit; }
             set
             {
-                if(biggestHit != value)
+                if (biggestHit != value)
                 {
                     biggestHit = value;
                     NotifyPropertyChanged("BiggestHit");
@@ -192,7 +192,7 @@ namespace KingsDamageMeter.Controls
             get { return damagePercent; }
             set
             {
-                if(damagePercent != value)
+                if (damagePercent != value)
                 {
                     if (value < 0)
                     {
@@ -221,12 +221,12 @@ namespace KingsDamageMeter.Controls
         {
             get
             {
-                if(FightTime <= 3)
+                if (FightTime <= 3)
                 {
                     return 0;
                 }
-                var value = (int) (Damage/FightTime);
-                if(value > PeakDps)
+                var value = (int)(Damage / FightTime);
+                if (value > PeakDps)
                 {
                     PeakDps = value;
                 }
@@ -284,9 +284,9 @@ namespace KingsDamageMeter.Controls
                 if (isGroupMember != value)
                 {
                     isGroupMember = value;
-                    if(value)
+                    if (value)
                     {
-                        if(!Settings.Default.GroupList.Contains(PlayerName))
+                        if (!Settings.Default.GroupList.Contains(PlayerName))
                         {
                             Settings.Default.GroupList.Add(PlayerName);
                         }
@@ -318,11 +318,11 @@ namespace KingsDamageMeter.Controls
                 message.AppendLine();
                 message.Append(BiggestHit + " " + PlayerToolTipRes.PlayerToolTipBiggestHit);
 
-                if(Kinah > 0 || Exp > 0)
+                if (Kinah > 0 || Exp > 0)
                 {
                     message.AppendLine();
                 }
-                if(Kinah > 0)
+                if (Kinah > 0)
                 {
                     message.AppendLine();
                     message.Append(Kinah + " " + PlayerToolTipRes.PlayerToolTipKinah);
@@ -341,7 +341,7 @@ namespace KingsDamageMeter.Controls
         {
             get
             {
-                if(Exp == 0)
+                if (Exp == 0)
                 {
                     return 0;
                 }
@@ -370,7 +370,7 @@ namespace KingsDamageMeter.Controls
             {
                 if (removePlayerCommand == null)
                 {
-                    removePlayerCommand = new ObjectRelayCommand(o=>RemovePlayer());
+                    removePlayerCommand = new ObjectRelayCommand(o => RemovePlayer());
                 }
                 return removePlayerCommand;
             }
@@ -378,7 +378,7 @@ namespace KingsDamageMeter.Controls
 
         private void RemovePlayer()
         {
-            if(RemoveMe != null)
+            if (RemoveMe != null)
             {
                 RemoveMe(this);
             }
@@ -395,7 +395,7 @@ namespace KingsDamageMeter.Controls
             {
                 if (ignorePlayerCommand == null)
                 {
-                    ignorePlayerCommand = new ObjectRelayCommand(o=>IgnorePlayer());
+                    ignorePlayerCommand = new ObjectRelayCommand(o => IgnorePlayer());
                 }
                 return ignorePlayerCommand;
             }
@@ -408,7 +408,7 @@ namespace KingsDamageMeter.Controls
         }
 
         #endregion
-        
+
         public void Reset()
         {
             Damage = 0;
@@ -425,7 +425,7 @@ namespace KingsDamageMeter.Controls
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "DisplayType")
+            if (e.PropertyName == "DisplayType")
             {
                 NotifyPropertyChanged("DisplayData");
             }
@@ -436,7 +436,7 @@ namespace KingsDamageMeter.Controls
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }

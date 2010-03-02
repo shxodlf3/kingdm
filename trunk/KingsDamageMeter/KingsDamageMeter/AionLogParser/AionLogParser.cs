@@ -85,6 +85,7 @@ namespace KingsDamageMeter
         private Regex _OtherSummonedAttackRegex;
         private Regex _JoinedGroupRegex;
         private Regex _LeftGroupRegex;
+        private Regex _KickedFromGroupRegex;
         private Regex _YouGainedExpRegex;
         private Regex _YouEarnedKinahRegex;
 
@@ -180,6 +181,7 @@ namespace KingsDamageMeter
             _OtherSummonedAttackRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherSummonedAttackRegex, RegexOptions.Compiled);
             _JoinedGroupRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.JoinedGroupRegex, RegexOptions.Compiled);
             _LeftGroupRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.LeftGroupRegex, RegexOptions.Compiled);
+            _KickedFromGroupRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.KickedFromGroupRegex, RegexOptions.Compiled);
             _YouGainedExpRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouGainedExpRegex, RegexOptions.Compiled);
             _YouEarnedKinahRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouEarnedKinahRegex, RegexOptions.Compiled);
         }
@@ -897,6 +899,22 @@ namespace KingsDamageMeter
 
                 matched = true;
                 regex = "_LeftGroupRegex";
+                goto End;
+            }
+
+            matches = _KickedFromGroupRegex.Matches(line);
+            if (matches.Count > 0)
+            {
+                string name = matches[0].Groups[_NameGroupName].Value;
+                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+
+                if (PlayerLeftGroup != null)
+                {
+                    PlayerLeftGroup(this, new PlayerEventArgs(time, name));
+                }
+
+                matched = true;
+                regex = "_KickedFromGroupRegex";
                 goto End;
             }
 

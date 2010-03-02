@@ -134,3 +134,21 @@ Wilbur has summoned Water Energy by using Summon Water Energy II.
 (?<name>.+) has summoned (?<pet>.+) to attack (?<target>.+) by using (?<skill>.+)\.
 
 Wilbur has summoned Water Energy to attack Kobold Worker by using Summon Water Energy II.
+
+---------------------------------------------------------------------
+-- Player Joined Group
+(?<name>.+) has joined your group\.
+
+Jackofspades has joined your group.
+
+---------------------------------------------------------------------
+-- Player Left Group
+(?<name>.+) has left your group\.
+
+Jackofspades has left your group.
+
+---------------------------------------------------------------------
+-- Player Kicked from Group
+(?<name>.+) has been kicked out of your group\.
+
+Jackofspades has been kicked out of your group.

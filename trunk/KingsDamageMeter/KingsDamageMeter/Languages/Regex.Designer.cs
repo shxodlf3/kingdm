@@ -354,5 +354,17 @@ namespace KingsDamageMeter.Languages {
                 this["Effect"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(?<name>.+) has been kicked out of your group\\.")]
+        public string KickedFromGroupRegex {
+            get {
+                return ((string)(this["KickedFromGroupRegex"]));
+            }
+            set {
+                this["KickedFromGroupRegex"] = value;
+            }
+        }
     }
 }

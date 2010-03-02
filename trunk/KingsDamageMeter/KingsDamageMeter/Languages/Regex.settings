@@ -83,5 +83,8 @@
     <Setting Name="Effect" Type="System.String" Scope="User">
       <Value Profile="(Default)"> Effect</Value>
     </Setting>
+    <Setting Name="KickedFromGroupRegex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(?&lt;name&gt;.+) has been kicked out of your group\.</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
