@@ -124,7 +124,7 @@
     <value>Add Member by Name</value>
   </data>
   <data name="ClearAllMenuHeader" xml:space="preserve">
-    <value>Clear All</value>
+    <value>Clear List</value>
   </data>
   <data name="CloseBtnToolTip" xml:space="preserve">
     <value>Close</value>

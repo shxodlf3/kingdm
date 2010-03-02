@@ -32,6 +32,7 @@
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // SkillList
@@ -39,12 +40,13 @@
             this.SkillList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader3,
+            this.columnHeader4});
             this.SkillList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SkillList.FullRowSelect = true;
             this.SkillList.Location = new System.Drawing.Point(0, 0);
             this.SkillList.Name = "SkillList";
-            this.SkillList.Size = new System.Drawing.Size(311, 175);
+            this.SkillList.Size = new System.Drawing.Size(354, 162);
             this.SkillList.TabIndex = 0;
             this.SkillList.UseCompatibleStateImageBehavior = false;
             this.SkillList.View = System.Windows.Forms.View.Details;
@@ -53,25 +55,29 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Skill";
-            this.columnHeader1.Width = 147;
+            this.columnHeader1.Width = 125;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Damage";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader2.Width = 74;
+            this.columnHeader2.Width = 75;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Percent";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader3.Width = 59;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Uses";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // SkillsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 175);
+            this.ClientSize = new System.Drawing.Size(354, 162);
             this.Controls.Add(this.SkillList);
             this.Name = "SkillsForm";
             this.ShowIcon = false;
@@ -88,5 +94,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

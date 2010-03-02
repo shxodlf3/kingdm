@@ -22,10 +22,11 @@ namespace KingsDamageMeter.Forms
             foreach (string skill in skills.Keys)
             {
                 ListViewItem item;
-                string[] info = new string[3];
+                string[] info = new string[4];
                 info[0] = skill;
-                info[1] = skills.Get(skill).Damage.ToString("#,#");
+                info[1] = skills.Get(skill).DamageFormatted;
                 info[2] = GetPercent(skills.Get(skill).Damage, damage).ToString("0.0%");
+                info[3] = skills.Get(skill).UsesFormatted;
                 item = new ListViewItem(info);
                 SkillList.Items.Add(item);
             }

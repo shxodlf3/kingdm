@@ -24,11 +24,27 @@ namespace KingsDamageMeter.Combat
             }
         }
 
+        public string UsesFormatted
+        {
+            get
+            {
+                return _Uses.ToString();
+            }
+        }
+
         public int Damage
         {
             get
             {
                 return _Damage;
+            }
+        }
+
+        public string DamageFormatted
+        {
+            get
+            {
+                return _Damage.ToString("#,#");
             }
         }
 

@@ -79,7 +79,7 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear All.
+        ///   Looks up a localized string similar to Clear List.
         /// </summary>
         internal static string ClearAllMenuHeader {
             get {
