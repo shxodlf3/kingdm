@@ -118,7 +118,7 @@ namespace KingsDamageMeter
 
         private void InitializeTimers()
         {
-            sortTimer.Interval = 5000; //Update sort every 5 seconds
+            sortTimer.Interval = 1000; //Update sort every 1 second
             sortTimer.Elapsed += NeedToSort;
             //dpsTimeoutTimer.Interval = 30000;
             //dpsTimeoutTimer.Elapsed += NeedToUpdateDps;
