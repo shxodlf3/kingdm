@@ -17,7 +17,7 @@
         Foreground="White" 
         ResizeMode="NoResize" 
         AllowsTransparency="True" 
-        Icon="/KingsDamageMeter;component/Bomb.ico" 
+        Icon="/KingsDamageMeter;component/Lion.ico" 
         MouseDown="Window_MouseDown" 
         MouseMove="Window_MouseMove" 
         MouseUp="Window_MouseUp" 
