@@ -133,26 +133,26 @@ namespace KingsDamageMeter
             DetectAvailableLanguages();
 
             //Note: This is a test
-            //Players.Add(new Player
-            //                {
-            //                    PlayerName = "Memphistopheles",
-            //                    Damage = 10000000,
-            //                    FightTime = 1800,
-            //                    DamagePercent = 1,
-            //                });
-            //You = new YouPlayer
-            //          {
-            //              PlayerName = Settings.Default.YouAlias,
-            //              Damage = 10000000,
-            //              FightTime = 1800,
-            //              DamagePercent = 1,
-            //              Exp = 10000000,
-            //              Ap = 10000,
-            //              KinahEarned = 200000,
-            //              KinahSpent = -100000,
-            //              IsGroupMember = true
-            //          };
-            //Players.Add(You);
+            Players.Add(new Player
+                            {
+                                PlayerName = "Memphistopheles",
+                                Damage = 10000000,
+                                FightTime = 1800,
+                                DamagePercent = 1,
+                            });
+            You = new YouPlayer
+                      {
+                          PlayerName = Settings.Default.YouAlias,
+                          Damage = 10000001,
+                          FightTime = 1800,
+                          DamagePercent = 1,
+                          Exp = 10000000,
+                          Ap = 10000,
+                          KinahEarned = 200000,
+                          KinahSpent = -100000,
+                          IsGroupMember = true
+                      };
+            Players.Add(You);
             //////////////////////////////////////
         }
 
@@ -758,12 +758,16 @@ namespace KingsDamageMeter
                         chatPrefix = "/l";
                         break;
                 }
-                var sb = new StringBuilder();
-                foreach (var player in Players)
+                ICollectionView view = CollectionViewSource.GetDefaultView(Players);
+                if (view != null)
                 {
-                    sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage, Environment.NewLine);
+                    var sb = new StringBuilder();
+                    foreach (Player player in view)
+                    {
+                        sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage, Environment.NewLine);
+                    }
+                    Clipboard.SetText(sb.ToString());
                 }
-                Clipboard.SetText(sb.ToString());
             }
         }
 
