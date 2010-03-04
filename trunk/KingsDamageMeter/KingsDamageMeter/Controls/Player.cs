@@ -106,27 +106,52 @@ namespace KingsDamageMeter.Controls
             }
         }
 
-        private double damagePercent;
-        public double DamagePercent
+        private double percentFromGroupDamages;
+        public double PercentFromGroupDamages
         {
-            get { return damagePercent; }
+            get { return percentFromGroupDamages; }
             set
             {
-                if (damagePercent != value)
+                if (percentFromGroupDamages != value)
                 {
                     if (value < 0)
                     {
-                        damagePercent = 0;
+                        percentFromGroupDamages = 0;
                     }
-                    else if (value > 100)
+                    else if (value > 1)
                     {
-                        damagePercent = 100;
+                        percentFromGroupDamages = 1;
                     }
                     else
                     {
-                        damagePercent = value;
+                        percentFromGroupDamages = value;
                     }
-                    NotifyPropertyChanged("DamagePercent");
+                    NotifyPropertyChanged("PercentFromGroupDamages");
+                }
+            }
+        }
+
+        private double percentFromTopDamage;
+        public double PercentFromTopDamage
+        {
+            get { return percentFromTopDamage; }
+            set
+            {
+                if (percentFromTopDamage != value)
+                {
+                    if (value < 0)
+                    {
+                        percentFromTopDamage = 0;
+                    }
+                    else if (value > 1)
+                    {
+                        percentFromTopDamage = 1;
+                    }
+                    else
+                    {
+                        percentFromTopDamage = value;
+                    }
+                    NotifyPropertyChanged("PercentFromTopDamage");
                 }
             }
         }
@@ -224,7 +249,7 @@ namespace KingsDamageMeter.Controls
         {
             Damage = 0;
             DamageTaken = 0;
-            DamagePercent = 0;
+            PercentFromGroupDamages = 0;
             FightTime = 0;
             PeakDps = 0;
 

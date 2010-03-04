@@ -127,14 +127,14 @@
             </Grid>
             <ProgressBar Grid.Row="1"
                          VerticalAlignment="Center" 
-                         Value="{Binding DamagePercent}" 
+                         Value="{Binding PercentFromTopDamage}" 
                          Maximum="1" 
                          SmallChange="0.01" 
                          LargeChange="0.1" 
                          Margin="5,0,5,2"/>
             <TextBlock Grid.Row="1"
                        Style="{DynamicResource PlayerControlTextStyle}"
-                       Text="{Binding DamagePercent, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"
+                       Text="{Binding PercentFromGroupDamages, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"
                        HorizontalAlignment="Center"
                        Visibility="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToVisibilityConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"/>
         </Grid>

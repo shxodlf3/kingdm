@@ -136,16 +136,16 @@ namespace KingsDamageMeter
             //Players.Add(new Player
             //                {
             //                    PlayerName = "Memphistopheles",
-            //                    Damage = 10000000,
+            //                    Damage = 1000000,
             //                    FightTime = 1800,
-            //                    DamagePercent = 1,
+            //                    PercentFromGroupDamages = 1,
             //                });
             //You = new YouPlayer
             //          {
             //              PlayerName = Settings.Default.YouAlias,
             //              Damage = 10000001,
             //              FightTime = 1800,
-            //              DamagePercent = 1,
+            //              PercentFromGroupDamages = 1,
             //              Exp = 10000000,
             //              Ap = 10000,
             //              KinahEarned = 200000,
@@ -153,6 +153,7 @@ namespace KingsDamageMeter
             //              IsGroupMember = true
             //          };
             //Players.Add(You);
+            //UpdatePercents();
             //////////////////////////////////////
         }
 
@@ -580,37 +581,39 @@ namespace KingsDamageMeter
 
         private void UpdatePercents()
         {
-            long total;
-            if (Settings.Default.IsGroupOnly)
+            CalculateGroupDamagePercents();
+            CalculateTopDamagePercents();
+        }
+
+        private void CalculateTopDamagePercents()
+        {
+            if(Players.Count == 0)
             {
-                total = Players.Where(o => o.IsGroupMember).Sum(o => o.Damage);
+                return;
             }
-            else
+
+            var topDamagePlayer = Players.Where(o => o.Damage == Players.Max(x => x.Damage)).First();
+            topDamagePlayer.PercentFromTopDamage = 1;
+            foreach (var player in Players)
             {
-                total = Players.Sum(o => o.Damage);
+                if(topDamagePlayer != player)
+                {
+                    player.PercentFromTopDamage = (double)player.Damage / topDamagePlayer.Damage;
+                }
             }
+        }
+
+        private void CalculateGroupDamagePercents()
+        {
+            long total = Players.Sum(o => o.Damage);
 
             foreach (Player p in Players)
             {
-                double percent = (((double)(p.Damage - total) / total) + 1);
+                //What for need that formula?
+                //double percent = (((double) (p.Damage - total)/total) + 1);
 
-                if (Settings.Default.IsGroupOnly)
-                {
-                    if (p.IsGroupMember)
-                    {
-                        p.DamagePercent = percent;
-                    }
-
-                    else
-                    {
-                        p.DamagePercent = 0;
-                    }
-                }
-
-                else
-                {
-                    p.DamagePercent = percent;
-                }
+                //Isn't player damage percent from total is:
+                p.PercentFromGroupDamages = (double)p.Damage / total;
             }
         }
 
