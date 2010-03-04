@@ -31,6 +31,8 @@
         </LinearGradientBrush>
         <Converters:PlayerSortTypeToBoolConverter x:Key="PlayerSortTypeToBoolConverter"/>
         <Converters:DisplayTypeToBoolConverter x:Key="DisplayTypeToBoolConverter"/>
+        <Converters:DisplayTypeToVisibilityConverter x:Key="DisplayTypeToVisibilityConverter"/>
+        <Converters:DataToFormattedDataConverter x:Key="DataToFormattedDataConverter"/>
         <Style x:Key="NotUncheckedMenuItemStyle" TargetType="{x:Type MenuItem}">
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
@@ -47,11 +49,13 @@
                 </Border.Background>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="25" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="20" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                    <Grid Grid.Row="0"
+                          Margin="0,2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
@@ -82,6 +86,7 @@
                                 </Style>
                             </local:SkinButton.Style>
                         </local:SkinButton>
+                        <!--
                         <Label Grid.Column="1"
                                Name="LabelMain"
                                Style="{DynamicResource TitleLabel}"
@@ -90,6 +95,14 @@
                                Margin="4,0,8,0" 
                                VerticalContentAlignment="Center"
                                Content="KDM"/>
+                        -->
+                        <TextBlock Grid.Column="1"
+                               Style="{StaticResource MainWindowTitleTextStyle}"
+                               Text="KDM"
+                               VerticalAlignment="Center"
+                               FontFamily="Verdana"
+                               FontWeight="Bold"
+                               Margin="4,0,8,0"/>
                         <StackPanel Grid.Column="2"
                                     Orientation="Horizontal"
                                     Margin="5,0">
@@ -127,31 +140,31 @@
                                         <Separator />
                                         <MenuItem Name="MainContextView"  
                                                   Header="{LocText KingsDamageMeter:WindowMainRes:MainViewMenuHeader}">
-                                            <MenuItem Name="MainContextViewDamage" 
+                                            <!--MenuItem Name="MainContextViewDamage" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:DamageMainViewMenuHeader}" 
                                                       IsCheckable="True" 
                                                       IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Damage}}"
-                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
+                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/-->
                                             <MenuItem Name="MainContextViewDps" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:DpsMainViewMenuHeader}" 
                                                       IsCheckable="True" 
-                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.DamagePerSecond}}"
-                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.DamagePerSecond}}"/>
                                             <MenuItem Name="MainContextViewPercent" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:PercentMainViewMenuHeader}" 
                                                       IsCheckable="True" 
-                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Percent}}"
-                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Percent}}"/>
                                             <MenuItem Name="MainContextViewExperience" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:ExperienceMainViewMenuHeader}" 
                                                       IsCheckable="True" 
-                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}"
-                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}"/>
                                             <MenuItem Name="MainContextViewKinah" 
                                                       Header="{LocText KingsDamageMeter:WindowMainRes:KinahMainViewMenuHeader}" 
                                                       IsCheckable="True" 
-                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"
-                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/>
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"/>
+                                            <MenuItem Name="MainContextViewAp" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:ApMainViewMenuHeader}" 
+                                                      IsCheckable="True" 
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.AbyssPoints}}"/>
                                         </MenuItem>
                                         <MenuItem Name="MainContextSorting"
                                                   Header="{LocText KingsDamageMeter:WindowMainRes:SortingMenuHeader}">
@@ -187,6 +200,10 @@
                                         <MenuItem Name="MainContextMenuAbout" 
                                                   Header="{LocText KingsDamageMeter:WindowMainRes:AboutMenuHeader}" 
                                                   Click="MainContextMenuAbout_Click" />
+                                        <MenuItem Name="MagicMenuItem" 
+                                                  Header="Click for magic" 
+                                                  Click="MagicMenuItem_Click"
+                                                  Visibility="Collapsed"/>
                                     </ContextMenu>
                                 </local:SkinButton.ContextMenu>
                             </local:SkinButton>
@@ -204,7 +221,7 @@
                     <ItemsControl x:Name="playersItemsControl"
                                   Grid.Row="1"
                                   ItemsSource="{Binding Players}"
-                                  Margin="5,3">
+                                  Margin="5,3,5,0">
                         <ItemsControl.Template>
                             <ControlTemplate TargetType="{x:Type ItemsControl}">
                                 <ScrollViewer Style="{DynamicResource PlayerScrollViewer}" BorderThickness="1" BorderBrush="{StaticResource BorderBrush}"
@@ -224,7 +241,134 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <Grid Grid.Row="2">
+                    <Border Grid.Row="2"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1,0,1,1"
+                            MaxWidth="{Binding ActualWidth, ElementName=playersItemsControl}">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding You}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Fake border to move text to right from scrollbar -->
+                            <Border Grid.Column="0"
+                                    MinWidth="{x:Static SystemParameters.VerticalScrollBarWidth}"/>
+                            <!--                                                  -->
+                            <WrapPanel Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Style>
+                                        <Style TargetType="{x:Type StackPanel}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding You.TotalKinah}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}" 
+                                                             Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <StackPanel.ToolTip>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Column="0"
+                                                       Grid.Row="0"
+                                                       Text="{LocText KingsDamageMeter:WindowMainRes:KinahEarnedToolTip}"
+                                                       Margin="2"/>
+                                            <TextBlock Grid.Column="1"
+                                                       Grid.Row="0"
+                                                       Text="{Binding You.KinahEarned, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"
+                                                       Margin="2"/>
+                                            <TextBlock Grid.Column="0"
+                                                       Grid.Row="1"
+                                                       Text="{LocText KingsDamageMeter:WindowMainRes:KinahSpentToolTip}"
+                                                       Margin="2"/>
+                                            <TextBlock Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       Text="{Binding You.KinahSpent, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"
+                                                       Margin="2"/>
+                                        </Grid>
+                                    </StackPanel.ToolTip>
+                                    <TextBlock Text="{Binding You.TotalKinah, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"
+                                               Style="{StaticResource MainWindowTextStyle}"
+                                               Margin="2"/>
+                                    <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:PlayerKinahSymbol}"
+                                               Style="{StaticResource MainWindowTextStyle}"
+                                               Margin="0,2,3,2"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Style>
+                                        <Style TargetType="{x:Type StackPanel}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding You.Exp}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}" 
+                                                             Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <StackPanel.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:ExpPerHourToolTip}"
+                                                       Margin="2"/>
+                                            <TextBlock Text="{Binding You.ExpPerHour, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}"
+                                                       Margin="2"/>
+                                        </StackPanel>
+                                    </StackPanel.ToolTip>
+                                    <TextBlock Text="{Binding You.Exp, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}"
+                                               Style="{StaticResource MainWindowTextStyle}"
+                                               Margin="2"/>
+                                    <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:PlayerExpSymbol}"
+                                               Style="{StaticResource MainWindowTextStyle}"
+                                               Margin="0,2,3,2"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Style>
+                                        <Style TargetType="{x:Type StackPanel}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding You.Ap}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.AbyssPoints}}" 
+                                                             Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <TextBlock Text="{Binding You.Ap, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.AbyssPoints}}"
+                                               Style="{StaticResource MainWindowTextStyle}"
+                                               Margin="2"/>
+                                    <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:PlayerApSymbol}"
+                                               Style="{StaticResource MainWindowTextStyle}"
+                                               Margin="0,2"/>
+                                </StackPanel>
+                            </WrapPanel>
+                        </Grid>
+                    </Border>
+                    <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>

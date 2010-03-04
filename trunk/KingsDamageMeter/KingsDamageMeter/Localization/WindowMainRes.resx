@@ -123,14 +123,11 @@
   <data name="AddByNameMenuHeader" xml:space="preserve">
     <value>Add Group Member...</value>
   </data>
+  <data name="ApMainViewMenuHeader" xml:space="preserve">
+    <value>Abyss Points</value>
+  </data>
   <data name="CloseBtnToolTip" xml:space="preserve">
     <value>Close</value>
-  </data>
-  <data name="CopyAllMenuHeader" xml:space="preserve">
-    <value>Copy All</value>
-  </data>
-  <data name="CopyYouMenuHeader" xml:space="preserve">
-    <value>Copy You</value>
   </data>
   <data name="DamageMainViewMenuHeader" xml:space="preserve">
     <value>Damage</value>
@@ -140,6 +137,9 @@
   </data>
   <data name="ExperienceMainViewMenuHeader" xml:space="preserve">
     <value>Experience</value>
+  </data>
+  <data name="ExpPerHourToolTip" xml:space="preserve">
+    <value>Exp per Hour:</value>
   </data>
   <data name="GroupOnlyMenuHeader" xml:space="preserve">
     <value>Group Only</value>
@@ -153,8 +153,14 @@
   <data name="IgnoreListMenuHeader" xml:space="preserve">
     <value>Ignore List...</value>
   </data>
+  <data name="KinahEarnedToolTip" xml:space="preserve">
+    <value>Earned:</value>
+  </data>
   <data name="KinahMainViewMenuHeader" xml:space="preserve">
     <value>Kinah</value>
+  </data>
+  <data name="KinahSpentToolTip" xml:space="preserve">
+    <value>Spent:</value>
   </data>
   <data name="LanguageMenuHeader" xml:space="preserve">
     <value>Language</value>
@@ -182,6 +188,15 @@
   </data>
   <data name="PercentMainViewMenuHeader" xml:space="preserve">
     <value>Percent</value>
+  </data>
+  <data name="PlayerApSymbol" xml:space="preserve">
+    <value>(a)</value>
+  </data>
+  <data name="PlayerExpSymbol" xml:space="preserve">
+    <value>(e)</value>
+  </data>
+  <data name="PlayerKinahSymbol" xml:space="preserve">
+    <value>(k)</value>
   </data>
   <data name="PowerOffBtnTooltip" xml:space="preserve">
     <value>Power Off</value>

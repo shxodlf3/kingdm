@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Converters="clr-namespace:KingsDamageMeter.Converters"
              xmlns:Controls="clr-namespace:KingsDamageMeter.Controls"
-             MinHeight="40" MinWidth="160">
+             xmlns:Properties="clr-namespace:KingsDamageMeter.Properties"
+             MinHeight="38" MinWidth="150"
+             Margin="2">
     <UserControl.Resources>
-        <Converters:DetectYouConverter x:Key="DetectYouConverter"/>
         <Converters:DataToFormattedDataConverter x:Key="DataToFormattedDataConverter"/>
+        <Converters:DisplayTypeToVisibilityConverter x:Key="DisplayTypeToVisibilityConverter"/>
         <Style x:Key="DisabledYouMenuItemStyle" TargetType="{x:Type MenuItem}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerName, Mode=OneWay, Converter={StaticResource DetectYouConverter}}" Value="True">
@@ -41,7 +43,7 @@
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipBiggestHit}"/>
             </StackPanel>
-            <TextBlock>
+            <!--TextBlock>
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Style.Triggers>
@@ -98,65 +100,15 @@
                 </StackPanel.Style>
                 <TextBlock Text="{Binding Ap, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.AbyssPoints}}"/>
                 <TextBlock Text=" "/>
-                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipExpPerHour}"/>
-            </StackPanel>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipAp}"/>
+            </StackPanel-->
         </StackPanel>
     </UserControl.ToolTip>
-    <UserControl.Style>
-        <Style TargetType="{x:Type UserControl}">
-            <Style.Triggers>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding IsGroupMember}" Value="True"/>
-                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <ImageBrush ImageSource="/Themes/BlackPearl/Images/GroupMemberBackground_MouseOver.bmp" Stretch="Fill" />
-                        </Setter.Value>
-                    </Setter>
-                </MultiDataTrigger>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding IsGroupMember}" Value="True"/>
-                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False"/>
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <ImageBrush ImageSource="/Themes/BlackPearl/Images/GroupMemberBackground.bmp" Stretch="Fill" />
-                        </Setter.Value>
-                    </Setter>
-                </MultiDataTrigger>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding IsGroupMember}" Value="False"/>
-                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False"/>
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <ImageBrush ImageSource="/Themes/BlackPearl/Images/PlayerBackground.bmp" Stretch="Fill" />
-                        </Setter.Value>
-                    </Setter>
-                </MultiDataTrigger>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding IsGroupMember}" Value="False"/>
-                        <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <ImageBrush ImageSource="/Themes/BlackPearl/Images/PlayerBackground_Hover.bmp" Stretch="Fill" />
-                        </Setter.Value>
-                    </Setter>
-                </MultiDataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Style>
     <UserControl.ContextMenu>
         <ContextMenu FontSize="9" FontFamily="Verdana">
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMenuHeader}" 
-                      Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
-                      CommandParameter="{x:Static Controls:ClipboardCopyType.OnlyYou}"/>
+                      Command="{x:Static Controls:Commands.CopySelectedToClipboardCommand}"
+                      CommandParameter="{Binding}"/>
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroMenuHeader}">
                 <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroGroupMenuHeader}"
                       Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
@@ -203,43 +155,47 @@
                       Command="{x:Static Controls:Commands.ClearAllCommand}"/>
         </ContextMenu>
     </UserControl.ContextMenu>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Label Foreground="Gold" 
-               FontFamily="Verdana" 
-               FlowDirection="LeftToRight" 
-               FontSize="9"
-               Content="{Binding PlayerName}">
-            <Label.Style>
-                <Style TargetType="{x:Type Label}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding PlayerName, Mode=OneWay, Converter={StaticResource DetectYouConverter}}" Value="True">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Label.Style>
-        </Label>
-        <Label Grid.Column="1"
-                   Foreground="Gold" 
-                   HorizontalAlignment="Right"
-                   FontFamily="Verdana"
-                   FontSize="9"
-                   Content="{Binding DisplayData}"/>
-        <ProgressBar VerticalAlignment="Center" 
-                     Value="{Binding DamagePercent}" 
-                     Maximum="1" 
-                     SmallChange="0.01" 
-                     LargeChange="0.1" 
-                     Grid.Row="1" 
-                     Grid.ColumnSpan="2" 
-                     Margin="5,0,5,2"/>
-    </Grid>
+    <Border Style="{DynamicResource PlayerControlBorderStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding PlayerName}"
+                           VerticalAlignment="Center"
+                           Margin="2,0,0,0"
+                           Style="{DynamicResource PlayerNameTextStyle}"/>
+                <StackPanel Grid.Column="1"
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            Margin="0,0,4,0"
+                            HorizontalAlignment="Right">
+                    <TextBlock HorizontalAlignment="Right"
+                               Style="{DynamicResource PlayerControlTextStyle}"
+                               Text="{Binding Damage, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
+                    <TextBlock HorizontalAlignment="Right"
+                               Style="{DynamicResource PlayerControlTextStyle}"
+                               Text="{Binding DamagePerSecond, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"
+                               Visibility="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToVisibilityConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
+                </StackPanel>
+            </Grid>
+            <ProgressBar Grid.Row="1"
+                         VerticalAlignment="Center" 
+                         Value="{Binding DamagePercent}" 
+                         Maximum="1" 
+                         SmallChange="0.01" 
+                         LargeChange="0.1" 
+                         Margin="5,0,5,2"/>
+            <TextBlock Grid.Row="1"
+                       Style="{DynamicResource PlayerControlTextStyle}"
+                       Text="{Binding DamagePercent, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"
+                       HorizontalAlignment="Center"
+                       Visibility="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToVisibilityConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"/>
+        </Grid>
+    </Border>
 </UserControl>

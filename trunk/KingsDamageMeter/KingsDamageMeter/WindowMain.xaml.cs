@@ -18,6 +18,7 @@
 \**************************************************************************/
 
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.ComponentModel;
 using System.Windows.Controls;
@@ -213,6 +214,32 @@ namespace KingsDamageMeter
                 ////////////////////////////////////////////////////////////////////
                 isLoaded = true;
             }
+        }
+
+        private void MagicMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceDictionary skinDict =
+                    Application.LoadComponent(new Uri("/KingsDamageMeter;component/Themes/BlueSky.xaml", UriKind.Relative)) as ResourceDictionary;
+
+            Collection<ResourceDictionary> mergedDicts =
+                Application.Current.Resources.MergedDictionaries;
+
+            // Remove the existing skin dictionary, if one exists.
+
+            // NOTE: In a real application, this logic might need
+
+            // to be more complex, because there might be dictionaries
+
+            // which should not be removed.
+
+            if (mergedDicts.Count > 0)
+                mergedDicts.Clear();
+
+            // Apply the selected skin so that all elements in the
+
+            // application will honor the new look and feel.
+
+            mergedDicts.Add(skinDict);
         }
     }
 }

@@ -79,29 +79,20 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abyss Points.
+        /// </summary>
+        internal static string ApMainViewMenuHeader {
+            get {
+                return ResourceManager.GetString("ApMainViewMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         internal static string CloseBtnToolTip {
             get {
                 return ResourceManager.GetString("CloseBtnToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Copy All.
-        /// </summary>
-        internal static string CopyAllMenuHeader {
-            get {
-                return ResourceManager.GetString("CopyAllMenuHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Copy You.
-        /// </summary>
-        internal static string CopyYouMenuHeader {
-            get {
-                return ResourceManager.GetString("CopyYouMenuHeader", resourceCulture);
             }
         }
         
@@ -129,6 +120,15 @@ namespace KingsDamageMeter.Localization {
         internal static string ExperienceMainViewMenuHeader {
             get {
                 return ResourceManager.GetString("ExperienceMainViewMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exp per Hour:.
+        /// </summary>
+        internal static string ExpPerHourToolTip {
+            get {
+                return ResourceManager.GetString("ExpPerHourToolTip", resourceCulture);
             }
         }
         
@@ -169,11 +169,29 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Earned:.
+        /// </summary>
+        internal static string KinahEarnedToolTip {
+            get {
+                return ResourceManager.GetString("KinahEarnedToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kinah.
         /// </summary>
         internal static string KinahMainViewMenuHeader {
             get {
                 return ResourceManager.GetString("KinahMainViewMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spent:.
+        /// </summary>
+        internal static string KinahSpentToolTip {
+            get {
+                return ResourceManager.GetString("KinahSpentToolTip", resourceCulture);
             }
         }
         
@@ -255,6 +273,33 @@ namespace KingsDamageMeter.Localization {
         internal static string PercentMainViewMenuHeader {
             get {
                 return ResourceManager.GetString("PercentMainViewMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (a).
+        /// </summary>
+        internal static string PlayerApSymbol {
+            get {
+                return ResourceManager.GetString("PlayerApSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (e).
+        /// </summary>
+        internal static string PlayerExpSymbol {
+            get {
+                return ResourceManager.GetString("PlayerExpSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (k).
+        /// </summary>
+        internal static string PlayerKinahSymbol {
+            get {
+                return ResourceManager.GetString("PlayerKinahSymbol", resourceCulture);
             }
         }
         

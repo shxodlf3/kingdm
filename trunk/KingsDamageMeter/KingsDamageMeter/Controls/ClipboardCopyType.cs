@@ -2,7 +2,7 @@ namespace KingsDamageMeter.Controls
 {
     public enum ClipboardCopyType
     {
-        OnlyYou,
+        OnlySelected,
         ToPartyChat,
         ToAllianceChat,
         ToLegionChat,

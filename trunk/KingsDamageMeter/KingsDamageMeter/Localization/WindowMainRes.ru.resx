@@ -123,14 +123,11 @@
   <data name="AddByNameMenuHeader" xml:space="preserve">
     <value>Добавить по имени</value>
   </data>
+  <data name="ApMainViewMenuHeader" xml:space="preserve">
+    <value>Очки Бездны</value>
+  </data>
   <data name="CloseBtnToolTip" xml:space="preserve">
     <value>Закрыть</value>
-  </data>
-  <data name="CopyAllMenuHeader" xml:space="preserve">
-    <value>Копировать все данные</value>
-  </data>
-  <data name="CopyYouMenuHeader" xml:space="preserve">
-    <value>Копировать свои данные</value>
   </data>
   <data name="DamageMainViewMenuHeader" xml:space="preserve">
     <value>Урон</value>
@@ -140,6 +137,9 @@
   </data>
   <data name="ExperienceMainViewMenuHeader" xml:space="preserve">
     <value>Опыт</value>
+  </data>
+  <data name="ExpPerHourToolTip" xml:space="preserve">
+    <value>Опыта в час:</value>
   </data>
   <data name="GroupOnlyMenuHeader" xml:space="preserve">
     <value>Показывать только группу</value>
@@ -153,8 +153,14 @@
   <data name="IgnoreListMenuHeader" xml:space="preserve">
     <value>Список игнорируемых...</value>
   </data>
+  <data name="KinahEarnedToolTip" xml:space="preserve">
+    <value>Получено:</value>
+  </data>
   <data name="KinahMainViewMenuHeader" xml:space="preserve">
     <value>Кина</value>
+  </data>
+  <data name="KinahSpentToolTip" xml:space="preserve">
+    <value>Потрачено:</value>
   </data>
   <data name="LanguageMenuHeader" xml:space="preserve">
     <value>Язык</value>
@@ -182,6 +188,15 @@
   </data>
   <data name="PercentMainViewMenuHeader" xml:space="preserve">
     <value>Процент</value>
+  </data>
+  <data name="PlayerApSymbol" xml:space="preserve">
+    <value>(б)</value>
+  </data>
+  <data name="PlayerExpSymbol" xml:space="preserve">
+    <value>(о)</value>
+  </data>
+  <data name="PlayerKinahSymbol" xml:space="preserve">
+    <value>(к)</value>
   </data>
   <data name="PowerOffBtnTooltip" xml:space="preserve">
     <value>Выключено</value>

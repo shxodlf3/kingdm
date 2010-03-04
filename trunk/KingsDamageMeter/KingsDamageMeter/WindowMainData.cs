@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -10,10 +11,8 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Data;
 using KingsDamageMeter.Controls;
-using KingsDamageMeter.Languages;
 using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
-using WPFLocalizeExtension.Engine;
 using Timer=System.Timers.Timer;
 
 namespace KingsDamageMeter
@@ -48,6 +47,21 @@ namespace KingsDamageMeter
         public ObservableCollection<Player> Players { get; private set; }
 
         public ObservableCollection<CultureInfo> AvailableLanguages { get; private set; }
+
+        private YouPlayer you;
+        public YouPlayer You
+        {
+            get { return you; }
+            private set
+            {
+                if(you != value)
+                {
+                    you = value;
+                    NotifyPropertyChanged("You");
+                }
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -109,6 +123,7 @@ namespace KingsDamageMeter
         public WindowMainData()
         {
             Players = new ObservableCollection<Player>();
+            Players.CollectionChanged += PlayersCollectionChanged;
             AvailableLanguages = new ObservableCollection<CultureInfo>();
             Settings.Default.PropertyChanged += OnSettingsChanged;
 
@@ -116,6 +131,29 @@ namespace KingsDamageMeter
             InitializeTimers();
             InitializeCommands();
             DetectAvailableLanguages();
+
+            //Note: This is a test
+            //Players.Add(new Player
+            //                {
+            //                    PlayerName = "Memphistopheles",
+            //                    Damage = 10000000,
+            //                    FightTime = 1800,
+            //                    DamagePercent = 1,
+            //                });
+            //You = new YouPlayer
+            //          {
+            //              PlayerName = Settings.Default.YouAlias,
+            //              Damage = 10000000,
+            //              FightTime = 1800,
+            //              DamagePercent = 1,
+            //              Exp = 10000000,
+            //              Ap = 10000,
+            //              KinahEarned = 200000,
+            //              KinahSpent = -100000,
+            //              IsGroupMember = true
+            //          };
+            //Players.Add(You);
+            //////////////////////////////////////
         }
 
         private void InitializeCommands()
@@ -124,7 +162,8 @@ namespace KingsDamageMeter
             Commands.ResetCountsCommand = new ObjectRelayCommand(o => ResetDamage());
             Commands.RemovePlayerCommand = new RelayCommand<Player>(RemovePlayer, player => player != null);
             Commands.IgnorePlayerCommand = new RelayCommand<Player>(IgnorePlayer, player => player != null);
-            Commands.CopyToClipboardCommand = new RelayCommand<ClipboardCopyType>(CopyToClipboard);
+            Commands.CopyToClipboardCommand = new RelayCommand<ClipboardCopyType>(o=>CopyToClipboard(o, null));
+            Commands.CopySelectedToClipboardCommand = new RelayCommand<Player>(o=>CopyToClipboard(ClipboardCopyType.OnlySelected, o));
         }
 
         private void InitializeTimers()
@@ -334,13 +373,11 @@ namespace KingsDamageMeter
             {
                 player.Damage += damage;
                 player.Skills.Incriment(skill, damage);
-                if (!Settings.Default.IgnoreList.Contains(name))
+                UpdatePercents();
+
+                if (!sortTimer.Enabled)
                 {
-                    UpdatePercents();
-                    if (!sortTimer.Enabled)
-                    {
-                        sortTimer.Enabled = true;
-                    }
+                    sortTimer.Enabled = true;
                 }
             }
         }
@@ -357,7 +394,7 @@ namespace KingsDamageMeter
                 AddPlayer(name, false);
             }
 
-            var player = Players.FirstOrDefault(o => o.PlayerName == name);
+            var player = Players.FirstOrDefault(o => o.PlayerName == name) as YouPlayer;
             if (player != null)
             {
                 player.Exp += exp;
@@ -381,10 +418,17 @@ namespace KingsDamageMeter
                 AddPlayer(name, false);
             }
 
-            var player = Players.FirstOrDefault(o => o.PlayerName == name);
+            var player = Players.FirstOrDefault(o => o.PlayerName == name) as YouPlayer;
             if (player != null)
             {
-                player.Kinah += isEarned ? kinah : -kinah;
+                if(isEarned)
+                {
+                    player.KinahEarned += kinah;
+                }
+                else
+                {
+                    player.KinahSpent -= kinah;
+                }
             }
         }
 
@@ -400,7 +444,7 @@ namespace KingsDamageMeter
                 AddPlayer(name, false);
             }
 
-            var player = Players.FirstOrDefault(o => o.PlayerName == name);
+            var player = Players.FirstOrDefault(o => o.PlayerName == name) as YouPlayer;
             if (player != null)
             {
                 player.Ap += points;
@@ -432,16 +476,28 @@ namespace KingsDamageMeter
 
             if (!String.IsNullOrEmpty(name))
             {
-                var p = new Player
+                Player p;
+                if (name == Settings.Default.YouAlias)
                 {
-                    PlayerName = name,
-                    IsGroupMember = isGroupMember
-                };
+                    p = new YouPlayer
+                            {
+                                PlayerName = name,
+                                IsGroupMember = true
+                            };
+                }
+                else
+                {
+                    p = new Player
+                            {
+                                PlayerName = name,
+                                IsGroupMember = isGroupMember
+                            };
+                }
 
                 Players.Add(p);
 
                 //SetFilter();
-                if (name == Settings.Default.YouAlias || Settings.Default.FriendList.Contains(name))
+                if (Settings.Default.FriendList.Contains(name))
                 {
                     p.IsGroupMember = true;
                     return;
@@ -453,6 +509,7 @@ namespace KingsDamageMeter
         private void RemovePlayer(Player player)
         {
             Players.Remove(player);
+            UpdatePercents();
         }
 
         private void IgnorePlayer(Player player)
@@ -603,6 +660,7 @@ namespace KingsDamageMeter
             if (player != null)
             {
                 player.IsGroupMember = false;
+                SetFilter();
                 UpdatePercents();
                 UpdateSort();
             }
@@ -676,14 +734,13 @@ namespace KingsDamageMeter
             Settings.Default.SelectedLanguage = findedLanguage ?? AvailableLanguages[0];
         }
 
-        private void CopyToClipboard(ClipboardCopyType copyType)
+        private void CopyToClipboard(ClipboardCopyType copyType, Player selectedPlayer)
         {
-            if(copyType == ClipboardCopyType.OnlyYou)
+            if(copyType == ClipboardCopyType.OnlySelected)
             {
-                var you = Players.FirstOrDefault(o => o.PlayerName == Settings.Default.YouAlias);
-                if (you != null)
+                if (selectedPlayer != null)
                 {
-                    Clipboard.SetText(Settings.Default.YouAlias + " " + you.Damage);
+                    Clipboard.SetText(selectedPlayer.PlayerName + " " + selectedPlayer.Damage);
                 }
             }
             else
@@ -707,6 +764,38 @@ namespace KingsDamageMeter
                     sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage, Environment.NewLine);
                 }
                 Clipboard.SetText(sb.ToString());
+            }
+        }
+
+        private void PlayersCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    if(e.NewItems != null)
+                    {
+                        var youAre =
+                            e.NewItems.Cast<Player>().FirstOrDefault(o => o.PlayerName == Settings.Default.YouAlias) as YouPlayer;
+                        if(youAre != null)
+                        {
+                            You = youAre;
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems != null)
+                    {
+                        var youAre =
+                            e.OldItems.Cast<Player>().FirstOrDefault(o => o.PlayerName == Settings.Default.YouAlias);
+                        if (youAre != null)
+                        {
+                            You = null;
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    You = null;
+                    break;
             }
         }
 

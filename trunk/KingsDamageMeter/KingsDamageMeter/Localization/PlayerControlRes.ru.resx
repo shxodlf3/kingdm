@@ -133,7 +133,7 @@
     <value>Копировать для макроса</value>
   </data>
   <data name="CopyMenuHeader" xml:space="preserve">
-    <value>Копировать себя</value>
+    <value>Копировать</value>
   </data>
   <data name="FriendMenuHeader" xml:space="preserve">
     <value>Друг</value>

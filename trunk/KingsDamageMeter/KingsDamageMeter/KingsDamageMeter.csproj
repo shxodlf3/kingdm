@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2ED927CC-AF2E-4190-AF56-7B18F8C2B8AC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -89,6 +89,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\BlackPearl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\BlackPearl\CheckBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\BlueSky.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WindowMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -155,8 +163,10 @@
     <Compile Include="Controls\Player.cs" />
     <Compile Include="Controls\PlayerSortType.cs" />
     <Compile Include="Controls\RelayCommand.cs" />
+    <Compile Include="Controls\YouPlayer.cs" />
     <Compile Include="Converters\DataToFormattedDataConverter.cs" />
     <Compile Include="Converters\DisplayTypeToBoolConverter.cs" />
+    <Compile Include="Converters\DisplayTypeToVisibilityConverter.cs" />
     <Compile Include="Converters\IsLanguageSelectedConverter.cs" />
     <Compile Include="Converters\DetectYouConverter.cs" />
     <Compile Include="Converters\PlayerSortTypeToBoolConverter.cs" />

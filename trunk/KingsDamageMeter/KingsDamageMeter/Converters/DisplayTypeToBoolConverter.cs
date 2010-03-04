@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using KingsDamageMeter.Controls;
+using KingsDamageMeter.Properties;
 
 namespace KingsDamageMeter.Converters
 {
@@ -13,7 +14,7 @@ namespace KingsDamageMeter.Converters
         {
             if (value is DisplayType && parameter is DisplayType)
             {
-                return (DisplayType)value == (DisplayType)parameter;
+                return ((DisplayType)value & (DisplayType)parameter) == (DisplayType)parameter;
 
             }
             return false;
@@ -25,7 +26,15 @@ namespace KingsDamageMeter.Converters
             {
                 if((bool)value)
                 {
-                    return (DisplayType)parameter;
+                    DisplayType result = Settings.Default.DisplayType;
+                    result |= (DisplayType)parameter;
+                    return result;
+                }
+                else
+                {
+                    DisplayType result = Settings.Default.DisplayType;
+                    result &= ~(DisplayType)parameter;
+                    return result;
                 }
             }
             return DisplayType.Damage;

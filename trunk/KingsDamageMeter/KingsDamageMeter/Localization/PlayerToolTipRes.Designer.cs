@@ -61,6 +61,15 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to abyss points.
+        /// </summary>
+        internal static string PlayerToolTipAp {
+            get {
+                return ResourceManager.GetString("PlayerToolTipAp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to biggest hit.
         /// </summary>
         internal static string PlayerToolTipBiggestHit {

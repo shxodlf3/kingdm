@@ -19,6 +19,11 @@ namespace KingsDamageMeter.Converters
         {
             if (parameter is DisplayType)
             {
+                var val = System.Convert.ToDouble(value);
+                if (val == 0)
+                {
+                    return string.Empty;
+                }
                 switch ((DisplayType)parameter)
                 {
                     case DisplayType.Damage:
@@ -26,9 +31,9 @@ namespace KingsDamageMeter.Converters
                     case DisplayType.Experience:
                     case DisplayType.Kinah:
                     case DisplayType.AbyssPoints:
-                        return System.Convert.ToDouble(value).ToString("#,#");
+                        return val.ToString("#,#");
                     case DisplayType.Percent:
-                        return System.Convert.ToDouble(value).ToString("0%");
+                        return val.ToString("0%");
                 }
             }
             return string.Empty;

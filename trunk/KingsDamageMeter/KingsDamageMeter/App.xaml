@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Themes/BlackPearl/TitleLabel.xaml" />
                 <ResourceDictionary Source="Themes/BlackPearl/ToolTip.xaml" />
                 <ResourceDictionary Source="Themes/BlackPearl/Thumb.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

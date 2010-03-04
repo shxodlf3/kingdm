@@ -1,13 +1,15 @@
+using System;
+
 namespace KingsDamageMeter.Controls
 {
+    [Flags]
     public enum DisplayType
     {
-        None,
-        Damage,
-        DamagePerSecond,
-        Percent,
-        Experience,
-        Kinah,
-        AbyssPoints
+        Damage = 1,
+        DamagePerSecond = 2,
+        Percent = 4,
+        Experience = 8,
+        Kinah = 16,
+        AbyssPoints = 32
     }
 }

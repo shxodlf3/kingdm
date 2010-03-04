@@ -1,10 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Text;
-using System.Threading;
 using KingsDamageMeter.Combat;
-using KingsDamageMeter.Converters;
-using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
 using Timer=System.Timers.Timer;
 
@@ -15,7 +11,6 @@ namespace KingsDamageMeter.Controls
         private readonly Timer fightTimer = new Timer(1000);
         private readonly Timer endOfFightTimer = new Timer(5000);
         private DateTime timeSinceLastDamage;
-        private DateTime startTime = DateTime.Now;
 
         public Player()
         {
@@ -32,7 +27,7 @@ namespace KingsDamageMeter.Controls
                                                //System.Diagnostics.Debug.WriteLine("Fight has ended: " + FightTime);
                                            };
 
-            Settings.Default.PropertyChanged += SettingsChanged;
+            //Settings.Default.PropertyChanged += SettingsChanged;
             Skills = new SkillCollection();
         }
 
@@ -52,7 +47,7 @@ namespace KingsDamageMeter.Controls
             }
         }
 
-        public string DisplayData
+        /*public string DisplayData
         {
             get
             {
@@ -72,7 +67,7 @@ namespace KingsDamageMeter.Controls
                         return string.Empty;
                 }
             }
-        }
+        }*/
 
         private long damage;
         public long Damage
@@ -117,34 +112,6 @@ namespace KingsDamageMeter.Controls
                 {
                     biggestHit = value;
                     NotifyPropertyChanged("BiggestHit");
-                }
-            }
-        }
-
-        private int exp;
-        public int Exp
-        {
-            get { return exp; }
-            set
-            {
-                if (exp != value)
-                {
-                    exp = value;
-                    NotifyPropertyChanged("Exp");
-                }
-            }
-        }
-
-        private int kinah;
-        public int Kinah
-        {
-            get { return kinah; }
-            set
-            {
-                if (kinah != value)
-                {
-                    kinah = value;
-                    NotifyPropertyChanged("Kinah");
                 }
             }
         }
@@ -234,20 +201,6 @@ namespace KingsDamageMeter.Controls
             }
         }
 
-        private int ap;
-        public int Ap
-        {
-            get { return ap; }
-            set
-            {
-                if(ap != value)
-                {
-                    ap = value;
-                    NotifyPropertyChanged("Ap");
-                }
-            }
-        }
-
         private bool isGroupMember;
         public bool IsGroupMember
         {
@@ -287,55 +240,33 @@ namespace KingsDamageMeter.Controls
             }
         }
 
-        public int ExpPerHour
-        {
-            get
-            {
-                if (Exp == 0)
-                {
-                    return 0;
-                }
-                TimeSpan span = DateTime.Now - startTime;
-                return (int)((Exp / span.TotalSeconds) * 3600);
-            }
-        }
-
-        public string ExpPerHourFormatted
-        {
-            get { return ExpPerHour.ToString("#,#"); }
-        }
-
         public SkillCollection Skills { get; private set; }
 
         #endregion
 
-        public void Reset()
+        public virtual void Reset()
         {
             Damage = 0;
             DamageTaken = 0;
             DamagePercent = 0;
             FightTime = 0;
             PeakDps = 0;
-            Exp = 0;
-            Kinah = 0;
-            Ap = 0;
 
-            startTime = DateTime.Now;
             Skills.Clear();
         }
 
-        private void SettingsChanged(object sender, PropertyChangedEventArgs e)
+        /*private void SettingsChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "DisplayType")
             {
                 NotifyPropertyChanged("DisplayData");
             }
-        }
+        }*/
 
         #region Implementation of INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
+        protected void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
