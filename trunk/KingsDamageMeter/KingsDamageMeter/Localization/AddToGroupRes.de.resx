@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PlayerToolTipBiggestHit" xml:space="preserve">
-    <value>biggest hit</value>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Abbrechen</value>
   </data>
-  <data name="PlayerToolTipDps" xml:space="preserve">
-    <value>dps</value>
+  <data name="InvalidNameMessage" xml:space="preserve">
+    <value>Der Name ist ungültig. Namen müssen mit einem Großbuchstaben beginnen und dürfen weder Leerzeichen noch Symbole enthalten.</value>
   </data>
-  <data name="PlayerToolTipPeak" xml:space="preserve">
-    <value>peak</value>
+  <data name="OKButton" xml:space="preserve">
+    <value>OK</value>
   </data>
-  <data name="PlayerToolTipTotal" xml:space="preserve">
-    <value>total</value>
+  <data name="WindowTitle" xml:space="preserve">
+    <value>Gruppenmitglied hinzufügen</value>
   </data>
 </root>

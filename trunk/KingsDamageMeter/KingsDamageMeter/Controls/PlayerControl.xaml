@@ -43,65 +43,6 @@
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipBiggestHit}"/>
             </StackPanel>
-            <!--TextBlock>
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Kinah}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding ExpPerHour}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Ap}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel.Style>
-                    <Style TargetType="{x:Type StackPanel}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Kinah}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                <TextBlock Text="{Binding Kinah, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Kinah}}"/>
-                <TextBlock Text=" "/>
-                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipKinah}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel.Style>
-                    <Style TargetType="{x:Type StackPanel}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ExpPerHour}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                <TextBlock Text="{Binding ExpPerHour, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Experience}}"/>
-                <TextBlock Text=" "/>
-                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipExpPerHour}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel.Style>
-                    <Style TargetType="{x:Type StackPanel}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Ap}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
-                <TextBlock Text="{Binding Ap, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.AbyssPoints}}"/>
-                <TextBlock Text=" "/>
-                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipAp}"/>
-            </StackPanel-->
         </StackPanel>
     </UserControl.ToolTip>
     <UserControl.ContextMenu>

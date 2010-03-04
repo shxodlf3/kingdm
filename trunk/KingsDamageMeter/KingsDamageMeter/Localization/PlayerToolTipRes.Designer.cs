@@ -61,15 +61,6 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to abyss points.
-        /// </summary>
-        internal static string PlayerToolTipAp {
-            get {
-                return ResourceManager.GetString("PlayerToolTipAp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to biggest hit.
         /// </summary>
         internal static string PlayerToolTipBiggestHit {
@@ -84,24 +75,6 @@ namespace KingsDamageMeter.Localization {
         internal static string PlayerToolTipDps {
             get {
                 return ResourceManager.GetString("PlayerToolTipDps", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to xp hour.
-        /// </summary>
-        internal static string PlayerToolTipExpPerHour {
-            get {
-                return ResourceManager.GetString("PlayerToolTipExpPerHour", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to kinah.
-        /// </summary>
-        internal static string PlayerToolTipKinah {
-            get {
-                return ResourceManager.GetString("PlayerToolTipKinah", resourceCulture);
             }
         }
         

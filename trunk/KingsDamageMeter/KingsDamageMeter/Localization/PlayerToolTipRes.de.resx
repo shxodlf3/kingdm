@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PlayerToolTipBiggestHit" xml:space="preserve">
-    <value>biggest hit</value>
+    <value>höchster Treffer</value>
   </data>
   <data name="PlayerToolTipDps" xml:space="preserve">
     <value>dps</value>
   </data>
   <data name="PlayerToolTipPeak" xml:space="preserve">
-    <value>peak</value>
+    <value>Höchstwert</value>
   </data>
   <data name="PlayerToolTipTotal" xml:space="preserve">
-    <value>total</value>
+    <value>Gesamt</value>
   </data>
 </root>

@@ -285,6 +285,9 @@
       <DependentUpon>SkillsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\AddToGroupRes.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\AddToGroupRes.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AddToGroupRes.Designer.cs</LastGenOutput>
@@ -293,7 +296,16 @@
     <EmbeddedResource Include="Localization\AddToGroupRes.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\PlayerControlRes.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\PlayerToolTipRes.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\PlayerToolTipRes.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\SkillsFormRes.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\SkillsFormRes.ru.resx">
@@ -307,6 +319,9 @@
     <EmbeddedResource Include="Localization\SkillsFormRes.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SkillsFormRes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\WindowMainRes.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\WindowMainRes.ru.resx">

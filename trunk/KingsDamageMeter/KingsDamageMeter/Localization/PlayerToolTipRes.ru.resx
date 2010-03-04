@@ -117,20 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PlayerToolTipAp" xml:space="preserve">
-    <value>очки бездны</value>
-  </data>
   <data name="PlayerToolTipBiggestHit" xml:space="preserve">
     <value>максимальный удар</value>
   </data>
   <data name="PlayerToolTipDps" xml:space="preserve">
     <value>урон в секунду</value>
-  </data>
-  <data name="PlayerToolTipExpPerHour" xml:space="preserve">
-    <value>опыта в час</value>
-  </data>
-  <data name="PlayerToolTipKinah" xml:space="preserve">
-    <value>кины</value>
   </data>
   <data name="PlayerToolTipPeak" xml:space="preserve">
     <value>пиковый</value>

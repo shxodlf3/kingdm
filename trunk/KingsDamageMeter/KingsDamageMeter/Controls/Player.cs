@@ -27,7 +27,6 @@ namespace KingsDamageMeter.Controls
                                                //System.Diagnostics.Debug.WriteLine("Fight has ended: " + FightTime);
                                            };
 
-            //Settings.Default.PropertyChanged += SettingsChanged;
             Skills = new SkillCollection();
         }
 
@@ -46,28 +45,6 @@ namespace KingsDamageMeter.Controls
                 }
             }
         }
-
-        /*public string DisplayData
-        {
-            get
-            {
-                switch (Settings.Default.DisplayType)
-                {
-                    case DisplayType.Damage:
-                        return (string)DataToFormattedDataConverter.Instance.Convert(Damage, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
-                    case DisplayType.DamagePerSecond:
-                        return (string)DataToFormattedDataConverter.Instance.Convert(DamagePerSecond, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
-                    case DisplayType.Percent:
-                        return (string)DataToFormattedDataConverter.Instance.Convert(DamagePercent, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
-                    case DisplayType.Experience:
-                        return (string)DataToFormattedDataConverter.Instance.Convert(Exp, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
-                    case DisplayType.Kinah:
-                        return (string)DataToFormattedDataConverter.Instance.Convert(Kinah, typeof(string), Settings.Default.DisplayType, Thread.CurrentThread.CurrentUICulture);
-                    default:
-                        return string.Empty;
-                }
-            }
-        }*/
 
         private long damage;
         public long Damage
@@ -97,7 +74,6 @@ namespace KingsDamageMeter.Controls
                     endOfFightTimer.Start();
 
                     NotifyPropertyChanged("Damage");
-                    NotifyPropertyChanged("DisplayData");
                 }
             }
         }
@@ -254,14 +230,6 @@ namespace KingsDamageMeter.Controls
 
             Skills.Clear();
         }
-
-        /*private void SettingsChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "DisplayType")
-            {
-                NotifyPropertyChanged("DisplayData");
-            }
-        }*/
 
         #region Implementation of INotifyPropertyChanged
 

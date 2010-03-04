@@ -67,6 +67,12 @@ namespace KingsDamageMeter
         {
             base.OnStartup(e);
 
+#if DEBUG
+            Settings.Default.Debug = true;
+#else
+            Settings.Default.Debug = false;
+#endif
+
             if (Settings.Default.IgnoreList == null)
             {
                 Settings.Default.IgnoreList = new ObservableCollection<string>();

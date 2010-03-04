@@ -117,16 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PlayerToolTipBiggestHit" xml:space="preserve">
-    <value>biggest hit</value>
+  <data name="ClearListMenuHeader" xml:space="preserve">
+    <value>Listezurücksetzten</value>
   </data>
-  <data name="PlayerToolTipDps" xml:space="preserve">
-    <value>dps</value>
+  <data name="CopyMacroAllianceMenuHeader" xml:space="preserve">
+    <value>Allianz Chat</value>
   </data>
-  <data name="PlayerToolTipPeak" xml:space="preserve">
-    <value>peak</value>
+  <data name="CopyMacroGroupMenuHeader" xml:space="preserve">
+    <value>Group Chat</value>
   </data>
-  <data name="PlayerToolTipTotal" xml:space="preserve">
-    <value>total</value>
+  <data name="CopyMacroLegionMenuHeader" xml:space="preserve">
+    <value>Legions Chat</value>
+  </data>
+  <data name="CopyMacroMenuHeader" xml:space="preserve">
+    <value>Makro kopieren</value>
+  </data>
+  <data name="CopyMenuHeader" xml:space="preserve">
+    <value>kopieren</value>
+  </data>
+  <data name="FriendMenuHeader" xml:space="preserve">
+    <value>Freund</value>
+  </data>
+  <data name="GroupMemeberMenuHeader" xml:space="preserve">
+    <value>Gruppenmitglied</value>
+  </data>
+  <data name="IgnorePlayerMenuHeader" xml:space="preserve">
+    <value>ignorieren</value>
+  </data>
+  <data name="RemoveMenuHeader" xml:space="preserve">
+    <value>entfernen</value>
+  </data>
+  <data name="ResetCountsMenuHeader" xml:space="preserve">
+    <value>Zähler zurücksetzten</value>
+  </data>
+  <data name="ViewSkillsMenuHeader" xml:space="preserve">
+    <value>Skills...</value>
   </data>
 </root>
