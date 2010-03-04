@@ -133,26 +133,26 @@ namespace KingsDamageMeter
             DetectAvailableLanguages();
 
             //Note: This is a test
-            Players.Add(new Player
-                            {
-                                PlayerName = "Memphistopheles",
-                                Damage = 10000000,
-                                FightTime = 1800,
-                                DamagePercent = 1,
-                            });
-            You = new YouPlayer
-                      {
-                          PlayerName = Settings.Default.YouAlias,
-                          Damage = 10000001,
-                          FightTime = 1800,
-                          DamagePercent = 1,
-                          Exp = 10000000,
-                          Ap = 10000,
-                          KinahEarned = 200000,
-                          KinahSpent = -100000,
-                          IsGroupMember = true
-                      };
-            Players.Add(You);
+            //Players.Add(new Player
+            //                {
+            //                    PlayerName = "Memphistopheles",
+            //                    Damage = 10000000,
+            //                    FightTime = 1800,
+            //                    DamagePercent = 1,
+            //                });
+            //You = new YouPlayer
+            //          {
+            //              PlayerName = Settings.Default.YouAlias,
+            //              Damage = 10000001,
+            //              FightTime = 1800,
+            //              DamagePercent = 1,
+            //              Exp = 10000000,
+            //              Ap = 10000,
+            //              KinahEarned = 200000,
+            //              KinahSpent = -100000,
+            //              IsGroupMember = true
+            //          };
+            //Players.Add(You);
             //////////////////////////////////////
         }
 
