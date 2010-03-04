@@ -311,9 +311,7 @@
                                     <TextBlock Text="{Binding You.TotalKinah, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"
                                                Style="{StaticResource MainWindowTextStyle}"
                                                Margin="2"/>
-                                    <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:PlayerKinahSymbol}"
-                                               Style="{StaticResource MainWindowTextStyle}"
-                                               Margin="0,2,3,2"/>
+                                    <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Coin-32x32.png" Width="16" Height="16" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel.Style>
@@ -340,9 +338,7 @@
                                     <TextBlock Text="{Binding You.Exp, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}"
                                                Style="{StaticResource MainWindowTextStyle}"
                                                Margin="2"/>
-                                    <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:PlayerExpSymbol}"
-                                               Style="{StaticResource MainWindowTextStyle}"
-                                               Margin="0,2,3,2"/>
+                                    <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Book-32x32.png" Width="16" Height="16" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel.Style>
@@ -361,9 +357,7 @@
                                     <TextBlock Text="{Binding You.Ap, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.AbyssPoints}}"
                                                Style="{StaticResource MainWindowTextStyle}"
                                                Margin="2"/>
-                                    <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:PlayerApSymbol}"
-                                               Style="{StaticResource MainWindowTextStyle}"
-                                               Margin="0,2"/>
+                                    <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Swords-32x32.png" Width="16" Height="16" />
                                 </StackPanel>
                             </WrapPanel>
                         </Grid>

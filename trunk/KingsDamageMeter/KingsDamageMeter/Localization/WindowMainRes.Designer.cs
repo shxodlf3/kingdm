@@ -277,33 +277,6 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (a).
-        /// </summary>
-        internal static string PlayerApSymbol {
-            get {
-                return ResourceManager.GetString("PlayerApSymbol", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (e).
-        /// </summary>
-        internal static string PlayerExpSymbol {
-            get {
-                return ResourceManager.GetString("PlayerExpSymbol", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (k).
-        /// </summary>
-        internal static string PlayerKinahSymbol {
-            get {
-                return ResourceManager.GetString("PlayerKinahSymbol", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Power Off.
         /// </summary>
         internal static string PowerOffBtnTooltip {

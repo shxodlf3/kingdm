@@ -68,7 +68,7 @@ namespace KingsDamageMeter.Controls
         {
             get
             {
-                return KinahEarned - KinahSpent;
+                return KinahEarned + KinahSpent;
             }
         }
 

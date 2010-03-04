@@ -189,15 +189,6 @@
   <data name="PercentMainViewMenuHeader" xml:space="preserve">
     <value>Percent</value>
   </data>
-  <data name="PlayerApSymbol" xml:space="preserve">
-    <value>(a)</value>
-  </data>
-  <data name="PlayerExpSymbol" xml:space="preserve">
-    <value>(e)</value>
-  </data>
-  <data name="PlayerKinahSymbol" xml:space="preserve">
-    <value>(k)</value>
-  </data>
   <data name="PowerOffBtnTooltip" xml:space="preserve">
     <value>Power Off</value>
   </data>

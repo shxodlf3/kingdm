@@ -453,6 +453,11 @@
   <ItemGroup>
     <Resource Include="Lion.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\BlackPearl\Images\Book-32x32.png" />
+    <Resource Include="Themes\BlackPearl\Images\Coin-32x32.png" />
+    <Resource Include="Themes\BlackPearl\Images\Swords-32x32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
