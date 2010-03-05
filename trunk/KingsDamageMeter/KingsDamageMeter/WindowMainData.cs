@@ -466,11 +466,12 @@ namespace KingsDamageMeter
                 Players.First(o => o.PlayerName == name).IsGroupMember = true;
                 return;
             }
-            if(Settings.Default.IsHideOthers && name != Settings.Default.YouAlias)
+            if (Settings.Default.IsHideOthers && name != Settings.Default.YouAlias)
             {
                 return;
             }
-            if (Settings.Default.IsGroupOnly && !isGroupMember)
+            if (Settings.Default.IsGroupOnly && !isGroupMember && !Settings.Default.FriendList.Contains(name) &&
+                name != Settings.Default.YouAlias)
             {
                 return;
             }
@@ -491,18 +492,11 @@ namespace KingsDamageMeter
                     p = new Player
                             {
                                 PlayerName = name,
-                                IsGroupMember = isGroupMember
+                                IsGroupMember = isGroupMember || Settings.Default.FriendList.Contains(name)
                             };
                 }
 
                 Players.Add(p);
-
-                //SetFilter();
-                if (Settings.Default.FriendList.Contains(name))
-                {
-                    p.IsGroupMember = true;
-                    return;
-                }
                 UpdateSort();
             }
         }
