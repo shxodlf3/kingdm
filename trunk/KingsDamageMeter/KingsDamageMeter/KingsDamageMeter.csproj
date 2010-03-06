@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2ED927CC-AF2E-4190-AF56-7B18F8C2B8AC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -288,6 +288,8 @@
     <EmbeddedResource Include="Localization\AddToGroupRes.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\AddToGroupRes.es.resx" />
+    <EmbeddedResource Include="Localization\AddToGroupRes.fr.resx" />
     <EmbeddedResource Include="Localization\AddToGroupRes.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AddToGroupRes.Designer.cs</LastGenOutput>
@@ -299,15 +301,21 @@
     <EmbeddedResource Include="Localization\PlayerControlRes.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\PlayerControlRes.es.resx" />
+    <EmbeddedResource Include="Localization\PlayerControlRes.fr.resx" />
     <EmbeddedResource Include="Localization\PlayerToolTipRes.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\PlayerToolTipRes.es.resx" />
+    <EmbeddedResource Include="Localization\PlayerToolTipRes.fr.resx" />
     <EmbeddedResource Include="Localization\PlayerToolTipRes.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\SkillsFormRes.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\SkillsFormRes.es.resx" />
+    <EmbeddedResource Include="Localization\SkillsFormRes.fr.resx" />
     <EmbeddedResource Include="Localization\SkillsFormRes.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -324,6 +332,8 @@
     <EmbeddedResource Include="Localization\WindowMainRes.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\WindowMainRes.es.resx" />
+    <EmbeddedResource Include="Localization\WindowMainRes.fr.resx" />
     <EmbeddedResource Include="Localization\WindowMainRes.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
