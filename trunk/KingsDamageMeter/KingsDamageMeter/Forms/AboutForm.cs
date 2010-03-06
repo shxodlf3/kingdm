@@ -24,6 +24,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Text;
 
 namespace KingsDamageMeter.Forms
 {
@@ -37,7 +38,7 @@ namespace KingsDamageMeter.Forms
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            this.textBoxDescription.Text = Contributors + AssemblyDescription;
         }
 
         #region Assembly Attribute Accessors
@@ -116,6 +117,20 @@ namespace KingsDamageMeter.Forms
                     return "";
                 }
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
+            }
+        }
+
+        public string Contributors
+        {
+            get
+            {
+                StringBuilder s = new StringBuilder();
+                s.Append("Contributors:");
+                s.AppendLine();
+                s.Append("Walentyn, Ayumi, M4dH4tter");
+                s.AppendLine();
+                s.AppendLine();
+                return s.ToString();
             }
         }
         #endregion

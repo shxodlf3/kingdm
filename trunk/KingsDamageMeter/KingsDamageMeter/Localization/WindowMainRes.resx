@@ -148,7 +148,7 @@
     <value>Help</value>
   </data>
   <data name="HideOthersMenuHeader" xml:space="preserve">
-    <value>Hide Others</value>
+    <value>You Only</value>
   </data>
   <data name="IgnoreListMenuHeader" xml:space="preserve">
     <value>Ignore List...</value>

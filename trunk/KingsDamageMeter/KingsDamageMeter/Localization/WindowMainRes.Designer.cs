@@ -151,7 +151,7 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hide Others.
+        ///   Looks up a localized string similar to You Only.
         /// </summary>
         internal static string HideOthersMenuHeader {
             get {
