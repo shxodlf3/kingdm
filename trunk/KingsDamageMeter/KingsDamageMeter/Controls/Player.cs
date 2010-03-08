@@ -109,7 +109,17 @@ namespace KingsDamageMeter.Controls
         private double percentFromGroupDamages;
         public double PercentFromGroupDamages
         {
-            get { return percentFromGroupDamages; }
+            get
+            {
+                if (Double.IsNaN(percentFromGroupDamages))
+                {
+                    return 0;
+                }
+                else
+                {
+                    return percentFromGroupDamages;
+                }
+            }
             set
             {
                 if (percentFromGroupDamages != value)
@@ -134,7 +144,17 @@ namespace KingsDamageMeter.Controls
         private double percentFromTopDamage;
         public double PercentFromTopDamage
         {
-            get { return percentFromTopDamage; }
+            get
+            {
+                if (Double.IsNaN(percentFromTopDamage))
+                {
+                    return 0;
+                }
+                else
+                {
+                    return percentFromTopDamage;
+                }
+            }
             set
             {
                 if (percentFromTopDamage != value)
