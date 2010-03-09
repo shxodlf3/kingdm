@@ -23,6 +23,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using KingsDamageMeter.Forms;
+using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
 using WPFLocalizeExtension.Engine;
 
@@ -77,6 +78,7 @@ namespace KingsDamageMeter
             }
 
             Settings.Default.PropertyChanged += SettingsChanged;
+            Regex.Culture = Settings.Default.SelectedLogLanguage;
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -92,7 +94,11 @@ namespace KingsDamageMeter
                 LocalizeDictionary.Instance.Culture = Settings.Default.SelectedLanguage;
                 Thread.CurrentThread.CurrentUICulture = Settings.Default.SelectedLanguage;
             }
-            else if(e.PropertyName == "IsHideOthers")
+            if (e.PropertyName == "SelectedLogLanguage")
+            {
+                Regex.Culture = Settings.Default.SelectedLogLanguage;
+            }
+            else if (e.PropertyName == "IsHideOthers")
             {
                 if(Settings.Default.IsHideOthers)
                 {

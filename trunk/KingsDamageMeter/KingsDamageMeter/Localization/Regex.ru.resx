@@ -117,106 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutMenuHeader" xml:space="preserve">
-    <value>Sobre</value>
+  <data name="Chat" xml:space="preserve">
+    <value>\[charname:</value>
   </data>
-  <data name="AddByNameMenuHeader" xml:space="preserve">
-    <value>Agregue al miembro del grupo</value>
+  <data name="Effect" xml:space="preserve">
+    <value>Effect</value>
   </data>
-  <data name="ApMainViewMenuHeader" xml:space="preserve">
-    <value>Abyss Points</value>
+  <data name="JoinedGroupRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) has joined your group\.</value>
   </data>
-  <data name="CloseBtnToolTip" xml:space="preserve">
-    <value>Salida</value>
+  <data name="KickedFromGroupRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) has been kicked out of your group\.</value>
   </data>
-  <data name="DamageMainViewMenuHeader" xml:space="preserve">
-    <value>Daño</value>
+  <data name="LeftGroupRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) has left your group\.</value>
   </data>
-  <data name="DpsMainViewMenuHeader" xml:space="preserve">
-    <value>Dps</value>
+  <data name="OtherContinuousRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) used (?&lt;skill&gt;.+) to inflict the continuous damage effect on (?&lt;target&gt;.+)\.</value>
   </data>
-  <data name="ExperienceMainViewMenuHeader" xml:space="preserve">
-    <value>Experiencia</value>
+  <data name="OtherInflictedBleedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) is bleeding because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\.</value>
   </data>
-  <data name="ExpPerHourToolTip" xml:space="preserve">
-    <value>Exp al Hora:</value>
+  <data name="OtherInflictedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage on (?&lt;target&gt;.+)\.</value>
   </data>
-  <data name="GroupOnlyMenuHeader" xml:space="preserve">
-    <value>Solamente Grupo</value>
+  <data name="OtherInflictedSkillRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage on (?&lt;target&gt;.+)( and caused the pattern engraving effect)? by using (?&lt;skill&gt;.+)\.</value>
   </data>
-  <data name="HelpMenuHeader" xml:space="preserve">
-    <value>Ayuda</value>
+  <data name="OtherReceivedBleedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+) bleeding damage after you used (?&lt;skill&gt;.+)\.</value>
   </data>
-  <data name="HideOthersMenuHeader" xml:space="preserve">
-    <value>Solamente usted</value>
+  <data name="OtherReceivedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+) damage from (?&lt;target&gt;.+)\.</value>
   </data>
-  <data name="IgnoreListMenuHeader" xml:space="preserve">
-    <value>Lista de Ignorar</value>
+  <data name="OtherReceivedSkillRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+) damage due to the effect of (?&lt;skill&gt;.+)\.</value>
   </data>
-  <data name="KinahEarnedToolTip" xml:space="preserve">
-    <value>Ganar:</value>
+  <data name="OtherSummonedAttackRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) has summoned (?&lt;pet&gt;.+) to attack (?&lt;target&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
   </data>
-  <data name="KinahMainViewMenuHeader" xml:space="preserve">
-    <value>Kinah</value>
+  <data name="OtherSummonedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) summoned (?&lt;pet&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
   </data>
-  <data name="KinahSpentToolTip" xml:space="preserve">
-    <value>Gastar :</value>
+  <data name="TimestampRegex" xml:space="preserve">
+    <value>(?&lt;time&gt;[^a-zA-Z]+) : </value>
   </data>
-  <data name="LanguageMenuHeader" xml:space="preserve">
-    <value>Lenguaje</value>
+  <data name="YouContinuousRegex" xml:space="preserve">
+    <value>You inflicted continuous damage on (?&lt;target&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
   </data>
-  <data name="LocateLogMenuHeader" xml:space="preserve">
-    <value>Encontrar Chat.log</value>
+  <data name="YouCriticalRegex" xml:space="preserve">
+    <value>Critical Hit! You inflicted (?&lt;damage&gt;[^a-zA-Z]+) critical damage on (?&lt;target&gt;.+)\.</value>
   </data>
-  <data name="MainViewMenuHeader" xml:space="preserve">
-    <value>Vista</value>
+  <data name="YouEarnedKinahRegex" xml:space="preserve">
+    <value>You have earned (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\.</value>
   </data>
-  <data name="MinimizeBtnToolTip" xml:space="preserve">
-    <value>Reducir</value>
+  <data name="YouEffectDamageRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+)( poisoning)? damage after you used (?&lt;effect&gt;.+)\.</value>
   </data>
-  <data name="NameTakenMessage" xml:space="preserve">
-    <value>A player with this name already exists.</value>
+  <data name="YouGainedApRegex" xml:space="preserve">
+    <value>You have gained (?&lt;ap&gt;[^a-zA-Z]+) Abyss Points\.</value>
   </data>
-  <data name="OpacitySliderToolTip" xml:space="preserve">
-    <value>Opaco</value>
+  <data name="YouGainedEffectRegex" xml:space="preserve">
+    <value>You received the effect by using (?&lt;effect&gt;.+)\.</value>
   </data>
-  <data name="OpenLogError" xml:space="preserve">
-    <value>Unable to locate chat log. Please refer to the documentation for instructions on setting up Aion to create the log or click "{0} -&gt; {1}"</value>
+  <data name="YouGainedExpRegex" xml:space="preserve">
+    <value>You have gained (?&lt;exp&gt;[^a-zA-Z]+) EXP from (?&lt;target&gt;.+)\.</value>
   </data>
-  <data name="OptionsBtnToolTip" xml:space="preserve">
-    <value>Opción</value>
+  <data name="YouInflictedBleedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) is bleeding because You used (?&lt;skill&gt;.+)\.</value>
   </data>
-  <data name="PercentMainViewMenuHeader" xml:space="preserve">
-    <value>Porcentaje</value>
+  <data name="YouInflictedRegex" xml:space="preserve">
+    <value>Ты нанёс (?&lt;damage&gt;[^a-zA-Z]+) damage on (?&lt;target&gt;.+)\.</value>
   </data>
-  <data name="PowerOffBtnTooltip" xml:space="preserve">
-    <value>Encender</value>
+  <data name="YouInflictedSkillRegex" xml:space="preserve">
+    <value>Ты нанёс (?&lt;damage&gt;[^a-zA-Z]+) damage( and the rune carve effect)? on (?&lt;target&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
   </data>
-  <data name="PowerOnBtnTooltip" xml:space="preserve">
-    <value>Apagar</value>
+  <data name="YouReceivedRegex" xml:space="preserve">
+    <value>You received (?&lt;damage&gt;[^a-zA-Z]+) damage from (?&lt;target&gt;.+)\.</value>
   </data>
-  <data name="ResizeThumbToolTip" xml:space="preserve">
-    <value>Tamaño</value>
+  <data name="YouSpentKinahRegex" xml:space="preserve">
+    <value>You spent (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\.</value>
   </data>
-  <data name="SetYouAliasMenuHeader" xml:space="preserve">
-    <value>You Alias...</value>
+  <data name="YouSummonedAttackRegex" xml:space="preserve">
+    <value>You summoned (?&lt;pet&gt;.+) by using (?&lt;skill&gt;.+) to let it attack (?&lt;target&gt;.+)\.</value>
   </data>
-  <data name="SortByDamageMenuHeader" xml:space="preserve">
-    <value>Daño</value>
-  </data>
-  <data name="SortByDpsMenuHeader" xml:space="preserve">
-    <value>DPS</value>
-  </data>
-  <data name="SortByNameMenuHeader" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
-  <data name="SortingMenuHeader" xml:space="preserve">
-    <value>Revisar algo</value>
-  </data>
-  <data name="TopMostCheckBoxToolTip" xml:space="preserve">
-    <value>De encima</value>
-  </data>
-  <data name="LogLanguageMenuHeader" xml:space="preserve">
-    <value>XXXXXXX</value>
+  <data name="YouSummonedRegex" xml:space="preserve">
+    <value>You summoned (?&lt;pet&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
   </data>
 </root>

@@ -248,5 +248,17 @@ namespace KingsDamageMeter.Properties {
                 this["YouAlias"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(Default)")]
+        public global::System.Globalization.CultureInfo SelectedLogLanguage {
+            get {
+                return ((global::System.Globalization.CultureInfo)(this["SelectedLogLanguage"]));
+            }
+            set {
+                this["SelectedLogLanguage"] = value;
+            }
+        }
     }
 }

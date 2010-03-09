@@ -303,6 +303,9 @@
     <EmbeddedResource Include="Localization\AddToGroupRes.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Regex.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\PlayerControlRes.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

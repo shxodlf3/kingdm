@@ -216,4 +216,7 @@
   <data name="TopMostCheckBoxToolTip" xml:space="preserve">
     <value>Поверх всего</value>
   </data>
+  <data name="LogLanguageMenuHeader" xml:space="preserve">
+    <value>Язык логов</value>
+  </data>
 </root>

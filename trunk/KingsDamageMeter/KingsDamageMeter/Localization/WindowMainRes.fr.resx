@@ -216,4 +216,7 @@
   <data name="TopMostCheckBoxToolTip" xml:space="preserve">
     <value>Toujours au premier plan</value>
   </data>
+  <data name="LogLanguageMenuHeader" xml:space="preserve">
+    <value>XXXXXXX</value>
+  </data>
 </root>

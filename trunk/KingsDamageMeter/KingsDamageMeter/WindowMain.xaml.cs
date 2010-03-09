@@ -208,6 +208,18 @@ namespace KingsDamageMeter
                                         new Binding("SelectedLanguage") { Mode = BindingMode.TwoWay, Source = Settings.Default, Converter = languageSelectedConverter, ConverterParameter = language});
                     MenuItemLanguage.Items.Add(menuItem);
                 }
+                foreach (var language in ((WindowMainData)DataContext).AvailableLogLanguages)
+                {
+                    var menuItem = new MenuItem
+                    {
+                        Header = language.DisplayName,
+                        IsCheckable = true,
+                        Style = menuStyle
+                    };
+                    menuItem.SetBinding(MenuItem.IsCheckedProperty,
+                                        new Binding("SelectedLogLanguage") { Mode = BindingMode.TwoWay, Source = Settings.Default, Converter = languageSelectedConverter, ConverterParameter = language });
+                    MenuItemLogLanguage.Items.Add(menuItem);
+                }
 
                 //This is for static commands initialization declared in Commands.cs
                 playersItemsControl.Focus();

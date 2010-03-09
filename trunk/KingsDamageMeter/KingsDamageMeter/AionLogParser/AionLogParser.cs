@@ -189,7 +189,7 @@ namespace KingsDamageMeter
         /// </summary>
         public event AbyssPointsEventHandler AbyssPointsGained;
 
-        private void Initialize()
+        public void Initialize()
         {
             _TimestampRegex = Localization.Regex.TimestampRegex;
             _ChatRegex = new Regex(Localization.Regex.Chat, RegexOptions.Compiled);

@@ -214,6 +214,15 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log Language.
+        /// </summary>
+        internal static string LogLanguageMenuHeader {
+            get {
+                return ResourceManager.GetString("LogLanguageMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Main View.
         /// </summary>
         internal static string MainViewMenuHeader {

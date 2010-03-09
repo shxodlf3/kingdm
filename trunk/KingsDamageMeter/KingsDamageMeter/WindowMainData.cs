@@ -18,12 +18,15 @@
 \**************************************************************************/
 
 using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Timers;
@@ -66,6 +69,7 @@ namespace KingsDamageMeter
         public ObservableCollection<Player> Players { get; private set; }
 
         public ObservableCollection<CultureInfo> AvailableLanguages { get; private set; }
+        public ObservableCollection<CultureInfo> AvailableLogLanguages { get; private set; }
 
         private YouPlayer you;
         public YouPlayer You
@@ -144,6 +148,7 @@ namespace KingsDamageMeter
             Players = new ObservableCollection<Player>();
             Players.CollectionChanged += PlayersCollectionChanged;
             AvailableLanguages = new ObservableCollection<CultureInfo>();
+            AvailableLogLanguages = new ObservableCollection<CultureInfo>();
             Settings.Default.PropertyChanged += OnSettingsChanged;
 
             InitializeLogParser();
@@ -217,6 +222,9 @@ namespace KingsDamageMeter
                     break;
                 case "SortType":
                     UpdateSort();
+                    break;
+                case "SelectedLogLanguage":
+                    _LogParser.Initialize();
                     break;
             }
         }
@@ -722,7 +730,10 @@ namespace KingsDamageMeter
             var dirs = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
             var allCultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
 
-            AvailableLanguages.Add(allCultures.First(o=>o.Name == "en")); //Default language
+            var defaultLanguage = allCultures.First(o => o.Name == "en");
+            AvailableLanguages.Add(defaultLanguage);
+            AvailableLogLanguages.Add(defaultLanguage);
+
             foreach (var dir in dirs)
             {
                 string dirName = Path.GetFileName(dir);
@@ -730,6 +741,7 @@ namespace KingsDamageMeter
                 if(availableCulture != null)
                 {
                     AvailableLanguages.Add(availableCulture);
+                    FindRegextLanguage(dir, availableCulture);
                 }
             }
 
@@ -740,7 +752,47 @@ namespace KingsDamageMeter
             else
             {
                 SelectLanguage(Settings.Default.SelectedLanguage);
-                
+            }
+            if(Settings.Default.SelectedLogLanguage == CultureInfo.InvariantCulture)
+            {
+                Settings.Default.SelectedLogLanguage = AvailableLogLanguages[0];
+            }
+        }
+
+        private void FindRegextLanguage(string dirPath, CultureInfo culture)
+        {
+            try
+            {
+                foreach (var file in Directory.GetFiles(dirPath, "*.dll"))
+                {
+                    if (Path.GetFileName(file).Contains(Assembly.GetEntryAssembly().GetName().Name))
+                    {
+                        Assembly resourceAssembly = Assembly.LoadFrom(file);
+                        foreach (string resourceName in resourceAssembly.GetManifestResourceNames())
+                        {
+                            if (resourceName.EndsWith(".resources"))
+                            {
+                                ManifestResourceInfo info = resourceAssembly.GetManifestResourceInfo(resourceName);
+                                // if this resource is in another assemlby, we will skip it
+                                if (info == null || (info.ResourceLocation & ResourceLocation.ContainedInAnotherAssembly) != 0)
+                                {
+                                    continue; // in resource assembly, we don't have resource that is contained in another assembly
+                                }
+
+                                if(resourceName.Contains("Regex"))
+                                {
+                                    AvailableLogLanguages.Add(culture);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                DebugLogger.Write(ex.ToString());
+                System.Diagnostics.Debug.WriteLine(ex);
             }
         }
 

@@ -202,6 +202,8 @@
                                         <!-- Here is we place language selection. But menu fill is implemented in WindowMain.xaml.cs -->
                                         <MenuItem Name="MenuItemLanguage"
                                                   Header="{LocText KingsDamageMeter:WindowMainRes:LanguageMenuHeader}"/>
+                                        <MenuItem Name="MenuItemLogLanguage"
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:LogLanguageMenuHeader}"/>
                                         <MenuItem Name="MainContextMenuHelp" 
                                                   Header="{LocText KingsDamageMeter:WindowMainRes:HelpMenuHeader}" 
                                                   Click="MainContextMenuHelp_Click"/>

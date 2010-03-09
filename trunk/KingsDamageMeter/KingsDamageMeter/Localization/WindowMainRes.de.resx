@@ -162,6 +162,9 @@
   <data name="LocateLogMenuHeader" xml:space="preserve">
     <value>LOG Datein auswählen...</value>
   </data>
+  <data name="LogLanguageMenuHeader" xml:space="preserve">
+    <value>LOG Sprache</value>
+  </data>
   <data name="MainViewMenuHeader" xml:space="preserve">
     <value>Hauptansicht</value>
   </data>
