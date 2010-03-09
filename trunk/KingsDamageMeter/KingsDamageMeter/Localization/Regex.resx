@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Chat" xml:space="preserve">
+    <value>\[charname:</value>
+  </data>
+  <data name="Effect" xml:space="preserve">
+    <value>Effect</value>
+  </data>
+  <data name="JoinedGroupRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) has joined your group\.</value>
+  </data>
+  <data name="KickedFromGroupRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) has been kicked out of your group\.</value>
+  </data>
+  <data name="LeftGroupRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) has left your group\.</value>
+  </data>
+  <data name="OtherContinuousRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) used (?&lt;skill&gt;.+) to inflict the continuous damage effect on (?&lt;target&gt;.+)\.</value>
+  </data>
+  <data name="OtherInflictedBleedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) is bleeding because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="OtherInflictedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage on (?&lt;target&gt;.+)\.</value>
+  </data>
+  <data name="OtherInflictedSkillRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage on (?&lt;target&gt;.+)( and caused the pattern engraving effect)? by using (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="OtherReceivedBleedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+) bleeding damage after you used (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="OtherReceivedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+) damage from (?&lt;target&gt;.+)\.</value>
+  </data>
+  <data name="OtherReceivedSkillRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+) damage due to the effect of (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="OtherSummonedAttackRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) has summoned (?&lt;pet&gt;.+) to attack (?&lt;target&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="OtherSummonedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) summoned (?&lt;pet&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="TimestampRegex" xml:space="preserve">
+    <value>(?&lt;time&gt;[^a-zA-Z]+) : </value>
+  </data>
+  <data name="YouContinuousRegex" xml:space="preserve">
+    <value>You inflicted continuous damage on (?&lt;target&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="YouCriticalRegex" xml:space="preserve">
+    <value>Critical Hit! You inflicted (?&lt;damage&gt;[^a-zA-Z]+) critical damage on (?&lt;target&gt;.+)\.</value>
+  </data>
+  <data name="YouEarnedKinahRegex" xml:space="preserve">
+    <value>You have earned (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\.</value>
+  </data>
+  <data name="YouEffectDamageRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+)( poisoning)? damage after you used (?&lt;effect&gt;.+)\.</value>
+  </data>
+  <data name="YouGainedApRegex" xml:space="preserve">
+    <value>You have gained (?&lt;ap&gt;[^a-zA-Z]+) Abyss Points\.</value>
+  </data>
+  <data name="YouGainedEffectRegex" xml:space="preserve">
+    <value>You received the effect by using (?&lt;effect&gt;.+)\.</value>
+  </data>
+  <data name="YouGainedExpRegex" xml:space="preserve">
+    <value>You have gained (?&lt;exp&gt;[^a-zA-Z]+) EXP from (?&lt;target&gt;.+)\.</value>
+  </data>
+  <data name="YouInflictedBleedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) is bleeding because You used (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="YouInflictedRegex" xml:space="preserve">
+    <value>You inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage on (?&lt;target&gt;.+)\.</value>
+  </data>
+  <data name="YouInflictedSkillRegex" xml:space="preserve">
+    <value>You inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage( and the rune carve effect)? on (?&lt;target&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="YouReceivedRegex" xml:space="preserve">
+    <value>You received (?&lt;damage&gt;[^a-zA-Z]+) damage from (?&lt;target&gt;.+)\.</value>
+  </data>
+  <data name="YouSpentKinahRegex" xml:space="preserve">
+    <value>You spent (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\.</value>
+  </data>
+  <data name="YouSummonedAttackRegex" xml:space="preserve">
+    <value>You summoned (?&lt;pet&gt;.+) by using (?&lt;skill&gt;.+) to let it attack (?&lt;target&gt;.+)\.</value>
+  </data>
+  <data name="YouSummonedRegex" xml:space="preserve">
+    <value>You summoned (?&lt;pet&gt;.+) by using (?&lt;skill&gt;.+)\.</value>
+  </data>
+</root>

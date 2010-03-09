@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2ED927CC-AF2E-4190-AF56-7B18F8C2B8AC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -222,11 +222,6 @@
     </Compile>
     <Compile Include="Forms\SkillSorter.cs" />
     <Compile Include="KeyboardHook\KeyboardHook.cs" />
-    <Compile Include="Languages\Regex.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Regex.settings</DependentUpon>
-    </Compile>
     <Compile Include="Localization\AddToGroupRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -241,6 +236,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PlayerToolTipRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Regex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Regex.resx</DependentUpon>
     </Compile>
     <Compile Include="Localization\SkillsFormRes.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -314,6 +314,11 @@
     <EmbeddedResource Include="Localization\PlayerToolTipRes.es.resx" />
     <EmbeddedResource Include="Localization\PlayerToolTipRes.fr.resx" />
     <EmbeddedResource Include="Localization\PlayerToolTipRes.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Regex.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Regex.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\SkillsFormRes.de.resx">
@@ -408,10 +413,6 @@
   <ItemGroup>
     <None Include="ChangeLog.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Languages\Regex.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Regex.Designer.cs</LastGenOutput>
     </None>
     <None Include="system.ovr">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

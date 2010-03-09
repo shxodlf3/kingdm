@@ -21,6 +21,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using KingsDamageMeter.Localization;
+using Regex=System.Text.RegularExpressions.Regex;
 
 namespace KingsDamageMeter.Forms
 {

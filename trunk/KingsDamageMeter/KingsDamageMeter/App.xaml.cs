@@ -18,17 +18,11 @@
 \**************************************************************************/
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Threading;
 using System.Windows;
-using KingsDamageMeter.Controls;
 using KingsDamageMeter.Forms;
-using KingsDamageMeter.Languages;
 using KingsDamageMeter.Properties;
 using WPFLocalizeExtension.Engine;
 
@@ -88,7 +82,6 @@ namespace KingsDamageMeter
         protected override void OnExit(ExitEventArgs e)
         {
             Settings.Default.Save();
-            Regex.Default.Save();
             base.OnExit(e);
         }
 

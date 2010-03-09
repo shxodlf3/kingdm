@@ -17,12 +17,9 @@
  * 
 \**************************************************************************/
 
-using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 using KingsDamageMeter.Combat;
-using KingsDamageMeter.Languages;
 
 namespace KingsDamageMeter.Forms
 {

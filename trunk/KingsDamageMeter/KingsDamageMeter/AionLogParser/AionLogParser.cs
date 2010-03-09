@@ -191,34 +191,34 @@ namespace KingsDamageMeter
 
         private void Initialize()
         {
-            _TimestampRegex = @KingsDamageMeter.Languages.Regex.Default.TimestampRegex;
-            _ChatRegex = new Regex(@KingsDamageMeter.Languages.Regex.Default.Chat, RegexOptions.Compiled);
-            _YouInflictedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouInflictedRegex, RegexOptions.Compiled);
-            _YouInflictedSkillRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouInflictedSkillRegex, RegexOptions.Compiled);
-            _YouInflictedBleedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouInflictedBleedRegex, RegexOptions.Compiled);
-            _YouCriticalRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouCriticalRegex, RegexOptions.Compiled);
-            _YouEffectDamageRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouEffectDamageRegex, RegexOptions.Compiled);
-            _YouGainedEffectRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouGainedEffectRegex, RegexOptions.Compiled);
-            _OtherInflictedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherInflictedRegex, RegexOptions.Compiled);
-            _OtherInflictedSkillRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherInflictedSkillRegex, RegexOptions.Compiled);
-            _OtherInflictedBleedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherInflictedBleedRegex, RegexOptions.Compiled);
-            _YouReceivedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouReceivedRegex, RegexOptions.Compiled);
-            _OtherReceivedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherReceivedRegex, RegexOptions.Compiled);
-            _OtherReceivedSkillRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherReceivedSkillRegex, RegexOptions.Compiled);
-            _OtherReceivedBleedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherReceivedBleedRegex, RegexOptions.Compiled);
-            _YouContinuousRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouContinuousRegex, RegexOptions.Compiled);
-            _OtherContinuousRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherContinuousRegex, RegexOptions.Compiled);
-            _YouSummonedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouSummonedRegex, RegexOptions.Compiled);
-            _YouSummonedAttackRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouSummonedAttackRegex, RegexOptions.Compiled);
-            _OtherSummonedRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherSummonedRegex, RegexOptions.Compiled);
-            _OtherSummonedAttackRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.OtherSummonedAttackRegex, RegexOptions.Compiled);
-            _JoinedGroupRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.JoinedGroupRegex, RegexOptions.Compiled);
-            _LeftGroupRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.LeftGroupRegex, RegexOptions.Compiled);
-            _KickedFromGroupRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.KickedFromGroupRegex, RegexOptions.Compiled);
-            _YouGainedExpRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouGainedExpRegex, RegexOptions.Compiled);
-            _YouEarnedKinahRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouEarnedKinahRegex, RegexOptions.Compiled);
-            _YouSpentKinahRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouSpentKinahRegex, RegexOptions.Compiled);
-            _YouGainedApRegex = new Regex(_TimestampRegex + @KingsDamageMeter.Languages.Regex.Default.YouGainedApRegex, RegexOptions.Compiled);
+            _TimestampRegex = Localization.Regex.TimestampRegex;
+            _ChatRegex = new Regex(Localization.Regex.Chat, RegexOptions.Compiled);
+            _YouInflictedRegex = new Regex(_TimestampRegex + Localization.Regex.YouInflictedRegex, RegexOptions.Compiled);
+            _YouInflictedSkillRegex = new Regex(_TimestampRegex + Localization.Regex.YouInflictedSkillRegex, RegexOptions.Compiled);
+            _YouInflictedBleedRegex = new Regex(_TimestampRegex + Localization.Regex.YouInflictedBleedRegex, RegexOptions.Compiled);
+            _YouCriticalRegex = new Regex(_TimestampRegex + Localization.Regex.YouCriticalRegex, RegexOptions.Compiled);
+            _YouEffectDamageRegex = new Regex(_TimestampRegex + Localization.Regex.YouEffectDamageRegex, RegexOptions.Compiled);
+            _YouGainedEffectRegex = new Regex(_TimestampRegex + Localization.Regex.YouGainedEffectRegex, RegexOptions.Compiled);
+            _OtherInflictedRegex = new Regex(_TimestampRegex + Localization.Regex.OtherInflictedRegex, RegexOptions.Compiled);
+            _OtherInflictedSkillRegex = new Regex(_TimestampRegex + Localization.Regex.OtherInflictedSkillRegex, RegexOptions.Compiled);
+            _OtherInflictedBleedRegex = new Regex(_TimestampRegex + Localization.Regex.OtherInflictedBleedRegex, RegexOptions.Compiled);
+            _YouReceivedRegex = new Regex(_TimestampRegex + Localization.Regex.YouReceivedRegex, RegexOptions.Compiled);
+            _OtherReceivedRegex = new Regex(_TimestampRegex + Localization.Regex.OtherReceivedRegex, RegexOptions.Compiled);
+            _OtherReceivedSkillRegex = new Regex(_TimestampRegex + Localization.Regex.OtherReceivedSkillRegex, RegexOptions.Compiled);
+            _OtherReceivedBleedRegex = new Regex(_TimestampRegex + Localization.Regex.OtherReceivedBleedRegex, RegexOptions.Compiled);
+            _YouContinuousRegex = new Regex(_TimestampRegex + Localization.Regex.YouContinuousRegex, RegexOptions.Compiled);
+            _OtherContinuousRegex = new Regex(_TimestampRegex + Localization.Regex.OtherContinuousRegex, RegexOptions.Compiled);
+            _YouSummonedRegex = new Regex(_TimestampRegex + Localization.Regex.YouSummonedRegex, RegexOptions.Compiled);
+            _YouSummonedAttackRegex = new Regex(_TimestampRegex + Localization.Regex.YouSummonedAttackRegex, RegexOptions.Compiled);
+            _OtherSummonedRegex = new Regex(_TimestampRegex + Localization.Regex.OtherSummonedRegex, RegexOptions.Compiled);
+            _OtherSummonedAttackRegex = new Regex(_TimestampRegex + Localization.Regex.OtherSummonedAttackRegex, RegexOptions.Compiled);
+            _JoinedGroupRegex = new Regex(_TimestampRegex + Localization.Regex.JoinedGroupRegex, RegexOptions.Compiled);
+            _LeftGroupRegex = new Regex(_TimestampRegex + Localization.Regex.LeftGroupRegex, RegexOptions.Compiled);
+            _KickedFromGroupRegex = new Regex(_TimestampRegex + Localization.Regex.KickedFromGroupRegex, RegexOptions.Compiled);
+            _YouGainedExpRegex = new Regex(_TimestampRegex + Localization.Regex.YouGainedExpRegex, RegexOptions.Compiled);
+            _YouEarnedKinahRegex = new Regex(_TimestampRegex + Localization.Regex.YouEarnedKinahRegex, RegexOptions.Compiled);
+            _YouSpentKinahRegex = new Regex(_TimestampRegex + Localization.Regex.YouSpentKinahRegex, RegexOptions.Compiled);
+            _YouGainedApRegex = new Regex(_TimestampRegex + Localization.Regex.YouGainedApRegex, RegexOptions.Compiled);
         }
 
         /// <summary>
@@ -408,626 +408,645 @@ namespace KingsDamageMeter
             bool matched = false;
             string regex = String.Empty;
 
-            matches = _YouInflictedSkillRegex.Matches(line);
-            if (matches.Count > 0)
+            try
             {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-
-                if (SkillDamageInflicted != null)
+                matches = _YouInflictedSkillRegex.Matches(line);
+                if (matches.Count > 0)
                 {
-                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, damage, skill));
-                }
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
 
-                matched = true;
-                regex = "_YouInflictedSkillRegex";
-                goto End;
-            }
-
-            matches = _YouInflictedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-
-                if (DamageInflicted != null)
-                {
-                    DamageInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, damage));
-                }
-
-                matched = true;
-                regex = "_YouInflictedRegex";
-                goto End;
-            }
-
-            matches = _YouCriticalRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-
-                if (CriticalInflicted != null)
-                {
-                    CriticalInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, damage));
-                }
-
-                matched = true;
-                regex = "_YouCriticalRegex";
-                goto End;
-            }
-
-            matches = _YouEffectDamageRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-                string effect = matches[0].Groups[_EffectGroupName].Value;
-
-                if (SkillDamageInflicted != null)
-                {
-                    SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, damage, effect));
-                }
-
-                matched = true;
-                regex = "_YouEffectDamageRegex";
-                goto End;
-            }
-
-            matches = _YouGainedEffectRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string effect = matches[0].Groups[_EffectGroupName].Value;
-
-                if (_Effects.ContainsKey(effect))
-                {
-                    if (_Effects[effect] != Settings.Default.YouAlias)
+                    if (SkillDamageInflicted != null)
                     {
-                        _Effects[effect] = Settings.Default.YouAlias;
+                        SkillDamageInflicted(this,
+                                             new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, damage,
+                                                                            skill));
                     }
-                }
 
-                else
-                {
-                    _Effects.Add(effect, Settings.Default.YouAlias);
-                }
-
-                matched = true;
-                regex = "_YouGainedEffectRegex";
-                goto End;
-            }
-
-            matches = _YouReceivedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-
-                if (DamageReceived != null)
-                {
-                    DamageReceived(this, new PlayerDamageEventArgs(time, target, damage));
-                }
-
-                matched = true;
-                regex = "_YouReceivedRegex";
-                goto End;
-            }
-
-            matches = _YouContinuousRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string target = matches[0].Groups[_TargetGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-
-                if (_Dots.ContainsKey(skill))
-                {
-                    if (_Dots[skill] != Settings.Default.YouAlias)
-                    {
-                        _Dots[skill] = Settings.Default.YouAlias;
-                    }
-                }
-
-                else
-                {
-                    _Dots.Add(skill, Settings.Default.YouAlias);
-                }
-
-                matched = true;
-                regex = "_YouContinuousRegex";
-                goto End;
-            }
-
-            matches = _YouInflictedBleedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string target = matches[0].Groups[_TargetGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-
-                if (_Dots.ContainsKey(skill))
-                {
-                    if (_Dots[skill] != Settings.Default.YouAlias)
-                    {
-                        _Dots[skill] = Settings.Default.YouAlias;
-                    }
-                }
-
-                else
-                {
-                    _Dots.Add(skill, Settings.Default.YouAlias);
-                }
-
-                matched = true;
-                regex = "_YouContinuousRegex";
-                goto End;
-            }
-
-            matches = _YouSummonedAttackRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string target = matches[0].Groups[_TargetGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-                string pet = matches[0].Groups[_PetGroupName].Value;
-
-                if (_Pets.ContainsKey(pet))
-                {
-                    if (_Pets[pet] != Settings.Default.YouAlias)
-                    {
-                        _Pets[pet] = Settings.Default.YouAlias;
-                    }
-                }
-
-                else
-                {
-                    _Pets.Add(pet, Settings.Default.YouAlias);
-                }
-
-                matched = true;
-                regex = "_YouSummonedAttackRegex";
-                goto End;
-            }
-
-            matches = _YouSummonedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string target = matches[0].Groups[_TargetGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-                string pet = matches[0].Groups[_PetGroupName].Value;
-
-                if (_Pets.ContainsKey(pet))
-                {
-                    if (_Pets[pet] != Settings.Default.YouAlias)
-                    {
-                        _Pets[pet] = Settings.Default.YouAlias;
-                    }
-                }
-
-                else
-                {
-                    _Pets.Add(pet, Settings.Default.YouAlias);
-                }
-
-                matched = true;
-                regex = "_YouSummonedRegex";
-                goto End;
-            }
-
-            matches = _OtherInflictedSkillRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-
-                if (String.IsNullOrEmpty(name))
-                {
+                    matched = true;
+                    regex = "_YouInflictedSkillRegex";
                     return;
                 }
 
-                if (name.Contains(" "))
+                matches = _YouInflictedRegex.Matches(line);
+                if (matches.Count > 0)
                 {
-                    if (_Pets.ContainsKey(name))
-                    {
-                        name = _Pets[name];
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
 
+                    if (DamageInflicted != null)
+                    {
+                        DamageInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, damage));
+                    }
+
+                    matched = true;
+                    regex = "_YouInflictedRegex";
+                    return;
+                }
+
+                matches = _YouCriticalRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+
+                    if (CriticalInflicted != null)
+                    {
+                        CriticalInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, damage));
+                    }
+
+                    matched = true;
+                    regex = "_YouCriticalRegex";
+                    return;
+                }
+
+                matches = _YouEffectDamageRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+                    string effect = matches[0].Groups[_EffectGroupName].Value;
+
+                    if (SkillDamageInflicted != null)
+                    {
+                        SkillDamageInflicted(this,
+                                             new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, damage,
+                                                                            effect));
+                    }
+
+                    matched = true;
+                    regex = "_YouEffectDamageRegex";
+                    return;
+                }
+
+                matches = _YouGainedEffectRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string effect = matches[0].Groups[_EffectGroupName].Value;
+
+                    if (_Effects.ContainsKey(effect))
+                    {
+                        if (_Effects[effect] != Settings.Default.YouAlias)
+                        {
+                            _Effects[effect] = Settings.Default.YouAlias;
+                        }
+                    }
+
+                    else
+                    {
+                        _Effects.Add(effect, Settings.Default.YouAlias);
+                    }
+
+                    matched = true;
+                    regex = "_YouGainedEffectRegex";
+                    return;
+                }
+
+                matches = _YouReceivedRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+
+                    if (DamageReceived != null)
+                    {
+                        DamageReceived(this, new PlayerDamageEventArgs(time, target, damage));
+                    }
+
+                    matched = true;
+                    regex = "_YouReceivedRegex";
+                    return;
+                }
+
+                matches = _YouContinuousRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+
+                    if (_Dots.ContainsKey(skill))
+                    {
+                        if (_Dots[skill] != Settings.Default.YouAlias)
+                        {
+                            _Dots[skill] = Settings.Default.YouAlias;
+                        }
+                    }
+
+                    else
+                    {
+                        _Dots.Add(skill, Settings.Default.YouAlias);
+                    }
+
+                    matched = true;
+                    regex = "_YouContinuousRegex";
+                    return;
+                }
+
+                matches = _YouInflictedBleedRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+
+                    if (_Dots.ContainsKey(skill))
+                    {
+                        if (_Dots[skill] != Settings.Default.YouAlias)
+                        {
+                            _Dots[skill] = Settings.Default.YouAlias;
+                        }
+                    }
+
+                    else
+                    {
+                        _Dots.Add(skill, Settings.Default.YouAlias);
+                    }
+
+                    matched = true;
+                    regex = "_YouContinuousRegex";
+                    return;
+                }
+
+                matches = _YouSummonedAttackRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+                    string pet = matches[0].Groups[_PetGroupName].Value;
+
+                    if (_Pets.ContainsKey(pet))
+                    {
+                        if (_Pets[pet] != Settings.Default.YouAlias)
+                        {
+                            _Pets[pet] = Settings.Default.YouAlias;
+                        }
+                    }
+
+                    else
+                    {
+                        _Pets.Add(pet, Settings.Default.YouAlias);
+                    }
+
+                    matched = true;
+                    regex = "_YouSummonedAttackRegex";
+                    return;
+                }
+
+                matches = _YouSummonedRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+                    string pet = matches[0].Groups[_PetGroupName].Value;
+
+                    if (_Pets.ContainsKey(pet))
+                    {
+                        if (_Pets[pet] != Settings.Default.YouAlias)
+                        {
+                            _Pets[pet] = Settings.Default.YouAlias;
+                        }
+                    }
+
+                    else
+                    {
+                        _Pets.Add(pet, Settings.Default.YouAlias);
+                    }
+
+                    matched = true;
+                    regex = "_YouSummonedRegex";
+                    return;
+                }
+
+                matches = _OtherInflictedSkillRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+
+                    if (String.IsNullOrEmpty(name))
+                    {
+                        return;
+                    }
+
+                    if (name.Contains(" "))
+                    {
+                        if (_Pets.ContainsKey(name))
+                        {
+                            name = _Pets[name];
+
+                            if (SkillDamageInflicted != null)
+                            {
+                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, skill));
+                            }
+                        }
+                    }
+
+                    else
+                    {
                         if (SkillDamageInflicted != null)
                         {
                             SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, skill));
                         }
                     }
-                }
 
-                else
-                {
-                    if (SkillDamageInflicted != null)
-                    {
-                        SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, skill));
-                    }
-                }
-
-                matched = true;
-                regex = "_OtherInflictedSkillRegex";
-                goto End;
-            }
-
-            matches = _OtherInflictedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-
-                if (String.IsNullOrEmpty(name))
-                {
+                    matched = true;
+                    regex = "_OtherInflictedSkillRegex";
                     return;
                 }
 
-                if (name.Contains(" "))
+                matches = _OtherInflictedRegex.Matches(line);
+                if (matches.Count > 0)
                 {
-                    if (_Pets.ContainsKey(name))
-                    {
-                        string pet = name;
-                        name = _Pets[pet];
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
 
-                        if (SkillDamageInflicted != null)
-                        {
-                            SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, pet));
-                        }
+                    if (String.IsNullOrEmpty(name))
+                    {
+                        return;
                     }
-                }
 
-                else
-                {
-                    if (DamageInflicted != null)
+                    if (name.Contains(" "))
                     {
-                        DamageInflicted(this, new PlayerDamageEventArgs(time, name, damage));
-                    }
-                }
-
-                matched = true;
-                regex = "_OtherInflictedRegex";
-                goto End;
-            }
-
-            matches = _OtherReceivedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-
-                matched = true;
-                regex = "_OtherReceivedRegex";
-                goto End;
-            }
-
-            matches = _OtherReceivedSkillRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-
-                if (_Dots.ContainsKey(skill))
-                {
-                    if (_Dots[skill].Contains(" "))
-                    {
-                        if (_Pets.ContainsKey(_Dots[skill]))
+                        if (_Pets.ContainsKey(name))
                         {
+                            string pet = name;
+                            name = _Pets[pet];
+
                             if (SkillDamageInflicted != null)
                             {
-                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]], damage, skill));
+                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, pet));
                             }
                         }
                     }
 
                     else
                     {
-                        if (SkillDamageInflicted != null)
+                        if (DamageInflicted != null)
                         {
-                            SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Dots[skill], damage, skill));
+                            DamageInflicted(this, new PlayerDamageEventArgs(time, name, damage));
                         }
                     }
+
+                    matched = true;
+                    regex = "_OtherInflictedRegex";
+                    return;
                 }
 
-                if (_Effects.ContainsKey(skill))
+                matches = _OtherReceivedRegex.Matches(line);
+                if (matches.Count > 0)
                 {
-                    if (SkillDamageInflicted != null)
-                    {
-                        SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Effects[skill], damage, skill));
-                    }
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+
+                    matched = true;
+                    regex = "_OtherReceivedRegex";
+                    return;
                 }
 
-                if (_Effects.ContainsKey(skill.Replace(KingsDamageMeter.Languages.Regex.Default.Effect, "")))
+                matches = _OtherReceivedSkillRegex.Matches(line);
+                if (matches.Count > 0)
                 {
-                    if (SkillDamageInflicted != null)
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+
+                    if (_Dots.ContainsKey(skill))
                     {
-                        SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Effects[skill.Replace(KingsDamageMeter.Languages.Regex.Default.Effect, "")], damage, skill));
-                    }
-                }
+                        if (_Dots[skill].Contains(" "))
+                        {
+                            if (_Pets.ContainsKey(_Dots[skill]))
+                            {
+                                if (SkillDamageInflicted != null)
+                                {
+                                    SkillDamageInflicted(this,
+                                                         new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]],
+                                                                                        damage, skill));
+                                }
+                            }
+                        }
 
-                matched = true;
-                regex = "_OtherReceivedSkillRegex";
-                goto End;
-            }
-
-            matches = _OtherReceivedBleedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-
-                if (_Dots.ContainsKey(skill))
-                {
-                    if (_Dots[skill].Contains(" "))
-                    {
-                        if (_Pets.ContainsKey(_Dots[skill]))
+                        else
                         {
                             if (SkillDamageInflicted != null)
                             {
-                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]], damage, skill));
+                                SkillDamageInflicted(this,
+                                                     new PlayerSkillDamageEventArgs(time, _Dots[skill], damage, skill));
                             }
+                        }
+                    }
+
+                    if (_Effects.ContainsKey(skill))
+                    {
+                        if (SkillDamageInflicted != null)
+                        {
+                            SkillDamageInflicted(this,
+                                                 new PlayerSkillDamageEventArgs(time, _Effects[skill], damage, skill));
+                        }
+                    }
+
+                    if (_Effects.ContainsKey(skill.Replace(Localization.Regex.Effect, "")))
+                    {
+                        if (SkillDamageInflicted != null)
+                        {
+                            SkillDamageInflicted(this,
+                                                 new PlayerSkillDamageEventArgs(time,
+                                                                                _Effects[
+                                                                                    skill.Replace(
+                                                                                        Localization.Regex.Effect, "")],
+                                                                                damage, skill));
+                        }
+                    }
+
+                    matched = true;
+                    regex = "_OtherReceivedSkillRegex";
+                    return;
+                }
+
+                matches = _OtherReceivedBleedRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+
+                    if (_Dots.ContainsKey(skill))
+                    {
+                        if (_Dots[skill].Contains(" "))
+                        {
+                            if (_Pets.ContainsKey(_Dots[skill]))
+                            {
+                                if (SkillDamageInflicted != null)
+                                {
+                                    SkillDamageInflicted(this,
+                                                         new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]],
+                                                                                        damage, skill));
+                                }
+                            }
+                        }
+
+                        else
+                        {
+                            if (SkillDamageInflicted != null)
+                            {
+                                SkillDamageInflicted(this,
+                                                     new PlayerSkillDamageEventArgs(time, _Dots[skill], damage, skill));
+                            }
+                        }
+                    }
+
+                    matched = true;
+                    regex = "_OtherReceivedBleedRegex";
+                    return;
+                }
+
+                matches = _OtherContinuousRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+
+                    if (_Dots.ContainsKey(skill))
+                    {
+                        if (_Dots[skill] != name)
+                        {
+                            _Dots[skill] = name;
                         }
                     }
 
                     else
                     {
-                        if (SkillDamageInflicted != null)
+                        _Dots.Add(skill, name);
+                    }
+
+                    matched = true;
+                    regex = "_OtherContinuousRegex";
+                    return;
+                }
+
+                matches = _OtherInflictedBleedRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+
+                    if (_Dots.ContainsKey(skill))
+                    {
+                        if (_Dots[skill] != name)
                         {
-                            SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, _Dots[skill], damage, skill));
+                            _Dots[skill] = name;
                         }
                     }
+
+                    else
+                    {
+                        _Dots.Add(skill, name);
+                    }
+
+                    matched = true;
+                    regex = "_OtherInflictedBleedRegex";
+                    return;
                 }
 
-                matched = true;
-                regex = "_OtherReceivedBleedRegex";
-                goto End;
-            }
-
-            matches = _OtherContinuousRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-                string target = matches[0].Groups[_TargetGroupName].Value;
-
-                if (_Dots.ContainsKey(skill))
+                matches = _OtherSummonedAttackRegex.Matches(line);
+                if (matches.Count > 0)
                 {
-                    if (_Dots[skill] != name)
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+                    string pet = matches[0].Groups[_PetGroupName].Value;
+
+                    if (_Pets.ContainsKey(pet))
                     {
-                        _Dots[skill] = name;
+                        if (_Pets[pet] != name)
+                        {
+                            _Pets[pet] = name;
+                        }
                     }
+
+                    else
+                    {
+                        _Pets.Add(pet, name);
+                    }
+
+                    matched = true;
+                    regex = "_OtherSummonedAttackRegex";
+                    return;
+                }
+
+                matches = _OtherSummonedRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+                    string pet = matches[0].Groups[_PetGroupName].Value;
+
+                    if (_Pets.ContainsKey(pet))
+                    {
+                        if (_Pets[pet] != name)
+                        {
+                            _Pets[pet] = name;
+                        }
+                    }
+
+                    else
+                    {
+                        _Pets.Add(pet, name);
+                    }
+
+                    matched = true;
+                    regex = "_OtherSummonedRegex";
+                    return;
+                }
+
+                matches = _JoinedGroupRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+
+                    if (PlayerJoinedGroup != null)
+                    {
+                        PlayerJoinedGroup(this, new PlayerEventArgs(time, name));
+                    }
+
+                    matched = true;
+                    regex = "_JoinedGroupRegex";
+                    return;
+                }
+
+                matches = _LeftGroupRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+
+                    if (PlayerLeftGroup != null)
+                    {
+                        PlayerLeftGroup(this, new PlayerEventArgs(time, name));
+                    }
+
+                    matched = true;
+                    regex = "_LeftGroupRegex";
+                    return;
+                }
+
+                matches = _KickedFromGroupRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+
+                    if (PlayerLeftGroup != null)
+                    {
+                        PlayerLeftGroup(this, new PlayerEventArgs(time, name));
+                    }
+
+                    matched = true;
+                    regex = "_KickedFromGroupRegex";
+                    return;
+                }
+
+                matches = _YouGainedExpRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int exp = matches[0].Groups[_ExpGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+
+                    if (ExpGained != null)
+                    {
+                        ExpGained(this, new ExpEventArgs(time, exp));
+                    }
+
+                    matched = true;
+                    regex = "_YouGainedExpRegex";
+                    return;
+                }
+
+                matches = _YouEarnedKinahRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int kinah = matches[0].Groups[_KinahGroupName].Value.GetDigits();
+
+                    if (KinahEarned != null)
+                    {
+                        KinahEarned(this, new KinahEventArgs(time, kinah));
+                    }
+
+                    matched = true;
+                    regex = "_YouEarnedKinahRegex";
+                    return;
+                }
+
+                matches = _YouSpentKinahRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int kinah = matches[0].Groups[_KinahGroupName].Value.GetDigits();
+
+                    if (KinahSpent != null)
+                    {
+                        KinahSpent(this, new KinahEventArgs(time, kinah));
+                    }
+
+                    matched = true;
+                    regex = "_YouSpentKinahRegex";
+                    return;
+                }
+
+                matches = _YouGainedApRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int ap = matches[0].Groups[_ApGroupName].Value.GetDigits();
+
+                    if (AbyssPointsGained != null)
+                    {
+                        AbyssPointsGained(this, new AbyssPointsEventArgs(time, ap));
+                    }
+
+                    matched = true;
+                    regex = "_YouGainedApRegex";
+                    return;
+                }
+            }
+            finally
+            {
+                if (!matched)
+                {
+                    DebugLogger.Write("No match for: (\"" + line + "\")");
                 }
 
                 else
                 {
-                    _Dots.Add(skill, name);
+                    DebugLogger.Write(regex + ": (\"" + line + "\")");
                 }
-
-                matched = true;
-                regex = "_OtherContinuousRegex";
-                goto End;
-            }
-
-            matches = _OtherInflictedBleedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-                string target = matches[0].Groups[_TargetGroupName].Value;
-
-                if (_Dots.ContainsKey(skill))
-                {
-                    if (_Dots[skill] != name)
-                    {
-                        _Dots[skill] = name;
-                    }
-                }
-
-                else
-                {
-                    _Dots.Add(skill, name);
-                }
-
-                matched = true;
-                regex = "_OtherInflictedBleedRegex";
-                goto End;
-            }
-
-            matches = _OtherSummonedAttackRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                string target = matches[0].Groups[_TargetGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-                string pet = matches[0].Groups[_PetGroupName].Value;
-
-                if (_Pets.ContainsKey(pet))
-                {
-                    if (_Pets[pet] != name)
-                    {
-                        _Pets[pet] = name;
-                    }
-                }
-
-                else
-                {
-                    _Pets.Add(pet, name);
-                }
-
-                matched = true;
-                regex = "_OtherSummonedAttackRegex";
-                goto End;
-            }
-
-            matches = _OtherSummonedRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                string name = matches[0].Groups[_NameGroupName].Value;
-                string skill = matches[0].Groups[_SkillGroupName].Value;
-                string pet = matches[0].Groups[_PetGroupName].Value;
-
-                if (_Pets.ContainsKey(pet))
-                {
-                    if (_Pets[pet] != name)
-                    {
-                        _Pets[pet] = name;
-                    }
-                }
-
-                else
-                {
-                    _Pets.Add(pet, name);
-                }
-
-                matched = true;
-                regex = "_OtherSummonedRegex";
-                goto End;
-            }
-
-            matches = _JoinedGroupRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                string name = matches[0].Groups[_NameGroupName].Value;
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-
-                if (PlayerJoinedGroup != null)
-                {
-                    PlayerJoinedGroup(this, new PlayerEventArgs(time, name));
-                }
-
-                matched = true;
-                regex = "_JoinedGroupRegex";
-                goto End;
-            }
-
-            matches = _LeftGroupRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                string name = matches[0].Groups[_NameGroupName].Value;
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-
-                if (PlayerLeftGroup != null)
-                {
-                    PlayerLeftGroup(this, new PlayerEventArgs(time, name));
-                }
-
-                matched = true;
-                regex = "_LeftGroupRegex";
-                goto End;
-            }
-
-            matches = _KickedFromGroupRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                string name = matches[0].Groups[_NameGroupName].Value;
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-
-                if (PlayerLeftGroup != null)
-                {
-                    PlayerLeftGroup(this, new PlayerEventArgs(time, name));
-                }
-
-                matched = true;
-                regex = "_KickedFromGroupRegex";
-                goto End;
-            }
-
-            matches = _YouGainedExpRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int exp = matches[0].Groups[_ExpGroupName].Value.GetDigits();
-                string target = matches[0].Groups[_TargetGroupName].Value;
-
-                if (ExpGained != null)
-                {
-                    ExpGained(this, new ExpEventArgs(time, exp));
-                }
-
-                matched = true;
-                regex = "_YouGainedExpRegex";
-                goto End;
-            }
-
-            matches = _YouEarnedKinahRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int kinah = matches[0].Groups[_KinahGroupName].Value.GetDigits();
-
-                if (KinahEarned != null)
-                {
-                    KinahEarned(this, new KinahEventArgs(time, kinah));
-                }
-
-                matched = true;
-                regex = "_YouEarnedKinahRegex";
-                goto End;
-            }
-
-            matches = _YouSpentKinahRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int kinah = matches[0].Groups[_KinahGroupName].Value.GetDigits();
-
-                if (KinahSpent != null)
-                {
-                    KinahSpent(this, new KinahEventArgs(time, kinah));
-                }
-
-                matched = true;
-                regex = "_YouSpentKinahRegex";
-                goto End;
-            }
-
-            matches = _YouGainedApRegex.Matches(line);
-            if (matches.Count > 0)
-            {
-                DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
-                int ap = matches[0].Groups[_ApGroupName].Value.GetDigits();
-
-                if (AbyssPointsGained != null)
-                {
-                    AbyssPointsGained(this, new AbyssPointsEventArgs(time, ap));
-                }
-
-                matched = true;
-                regex = "_YouGainedApRegex";
-                goto End;
-            }
-
-        End:
-
-            if (!matched)
-            {
-                DebugLogger.Write("No match for: (\"" + line + "\")");
-            }
-
-            else
-            {
-                DebugLogger.Write(regex + ": (\"" + line + "\")");
             }
         }
     }
