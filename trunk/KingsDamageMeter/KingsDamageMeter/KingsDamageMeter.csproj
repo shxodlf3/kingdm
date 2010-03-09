@@ -221,6 +221,7 @@
       <DependentUpon>SkillsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SkillSorter.cs" />
+    <Compile Include="KeyboardHook\KeyboardHook.cs" />
     <Compile Include="Languages\Regex.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
