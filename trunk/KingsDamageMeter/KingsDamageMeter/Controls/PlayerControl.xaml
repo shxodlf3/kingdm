@@ -25,7 +25,7 @@
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipTotal}"/>
             </StackPanel>
-            <TextBlock Text="{Binding DamagePercent, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"/>
+            <TextBlock Text="{Binding PercentFromGroupDamages, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"/>
             <TextBlock/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding DamagePerSecond, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
