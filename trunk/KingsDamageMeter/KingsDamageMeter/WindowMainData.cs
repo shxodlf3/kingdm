@@ -33,6 +33,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Data;
 using KingsDamageMeter.Controls;
+using KingsDamageMeter.Converters;
 using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
 using Timer=System.Timers.Timer;
@@ -808,7 +809,9 @@ namespace KingsDamageMeter
             {
                 if (selectedPlayer != null)
                 {
-                    Clipboard.SetText(selectedPlayer.PlayerName + " " + selectedPlayer.Damage);
+                    //Clipboard.SetText(selectedPlayer.PlayerName + " " + selectedPlayer.Damage);
+                    Clipboard.SetText(String.Format("{0} {1}, {2} ({3})", selectedPlayer.PlayerName, selectedPlayer.Damage, 
+                        selectedPlayer.DamagePerSecond, selectedPlayer.PercentFromGroupDamages.ToString("0%")));
                 }
             }
             else
@@ -832,7 +835,9 @@ namespace KingsDamageMeter
                     var sb = new StringBuilder();
                     foreach (Player player in view)
                     {
-                        sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage, Environment.NewLine);
+                        //sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage, Environment.NewLine);
+                        sb.AppendFormat("{0} {1} {2}, {3} ({4}){5}", chatPrefix, player.PlayerName, player.Damage,
+                            player.DamagePerSecond, player.PercentFromGroupDamages.ToString("0%"), Environment.NewLine);
                     }
                     Clipboard.SetText(sb.ToString());
                 }
