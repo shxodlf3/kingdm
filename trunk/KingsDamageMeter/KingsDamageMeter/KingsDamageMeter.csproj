@@ -168,6 +168,7 @@
     <Compile Include="Controls\PlayerSortType.cs" />
     <Compile Include="Controls\RelayCommand.cs" />
     <Compile Include="Controls\YouPlayer.cs" />
+    <Compile Include="ClassType\ClassType.cs" />
     <Compile Include="Converters\DataToFormattedDataConverter.cs" />
     <Compile Include="Converters\DisplayTypeToBoolConverter.cs" />
     <Compile Include="Converters\DisplayTypeToVisibilityConverter.cs" />
