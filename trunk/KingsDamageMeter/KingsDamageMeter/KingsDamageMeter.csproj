@@ -267,6 +267,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SkillDictionary\SkillDictionary.cs" />
+    <Compile Include="SkillLists\SkillList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SkillList.resx</DependentUpon>
+    </Compile>
     <Compile Include="WindowMainData.cs" />
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
@@ -369,6 +374,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillLists\SkillList.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SkillList.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Documentation.pdf">

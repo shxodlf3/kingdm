@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Assassin" xml:space="preserve">
+    <value>Dash Attack,Killer's Eye,Rune Carve,Sprinting,Pain Rune,Apply Poison,Fang Strike,Rune Slash,Clear Focus,Whirlwind Slash,Binding Rune,Beast Kick,Searching Eye,Wind Walk,Assassination,Weakening Blow,Blood Rune,Beast Swipe,Spiral Slash,Throw Dagger</value>
+  </data>
+  <data name="Chanter" xml:space="preserve">
+    <value>Victory Mantra,Meteor Strike,Shield Mantra,Booming Strike,Word of Revival,Promise of Earth,Magic Mantra,Incandescent Blow,Celerity Mantra,Focused Parry,Booming Smash,Revival Mantra,Clement Mind Mantra,Parrying Strike,Pentacle Shock,Word of Wind,Booming Assault,Intensity Mantra,Word of Quickness,Protection Mantra,Tremor</value>
+  </data>
+  <data name="Cleric" xml:space="preserve">
+    <value>Light of Rejuvenation,Root,Thunderbolt,Dispel,Tranquility,Radiant Cure,Cure Mind,Penance,Divine Touch,Healing Wind,Rebirth,Divine Spark,Summer Circle,Winter Circle,Thorny Skin,Acquittal,Light of Recovery,Chastisement,Resurrection Loci,Prayer of Focus,Grace of Resurrection,Blessed Shield,Slashing Wind</value>
+  </data>
+  <data name="Gladiator" xml:space="preserve">
+    <value>Seismic Wave,Wrathful Strike,Aion's Strength,Rupture,Cleave,Aerial Lockdown,Body Smash,Crashing Blow,Shock Wave,Seismic Billow,Reckless Strike,Stamina Recovery,Wall of Steel,Pressure Wave,Great Cleave,Wrathful Wave,Righteous Cleave,Strengthen Wings</value>
+  </data>
+  <data name="Ranger" xml:space="preserve">
+    <value>Swift Shot,Entanglng Shot,Arrow Strke,Stunnng Shot,Aiming,Poison Arrow,Rupture Arrow,Strong Shots,Tactcal Retreat,Aerial Wild Shot,Hunter's Eye,Arrow Flurry,Fleshcutter Arrow,Arrow Storm</value>
+  </data>
+  <data name="Sorcerer" xml:space="preserve">
+    <value>Robe of Earth,Flame Harpoon,Blind Leap,Winter Binding,Flame Cage,Delayed Blast,Robe of Flame,Freezing Wind,Boon of Peace,Aether's Hold,Aether Flame,Inferno,Robe of Cold,Tranquilizing Cloud,Gain Mana,Flame Fusion,Magic Fist,Soul Absorption,Soul Freeze,Flaming Meteor,Cometfall</value>
+  </data>
+  <data name="Spiritmaster" xml:space="preserve">
+    <value>Root of Enervation,Summon Fire Spirit,Summon Wind Spirit,Chain of Earth,Summon Fire Energy,Dispel Magic,Summon Water Spirit,Summon Wind Servant,Spirit Erosion,Stone Shock,Sandblaster,Summon Group Member,Disenchant,Summoning Alacrity,Spirit Absorption,Blade of Earth,Wing Root,Erosion,Stone Skin</value>
+  </data>
+  <data name="Templar" xml:space="preserve">
+    <value>Taunt,Shield Bash,Provoking Shield Counter,Empyrean Armor,Shining Slash,Wrath Strike,Avenging Blow,Steel Wall Defense,Divine Blow,Dazing Severe Blow,Face Smash,Hand of Healing,Blunting Severe Blow,Judgment,Iron Skin,Divine Grasp</value>
+  </data>
+</root>

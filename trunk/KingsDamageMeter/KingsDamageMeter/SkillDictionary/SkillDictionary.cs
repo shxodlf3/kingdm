@@ -152,7 +152,6 @@ namespace KingsDamageMeter
             _Skills.Add("Divine Grasp", ClassType.Templar);
 
             // Gladiator
-            _Skills.Add("", ClassType.Gladiator);
             _Skills.Add("Seismic Wave", ClassType.Gladiator);
             _Skills.Add("Wrathful Strike", ClassType.Gladiator);
             _Skills.Add("Aion's Strength", ClassType.Gladiator);
