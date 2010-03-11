@@ -70,6 +70,7 @@ namespace KingsDamageMeter
             _Skills.Add("Prayer of Focus", ClassType.Cleric);
             _Skills.Add("Grace of Resurrection", ClassType.Cleric);
             _Skills.Add("Blessed Shield", ClassType.Cleric);
+            _Skills.Add("Slashing Wind", ClassType.Cleric);
 
             // Chanter
             _Skills.Add("Victory Mantra", ClassType.Chanter);

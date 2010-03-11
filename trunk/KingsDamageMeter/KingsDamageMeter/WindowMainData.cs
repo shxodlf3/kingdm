@@ -86,6 +86,14 @@ namespace KingsDamageMeter
             }
         }
 
+        public string PowerButtonToolTip
+        {
+            get
+            {
+                return IsEnabled ? WindowMainRes.PowerOnBtnTooltip : WindowMainRes.PowerOffBtnTooltip;
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -226,6 +234,9 @@ namespace KingsDamageMeter
                     break;
                 case "SelectedLogLanguage":
                     _LogParser.Initialize();
+                    break;
+                case "SelectedLanguage":
+                    NotifyPropertyChanged("PowerButtonToolTip");
                     break;
             }
         }
@@ -724,6 +735,7 @@ namespace KingsDamageMeter
                 _LogParser.Start(Settings.Default.AionLogPath);
             }
             NotifyPropertyChanged("IsEnabled");
+            NotifyPropertyChanged("PowerButtonToolTip");
         }
 
         private void ClearAll()

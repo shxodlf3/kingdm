@@ -4,6 +4,7 @@
              xmlns:Converters="clr-namespace:KingsDamageMeter.Converters"
              xmlns:Controls="clr-namespace:KingsDamageMeter.Controls"
              xmlns:Properties="clr-namespace:KingsDamageMeter.Properties"
+             xmlns:KingsDamageMeter="clr-namespace:KingsDamageMeter"
              MinHeight="38" MinWidth="150"
              Margin="2">
     <UserControl.Resources>
@@ -109,10 +110,20 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Ellipse x:Name="ClassIcon" Style="{DynamicResource ClassTypeNone}" Width="9" Height="9" Margin="2,4,2,2" VerticalAlignment="Top">
-                    <Ellipse.ToolTip>
-                        <ToolTip Content="{Binding PlayerClass}"/>
-                    </Ellipse.ToolTip>
+                <Ellipse x:Name="ClassIcon" Width="9" Height="9" Margin="2,4,2,2" VerticalAlignment="Top"
+                         ToolTip="{Binding PlayerClass}">
+                    <Ellipse.Style>
+                        <Style TargetType="{x:Type Ellipse}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PlayerClass}" Value="{x:Static KingsDamageMeter:ClassType.None}">
+                                    <Setter Property="Fill" Value="{DynamicResource ClassTypeNone}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding PlayerClass}" Value="{x:Static KingsDamageMeter:ClassType.Cleric}">
+                                    <Setter Property="Fill" Value="{DynamicResource ClassTypeCleric}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
                 </Ellipse>
                 <TextBlock Text="{Binding PlayerName}"
                            VerticalAlignment="Center"

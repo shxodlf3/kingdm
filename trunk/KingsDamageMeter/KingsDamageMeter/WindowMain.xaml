@@ -66,7 +66,8 @@
                                           Width="20" Height="20"
                                           Grid.Column="0"
                                           HorizontalAlignment="Left"
-                                          Margin="5,0">
+                                          Margin="5,0"
+                                          ToolTip="{Binding PowerButtonToolTip}">
                             <local:SkinButton.Style>
                                 <Style TargetType="{x:Type local:SkinButton}">
                                     <Style.Triggers>
@@ -74,13 +75,11 @@
                                             <Setter Property="MouseUpImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp"/>
                                             <Setter Property="MouseDownImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OnButtonPress.bmp"/>
                                             <Setter Property="MouseOverImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp"/>
-                                            <Setter Property="ToolTip" Value="{LocText KingsDamageMeter:WindowMainRes:PowerOnBtnTooltip}"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding IsEnabled}" Value="False">
                                             <Setter Property="MouseUpImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp"/>
                                             <Setter Property="MouseDownImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OffButtonPress.bmp"/>
                                             <Setter Property="MouseOverImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp"/>
-                                            <Setter Property="ToolTip" Value="{LocText KingsDamageMeter:WindowMainRes:PowerOffBtnTooltip}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -228,33 +227,58 @@
                                               HorizontalAlignment="Left"/>
                         </StackPanel>
                     </Grid>
-                    <ItemsControl x:Name="playersItemsControl"
-                                  Grid.Row="1"
-                                  ItemsSource="{Binding Players}"
-                                  Margin="5,3,5,0">
-                        <ItemsControl.Template>
-                            <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                <ScrollViewer Style="{DynamicResource PlayerScrollViewer}" BorderThickness="1" BorderBrush="{StaticResource BorderBrush}"
-                                              HorizontalAlignment="Stretch">
-                                    <ItemsPresenter />
-                                </ScrollViewer>
-                            </ControlTemplate>
-                        </ItemsControl.Template>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel IsItemsHost="True" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:PlayerControl/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <Grid Grid.Row="1"
+                          Margin="5,3,5,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl x:Name="playersItemsControl"
+                                      Grid.Column="0"
+                                      ItemsSource="{Binding Players}">
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                    <ScrollViewer Style="{DynamicResource PlayerScrollViewer}" 
+                                                  BorderThickness="1" 
+                                                  BorderBrush="{StaticResource BorderBrush}"
+                                                  HorizontalAlignment="Stretch">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <local:PlayerControl/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!--GridSplitter Grid.Column="1"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"
+                                      MinWidth="3"
+                                      Margin="3">
+                            
+                        </GridSplitter>
+                        <Expander ExpandDirection="Left"
+                                  Grid.Column="2">
+                            <Border BorderBrush="{StaticResource BorderBrush}" 
+                                    BorderThickness="1"
+                                    CornerRadius="0,10,0,0"/>
+                        </Expander-->
+                    </Grid>
                     <Border Grid.Row="2"
                             BorderBrush="{StaticResource BorderBrush}"
                             BorderThickness="1,0,1,1"
-                            MaxWidth="{Binding ActualWidth, ElementName=playersItemsControl}">
+                            CornerRadius="0,0,0,10"
+                            Width="{Binding ActualWidth, ElementName=playersItemsControl}"
+                            HorizontalAlignment="Left"
+                            Margin="5,0,0,0">
                         <Border.Style>
                             <Style TargetType="{x:Type Border}">
                                 <Style.Triggers>

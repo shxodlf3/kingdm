@@ -79,7 +79,27 @@
     </Style>
     
     <!-- Class Buttons -->
-    <Style x:Key="ClassTypeNone" TargetType="{x:Type Ellipse}">
+    <RadialGradientBrush x:Key="ClassTypeNone" GradientOrigin="0.496,1.052">
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                <TranslateTransform X="0.02" Y="0.3"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+        <GradientStop Offset="0.4" Color="#000"/>
+        <GradientStop Offset="1" Color="#CCC"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="ClassTypeCleric" GradientOrigin="0.496,1.052">
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                <TranslateTransform X="0.02" Y="0.3"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+        <GradientStop Offset="0.4" Color="#000"/>
+        <GradientStop Offset="1" Color="#66F"/>
+    </RadialGradientBrush>
+    <!--Style x:Key="ClassTypeNone" TargetType="{x:Type Ellipse}">
         <Setter Property="Fill">
             <Setter.Value>
                 <RadialGradientBrush GradientOrigin="0.496,1.052">
@@ -94,8 +114,8 @@
                 </RadialGradientBrush>
             </Setter.Value>
         </Setter>
-    </Style>
-    <Style x:Key="ClassTypeCleric" TargetType="{x:Type Ellipse}">
+    </Style-->
+    <!--Style x:Key="ClassTypeCleric" TargetType="{x:Type Ellipse}">
         <Setter Property="Fill">
             <Setter.Value>
                 <RadialGradientBrush GradientOrigin="0.496,1.052">
@@ -110,7 +130,7 @@
                 </RadialGradientBrush>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style-->
     <Style x:Key="ClassTypeChanter" TargetType="{x:Type Ellipse}">
         <Setter Property="Fill">
             <Setter.Value>
