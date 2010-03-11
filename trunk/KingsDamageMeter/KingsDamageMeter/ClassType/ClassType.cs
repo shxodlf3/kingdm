@@ -22,16 +22,12 @@ namespace KingsDamageMeter
     public enum ClassType
     {
         None,
-        Priest,
         Cleric,
         Chanter,
-        Scout,
         Assassin,
         Ranger,
-        Warrior,
         Templar,
         Gladiator,
-        Mage,
         Sorcerer,
         Spiritmaster
     }
