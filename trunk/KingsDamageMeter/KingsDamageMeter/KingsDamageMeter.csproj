@@ -267,10 +267,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SkillDictionary\SkillDictionary.cs" />
-    <Compile Include="SkillLists\SkillList.Designer.cs">
+	    <Compile Include="SkillLists\ClassList.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SkillList.resx</DependentUpon>
+      <DependentUpon>ClassList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SkillLists\SkillLists.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SkillLists.resx</DependentUpon>
     </Compile>
     <Compile Include="WindowMainData.cs" />
     <EmbeddedResource Include="Forms\AboutForm.resx">
@@ -375,10 +380,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SkillLists\SkillList.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SkillList.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="SkillLists\ClassList.de.resx" />
+    <EmbeddedResource Include="SkillLists\ClassList.fr.resx" />
+    <EmbeddedResource Include="SkillLists\ClassList.resx" />
+    <EmbeddedResource Include="SkillLists\SkillList.de.resx" />
+    <EmbeddedResource Include="SkillLists\SkillList.fr.resx" />
+    <EmbeddedResource Include="SkillLists\SkillLists.resx" />
     <None Include="app.config" />
     <None Include="Documentation.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
