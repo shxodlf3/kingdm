@@ -70,7 +70,7 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Effect.
+        ///   Looks up a localized string similar to  Effect.
         /// </summary>
         internal static string Effect {
             get {

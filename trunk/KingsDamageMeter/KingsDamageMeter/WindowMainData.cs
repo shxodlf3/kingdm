@@ -835,9 +835,7 @@ namespace KingsDamageMeter
                     var sb = new StringBuilder();
                     foreach (Player player in view)
                     {
-                        //sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage, Environment.NewLine);
-                        sb.AppendFormat("{0} {1} {2}, {3} ({4}){5}", chatPrefix, player.PlayerName, player.Damage,
-                            player.DamagePerSecond, player.PercentFromGroupDamages.ToString("0%"), Environment.NewLine);
+                        sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage, Environment.NewLine);
                     }
                     Clipboard.SetText(sb.ToString());
                 }

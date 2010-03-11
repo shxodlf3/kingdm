@@ -121,7 +121,7 @@
     <value>\[charname:</value>
   </data>
   <data name="Effect" xml:space="preserve">
-    <value>Effect</value>
+    <value> Effect</value>
   </data>
   <data name="JoinedGroupRegex" xml:space="preserve">
     <value>(?&lt;name&gt;.+) has joined your group\.</value>
