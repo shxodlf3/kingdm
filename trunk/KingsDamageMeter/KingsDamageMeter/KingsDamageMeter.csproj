@@ -159,7 +159,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SkillDictionary\SkillDictionary.cs" />
     <Compile Include="Combat\Skill.cs" />
     <Compile Include="Combat\SkillCollection.cs" />
     <Compile Include="Controls\ClipboardCopyType.cs" />
@@ -169,7 +168,6 @@
     <Compile Include="Controls\PlayerSortType.cs" />
     <Compile Include="Controls\RelayCommand.cs" />
     <Compile Include="Controls\YouPlayer.cs" />
-    <Compile Include="SkillDictionary\ClassType.cs" />
     <Compile Include="Converters\DataToFormattedDataConverter.cs" />
     <Compile Include="Converters\DisplayTypeToBoolConverter.cs" />
     <Compile Include="Converters\DisplayTypeToVisibilityConverter.cs" />
