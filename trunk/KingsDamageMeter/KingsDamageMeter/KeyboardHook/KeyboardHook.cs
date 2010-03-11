@@ -35,7 +35,6 @@ namespace KingsDamageMeter
         private const byte VK_RCONTROL = 0xA3;
         private const byte VK_LMENU = 0xA4;
         private const byte VK_RMENU = 0xA5;
-        private const byte VK_CAPITAL = 0x14;
         private const byte PRESSED_STATE = 0x80;
 
         private static IntPtr _Handle = IntPtr.Zero;
@@ -121,14 +120,6 @@ namespace KingsDamageMeter
                 }
 
                 return false;
-            }
-        }
-
-        public static bool CapsLockEnabled
-        {
-            get
-            {
-                return (GetKeyState(VK_CAPITAL) != 0 ? true : false);
             }
         }
 
