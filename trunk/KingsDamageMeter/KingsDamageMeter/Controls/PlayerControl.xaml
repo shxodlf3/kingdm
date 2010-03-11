@@ -20,6 +20,7 @@
     <UserControl.ToolTip>
         <StackPanel>
             <TextBlock Text="{Binding PlayerName}"/>
+            <TextBlock Text="{Binding PlayerClass}"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding Damage, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
                 <TextBlock Text=" "/>
