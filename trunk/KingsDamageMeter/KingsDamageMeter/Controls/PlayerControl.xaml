@@ -108,7 +108,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Ellipse x:Name="ClassIcon" Style="{DynamicResource ClassTypeTemplar}" Width="9" Height="9" Margin="2,4,2,2" VerticalAlignment="Top">
+                <Ellipse x:Name="ClassIcon" Style="{DynamicResource ClassTypeNone}" Width="9" Height="9" Margin="2,4,2,2" VerticalAlignment="Top">
                     <Ellipse.ToolTip>
                         <ToolTip Content="{Binding PlayerClass}"/>
                     </Ellipse.ToolTip>
