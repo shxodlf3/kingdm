@@ -153,8 +153,8 @@
                             <TranslateTransform X="0.02" Y="0.3"/>
                         </TransformGroup>
                     </RadialGradientBrush.RelativeTransform>
-                    <GradientStop Offset="1" Color="#000"/>
-                    <GradientStop Offset="0.4" Color="#060"/>
+                    <GradientStop Offset="0.4" Color="#000"/>
+                    <GradientStop Offset="1" Color="#060"/>
                 </RadialGradientBrush>
             </Setter.Value>
         </Setter>
@@ -169,8 +169,8 @@
                             <TranslateTransform X="0.02" Y="0.3"/>
                         </TransformGroup>
                     </RadialGradientBrush.RelativeTransform>
-                    <GradientStop Offset="1" Color="#000"/>
-                    <GradientStop Offset="0.4" Color="#F90"/>
+                    <GradientStop Offset="0.4" Color="#000"/>
+                    <GradientStop Offset="1" Color="#F90"/>
                 </RadialGradientBrush>
             </Setter.Value>
         </Setter>
@@ -185,8 +185,8 @@
                             <TranslateTransform X="0.02" Y="0.3"/>
                         </TransformGroup>
                     </RadialGradientBrush.RelativeTransform>
-                    <GradientStop Offset="1" Color="#000"/>
-                    <GradientStop Offset="0.4" Color="#F00"/>
+                    <GradientStop Offset="0.4" Color="#000"/>
+                    <GradientStop Offset="1" Color="#F00"/>
                 </RadialGradientBrush>
             </Setter.Value>
         </Setter>
@@ -201,8 +201,8 @@
                             <TranslateTransform X="0.02" Y="0.3"/>
                         </TransformGroup>
                     </RadialGradientBrush.RelativeTransform>
-                    <GradientStop Offset="1" Color="#000"/>
-                    <GradientStop Offset="0.4" Color="#606"/>
+                    <GradientStop Offset="0.4" Color="#000"/>
+                    <GradientStop Offset="1" Color="#606"/>
                 </RadialGradientBrush>
             </Setter.Value>
         </Setter>
@@ -217,8 +217,8 @@
                             <TranslateTransform X="0.02" Y="0.3"/>
                         </TransformGroup>
                     </RadialGradientBrush.RelativeTransform>
-                    <GradientStop Offset="1" Color="#000"/>
-                    <GradientStop Offset="0.4" Color="#909"/>
+                    <GradientStop Offset="0.4" Color="#000"/>
+                    <GradientStop Offset="1" Color="#909"/>
                 </RadialGradientBrush>
             </Setter.Value>
         </Setter>
