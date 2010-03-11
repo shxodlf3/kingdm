@@ -65,6 +65,17 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        private ClassType playerClass;
+        public ClassType PlayerClass
+        {
+            get { return playerClass; }
+            set
+            {
+                playerClass = value;
+                NotifyPropertyChanged("PlayerClass");
+            }
+        }
+
         private long damage;
         public long Damage
         {

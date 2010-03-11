@@ -408,6 +408,20 @@ namespace KingsDamageMeter
                 {
                     sortTimer.Enabled = true;
                 }
+                UpdatePlayerClass(player.PlayerName, skill);
+            }
+        }
+
+        public void UpdatePlayerClass(string name, string skill)
+        {
+            var player = Players.FirstOrDefault(o => o.PlayerName == name);
+
+            if (player != null)
+            {
+                if (player.PlayerClass == ClassType.None)
+                {
+                    player.PlayerClass = SkillDictionary.GetClass(skill);
+                }
             }
         }
 

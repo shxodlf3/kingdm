@@ -77,4 +77,150 @@
     <Style x:Key="MainWindowTextStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource PlayerControlTextStyle}">
         <!-- This style can be changed in other Themes. But here is the same -->
     </Style>
+    
+    <!-- Class Buttons -->
+    <Style x:Key="ClassTypeNone" TargetType="{x:Type Ellipse}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="0.4" Color="#000"/>
+                    <GradientStop Offset="1" Color="#CCC"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ClassTypeCleric" TargetType="{x:Type Ellipse}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="0.4" Color="#000"/>
+                    <GradientStop Offset="1" Color="#66F"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ClassTypeChanter" TargetType="{x:Type Ellipse}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="0.4" Color="#000"/>
+                    <GradientStop Offset="1" Color="#09C"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ClassTypeAssassin" TargetType="{x:Type Ellipse}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="0.4" Color="#000"/>
+                    <GradientStop Offset="1" Color="#099"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ClassTypeRanger" TargetType="{x:Type Ellipse}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="1" Color="#000"/>
+                    <GradientStop Offset="0.4" Color="#060"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ClassTypeTemplar" TargetType="{x:Type Ellipse}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="1" Color="#000"/>
+                    <GradientStop Offset="0.4" Color="#F90"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ClassTypeGladiator" TargetType="{x:Type Ellipse}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="1" Color="#000"/>
+                    <GradientStop Offset="0.4" Color="#F00"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ClassTypeSorcerer" TargetType="{x:Type Ellipse}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="1" Color="#000"/>
+                    <GradientStop Offset="0.4" Color="#606"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ClassTypeSpiritmaster" TargetType="{x:Type Ellipse}">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                    <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                            <TranslateTransform X="0.02" Y="0.3"/>
+                        </TransformGroup>
+                    </RadialGradientBrush.RelativeTransform>
+                    <GradientStop Offset="1" Color="#000"/>
+                    <GradientStop Offset="0.4" Color="#909"/>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

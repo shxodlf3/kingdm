@@ -21,18 +21,12 @@ using System.Collections.Generic;
 
 namespace KingsDamageMeter
 {
-    public class SkillDictionary
+    public static class SkillDictionary
     {
-        public static SkillDictionary Instance { get; private set; }
         private static Dictionary<string, ClassType> _Skills = new Dictionary<string, ClassType>();
         private static char[] _Numerals = { ' ', 'I', 'V', 'X' };
 
-        static SkillDictionary()
-        {
-            Instance = new SkillDictionary();
-        }
-
-        static ClassType GetClass(string skill)
+        public static ClassType GetClass(string skill)
         {
             if (_Skills.Count < 1)
             {
