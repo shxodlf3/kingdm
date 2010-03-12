@@ -18,6 +18,7 @@
 \**************************************************************************/
 
 using System;
+using System.Windows.Forms;
 
 namespace KingsDamageMeter
 {
@@ -68,6 +69,11 @@ namespace KingsDamageMeter
                 return dateTime;
             }
             return DateTime.Now;
+        }
+
+        public static void ShowMessage(this string message)
+        {
+            MessageBox.Show(message);
         }
     }
 }

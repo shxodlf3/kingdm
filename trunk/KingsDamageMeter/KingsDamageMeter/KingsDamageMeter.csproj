@@ -267,12 +267,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SkillDictionary\SkillDictionary.cs" />
-	    <Compile Include="SkillLists\ClassList.Designer.cs">
+    <Compile Include="Localization\ClassList.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClassList.resx</DependentUpon>
     </Compile>
-    <Compile Include="SkillLists\SkillLists.Designer.cs">
+    <Compile Include="Localization\SkillLists.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SkillLists.resx</DependentUpon>
@@ -315,6 +315,8 @@
     <EmbeddedResource Include="Localization\AddToGroupRes.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\ClassList.es.resx" />
+    <EmbeddedResource Include="Localization\ClassList.ru.resx" />
     <EmbeddedResource Include="Localization\Regex.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -336,6 +338,8 @@
       <LastGenOutput>Regex.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\SkillLists.es.resx" />
+    <EmbeddedResource Include="Localization\SkillLists.ru.resx" />
     <EmbeddedResource Include="Localization\SkillsFormRes.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -380,12 +384,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SkillLists\ClassList.de.resx" />
-    <EmbeddedResource Include="SkillLists\ClassList.fr.resx" />
-    <EmbeddedResource Include="SkillLists\ClassList.resx" />
-    <EmbeddedResource Include="SkillLists\SkillList.de.resx" />
-    <EmbeddedResource Include="SkillLists\SkillList.fr.resx" />
-    <EmbeddedResource Include="SkillLists\SkillLists.resx" />
+    <EmbeddedResource Include="Localization\ClassList.de.resx" />
+    <EmbeddedResource Include="Localization\ClassList.fr.resx" />
+    <EmbeddedResource Include="Localization\ClassList.resx" />
+    <EmbeddedResource Include="Localization\SkillLists.de.resx" />
+    <EmbeddedResource Include="Localization\SkillLists.fr.resx" />
+    <EmbeddedResource Include="Localization\SkillLists.resx" />
     <None Include="app.config" />
     <None Include="Documentation.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

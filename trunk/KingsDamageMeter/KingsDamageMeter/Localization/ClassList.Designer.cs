@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KingsDamageMeter.SkillLists {
+namespace KingsDamageMeter.Localization {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace KingsDamageMeter.SkillLists {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "2.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SkillLists {
+    internal class ClassList {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SkillLists() {
+        internal ClassList() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace KingsDamageMeter.SkillLists {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KingsDamageMeter.SkillLists.SkillLists", typeof(SkillLists).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KingsDamageMeter.Localization.ClassList", typeof(ClassList).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace KingsDamageMeter.SkillLists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dash Attack,Killer&apos;s Eye,Rune Carve,Sprinting,Pain Rune,Apply Poison,Fang Strike,Rune Slash,Clear Focus,Whirlwind Slash,Binding Rune,Beast Kick,Searching Eye,Wind Walk,Assassination,Weakening Blow,Blood Rune,Beast Swipe,Spiral Slash,Throw Dagger.
+        ///   Looks up a localized string similar to Assassin.
         /// </summary>
         internal static string Assassin {
             get {
@@ -70,7 +70,7 @@ namespace KingsDamageMeter.SkillLists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Victory Mantra,Meteor Strike,Shield Mantra,Booming Strike,Word of Revival,Promise of Earth,Magic Mantra,Incandescent Blow,Celerity Mantra,Focused Parry,Booming Smash,Revival Mantra,Clement Mind Mantra,Parrying Strike,Pentacle Shock,Word of Wind,Booming Assault,Intensity Mantra,Word of Quickness,Protection Mantra,Tremor.
+        ///   Looks up a localized string similar to Chanter.
         /// </summary>
         internal static string Chanter {
             get {
@@ -79,7 +79,7 @@ namespace KingsDamageMeter.SkillLists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Light of Rejuvenation,Root,Thunderbolt,Dispel,Tranquility,Radiant Cure,Cure Mind,Penance,Divine Touch,Healing Wind,Rebirth,Divine Spark,Summer Circle,Winter Circle,Thorny Skin,Acquittal,Light of Recovery,Chastisement,Resurrection Loci,Prayer of Focus,Grace of Resurrection,Blessed Shield,Slashing Wind.
+        ///   Looks up a localized string similar to Cleric.
         /// </summary>
         internal static string Cleric {
             get {
@@ -88,7 +88,7 @@ namespace KingsDamageMeter.SkillLists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Seismic Wave,Wrathful Strike,Aion&apos;s Strength,Rupture,Cleave,Aerial Lockdown,Body Smash,Crashing Blow,Shock Wave,Seismic Billow,Reckless Strike,Stamina Recovery,Wall of Steel,Pressure Wave,Great Cleave,Wrathful Wave,Righteous Cleave,Strengthen Wings.
+        ///   Looks up a localized string similar to Gladiator.
         /// </summary>
         internal static string Gladiator {
             get {
@@ -97,7 +97,7 @@ namespace KingsDamageMeter.SkillLists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Swift Shot,Entanglng Shot,Arrow Strke,Stunnng Shot,Aiming,Poison Arrow,Rupture Arrow,Strong Shots,Tactcal Retreat,Aerial Wild Shot,Hunter&apos;s Eye,Arrow Flurry,Fleshcutter Arrow,Arrow Storm.
+        ///   Looks up a localized string similar to Ranger.
         /// </summary>
         internal static string Ranger {
             get {
@@ -106,7 +106,7 @@ namespace KingsDamageMeter.SkillLists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Robe of Earth,Flame Harpoon,Blind Leap,Winter Binding,Flame Cage,Delayed Blast,Robe of Flame,Freezing Wind,Boon of Peace,Aether&apos;s Hold,Aether Flame,Inferno,Robe of Cold,Tranquilizing Cloud,Gain Mana,Flame Fusion,Magic Fist,Soul Absorption,Soul Freeze,Flaming Meteor,Cometfall.
+        ///   Looks up a localized string similar to Sorcerer.
         /// </summary>
         internal static string Sorcerer {
             get {
@@ -115,7 +115,7 @@ namespace KingsDamageMeter.SkillLists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Root of Enervation,Summon Fire Spirit,Summon Wind Spirit,Chain of Earth,Summon Fire Energy,Dispel Magic,Summon Water Spirit,Summon Wind Servant,Spirit Erosion,Stone Shock,Sandblaster,Summon Group Member,Disenchant,Summoning Alacrity,Spirit Absorption,Blade of Earth,Wing Root,Erosion,Stone Skin.
+        ///   Looks up a localized string similar to Spiritmaster.
         /// </summary>
         internal static string Spiritmaster {
             get {
@@ -124,7 +124,7 @@ namespace KingsDamageMeter.SkillLists {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Taunt,Shield Bash,Provoking Shield Counter,Empyrean Armor,Shining Slash,Wrath Strike,Avenging Blow,Steel Wall Defense,Divine Blow,Dazing Severe Blow,Face Smash,Hand of Healing,Blunting Severe Blow,Judgment,Iron Skin,Divine Grasp.
+        ///   Looks up a localized string similar to Templar.
         /// </summary>
         internal static string Templar {
             get {

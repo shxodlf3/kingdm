@@ -112,14 +112,12 @@
                                               Click="MinimizeButton_Click" 
                                               Grid.Column="5" 
                                               Width="20" Height="20" />
-                            <!--
-                            Not sure if I'm gonna use this. The style isn't quite right.
-                            <Button Style="{StaticResource RoundButton}"
+                            <!--Button Style="{StaticResource RoundButton}"
                                     ToolTip="{LocText KingsDamageMeter:WindowMainRes:MinimizeBtnToolTip}"
                                     Click="MinimizeButton_Click"
                                     Grid.Column="5"
                                     Content="~"
-                                    Width="16" Height="16" />-->
+                                    Width="16" Height="16" /-->
                             <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonClick.bmp" 
                                               MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonHover.bmp"
                                               MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButton.bmp"
