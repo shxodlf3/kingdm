@@ -1,3 +1,4 @@
-﻿g_chatlog = "1"
+g_chatlog = "1"
+log_IncludeTime = "1"
 log_Verbosity = "1"
 log_FileVerbosity = "1"
