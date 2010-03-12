@@ -17,11 +17,8 @@
  * 
 \**************************************************************************/
 
-using System;
-using System.Resources;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Globalization;
+using KingsDamageMeter.Localization;
 
 namespace KingsDamageMeter
 {
@@ -59,14 +56,14 @@ namespace KingsDamageMeter
 
         private static void PopulateDictionary()
         {
-            PopulateFromArray(KingsDamageMeter.Localization.SkillLists.Cleric.Split(','), ClassType.Cleric);
-            PopulateFromArray(KingsDamageMeter.Localization.SkillLists.Chanter.Split(','), ClassType.Chanter);
-            PopulateFromArray(KingsDamageMeter.Localization.SkillLists.Assassin.Split(','), ClassType.Assassin);
-            PopulateFromArray(KingsDamageMeter.Localization.SkillLists.Ranger.Split(','), ClassType.Ranger);
-            PopulateFromArray(KingsDamageMeter.Localization.SkillLists.Templar.Split(','), ClassType.Templar);
-            PopulateFromArray(KingsDamageMeter.Localization.SkillLists.Gladiator.Split(','), ClassType.Gladiator);
-            PopulateFromArray(KingsDamageMeter.Localization.SkillLists.Sorcerer.Split(','), ClassType.Sorcerer);
-            PopulateFromArray(KingsDamageMeter.Localization.SkillLists.Spiritmaster.Split(','), ClassType.Spiritmaster);
+            PopulateFromArray(SkillLists.Cleric.Split(','), ClassType.Cleric);
+            PopulateFromArray(SkillLists.Chanter.Split(','), ClassType.Chanter);
+            PopulateFromArray(SkillLists.Assassin.Split(','), ClassType.Assassin);
+            PopulateFromArray(SkillLists.Ranger.Split(','), ClassType.Ranger);
+            PopulateFromArray(SkillLists.Templar.Split(','), ClassType.Templar);
+            PopulateFromArray(SkillLists.Gladiator.Split(','), ClassType.Gladiator);
+            PopulateFromArray(SkillLists.Sorcerer.Split(','), ClassType.Sorcerer);
+            PopulateFromArray(SkillLists.Spiritmaster.Split(','), ClassType.Spiritmaster);
         }
     }
 }
