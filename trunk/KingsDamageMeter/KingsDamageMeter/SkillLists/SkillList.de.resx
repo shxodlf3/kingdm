@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Assassin" xml:space="preserve">
-    <value />
+    <value>Sprintangriff,Folgeschlag,Siegelgravur,Siegel-Explosion,Blutdurst,Magiewiderstand erhöhen,Gift auftragen,Brüllen der Bestie,Beruhigendes Flüstern,Klarer Fokus,Siegelangriff,Himmelsklinge,Tritt der Bestie,Erkennendes Auge,Windschritt,Attentat,Rückenbrecher,Höllenklinge,Volltreffer-Sprengsiegel,Spiralschnitt,Schlag der Bestie</value>
   </data>
   <data name="Chanter" xml:space="preserve">
-    <value />
+    <value>Siegesmantra,Schall-Schwung,Schildmantra,Magiemantra,Versprechen der Erde,Geschwindigkeitsmantra,Glühender Hieb,Konzentriertes Parieren,Schall-Ansturm,Wiederbelebungsmantra,Riposte,Mantra-Reichweite erhöhen,Mantra des ruhigen Geistes,Pentagramm-Schock,Schall-Angriff,Zauberformel des Sturms,Intensitätsmantra,Resonanztrübung,Zauber der Flinkheit,Schutzmantra</value>
   </data>
   <data name="Cleric" xml:space="preserve">
-    <value />
+    <value>Donnerschlag,Zügelung,Licht der Verjüngung,Heilung erhöhen,Beruhigung,Geist heilen,Buße,Göttliche Berührung,Wiedergeburt,Heilender Wind,Göttlicher Funke,Sommerkreis,Winterkreis,Dornenhaut,Freispruch,Licht der Wiederherstellung,Züchtigung,Gebet des Fokus,Gnade der Wiederauferstehung,Gesegneter Schild,Stimme der Zerstörung</value>
   </data>
   <data name="Gladiator" xml:space="preserve">
-    <value />
+    <value>Angriffsvorbereitung,Zorniger Schlag,Zerreißen,Flügelklinge,Verteidigungsvorbereitung,Erzwungene Landung,Schockwelle,Seismische Woge,Wagemutiger Schlag,Ausdauer-Wiederherstellung,Niederwerfen erhöhen,Konzentriertes Blocken,Druckwelle,Entschlossenheit,Zornige Welle</value>
   </data>
   <data name="Ranger" xml:space="preserve">
-    <value />
+    <value>Pfeilschlag,Konzentriertes Auge,Betäubender Schuss,Giftpfeil,Stärkendes Auge,Zerreißender Pfeil,Lebenskraft des Windes,Spiralpfeil,Wilder Luftschuss,Schneller Bogen,Pfeil der Teufelsbezwingung,Flügelheilung</value>
   </data>
   <data name="Sorcerer" xml:space="preserve">
-    <value />
+    <value>Magischen Angriff erhöhen,Robe der Erde,Blinder Sprung,Flammenharpune,Winterbindung,Flammenkäfig,Maximale MP erhöhen,Verzögerte Explosion,Robe der Flamme,Kalte Luft beschwören,Gabe des Friedens,Flugbindung,Gabe der Eisengewandung,Schlafwolke,Feuerschuss,Robe der Kälte,Flamme der Hölle,Flammenschmelze,Managewinn,Magische Faust,Seelenabsorption,Seelenfrost,Flammenwalze</value>
   </data>
   <data name="Spiritmaster" xml:space="preserve">
-    <value />
+    <value>Entkräftendes Festhalten,Kette der Erde,Elementarauffrischung,Magie auflösen,Steinschock,Umfangreiche Erosion,Befehl: Störung,Entzauberung,Mudra der Unterwerfung,Geistabsorption,Klinge der Erde,Fluchwolke</value>
   </data>
   <data name="Templar" xml:space="preserve">
-    <value />
+    <value>Schildschlag,Schildhieb,Glänzender Schnitt,Verzweifelter Schlag,Schlag der Züchtigung,Stahlmauer-Verteidigung,Wiederholter Hieb,Gesichtsschlag,Siegel des Schutzes,Heilende Hand,Abstumpfender schwerer Hieb,Urteil,Festnahme,Eisenhaut</value>
   </data>
 </root>
