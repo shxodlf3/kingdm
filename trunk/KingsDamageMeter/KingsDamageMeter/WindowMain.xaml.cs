@@ -76,7 +76,22 @@ namespace KingsDamageMeter
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            ((WindowMainData)DataContext).OnClose();
+            WindowMainData data = (WindowMainData)DataContext;
+
+            if (data.Players.Count > 0)
+            {
+                string message = Localization.WindowMainRes.ConfirmCloseMessage;
+                string caption = Localization.WindowMainRes.ConfirmCloseCaption;
+                MessageBoxResult result = MessageBox.Show(message, caption, MessageBoxButton.OKCancel, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
+            data.OnClose();
         }
 
         #endregion

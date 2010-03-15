@@ -102,6 +102,13 @@ namespace KingsDamageMeter.Properties {
             }
         }
         
+        internal static System.Drawing.Icon Lion {
+            get {
+                object obj = ResourceManager.GetObject("Lion", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap MainFormBackground {
             get {
                 object obj = ResourceManager.GetObject("MainFormBackground", resourceCulture);

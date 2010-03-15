@@ -149,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\ShortcutsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -159,6 +163,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Localization\ShortcutsWindowRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShortcutsWindowRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NotifyIcon.cs" />
+    <Compile Include="Shortcuts\ShortcutKey.cs" />
     <Compile Include="SkillDictionary\ClassType.cs" />
     <Compile Include="Combat\Skill.cs" />
     <Compile Include="Combat\SkillCollection.cs" />
@@ -278,6 +289,9 @@
       <DependentUpon>SkillLists.resx</DependentUpon>
     </Compile>
     <Compile Include="WindowMainData.cs" />
+    <Compile Include="Windows\ShortcutsWindow.xaml.cs">
+      <DependentUpon>ShortcutsWindow.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -337,6 +351,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Regex.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\ShortcutsWindowRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShortcutsWindowRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\SkillLists.es.resx" />
     <EmbeddedResource Include="Localization\SkillLists.ru.resx" />

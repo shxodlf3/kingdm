@@ -26,6 +26,7 @@ using KingsDamageMeter.Forms;
 using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
 using WPFLocalizeExtension.Engine;
+using KingsDamageMeter.Windows;
 
 namespace KingsDamageMeter
 {
@@ -38,6 +39,9 @@ namespace KingsDamageMeter
         {
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
             DebugLogger.Write(Environment.NewLine + "Started KDM " + DateTime.Now.ToString());
+
+            NotifyIcon.Icon = KingsDamageMeter.Properties.Resources.Lion;
+            NotifyIcon.Show();
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -83,6 +87,7 @@ namespace KingsDamageMeter
 
         protected override void OnExit(ExitEventArgs e)
         {
+            NotifyIcon.Hide();
             Settings.Default.Save();
             base.OnExit(e);
         }

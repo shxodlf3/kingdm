@@ -219,4 +219,10 @@
   <data name="LogLanguageMenuHeader" xml:space="preserve">
     <value>Log Language</value>
   </data>
+  <data name="ConfirmCloseCaption" xml:space="preserve">
+    <value>Close?</value>
+  </data>
+  <data name="ConfirmCloseMessage" xml:space="preserve">
+    <value>Are you sure you wish to close King's Damage Meter?</value>
+  </data>
 </root>

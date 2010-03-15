@@ -97,6 +97,24 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close?.
+        /// </summary>
+        internal static string ConfirmCloseCaption {
+            get {
+                return ResourceManager.GetString("ConfirmCloseCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you wish to close King&apos;s Damage Meter?.
+        /// </summary>
+        internal static string ConfirmCloseMessage {
+            get {
+                return ResourceManager.GetString("ConfirmCloseMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Damage.
         /// </summary>
         internal static string DamageMainViewMenuHeader {
