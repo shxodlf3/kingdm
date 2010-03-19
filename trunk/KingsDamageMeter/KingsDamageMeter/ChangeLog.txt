@@ -1,4 +1,13 @@
-﻿Version 1.5.0 Beta 6
+﻿Version -TBD- Beta 7
+	Added: Completed multilanguage regex support.
+	Added: Player classes are now detected based on unique skills. Tested in english only. Should be working for german and french.
+	Added: The user will now be asked to confirm closing if players exist in the window.
+	Fixed: Player pecentage in the tooltip will show as the total from group.
+	Fixed: Percentages should no longer appear as NaN when the value should be 0.
+	Fixed: The provided system.ovr file should now work properly.
+	Fixed: An issue in the parser caused an out of memory exception when loading a large log file.
+
+Version 1.5.0 Beta 6
 	Added: Right click on a player and "Skills..." will now show a breakdown of their skills and how much damage each contributes.
 	Added: Now keeps track of Kinah spent/earned, EXP and Abyss Points gained.
 	Added: Player controls can now display damage, dps and percentage.
