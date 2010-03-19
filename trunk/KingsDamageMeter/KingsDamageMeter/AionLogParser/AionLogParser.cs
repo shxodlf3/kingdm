@@ -250,8 +250,11 @@ namespace KingsDamageMeter
             if ((_FileStream = OpenFileStream(file)) != null)
             {
                 _Running = true;
+
+                // Skip the stuff in the file from the last session.
+                _FileStream.Position = _FileStream.Length;
+
                 _StreamReader = GetStreamReader(_FileStream);
-                _StreamReader.ReadToEnd(); // Skip the stuff in the file from the last session.
                 StartWorker();
             }
 
