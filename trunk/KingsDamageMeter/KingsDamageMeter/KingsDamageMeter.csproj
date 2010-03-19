@@ -168,7 +168,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ShortcutsWindowRes.resx</DependentUpon>
     </Compile>
-    <Compile Include="NotifyIcon.cs" />
+    <Compile Include="NotifyIcon\NotifyIcon.cs" />
     <Compile Include="Shortcuts\ShortcutKey.cs" />
     <Compile Include="SkillDictionary\ClassType.cs" />
     <Compile Include="Combat\Skill.cs" />
@@ -449,9 +449,9 @@
     <Resource Include="Bomb.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="License.txt">
+    <None Include="License.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="ChangeLog.txt">
