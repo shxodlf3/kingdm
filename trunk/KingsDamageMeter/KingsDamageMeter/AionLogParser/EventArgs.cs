@@ -119,6 +119,25 @@ namespace KingsDamageMeter
         }
     }
 
+    public class JoinedRegionChannelEventArgs : LogEventArgs
+    {
+        private string _Region;
+
+        public string Region
+        {
+            get
+            {
+                return _Region;
+            }
+        }
+
+        public JoinedRegionChannelEventArgs(DateTime time, string regionName)
+            : base(time)
+        {
+            _Region = regionName;
+        }
+    }
+
     /// <summary>
     /// Provides data for the KingsDamageMeter.AionLogParser.DamageInflicted event.
     /// </summary>
@@ -137,12 +156,25 @@ namespace KingsDamageMeter
             }
         }
 
+        private string _Target;
+
+        /// <summary>
+        /// Get the target of damage
+        /// </summary>
+        public string Target
+        {
+            get
+            {
+                return _Target;
+            }
+        }
+
         /// <summary>
         /// Provides data for the KingsDamageMeter.AionLogParser.DamageInflicted event.
         /// </summary>
         /// <param name="name">The name of the player inflicting damage.</param>
         /// <param name="damage">The amount of damage inflicted.</param>
-        public PlayerDamageEventArgs(DateTime time, string name, int damage)
+        public PlayerDamageEventArgs(DateTime time, string name, string target, int damage)
             : base(time, name)
         {
             if (damage < 0)
@@ -151,6 +183,7 @@ namespace KingsDamageMeter
             }
 
             _Damage = damage;
+            _Target = target;
         }
     }
 
@@ -166,8 +199,8 @@ namespace KingsDamageMeter
             }
         }
 
-        public PlayerSkillDamageEventArgs(DateTime time, string name, int damage, string skill)
-            : base(time, name, damage)
+        public PlayerSkillDamageEventArgs(DateTime time, string name, string target, int damage, string skill)
+            : base(time, name, target, damage)
         {
             if (String.IsNullOrEmpty(skill))
             {

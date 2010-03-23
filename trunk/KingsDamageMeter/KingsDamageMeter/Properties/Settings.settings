@@ -44,10 +44,10 @@
     <Setting Name="IsGroupOnly" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="SortType" Type="KingsDamageMeter.Controls.PlayerSortType" Scope="User">
+    <Setting Name="SortType" Type="KingsDamageMeter.Enums.PlayerSortType" Scope="User">
       <Value Profile="(Default)">None</Value>
     </Setting>
-    <Setting Name="DisplayType" Type="KingsDamageMeter.Controls.DisplayType" Scope="User">
+    <Setting Name="DisplayType" Type="KingsDamageMeter.Enums.DisplayType" Scope="User">
       <Value Profile="(Default)">Damage</Value>
     </Setting>
     <Setting Name="IsHideOthers" Type="System.Boolean" Scope="User">
@@ -61,6 +61,12 @@
     </Setting>
     <Setting Name="SelectedLogLanguage" Type="System.Globalization.CultureInfo" Scope="User">
       <Value Profile="(Default)">(Default)</Value>
+    </Setting>
+    <Setting Name="EncountersWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="IsEncountersExpanded" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

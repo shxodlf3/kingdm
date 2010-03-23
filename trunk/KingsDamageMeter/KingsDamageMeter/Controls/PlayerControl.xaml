@@ -4,12 +4,13 @@
              xmlns:Converters="clr-namespace:KingsDamageMeter.Converters"
              xmlns:Controls="clr-namespace:KingsDamageMeter.Controls"
              xmlns:Properties="clr-namespace:KingsDamageMeter.Properties"
+             xmlns:Enums="clr-namespace:KingsDamageMeter.Enums"
              MinHeight="38" MinWidth="150"
              Margin="2">
     <UserControl.Resources>
         <Converters:DataToFormattedDataConverter x:Key="DataToFormattedDataConverter"/>
         <Converters:DisplayTypeToVisibilityConverter x:Key="DisplayTypeToVisibilityConverter"/>
-        <Style x:Key="DisabledYouMenuItemStyle" TargetType="{x:Type MenuItem}">
+        <Style x:Key="DisabledYouMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding PlayerName, Mode=OneWay, Converter={StaticResource DetectYouConverter}}" Value="True">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -53,25 +54,25 @@
             <TextBlock Text="{Binding PlayerName}"/>
             <TextBlock Text="{Binding PlayerClass}"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Damage, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
+                <TextBlock Text="{Binding Damage, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Damage}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipTotal}"/>
             </StackPanel>
-            <TextBlock Text="{Binding PercentFromGroupDamages, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"/>
+            <TextBlock Text="{Binding PercentFromGroupDamages, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Percent}}"/>
             <TextBlock/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding DamagePerSecond, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
+                <TextBlock Text="{Binding DamagePerSecond, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.DamagePerSecond}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipDps}"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding PeakDps, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
+            <!--StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding PeakDps, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.DamagePerSecond}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipPeak}"/>
-            </StackPanel>
+            </StackPanel-->
             <TextBlock/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding BiggestHit, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
+                <TextBlock Text="{Binding BiggestHit, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Damage}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipBiggestHit}"/>
             </StackPanel>
@@ -85,13 +86,13 @@
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroMenuHeader}">
                 <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroGroupMenuHeader}"
                       Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
-                      CommandParameter="{x:Static Controls:ClipboardCopyType.ToPartyChat}"/>
+                      CommandParameter="{x:Static Enums:ClipboardCopyType.ToPartyChat}"/>
                 <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroAllianceMenuHeader}"
                       Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
-                      CommandParameter="{x:Static Controls:ClipboardCopyType.ToAllianceChat}"/>
+                      CommandParameter="{x:Static Enums:ClipboardCopyType.ToAllianceChat}"/>
                 <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroLegionMenuHeader}"
                       Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
-                      CommandParameter="{x:Static Controls:ClipboardCopyType.ToLegionChat}"/>
+                      CommandParameter="{x:Static Enums:ClipboardCopyType.ToLegionChat}"/>
             </MenuItem>
             <Separator />
             <MenuItem Name="MenuItemViewSkills" 
@@ -121,11 +122,11 @@
                       Command="{x:Static Controls:Commands.IgnorePlayerCommand}"
                       CommandParameter="{Binding}"
                       Style="{StaticResource DisabledYouMenuItemStyle}"/>
-            <Separator />
+            <!--Separator />
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:ResetCountsMenuHeader}"
                       Command="{x:Static Controls:Commands.ResetCountsCommand}"/>
             <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:ClearListMenuHeader}"
-                      Command="{x:Static Controls:Commands.ClearAllCommand}"/>
+                      Command="{x:Static Controls:Commands.ClearAllCommand}"/-->
         </ContextMenu>
     </UserControl.ContextMenu>
     <Border Style="{DynamicResource PlayerControlBorderStyle}">
@@ -157,11 +158,11 @@
                             HorizontalAlignment="Right">
                     <TextBlock HorizontalAlignment="Right"
                                Style="{DynamicResource PlayerControlTextStyle}"
-                               Text="{Binding Damage, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
+                               Text="{Binding Damage, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Damage}}"/>
                     <TextBlock HorizontalAlignment="Right"
                                Style="{DynamicResource PlayerControlTextStyle}"
-                               Text="{Binding DamagePerSecond, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"
-                               Visibility="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToVisibilityConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
+                               Text="{Binding DamagePerSecond, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.DamagePerSecond}}"
+                               Visibility="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToVisibilityConverter}, ConverterParameter={x:Static Enums:DisplayType.DamagePerSecond}}"/>
                 </StackPanel>
             </Grid>
             <ProgressBar Grid.Row="1"
@@ -173,9 +174,9 @@
                          Margin="5,0,5,2"/>
             <TextBlock Grid.Row="1"
                        Style="{DynamicResource PlayerControlTextStyle}"
-                       Text="{Binding PercentFromGroupDamages, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"
+                       Text="{Binding PercentFromGroupDamages, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Percent}}"
                        HorizontalAlignment="Center"
-                       Visibility="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToVisibilityConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"/>
+                       Visibility="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToVisibilityConverter}, ConverterParameter={x:Static Enums:DisplayType.Percent}}"/>
         </Grid>
     </Border>
 </UserControl>

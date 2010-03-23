@@ -259,6 +259,15 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have joined the (?&lt;region&gt;.+) region channel\..
+        /// </summary>
+        internal static string YouHaveJoinedChannelRegex {
+            get {
+                return ResourceManager.GetString("YouHaveJoinedChannelRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (?&lt;target&gt;.+) is bleeding because You used (?&lt;skill&gt;.+)\..
         /// </summary>
         internal static string YouInflictedBleedRegex {

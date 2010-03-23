@@ -28,6 +28,7 @@ using System.IO;
 using System.Diagnostics;
 using KingsDamageMeter.Controls;
 using KingsDamageMeter.Converters;
+using KingsDamageMeter.Enums;
 using KingsDamageMeter.Forms;
 using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
@@ -36,11 +37,27 @@ namespace KingsDamageMeter
 {
     public partial class WindowMain
     {
+    	private bool isInitializing;
         public WindowMain()
         {
-            InitializeComponent();
-
             DataContext = new WindowMainData();
+
+            try
+            {
+                isInitializing = true;
+                InitializeComponent();
+            }
+            finally
+            {
+                isInitializing = false;
+            }
+
+            if (Settings.Default.IsEncountersExpanded)
+            {
+                expanderEncaunters_Expanded(encauntersExpander, new RoutedEventArgs());
+            }
+
+            Settings.Default.PropertyChanged += OnSettingsChanged;
         }
 
         private bool _Dragging;
@@ -78,7 +95,7 @@ namespace KingsDamageMeter
         {
             WindowMainData data = (WindowMainData)DataContext;
 
-            if (data.Players.Count > 0)
+            if (data.Regions.Count > 0)
             {
                 string message = Localization.WindowMainRes.ConfirmCloseMessage;
                 string caption = Localization.WindowMainRes.ConfirmCloseCaption;
@@ -176,7 +193,7 @@ namespace KingsDamageMeter
 
             if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                ((WindowMainData)DataContext).AddPlayer(d.PlayerName, /* isGroupMember = */ true);
+                ((WindowMainData)DataContext).AddGroupMemberPlayer(d.PlayerName);
             }
         }
 
@@ -236,9 +253,6 @@ namespace KingsDamageMeter
                     MenuItemLogLanguage.Items.Add(menuItem);
                 }
 
-                //This is for static commands initialization declared in Commands.cs
-                playersItemsControl.Focus();
-                ////////////////////////////////////////////////////////////////////
                 isLoaded = true;
             }
         }
@@ -267,6 +281,94 @@ namespace KingsDamageMeter
             // application will honor the new look and feel.
 
             mergedDicts.Add(skinDict);
+        }
+
+		private void expanderEncaunters_Expanded(object sender, RoutedEventArgs e)
+		{
+			if (isInitializing)
+			{
+				return;
+			}
+
+			if (IsLoaded)
+			{
+				var size = Settings.Default.EncountersWidth - colEncounters.MinWidth - encounersSplitter.MinWidth;
+				Left -= size;
+				Width += size;
+			}
+			colEncounters.Width = new GridLength(Settings.Default.EncountersWidth - encounersSplitter.MinWidth);
+
+			var dpd = DependencyPropertyDescriptor.FromProperty(ColumnDefinition.WidthProperty, typeof(ColumnDefinition));
+			if (dpd != null)
+			{
+				dpd.AddValueChanged(colEncounters, EncountersColumnWidthChanged);
+			}
+		}
+
+		private void expanderEncaunters_Collapsed(object sender, RoutedEventArgs e)
+		{
+			var size = Settings.Default.EncountersWidth - colEncounters.MinWidth - encounersSplitter.MinWidth;
+			Width -= size;
+			Left += size;
+
+			colEncounters.Width = new GridLength(colEncounters.MinWidth);
+			
+			var dpd = DependencyPropertyDescriptor.FromProperty(ColumnDefinition.WidthProperty, typeof(ColumnDefinition));
+			if (dpd != null)
+			{
+				dpd.RemoveValueChanged(colEncounters, EncountersColumnWidthChanged);
+			}
+		}
+	
+		private void EncountersColumnWidthChanged(object sender, EventArgs e)
+		{
+			if (encauntersExpander.IsExpanded)
+			{
+				Settings.Default.EncountersWidth = colEncounters.Width.Value;
+			}
+		}
+
+        private void encountersTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            ((WindowMainData) DataContext).SelectedEncounter = (IEncounter) e.NewValue;
+            UpdatePlayersSort();
+        }
+
+        private void OnSettingsChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "SortType")
+            {
+                UpdatePlayersSort();
+            }
+        }
+        
+        private void UpdatePlayersSort()
+        {
+            var view = (CollectionView)CollectionViewSource.GetDefaultView(playersItemsControl.ItemsSource);
+            if (view != null)
+            {
+                view.SortDescriptions.Clear();
+                switch (Settings.Default.SortType)
+                {
+                    case PlayerSortType.Damage:
+                        view.SortDescriptions.Add(new SortDescription("Damage", ListSortDirection.Descending));
+                        break;
+                    case PlayerSortType.Name:
+                        view.SortDescriptions.Add(new SortDescription("PlayerName", ListSortDirection.Ascending));
+                        break;
+                    case PlayerSortType.DamagePerSecond:
+                        view.SortDescriptions.Add(new SortDescription("DamagePerSecond",
+                                                                      ListSortDirection.Descending));
+                        break;
+                }
+                view.Refresh();
+            }
+        }
+
+        private void TreeViewItem_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ((TreeViewItem) sender).IsSelected = true;
+            e.Handled = true;
         }
     }
 }

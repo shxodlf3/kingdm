@@ -322,6 +322,42 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove All.
+        /// </summary>
+        internal static string RemoveAllEncountersMenuHeader {
+            get {
+                return ResourceManager.GetString("RemoveAllEncountersMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string RemoveEncounterMenuHeader {
+            get {
+                return ResourceManager.GetString("RemoveEncounterMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset All.
+        /// </summary>
+        internal static string ResetAllMenuHeader {
+            get {
+                return ResourceManager.GetString("ResetAllMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string ResetMenuHeader {
+            get {
+                return ResourceManager.GetString("ResetMenuHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resize.
         /// </summary>
         internal static string ResizeThumbToolTip {

@@ -183,6 +183,9 @@
   <data name="YouGainedExpRegex" xml:space="preserve">
     <value>You have gained (?&lt;exp&gt;[^a-zA-Z]+) EXP from (?&lt;target&gt;.+)\.</value>
   </data>
+  <data name="YouHaveJoinedChannelRegex" xml:space="preserve">
+    <value>You have joined the (?&lt;region&gt;.+) region channel\.</value>
+  </data>
   <data name="YouInflictedBleedRegex" xml:space="preserve">
     <value>(?&lt;target&gt;.+) is bleeding because You used (?&lt;skill&gt;.+)\.</value>
   </data>

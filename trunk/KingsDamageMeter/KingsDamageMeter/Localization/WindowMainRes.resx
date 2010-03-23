@@ -225,4 +225,16 @@
   <data name="ConfirmCloseMessage" xml:space="preserve">
     <value>Are you sure you wish to close King's Damage Meter?</value>
   </data>
+  <data name="RemoveAllEncountersMenuHeader" xml:space="preserve">
+    <value>Remove All</value>
+  </data>
+  <data name="RemoveEncounterMenuHeader" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ResetAllMenuHeader" xml:space="preserve">
+    <value>Reset All</value>
+  </data>
+  <data name="ResetMenuHeader" xml:space="preserve">
+    <value>Reset</value>
+  </data>
 </root>

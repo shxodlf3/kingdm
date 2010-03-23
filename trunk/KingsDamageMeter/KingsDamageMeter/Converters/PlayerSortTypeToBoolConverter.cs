@@ -20,7 +20,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using KingsDamageMeter.Controls;
+using KingsDamageMeter.Enums;
 
 namespace KingsDamageMeter.Converters
 {

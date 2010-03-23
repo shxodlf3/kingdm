@@ -84,6 +84,7 @@ namespace KingsDamageMeter
         private string _ExpGroupName = "exp";
         private string _KinahGroupName = "kinah";
         private string _ApGroupName = "ap";
+        private string _RegionGroupName = "region";
 
         private string _TimestampRegex;
         private Regex _ChatRegex;
@@ -113,6 +114,7 @@ namespace KingsDamageMeter
         private Regex _YouEarnedKinahRegex;
         private Regex _YouSpentKinahRegex;
         private Regex _YouGainedApRegex;
+        private Regex _YouHaveJoinedChannelRegex;
 
         /// <summary>
         /// Occurs when the parser is starting.
@@ -189,6 +191,11 @@ namespace KingsDamageMeter
         /// </summary>
         public event AbyssPointsEventHandler AbyssPointsGained;
 
+        /// <summary>
+        /// Occurs when you change the region.
+        /// </summary>
+        public event JoinedRegionChannelEventHandler JoinedRegionChannel;
+
         public void Initialize()
         {
             _TimestampRegex = Localization.Regex.TimestampRegex;
@@ -219,6 +226,7 @@ namespace KingsDamageMeter
             _YouEarnedKinahRegex = new Regex(_TimestampRegex + Localization.Regex.YouEarnedKinahRegex, RegexOptions.Compiled);
             _YouSpentKinahRegex = new Regex(_TimestampRegex + Localization.Regex.YouSpentKinahRegex, RegexOptions.Compiled);
             _YouGainedApRegex = new Regex(_TimestampRegex + Localization.Regex.YouGainedApRegex, RegexOptions.Compiled);
+            _YouHaveJoinedChannelRegex = new Regex(_TimestampRegex + Localization.Regex.YouHaveJoinedChannelRegex, RegexOptions.Compiled);
         }
 
         /// <summary>
@@ -250,11 +258,8 @@ namespace KingsDamageMeter
             if ((_FileStream = OpenFileStream(file)) != null)
             {
                 _Running = true;
-
-                // Skip the stuff in the file from the last session.
-                _FileStream.Position = _FileStream.Length;
-
                 _StreamReader = GetStreamReader(_FileStream);
+                _StreamReader.ReadToEnd(); // Skip the stuff in the file from the last session.
                 StartWorker();
             }
 
@@ -424,7 +429,7 @@ namespace KingsDamageMeter
                     if (SkillDamageInflicted != null)
                     {
                         SkillDamageInflicted(this,
-                                             new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, damage,
+                                             new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, target, damage,
                                                                             skill));
                     }
 
@@ -442,7 +447,7 @@ namespace KingsDamageMeter
 
                     if (DamageInflicted != null)
                     {
-                        DamageInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, damage));
+                        DamageInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, target, damage));
                     }
 
                     matched = true;
@@ -459,7 +464,7 @@ namespace KingsDamageMeter
 
                     if (CriticalInflicted != null)
                     {
-                        CriticalInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, damage));
+                        CriticalInflicted(this, new PlayerDamageEventArgs(time, Settings.Default.YouAlias, target, damage));
                     }
 
                     matched = true;
@@ -478,7 +483,7 @@ namespace KingsDamageMeter
                     if (SkillDamageInflicted != null)
                     {
                         SkillDamageInflicted(this,
-                                             new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, damage,
+                                             new PlayerSkillDamageEventArgs(time, Settings.Default.YouAlias, target, damage,
                                                                             effect));
                     }
 
@@ -520,7 +525,7 @@ namespace KingsDamageMeter
 
                     if (DamageReceived != null)
                     {
-                        DamageReceived(this, new PlayerDamageEventArgs(time, target, damage));
+                        DamageReceived(this, new PlayerDamageEventArgs(time, target, Settings.Default.YouAlias, damage));
                     }
 
                     matched = true;
@@ -652,7 +657,7 @@ namespace KingsDamageMeter
 
                             if (SkillDamageInflicted != null)
                             {
-                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, skill));
+                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, target, damage, skill));
                             }
                         }
                     }
@@ -661,7 +666,7 @@ namespace KingsDamageMeter
                     {
                         if (SkillDamageInflicted != null)
                         {
-                            SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, skill));
+                            SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, target, damage, skill));
                         }
                     }
 
@@ -692,7 +697,7 @@ namespace KingsDamageMeter
 
                             if (SkillDamageInflicted != null)
                             {
-                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, damage, pet));
+                                SkillDamageInflicted(this, new PlayerSkillDamageEventArgs(time, name, target, damage, pet));
                             }
                         }
                     }
@@ -701,7 +706,7 @@ namespace KingsDamageMeter
                     {
                         if (DamageInflicted != null)
                         {
-                            DamageInflicted(this, new PlayerDamageEventArgs(time, name, damage));
+                            DamageInflicted(this, new PlayerDamageEventArgs(time, name, target, damage));
                         }
                     }
 
@@ -740,7 +745,7 @@ namespace KingsDamageMeter
                                 if (SkillDamageInflicted != null)
                                 {
                                     SkillDamageInflicted(this,
-                                                         new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]],
+                                                         new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]], name,
                                                                                         damage, skill));
                                 }
                             }
@@ -751,7 +756,7 @@ namespace KingsDamageMeter
                             if (SkillDamageInflicted != null)
                             {
                                 SkillDamageInflicted(this,
-                                                     new PlayerSkillDamageEventArgs(time, _Dots[skill], damage, skill));
+                                                     new PlayerSkillDamageEventArgs(time, _Dots[skill], name, damage, skill));
                             }
                         }
                     }
@@ -761,7 +766,7 @@ namespace KingsDamageMeter
                         if (SkillDamageInflicted != null)
                         {
                             SkillDamageInflicted(this,
-                                                 new PlayerSkillDamageEventArgs(time, _Effects[skill], damage, skill));
+                                                 new PlayerSkillDamageEventArgs(time, _Effects[skill], name, damage, skill));
                         }
                     }
 
@@ -773,7 +778,7 @@ namespace KingsDamageMeter
                                                  new PlayerSkillDamageEventArgs(time,
                                                                                 _Effects[
                                                                                     skill.Replace(
-                                                                                        Localization.Regex.Effect, "")],
+                                                                                        Localization.Regex.Effect, "")], name,
                                                                                 damage, skill));
                         }
                     }
@@ -800,7 +805,7 @@ namespace KingsDamageMeter
                                 if (SkillDamageInflicted != null)
                                 {
                                     SkillDamageInflicted(this,
-                                                         new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]],
+                                                         new PlayerSkillDamageEventArgs(time, _Pets[_Dots[skill]], name,
                                                                                         damage, skill));
                                 }
                             }
@@ -811,7 +816,7 @@ namespace KingsDamageMeter
                             if (SkillDamageInflicted != null)
                             {
                                 SkillDamageInflicted(this,
-                                                     new PlayerSkillDamageEventArgs(time, _Dots[skill], damage, skill));
+                                                     new PlayerSkillDamageEventArgs(time, _Dots[skill], name, damage, skill));
                             }
                         }
                     }
@@ -1036,6 +1041,22 @@ namespace KingsDamageMeter
 
                     matched = true;
                     regex = "_YouGainedApRegex";
+                    return;
+                }
+                
+                matches = _YouHaveJoinedChannelRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string regionName = matches[0].Groups[_RegionGroupName].Value;
+
+                    if (JoinedRegionChannel != null)
+                    {
+                        JoinedRegionChannel(this, new JoinedRegionChannelEventArgs(time, regionName));
+                    }
+
+                    matched = true;
+                    regex = "_YouHaveJoinedChannelRegex";
                     return;
                 }
             }

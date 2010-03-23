@@ -33,4 +33,6 @@ namespace KingsDamageMeter
     public delegate void KinahEventHandler(object sender, KinahEventArgs e);
 
     public delegate void AbyssPointsEventHandler(object sender, AbyssPointsEventArgs e);
+
+    public delegate void JoinedRegionChannelEventHandler(object sender, JoinedRegionChannelEventArgs e);
 }

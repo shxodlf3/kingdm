@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Assassin" xml:space="preserve">
-    <value />
+    <value>Dash Attack,Killer's Eye,Rune Carve,Sprinting,Pain Rune,Apply Poison,Fang Strike,Rune Slash,Clear Focus,Whirlwind Slash,Binding Rune,Beast Kick,Searching Eye,Wind Walk,Assassination,Weakening Blow,Blood Rune,Beast Swipe,Spiral Slash,Throw Dagger</value>
   </data>
   <data name="Chanter" xml:space="preserve">
-    <value />
+    <value>Victory Mantra,Meteor Strike,Shield Mantra,Booming Strike,Word of Revival,Promise of Earth,Magic Mantra,Incandescent Blow,Celerity Mantra,Focused Parry,Booming Smash,Revival Mantra,Clement Mind Mantra,Parrying Strike,Pentacle Shock,Word of Wind,Booming Assault,Intensity Mantra,Word of Quickness,Protection Mantra,Tremor</value>
   </data>
   <data name="Cleric" xml:space="preserve">
-    <value />
+    <value>Light of Rejuvenation,Root,Thunderbolt,Dispel,Tranquility,Radiant Cure,Cure Mind,Penance,Divine Touch,Healing Wind,Rebirth,Divine Spark,Summer Circle,Winter Circle,Thorny Skin,Acquittal,Light of Recovery,Chastisement,Resurrection Loci,Prayer of Focus,Grace of Resurrection,Blessed Shield,Slashing Wind</value>
   </data>
   <data name="Gladiator" xml:space="preserve">
-    <value />
+    <value>Seismic Wave,Wrathful Strike,Aion's Strength,Rupture,Cleave,Aerial Lockdown,Body Smash,Crashing Blow,Shock Wave,Seismic Billow,Reckless Strike,Stamina Recovery,Wall of Steel,Pressure Wave,Great Cleave,Wrathful Wave,Righteous Cleave,Strengthen Wings</value>
   </data>
   <data name="Ranger" xml:space="preserve">
-    <value />
+    <value>Swift Shot,Entanglng Shot,Arrow Strke,Stunnng Shot,Aiming,Poison Arrow,Rupture Arrow,Strong Shots,Tactcal Retreat,Aerial Wild Shot,Hunter's Eye,Arrow Flurry,Fleshcutter Arrow,Arrow Storm</value>
   </data>
   <data name="Sorcerer" xml:space="preserve">
-    <value />
+    <value>Robe of Earth,Flame Harpoon,Blind Leap,Winter Binding,Flame Cage,Delayed Blast,Robe of Flame,Freezing Wind,Boon of Peace,Aether's Hold,Aether Flame,Inferno,Robe of Cold,Tranquilizing Cloud,Gain Mana,Flame Fusion,Magic Fist,Soul Absorption,Soul Freeze,Flaming Meteor,Cometfall</value>
   </data>
   <data name="Spiritmaster" xml:space="preserve">
-    <value />
+    <value>Root of Enervation,Summon Fire Spirit,Summon Wind Spirit,Chain of Earth,Summon Fire Energy,Dispel Magic,Summon Water Spirit,Summon Wind Servant,Spirit Erosion,Stone Shock,Sandblaster,Summon Group Member,Disenchant,Summoning Alacrity,Spirit Absorption,Blade of Earth,Wing Root,Erosion,Stone Skin</value>
   </data>
   <data name="Templar" xml:space="preserve">
-    <value />
+    <value>Taunt,Shield Bash,Provoking Shield Counter,Empyrean Armor,Shining Slash,Wrath Strike,Avenging Blow,Steel Wall Defense,Divine Blow,Dazing Severe Blow,Face Smash,Hand of Healing,Blunting Severe Blow,Judgment,Iron Skin,Divine Grasp</value>
   </data>
 </root>

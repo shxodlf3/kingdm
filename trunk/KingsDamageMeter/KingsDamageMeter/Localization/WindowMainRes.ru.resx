@@ -219,4 +219,16 @@
   <data name="LogLanguageMenuHeader" xml:space="preserve">
     <value>Язык логов</value>
   </data>
+  <data name="RemoveAllEncountersMenuHeader" xml:space="preserve">
+    <value>Удалить всё</value>
+  </data>
+  <data name="RemoveEncounterMenuHeader" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="ResetAllMenuHeader" xml:space="preserve">
+    <value>Сбросить всё</value>
+  </data>
+  <data name="ResetMenuHeader" xml:space="preserve">
+    <value>Сбросить</value>
+  </data>
 </root>

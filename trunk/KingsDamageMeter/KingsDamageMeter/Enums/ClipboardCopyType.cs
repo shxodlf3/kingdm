@@ -17,7 +17,7 @@
  * 
 \**************************************************************************/
 
-namespace KingsDamageMeter.Controls
+namespace KingsDamageMeter.Enums
 {
     public enum ClipboardCopyType
     {

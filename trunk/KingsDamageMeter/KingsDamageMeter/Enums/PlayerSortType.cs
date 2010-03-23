@@ -17,18 +17,13 @@
  * 
 \**************************************************************************/
 
-using System;
-
-namespace KingsDamageMeter.Controls
+namespace KingsDamageMeter.Enums
 {
-    [Flags]
-    public enum DisplayType
+    public enum PlayerSortType
     {
-        Damage = 1,
-        DamagePerSecond = 2,
-        Percent = 4,
-        Experience = 8,
-        Kinah = 16,
-        AbyssPoints = 32
+        None,
+        Name,
+        Damage,
+        DamagePerSecond
     }
 }

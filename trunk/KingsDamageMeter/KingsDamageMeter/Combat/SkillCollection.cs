@@ -18,11 +18,12 @@
 \**************************************************************************/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace KingsDamageMeter.Combat
 {
-    public class SkillCollection
+    public class SkillCollection : IEnumerable<Skill>
     {
         private Dictionary<string, Skill> _Skills = new Dictionary<string, Skill>();
 
@@ -77,6 +78,16 @@ namespace KingsDamageMeter.Combat
             {
                 _Skills.Clear();
             }
+        }
+
+        public IEnumerator<Skill> GetEnumerator()
+        {
+            return _Skills.Values.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

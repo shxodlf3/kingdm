@@ -18,34 +18,16 @@
 \**************************************************************************/
 
 using System;
-using System.ComponentModel;
 using KingsDamageMeter.Combat;
+using KingsDamageMeter.Helpers;
 using KingsDamageMeter.Properties;
-using Timer=System.Timers.Timer;
 
 namespace KingsDamageMeter.Controls
 {
-    public class Player : INotifyPropertyChanged
+    public class Player : NotifyPropertyChangedBase
     {
-        private readonly Timer fightTimer = new Timer(1000);
-        private readonly Timer endOfFightTimer = new Timer(5000);
-        private DateTime timeSinceLastDamage;
-
         public Player()
         {
-            fightTimer.Elapsed += delegate
-                                      {
-                                          FightTime += fightTimer.Interval / 1000;
-                                          //System.Diagnostics.Debug.WriteLine("FightTime: " + FightTime);
-                                      };
-            endOfFightTimer.Elapsed += delegate
-                                           {
-                                               fightTimer.Enabled = false;
-                                               endOfFightTimer.Enabled = false;
-                                               FightTime -= (DateTime.Now - timeSinceLastDamage).TotalSeconds;
-                                               //System.Diagnostics.Debug.WriteLine("Fight has ended: " + FightTime);
-                                           };
-
             Skills = new SkillCollection();
         }
 
@@ -95,14 +77,6 @@ namespace KingsDamageMeter.Controls
                     }
 
                     damage = value;
-                    timeSinceLastDamage = DateTime.Now;
-                    if (!fightTimer.Enabled)
-                    {
-                        fightTimer.Start();
-                    }
-                    endOfFightTimer.Stop();
-                    endOfFightTimer.Start();
-
                     NotifyPropertyChanged("Damage");
                 }
             }
@@ -206,51 +180,40 @@ namespace KingsDamageMeter.Controls
             }
         }
 
+        private int damagePerSecond;
         public int DamagePerSecond
         {
             get
             {
-                if (FightTime <= 3)
-                {
-                    return 0;
-                }
-                var value = (int)(Damage / FightTime);
-                if (value > PeakDps)
-                {
-                    PeakDps = value;
-                }
-                return value;
+                return damagePerSecond;
             }
-        }
-
-        private double fightTime;
-        public double FightTime
-        {
-            get { return fightTime; }
             set
             {
-                if (fightTime != value)
+                if (damagePerSecond != value)
                 {
-                    fightTime = value;
-                    NotifyPropertyChanged("FightTime");
+                    damagePerSecond = value;
+                    //if (value > PeakDps)
+                    //{
+                    //    PeakDps = value;
+                    //}
                     NotifyPropertyChanged("DamagePerSecond");
                 }
             }
         }
 
-        private int peakDps;
-        public int PeakDps
-        {
-            get { return peakDps; }
-            private set
-            {
-                if (peakDps != value)
-                {
-                    peakDps = value;
-                    NotifyPropertyChanged("PeakDps");
-                }
-            }
-        }
+        //private int peakDps;
+        //public int PeakDps
+        //{
+        //    get { return peakDps; }
+        //    private set
+        //    {
+        //        if (peakDps != value)
+        //        {
+        //            peakDps = value;
+        //            NotifyPropertyChanged("PeakDps");
+        //        }
+        //    }
+        //}
 
         private bool isGroupMember;
         public bool IsGroupMember
@@ -261,6 +224,10 @@ namespace KingsDamageMeter.Controls
                 if (isGroupMember != value)
                 {
                     isGroupMember = value;
+                    if(Commands.IsGroupMemberChangedCommand != null)
+                    {
+                        Commands.IsGroupMemberChangedCommand.Execute(this);
+                    }
                     NotifyPropertyChanged("IsGroupMember");
                 }
             }
@@ -286,36 +253,16 @@ namespace KingsDamageMeter.Controls
                         Settings.Default.FriendList.Remove(PlayerName);
                     }
                 }
+                if (Commands.IsFriendChangedCommand != null)
+                {
+                    Commands.IsFriendChangedCommand.Execute(this);
+                }
                 NotifyPropertyChanged("IsFriend");
                 NotifyPropertyChanged("IsGroupMember");
             }
         }
 
         public SkillCollection Skills { get; private set; }
-
-        #endregion
-
-        public virtual void Reset()
-        {
-            Damage = 0;
-            DamageTaken = 0;
-            PercentFromGroupDamages = 0;
-            FightTime = 0;
-            PeakDps = 0;
-
-            Skills.Clear();
-        }
-
-        #region Implementation of INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
 
         #endregion
     }

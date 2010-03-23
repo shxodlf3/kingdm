@@ -192,9 +192,9 @@ namespace KingsDamageMeter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("None")]
-        public global::KingsDamageMeter.Controls.PlayerSortType SortType {
+        public global::KingsDamageMeter.Enums.PlayerSortType SortType {
             get {
-                return ((global::KingsDamageMeter.Controls.PlayerSortType)(this["SortType"]));
+                return ((global::KingsDamageMeter.Enums.PlayerSortType)(this["SortType"]));
             }
             set {
                 this["SortType"] = value;
@@ -204,9 +204,9 @@ namespace KingsDamageMeter.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Damage")]
-        public global::KingsDamageMeter.Controls.DisplayType DisplayType {
+        public global::KingsDamageMeter.Enums.DisplayType DisplayType {
             get {
-                return ((global::KingsDamageMeter.Controls.DisplayType)(this["DisplayType"]));
+                return ((global::KingsDamageMeter.Enums.DisplayType)(this["DisplayType"]));
             }
             set {
                 this["DisplayType"] = value;
@@ -258,6 +258,30 @@ namespace KingsDamageMeter.Properties {
             }
             set {
                 this["SelectedLogLanguage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public double EncountersWidth {
+            get {
+                return ((double)(this["EncountersWidth"]));
+            }
+            set {
+                this["EncountersWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsEncountersExpanded {
+            get {
+                return ((bool)(this["IsEncountersExpanded"]));
+            }
+            set {
+                this["IsEncountersExpanded"] = value;
             }
         }
     }

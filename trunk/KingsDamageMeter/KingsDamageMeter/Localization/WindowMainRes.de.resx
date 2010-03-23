@@ -192,6 +192,18 @@
   <data name="PowerOnBtnTooltip" xml:space="preserve">
     <value>Einschalten</value>
   </data>
+  <data name="RemoveAllEncountersMenuHeader" xml:space="preserve">
+    <value>XXXX</value>
+  </data>
+  <data name="RemoveEncounterMenuHeader" xml:space="preserve">
+    <value>XXXX</value>
+  </data>
+  <data name="ResetAllMenuHeader" xml:space="preserve">
+    <value>XXXX</value>
+  </data>
+  <data name="ResetMenuHeader" xml:space="preserve">
+    <value>XXXX</value>
+  </data>
   <data name="ResizeThumbToolTip" xml:space="preserve">
     <value>Größe ändern</value>
   </data>

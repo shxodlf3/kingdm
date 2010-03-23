@@ -18,46 +18,32 @@
 \**************************************************************************/
 
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Timers;
 using System.Windows;
 using System.Windows.Data;
 using KingsDamageMeter.Controls;
-using KingsDamageMeter.Converters;
+using KingsDamageMeter.Enums;
+using KingsDamageMeter.Helpers;
 using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
 using Timer=System.Timers.Timer;
 
 namespace KingsDamageMeter
 {
-    public class WindowMainData : INotifyPropertyChanged
+    public class WindowMainData : NotifyPropertyChangedBase
     {
-        #region Implementation of INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion
-
         private readonly AionLogParser _LogParser = new AionLogParser();
-        private readonly Timer sortTimer = new Timer();
-        //private readonly Timer dpsTimeoutTimer = new Timer();
+        private readonly Timer expGainedTimer = new Timer(5000);
+        private readonly Timer timeoutTimer = new Timer(20000);
 
 
         #region Properties
@@ -67,21 +53,45 @@ namespace KingsDamageMeter
             get { return _LogParser.Running; }
         }
 
-        public ObservableCollection<Player> Players { get; private set; }
+        public List<string> GroupMembers { get; private set; }
+        public ObservableCollection<Region> Regions { get; private set; }
 
         public ObservableCollection<CultureInfo> AvailableLanguages { get; private set; }
         public ObservableCollection<CultureInfo> AvailableLogLanguages { get; private set; }
 
-        private YouPlayer you;
-        public YouPlayer You
+        private IEncounter selectedEncounter;
+        public IEncounter SelectedEncounter
         {
-            get { return you; }
-            private set
+            get { return selectedEncounter; }
+            set
             {
-                if(you != value)
+                if(selectedEncounter != value)
                 {
-                    you = value;
-                    NotifyPropertyChanged("You");
+                    if(selectedEncounter != null)
+                    {
+                        selectedEncounter.IsSelected = false;
+                    }
+                    selectedEncounter = value;
+                    if(selectedEncounter != null)
+                    {
+                        selectedEncounter.IsSelected = true;
+                    }
+
+                    NotifyPropertyChanged("SelectedEncounter");
+                }
+            }
+        }
+
+        private string currentRegionName;
+        public string CurrentRegionName
+        {
+            get { return currentRegionName; }
+            set
+            {
+                if(currentRegionName != value)
+                {
+                    currentRegionName = value;
+                    NotifyPropertyChanged("CurrentRegionName");
                 }
             }
         }
@@ -93,6 +103,93 @@ namespace KingsDamageMeter
                 return IsEnabled ? WindowMainRes.PowerOnBtnTooltip : WindowMainRes.PowerOffBtnTooltip;
             }
         }
+
+        private DateTime lastExpGainedTime;
+        private DateTime lastDamageInflictedTime;
+        private DateTime startTime = DateTime.Now;
+
+        private int exp;
+        public int Exp
+        {
+            get { return exp; }
+            set
+            {
+                if (exp != value)
+                {
+                    exp = value;
+                    NotifyPropertyChanged("Exp");
+                    NotifyPropertyChanged("ExpPerHour");
+                }
+            }
+        }
+
+        public int ExpPerHour
+        {
+            get
+            {
+                if (Exp == 0)
+                {
+                    return 0;
+                }
+                TimeSpan span = DateTime.Now - startTime;
+                return (int)((Exp / span.TotalSeconds) * 3600);
+            }
+        }
+
+        private int kinahEarned;
+        public int KinahEarned
+        {
+            get { return kinahEarned; }
+            set
+            {
+                if (kinahEarned != value)
+                {
+                    kinahEarned = value;
+                    NotifyPropertyChanged("KinahEarned");
+                    NotifyPropertyChanged("TotalKinah");
+                }
+            }
+        }
+
+        private int kinahSpent;
+        public int KinahSpent
+        {
+            get { return kinahSpent; }
+            set
+            {
+                if (kinahSpent != value)
+                {
+                    kinahSpent = value;
+                    NotifyPropertyChanged("KinahSpent");
+                    NotifyPropertyChanged("TotalKinah");
+                }
+            }
+        }
+
+        public int TotalKinah
+        {
+            get
+            {
+                return KinahEarned + KinahSpent;
+            }
+        }
+
+        private int ap;
+        public int Ap
+        {
+            get { return ap; }
+            set
+            {
+                if (ap != value)
+                {
+                    ap = value;
+                    NotifyPropertyChanged("Ap");
+                }
+            }
+        }
+        
+        private Region LastRegion { get; set; }
+        private Encounter LastEncounter { get; set; }
 
         #endregion
 
@@ -111,29 +208,29 @@ namespace KingsDamageMeter
             }
         }
 
-        private ObjectRelayCommand resetCountsCommand;
-        public ObjectRelayCommand ResetCountsCommand
+        private RelayCommand<DisplayType> resetCommand;
+        public RelayCommand<DisplayType> ResetCommand
         {
             get
             {
-                if (resetCountsCommand == null)
+                if (resetCommand == null)
                 {
-                    resetCountsCommand = new ObjectRelayCommand(o => ResetDamage());
+                    resetCommand = new RelayCommand<DisplayType>(Reset);
                 }
-                return resetCountsCommand;
+                return resetCommand;
             }
         }
 
-        private ObjectRelayCommand clearAllCommand;
-        public ObjectRelayCommand ClearAllCommand
+        private ObjectRelayCommand resetAllCommand;
+        public ObjectRelayCommand ResetAllCommand
         {
             get
             {
-                if (clearAllCommand == null)
+                if (resetAllCommand == null)
                 {
-                    clearAllCommand = new ObjectRelayCommand(o => ClearAll());
+                    resetAllCommand = new ObjectRelayCommand(o => ResetAll());
                 }
-                return clearAllCommand;
+                return resetAllCommand;
             }
         }
 
@@ -154,71 +251,85 @@ namespace KingsDamageMeter
 
         public WindowMainData()
         {
-            Players = new ObservableCollection<Player>();
-            Players.CollectionChanged += PlayersCollectionChanged;
-            AvailableLanguages = new ObservableCollection<CultureInfo>();
-            AvailableLogLanguages = new ObservableCollection<CultureInfo>();
-            Settings.Default.PropertyChanged += OnSettingsChanged;
-
-            InitializeLogParser();
-            InitializeTimers();
-            InitializeCommands();
-            DetectAvailableLanguages();
+            Regions = new ObservableCollection<Region>();
 
             //Note: This is a test
-            //Players.Add(new Player
+            //Regions.Add(new Region { Name = "Some region" });
+            //Regions[0].Encounters.Add(new Encounter { Name = "Encounter 1" });
+            //Regions[0].Encounters[0].Players.Add(new Player
             //                {
             //                    PlayerName = "Memphistopheles",
             //                    Damage = 1000000,
-            //                    FightTime = 1800,
             //                    PercentFromGroupDamages = 1,
+            //                    BiggestHit = 3000
             //                });
-            //You = new YouPlayer
+            //Regions[0].Encounters[0].Players.Add(new YouPlayer
             //          {
             //              PlayerName = Settings.Default.YouAlias,
             //              Damage = 10000001,
-            //              FightTime = 1800,
             //              PercentFromGroupDamages = 1,
             //              Exp = 10000000,
             //              Ap = 10000,
             //              KinahEarned = 200000,
             //              KinahSpent = -100000,
-            //              IsGroupMember = true
-            //          };
-            //Players.Add(You);
-            //UpdatePercents();
-            //////////////////////////////////////
+            //              IsGroupMember = true,
+            //              BiggestHit = 5000
+            //          });
+            //Regions[0].Encounters[0].You = (YouPlayer) Regions[0].Encounters[0].Players.Last();
+            //Regions[0].Encounters.Add(new Encounter { Name = "Encounter 2" });
+            //Regions[0].Encounters[1].Players.Add(new Player
+            //{
+            //    PlayerName = "Memphistopheles",
+            //    Damage = 2000000,
+            //    PercentFromGroupDamages = 1,
+            //    BiggestHit = 4500
+            //});
+            //Regions[0].Encounters[1].Players.Add(new YouPlayer
+            //{
+            //    PlayerName = Settings.Default.YouAlias,
+            //    Damage = 20000001,
+            //    PercentFromGroupDamages = 1,
+            //    Exp = 10000000,
+            //    Ap = 20000,
+            //    KinahEarned = 300000,
+            //    KinahSpent = -100000,
+            //    IsGroupMember = true,
+            //    BiggestHit = 4500
+            //});
+            //Regions[0].Encounters[1].You = (YouPlayer)Regions[0].Encounters[1].Players.Last();
+
+            GroupMembers = new List<string>();
+            AvailableLanguages = new ObservableCollection<CultureInfo>();
+            AvailableLogLanguages = new ObservableCollection<CultureInfo>();
+            Settings.Default.PropertyChanged += OnSettingsChanged;
+
+            CurrentRegionName = "Unknown";
+
+            InitializeLogParser();
+            InitializeTimers();
+            InitializeCommands();
+            DetectAvailableLanguages();
         }
 
         private void InitializeCommands()
         {
-            Commands.ClearAllCommand = new ObjectRelayCommand(o=>ClearAll());
-            Commands.ResetCountsCommand = new ObjectRelayCommand(o => ResetDamage());
-            Commands.RemovePlayerCommand = new RelayCommand<Player>(RemovePlayer, player => player != null);
+            Commands.RemoveEncounterCommand = new RelayCommand<IEncounter>(RemoveEncounter,
+                                                                           encounter => encounter != null);
+            Commands.RemoveAllEncountersCommand = new ObjectRelayCommand(o => RemoveAllEncounters(),
+                                                                         o => Regions.Count > 0);
+            Commands.RemovePlayerCommand = new RelayCommand<Player>(RemovePlayer, player => player != null && SelectedEncounter is Encounter);
             Commands.IgnorePlayerCommand = new RelayCommand<Player>(IgnorePlayer, player => player != null);
             Commands.CopyToClipboardCommand = new RelayCommand<ClipboardCopyType>(o=>CopyToClipboard(o, null));
             Commands.CopySelectedToClipboardCommand = new RelayCommand<Player>(o=>CopyToClipboard(ClipboardCopyType.OnlySelected, o));
+            Commands.IsGroupMemberChangedCommand = new RelayCommand<Player>(IsGroupMemberChanged);
+            Commands.IsFriendChangedCommand = new RelayCommand<Player>(IsFriendChanged);
         }
 
         private void InitializeTimers()
         {
-            sortTimer.Interval = 5000; //Update sort every 5 seconds
-            sortTimer.Elapsed += NeedToSort;
-            //dpsTimeoutTimer.Interval = 30000;
-            //dpsTimeoutTimer.Elapsed += NeedToUpdateDps;
+            expGainedTimer.Elapsed += EndEncounter;
+            timeoutTimer.Elapsed += EndEncounter;
         }
-
-        private void NeedToSort(object sender, ElapsedEventArgs e)
-        {
-            UpdateSort();
-            sortTimer.Enabled = false;
-        }
-
-        //private void NeedToUpdateDps(object sender, ElapsedEventArgs e)
-        //{
-        //    UpdateDps(0);
-        //    dpsTimeoutTimer.Enabled = false;
-        //}
 
         private void OnSettingsChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -226,11 +337,8 @@ namespace KingsDamageMeter
             {
                 case "IsGroupOnly":
                 case "IsHideOthers":
-                    SetFilter();
-                    UpdatePercents();
-                    break;
-                case "SortType":
-                    UpdateSort();
+                    //SetFilter();
+                    //UpdatePercents();
                     break;
                 case "SelectedLogLanguage":
                     _LogParser.Initialize();
@@ -257,6 +365,7 @@ namespace KingsDamageMeter
             _LogParser.KinahEarned += OnKinahEarned;
             _LogParser.KinahSpent += OnKinahSpent;
             _LogParser.AbyssPointsGained += OnAbyssPointsGained;
+            _LogParser.JoinedRegionChannel += OnJoinedRegionChannel;
             _LogParser.Start(Settings.Default.AionLogPath);
         }
 
@@ -275,7 +384,7 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerDamage(e.Name, e.Damage, Resources.WhiteDamageSkillName);
+                UpdatePlayerDamage(e.Name, e.Target, e.Damage, Resources.WhiteDamageSkillName);
             }
         }
 
@@ -288,7 +397,7 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerDamage(e.Name, e.Damage, e.Skill);
+                UpdatePlayerDamage(e.Name, e.Target, e.Damage, e.Skill);
             }
         }
 
@@ -301,7 +410,10 @@ namespace KingsDamageMeter
             }
             else
             {
-                AddPlayer(e.Name, /* isGroupMember = */true);
+                if(!GroupMembers.Contains(e.Name))
+                {
+                    GroupMembers.Add(e.Name);
+                }
             }
         }
 
@@ -314,7 +426,7 @@ namespace KingsDamageMeter
             }
             else
             {
-                RemoveGroupMember(e.Name);
+                GroupMembers.Remove(e.Name);
             }
         }
 
@@ -327,7 +439,9 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerExp(Settings.Default.YouAlias, e.Exp);
+                lastExpGainedTime = DateTime.Now;
+                Exp += e.Exp;
+                expGainedTimer.Start();
             }
         }
 
@@ -340,7 +454,7 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerKinah(Settings.Default.YouAlias, e.Kinah, /* isEarned = */ true);
+                KinahEarned += e.Kinah;
             }
         }
 
@@ -353,7 +467,7 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerKinah(Settings.Default.YouAlias, e.Kinah, false);
+                KinahSpent -= e.Kinah;
             }
         }
 
@@ -366,7 +480,20 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerAp(Settings.Default.YouAlias, e.Points);
+                Ap += e.Points;
+            }
+        }
+
+        private void OnJoinedRegionChannel(object sender, JoinedRegionChannelEventArgs e)
+        {
+            if (!Application.Current.Dispatcher.CheckAccess())
+            {
+                Application.Current.Dispatcher.Invoke(new Action<object, JoinedRegionChannelEventArgs>(OnJoinedRegionChannel),
+                                                      sender, e);
+            }
+            else
+            {
+                CurrentRegionName = e.Region;
             }
         }
 
@@ -391,173 +518,86 @@ namespace KingsDamageMeter
         /// </summary>
         /// <param name="name">The name of the player</param>
         /// <param name="damage">The total damage the player has dealt</param>
-        public void UpdatePlayerDamage(string name, int damage, string skill)
+        public void UpdatePlayerDamage(string name, string target, int damage, string skill)
         {
             if (Settings.Default.IgnoreList.Contains(name))
             {
                 return;
             }
 
-            if (!PlayerExists(name))
-            {
-                AddPlayer(name, false);
-            }
-
-            //if(TimeWhenFightIsStarted == null)
-            //{
-            //    TimeWhenFightIsStarted = DateTime.Now;
-            //}
-
-            var player = Players.FirstOrDefault(o => o.PlayerName == name);
-            if (player != null)
-            {
-                player.Damage += damage;
-                player.Skills.Incriment(skill, damage);
-                UpdatePercents();
-
-                if (!sortTimer.Enabled)
-                {
-                    sortTimer.Enabled = true;
-                }
-                UpdatePlayerClass(player.PlayerName, skill);
-            }
-        }
-
-        public void UpdatePlayerClass(string name, string skill)
-        {
-            var player = Players.FirstOrDefault(o => o.PlayerName == name);
-
-            if (player != null)
-            {
-                if (player.PlayerClass == ClassType.None)
-                {
-                    player.PlayerClass = SkillDictionary.GetClass(skill);
-                }
-            }
-        }
-
-        public void UpdatePlayerExp(string name, int exp)
-        {
-            if (Settings.Default.IgnoreList.Contains(name))
-            {
-                return;
-            }
-
-            if (!PlayerExists(name))
-            {
-                AddPlayer(name, false);
-            }
-
-            var player = Players.FirstOrDefault(o => o.PlayerName == name) as YouPlayer;
-            if (player != null)
-            {
-                player.Exp += exp;
-                //if(TimeWhenFightIsStarted != null)
-                //{
-                //    UpdateDps((int)(DateTime.Now - TimeWhenFightIsStarted.Value).TotalSeconds);
-                //    TimeWhenFightIsStarted = null;
-                //}
-            }
-        }
-
-        public void UpdatePlayerKinah(string name, int kinah, bool isEarned)
-        {
-            if (Settings.Default.IgnoreList.Contains(name))
-            {
-                return;
-            }
-
-            if (!PlayerExists(name))
-            {
-                AddPlayer(name, false);
-            }
-
-            var player = Players.FirstOrDefault(o => o.PlayerName == name) as YouPlayer;
-            if (player != null)
-            {
-                if(isEarned)
-                {
-                    player.KinahEarned += kinah;
-                }
-                else
-                {
-                    player.KinahSpent -= kinah;
-                }
-            }
-        }
-
-        private void UpdatePlayerAp(string name, int points)
-        {
-            if (Settings.Default.IgnoreList.Contains(name))
-            {
-                return;
-            }
-
-            if (!PlayerExists(name))
-            {
-                AddPlayer(name, false);
-            }
-
-            var player = Players.FirstOrDefault(o => o.PlayerName == name) as YouPlayer;
-            if (player != null)
-            {
-                player.Ap += points;
-            }
-        }
-
-        /// <summary>
-        /// Add a player to the scroll viewer.
-        /// </summary>
-        public void AddPlayer(string name, bool isGroupMember)
-        {
-            if (Settings.Default.IgnoreList.Contains(name))
-            {
-                return;
-            }
-            if (isGroupMember && Players.Any(o => o.PlayerName == name))
-            {
-                Players.First(o => o.PlayerName == name).IsGroupMember = true;
-                return;
-            }
+            bool isGroupMember = name == Settings.Default.YouAlias ||
+                                 GroupMembers.Contains(name) ||
+                                 Settings.Default.FriendList.Contains(name);
             if (Settings.Default.IsHideOthers && name != Settings.Default.YouAlias)
             {
                 return;
             }
-            if (Settings.Default.IsGroupOnly && !isGroupMember && !Settings.Default.FriendList.Contains(name) &&
-                name != Settings.Default.YouAlias)
+            if (Settings.Default.IsGroupOnly && !isGroupMember)
             {
                 return;
             }
 
-            if (!String.IsNullOrEmpty(name))
+            if (LastRegion == null || LastRegion.Name != CurrentRegionName)
             {
-                Player p;
-                if (name == Settings.Default.YouAlias)
+                LastRegion = new Region {Name = CurrentRegionName, IsExpanded = true};
+                Regions.Add(LastRegion);
+            }
+            var lastEncounter = LastEncounter;
+            if (LastEncounter == null || LastEncounter.IsEnded)
+            {
+                LastEncounter = new Encounter(LastRegion);
+                timeoutTimer.Start();
+
+                if (!string.IsNullOrEmpty(target))
                 {
-                    p = new YouPlayer
-                            {
-                                PlayerName = name,
-                                IsGroupMember = true
-                            };
+                    LastEncounter.Name = target;
                 }
                 else
                 {
-                    p = new Player
-                            {
-                                PlayerName = name,
-                                IsGroupMember = isGroupMember || Settings.Default.FriendList.Contains(name)
-                            };
+                    LastEncounter.Name = "Encounter " + LastRegion.Encounters.Count + 1;
                 }
+                LastRegion.Encounters.Add(LastEncounter);
+            }
+            if (SelectedEncounter == null || SelectedEncounter == lastEncounter)
+            {
+                SelectedEncounter = LastEncounter;
+            }
+            LastEncounter.UpdatePlayerDamage(name, damage, skill, isGroupMember);
 
-                Players.Add(p);
-                UpdateSort();
+            lastDamageInflictedTime = DateTime.Now;
+            expGainedTimer.Stop();
+
+            timeoutTimer.Stop();
+            timeoutTimer.Start();
+        }
+
+        private void EndEncounter(object sender, ElapsedEventArgs e)
+        {
+            if (!Application.Current.Dispatcher.CheckAccess())
+            {
+                Application.Current.Dispatcher.Invoke(new Action<object, ElapsedEventArgs>(EndEncounter), sender, e);
+            }
+            else
+            {
+                expGainedTimer.Stop();
+                timeoutTimer.Stop();
+                if (LastEncounter != null && !LastEncounter.IsEnded)
+                {
+                    if (sender == expGainedTimer)
+                    {
+                        LastEncounter.EndEncounter(lastExpGainedTime);
+                    }
+                    else if (sender == timeoutTimer)
+                    {
+                        LastEncounter.EndEncounter(lastDamageInflictedTime);
+                    }
+                }
             }
         }
 
         private void RemovePlayer(Player player)
         {
-            Players.Remove(player);
-            UpdatePercents();
+            ((Encounter)SelectedEncounter).RemovePlayer(player);
         }
 
         private void IgnorePlayer(Player player)
@@ -572,7 +612,17 @@ namespace KingsDamageMeter
                 Settings.Default.IgnoreList.Add(player.PlayerName);
             }
 
-            RemovePlayer(player);
+            foreach (var region in Regions)
+            {
+                foreach (var encounter in region.Encounters)
+                {
+                    var findedPlayer = encounter.Players.FirstOrDefault(o => o.PlayerName == player.PlayerName);
+                    if(findedPlayer != null)
+                    {
+                        encounter.RemovePlayer(findedPlayer);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -582,147 +632,141 @@ namespace KingsDamageMeter
         /// <returns>bool</returns>
         public bool PlayerExists(string name)
         {
-            return Players.Any(o => o.PlayerName == name);
-        }
-
-        private void SetFilter()
-        {
-            /*ICollectionView view = CollectionViewSource.GetDefaultView(Players);
-            if (view != null)
+            foreach (var region in Regions)
             {
-                if (Settings.Default.IsHideOthers)
+                foreach (var encounter in region.Encounters)
                 {
-                    view.Filter = o => ((Player)o).PlayerName == Settings.Default.YouAlias;
-                }
-                else if (Settings.Default.IsGroupOnly)
-                {
-                    view.Filter = o => ((Player)o).IsGroupMember;
-                }
-                else
-                {
-                    view.Filter = null;
-                }
-            }*/
-            if (Settings.Default.IsHideOthers)
-            {
-                //ToList() here is copy data to temp list for allow to us delete permission for Players collection
-                foreach (var player in Players.ToList())
-                {
-                    if(player.PlayerName != Settings.Default.YouAlias)
+                    if(encounter.Players.Any(o => o.PlayerName == name))
                     {
-                        Players.Remove(player);
+                        return true;
                     }
                 }
             }
-            else if(Settings.Default.IsGroupOnly)
-            {
-                foreach (var player in Players.ToList())
-                {
-                    if (!player.IsGroupMember)
-                    {
-                        Players.Remove(player);
-                    }
-                }
-            }
+            return false;
         }
 
-        private void UpdatePercents()
-        {
-            CalculateGroupDamagePercents();
-            CalculateTopDamagePercents();
-        }
+        //private void SetFilter()
+        //{
+        //    if (Settings.Default.IsHideOthers)
+        //    {
+        //        //ToList() here is copy data to temp list for allow to us delete permission for Players collection
+        //        foreach (var player in Players.ToList())
+        //        {
+        //            if(player.PlayerName != Settings.Default.YouAlias)
+        //            {
+        //                Players.Remove(player);
+        //            }
+        //        }
+        //    }
+        //    else if(Settings.Default.IsGroupOnly)
+        //    {
+        //        foreach (var player in Players.ToList())
+        //        {
+        //            if (!player.IsGroupMember)
+        //            {
+        //                Players.Remove(player);
+        //            }
+        //        }
+        //    }
+        //}
 
-        private void CalculateTopDamagePercents()
-        {
-            if(Players.Count == 0)
-            {
-                return;
-            }
+        //private void UpdatePercents()
+        //{
+        //    CalculateGroupDamagePercents();
+        //    CalculateTopDamagePercents();
+        //}
 
-            var topDamagePlayer = Players.Where(o => o.Damage == Players.Max(x => x.Damage)).First();
-            topDamagePlayer.PercentFromTopDamage = 1;
-            foreach (var player in Players)
-            {
-                if(topDamagePlayer != player)
-                {
-                    player.PercentFromTopDamage = (double)player.Damage / topDamagePlayer.Damage;
-                }
-            }
-        }
+        //private void CalculateTopDamagePercents()
+        //{
+        //    if(Players.Count == 0)
+        //    {
+        //        return;
+        //    }
 
-        private void CalculateGroupDamagePercents()
-        {
-            long total = Players.Sum(o => o.Damage);
+        //    var topDamagePlayer = Players.Where(o => o.Damage == Players.Max(x => x.Damage)).First();
+        //    topDamagePlayer.PercentFromTopDamage = 1;
+        //    foreach (var player in Players)
+        //    {
+        //        if(topDamagePlayer != player)
+        //        {
+        //            player.PercentFromTopDamage = (double)player.Damage / topDamagePlayer.Damage;
+        //        }
+        //    }
+        //}
 
-            foreach (Player p in Players)
-            {
-                //What for need that formula?
-                //double percent = (((double) (p.Damage - total)/total) + 1);
+        //private void CalculateGroupDamagePercents()
+        //{
+        //    long total = Players.Sum(o => o.Damage);
 
-                //Isn't player damage percent from total is:
-                p.PercentFromGroupDamages = (double)p.Damage / total;
-            }
-        }
+        //    foreach (Player p in Players)
+        //    {
+        //        //What for need that formula?
+        //        //double percent = (((double) (p.Damage - total)/total) + 1);
 
-        private void UpdateSort()
-        {
-            // Think timer is elapsed while exit. This should be fix the problem.
-            if (Application.Current == null)
-            {
-                return;
-            }
-            if (!Application.Current.Dispatcher.CheckAccess())
-            {
-                Application.Current.Dispatcher.Invoke(new Action(UpdateSort));
-            }
-            else
-            {
-                ICollectionView view = CollectionViewSource.GetDefaultView(Players);
-                if (view != null)
-                {
-                    view.SortDescriptions.Clear();
-                    switch (Settings.Default.SortType)
-                    {
-                        case PlayerSortType.Damage:
-                            view.SortDescriptions.Add(new SortDescription("Damage", ListSortDirection.Descending));
-                            break;
-                        case PlayerSortType.Name:
-                            view.SortDescriptions.Add(new SortDescription("PlayerName", ListSortDirection.Descending));
-                            break;
-                        case PlayerSortType.DamagePerSecond:
-                            view.SortDescriptions.Add(new SortDescription("DamagePerSecond",
-                                                                          ListSortDirection.Descending));
-                            break;
-                    }
-                    view.Refresh();
-                }
-            }
-        }
+        //        //Isn't player damage percent from total is:
+        //        p.PercentFromGroupDamages = (double)p.Damage / total;
+        //    }
+        //}
 
-        private void RemoveGroupMember(string name)
-        {
-            if(Settings.Default.FriendList.Contains(name))
-            {
-                return;
-            }
+        //private void UpdateSort()
+        //{
+        //    // Think timer is elapsed while exit. This should be fix the problem.
+        //    if (Application.Current == null)
+        //    {
+        //        return;
+        //    }
+        //    if (!Application.Current.Dispatcher.CheckAccess())
+        //    {
+        //        Application.Current.Dispatcher.Invoke(new Action(UpdateSort));
+        //    }
+        //    else
+        //    {
+        //        ICollectionView view = CollectionViewSource.GetDefaultView(Players);
+        //        if (view != null)
+        //        {
+        //            view.SortDescriptions.Clear();
+        //            switch (Settings.Default.SortType)
+        //            {
+        //                case PlayerSortType.Damage:
+        //                    view.SortDescriptions.Add(new SortDescription("Damage", ListSortDirection.Descending));
+        //                    break;
+        //                case PlayerSortType.Name:
+        //                    view.SortDescriptions.Add(new SortDescription("PlayerName", ListSortDirection.Descending));
+        //                    break;
+        //                case PlayerSortType.DamagePerSecond:
+        //                    view.SortDescriptions.Add(new SortDescription("DamagePerSecond",
+        //                                                                  ListSortDirection.Descending));
+        //                    break;
+        //            }
+        //            view.Refresh();
+        //        }
+        //    }
+        //}
 
-            var player = Players.FirstOrDefault(o => o.PlayerName == name);
-            if (player != null)
-            {
-                player.IsGroupMember = false;
-                SetFilter();
-                UpdatePercents();
-                UpdateSort();
-            }
-        }
+        //private void RemoveGroupMember(string name)
+        //{
+        //    if(Settings.Default.FriendList.Contains(name))
+        //    {
+        //        return;
+        //    }
 
-        private void ResetDamage()
-        {
-            foreach (var player in Players)
-            {
-                player.Reset();
-            }
-        }
+        //    var player = Players.FirstOrDefault(o => o.PlayerName == name);
+        //    if (player != null)
+        //    {
+        //        player.IsGroupMember = false;
+        //        SetFilter();
+        //        UpdatePercents();
+        //        UpdateSort();
+        //    }
+        //}
+
+        //private void ResetDamage()
+        //{
+        //    foreach (var player in Players)
+        //    {
+        //        player.Reset();
+        //    }
+        //}
 
         private void ChangePower()
         {
@@ -738,20 +782,39 @@ namespace KingsDamageMeter
             NotifyPropertyChanged("PowerButtonToolTip");
         }
 
-        private void ClearAll()
-        {
-            Players.Clear();
-        }
+        //private void ClearAll()
+        //{
+        //    Players.Clear();
+        //}
 
         public void Rename(string newName, string oldName)
         {
-            var player = Players.FirstOrDefault(o => o.PlayerName == oldName);
-            if (player != null)
+            foreach (var region in Regions)
             {
-                player.PlayerName = newName;
+                foreach (var encounter in region.Encounters)
+                {
+                    var player = encounter.Players.FirstOrDefault(o => o.PlayerName == oldName);
+                    if (player != null)
+                    {
+                        player.PlayerName = newName;
+                    }
+                }
             }
+            //var player = Players.FirstOrDefault(o => o.PlayerName == oldName);
+            //if (player != null)
+            //{
+            //    player.PlayerName = newName;
+            //}
         }
 
+        public void AddGroupMemberPlayer(string name)
+        {
+            if (!GroupMembers.Contains(name))
+            {
+                GroupMembers.Add(name);
+            }
+        }
+        
         private void DetectAvailableLanguages()
         {
             var dirs = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
@@ -855,52 +918,121 @@ namespace KingsDamageMeter
                         chatPrefix = "/l";
                         break;
                 }
-                ICollectionView view = CollectionViewSource.GetDefaultView(Players);
-                if (view != null)
+                if (SelectedEncounter != null)
                 {
-                    var sb = new StringBuilder();
-                    foreach (Player player in view)
+                    ICollectionView view = CollectionViewSource.GetDefaultView(SelectedEncounter.Players);
+                    if (view != null)
                     {
-                        sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage, Environment.NewLine);
+                        var sb = new StringBuilder();
+                        foreach (Player player in view)
+                        {
+                            sb.AppendFormat("{0} {1} {2}{3}", chatPrefix, player.PlayerName, player.Damage,
+                                            Environment.NewLine);
+                        }
+                        Clipboard.SetText(sb.ToString());
                     }
-                    Clipboard.SetText(sb.ToString());
                 }
             }
         }
 
-        private void PlayersCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void IsGroupMemberChanged(Player player)
         {
-            switch (e.Action)
+            if (player.IsGroupMember)
             {
-                case NotifyCollectionChangedAction.Add:
-                    if(e.NewItems != null)
+                if (!GroupMembers.Contains(player.PlayerName))
+                {
+                    GroupMembers.Add(player.PlayerName);
+                }
+            }
+            else
+            {
+                GroupMembers.Remove(player.PlayerName);
+            }
+            foreach (var region in Regions)
+            {
+                foreach (var encounter in region.Encounters)
+                {
+                    var findedPlayer = encounter.Players.FirstOrDefault(o => o.PlayerName == player.PlayerName);
+                    if(findedPlayer != null)
                     {
-                        var youAre =
-                            e.NewItems.Cast<Player>().FirstOrDefault(o => o.PlayerName == Settings.Default.YouAlias) as YouPlayer;
-                        if(youAre != null)
+                        findedPlayer.IsGroupMember = player.IsGroupMember;
+                    }
+                }
+            }
+        }
+
+        private void IsFriendChanged(Player player)
+        {
+            if(player.IsFriend)
+            {
+                foreach (var region in Regions)
+                {
+                    foreach (var encounter in region.Encounters)
+                    {
+                        var findedPlayer = encounter.Players.FirstOrDefault(o => o.PlayerName == player.PlayerName);
+                        if (findedPlayer != null)
                         {
-                            You = youAre;
+                            findedPlayer.IsGroupMember = player.IsFriend;
                         }
                     }
+                }
+            }
+        }
+
+        private void RemoveEncounter(IEncounter encounter)
+        {
+            if(encounter is Region)
+            {
+                Regions.Remove((Region)encounter);
+                if(LastRegion == encounter)
+                {
+                    LastRegion = null;
+                    LastEncounter = null;
+                }
+            }
+            else if(encounter is Encounter)
+            {
+                ((Encounter) encounter).Parent.Encounters.Remove((Encounter) encounter);
+                if (LastEncounter == encounter)
+                {
+                    LastEncounter = null;
+                }
+            }
+            SelectedEncounter = null;
+        }
+
+        private void RemoveAllEncounters()
+        {
+            Regions.Clear();
+            LastRegion = null;
+            LastEncounter = null;
+            SelectedEncounter = null;
+        }
+
+        private void Reset(DisplayType displayType)
+        {
+            switch (displayType)
+            {
+                case DisplayType.Experience:
+                    Exp = 0;
                     break;
-                case NotifyCollectionChangedAction.Remove:
-                    if (e.OldItems != null)
-                    {
-                        var youAre =
-                            e.OldItems.Cast<Player>().FirstOrDefault(o => o.PlayerName == Settings.Default.YouAlias);
-                        if (youAre != null)
-                        {
-                            You = null;
-                        }
-                    }
+                case DisplayType.Kinah:
+                    KinahEarned = 0;
+                    KinahSpent = 0;
                     break;
-                case NotifyCollectionChangedAction.Reset:
-                    You = null;
+                case DisplayType.AbyssPoints:
+                    Ap = 0;
                     break;
             }
         }
 
-        #endregion
+        private void ResetAll()
+        {
+            Reset(DisplayType.Experience);
+            Reset(DisplayType.Kinah);
+            Reset(DisplayType.AbyssPoints);
+        }
 
+        #endregion
     }
 }

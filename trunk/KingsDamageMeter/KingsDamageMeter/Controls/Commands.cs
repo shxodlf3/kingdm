@@ -17,15 +17,19 @@
  * 
 \**************************************************************************/
 
+using KingsDamageMeter.Enums;
+
 namespace KingsDamageMeter.Controls
 {
     public static class Commands
     {
-        public static ObjectRelayCommand ClearAllCommand { get; set; }
-        public static ObjectRelayCommand ResetCountsCommand { get; set; }
+        public static RelayCommand<IEncounter> RemoveEncounterCommand { get; set; }
+        public static ObjectRelayCommand RemoveAllEncountersCommand { get; set; }
         public static RelayCommand<Player> RemovePlayerCommand { get; set; }
         public static RelayCommand<Player> IgnorePlayerCommand { get; set; }
         public static RelayCommand<Player> CopySelectedToClipboardCommand { get; set; }
         public static RelayCommand<ClipboardCopyType> CopyToClipboardCommand { get; set; }
+        public static RelayCommand<Player> IsGroupMemberChangedCommand { get; set; }
+        public static RelayCommand<Player> IsFriendChangedCommand { get; set; }
     }
 }
