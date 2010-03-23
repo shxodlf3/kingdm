@@ -66,7 +66,7 @@ namespace KingsDamageMeter.Controls
                         findedPlayer.Damage += player.Damage;
                         foreach (var skill in player.Skills)
                         {
-                            findedPlayer.Skills.Incriment(skill.Name, skill.Damage);
+                            findedPlayer.Skills.Incriment(skill);
                         }
 
 

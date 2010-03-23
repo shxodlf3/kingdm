@@ -75,6 +75,10 @@ namespace KingsDamageMeter
                     if(selectedEncounter != null)
                     {
                         selectedEncounter.IsSelected = true;
+                        if(selectedEncounter.Name == WindowMainRes.AllEncounterName)
+                        {
+                            //Calculate
+                        }
                     }
 
                     NotifyPropertyChanged("SelectedEncounter");
@@ -309,14 +313,16 @@ namespace KingsDamageMeter
             InitializeTimers();
             InitializeCommands();
             DetectAvailableLanguages();
+
+            Regions.Add(new Region {Name = WindowMainRes.AllEncounterName});
         }
 
         private void InitializeCommands()
         {
             Commands.RemoveEncounterCommand = new RelayCommand<IEncounter>(RemoveEncounter,
-                                                                           encounter => encounter != null);
+                                                                           encounter => encounter != null && encounter.Name != WindowMainRes.AllEncounterName);
             Commands.RemoveAllEncountersCommand = new ObjectRelayCommand(o => RemoveAllEncounters(),
-                                                                         o => Regions.Count > 0);
+                                                                         o => Regions.Where(x => x.Name != WindowMainRes.AllEncounterName).Count() > 0);
             Commands.RemovePlayerCommand = new RelayCommand<Player>(RemovePlayer, player => player != null && SelectedEncounter is Encounter);
             Commands.IgnorePlayerCommand = new RelayCommand<Player>(IgnorePlayer, player => player != null);
             Commands.CopyToClipboardCommand = new RelayCommand<ClipboardCopyType>(o=>CopyToClipboard(o, null));
@@ -923,6 +929,22 @@ namespace KingsDamageMeter
                     ICollectionView view = CollectionViewSource.GetDefaultView(SelectedEncounter.Players);
                     if (view != null)
                     {
+                        view.SortDescriptions.Clear();
+                        switch (Settings.Default.SortType)
+                        {
+                            case PlayerSortType.Damage:
+                                view.SortDescriptions.Add(new SortDescription("Damage", ListSortDirection.Descending));
+                                break;
+                            case PlayerSortType.Name:
+                                view.SortDescriptions.Add(new SortDescription("PlayerName", ListSortDirection.Ascending));
+                                break;
+                            case PlayerSortType.DamagePerSecond:
+                                view.SortDescriptions.Add(new SortDescription("DamagePerSecond",
+                                                                              ListSortDirection.Descending));
+                                break;
+                        }
+                        view.Refresh();
+
                         var sb = new StringBuilder();
                         foreach (Player player in view)
                         {
@@ -1007,6 +1029,7 @@ namespace KingsDamageMeter
             LastRegion = null;
             LastEncounter = null;
             SelectedEncounter = null;
+            Regions.Add(new Region { Name = WindowMainRes.AllEncounterName });
         }
 
         private void Reset(DisplayType displayType)

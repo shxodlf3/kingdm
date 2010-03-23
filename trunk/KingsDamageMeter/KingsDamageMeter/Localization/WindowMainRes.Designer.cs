@@ -79,6 +79,15 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        internal static string AllEncounterName {
+            get {
+                return ResourceManager.GetString("AllEncounterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Abyss Points.
         /// </summary>
         internal static string ApMainViewMenuHeader {

@@ -123,6 +123,9 @@
   <data name="AddByNameMenuHeader" xml:space="preserve">
     <value>Gruppenmitglied hinzufügen</value>
   </data>
+  <data name="AllEncounterName" xml:space="preserve">
+    <value>XXXX</value>
+  </data>
   <data name="CloseBtnToolTip" xml:space="preserve">
     <value>Schliessen</value>
   </data>

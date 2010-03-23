@@ -89,5 +89,11 @@ namespace KingsDamageMeter.Combat
         {
             return GetEnumerator();
         }
+
+        public void Incriment(Skill skill)
+        {
+            Add(skill.Name);
+            _Skills[skill.Name].Increment(skill);
+        }
     }
 }

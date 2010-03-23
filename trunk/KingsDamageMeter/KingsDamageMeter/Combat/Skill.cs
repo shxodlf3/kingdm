@@ -80,5 +80,13 @@ namespace KingsDamageMeter.Combat
                 _Uses++;
             }
         }
+        public void Increment(Skill anotherSkill)
+        {
+            if (anotherSkill.Damage > 0)
+            {
+                _Damage += anotherSkill.Damage;
+                _Uses += anotherSkill.Uses;
+            }
+        }
     }
 }

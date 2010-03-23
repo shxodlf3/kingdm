@@ -231,4 +231,7 @@
   <data name="ResetMenuHeader" xml:space="preserve">
     <value>Сбросить</value>
   </data>
+  <data name="AllEncounterName" xml:space="preserve">
+    <value>Все</value>
+  </data>
 </root>

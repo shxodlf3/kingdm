@@ -231,4 +231,7 @@
   <data name="ResetMenuHeader" xml:space="preserve">
     <value>XXXX</value>
   </data>
+  <data name="AllEncounterName" xml:space="preserve">
+    <value>XXXX</value>
+  </data>
 </root>
