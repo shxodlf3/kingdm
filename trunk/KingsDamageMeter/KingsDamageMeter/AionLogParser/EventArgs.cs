@@ -21,282 +21,158 @@ using System;
 
 namespace KingsDamageMeter
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class LogEventArgs : EventArgs
     {
-        private DateTime _Time;
-
         public DateTime Time
         {
-            get
-            {
-                return _Time;
-            }
+            get;
+            private set;
         }
 
         public LogEventArgs(DateTime time)
         {
-            if (time == null)
-            {
-                time = DateTime.Now;
-            }
-
-            _Time = time;
+            Time = time;
         }
     }
 
     public class ExpEventArgs : LogEventArgs
     {
-        private int _Exp;
-
         public int Exp
         {
-            get
-            {
-                return _Exp;
-            }
+            get;
+            private set;
         }
 
         public ExpEventArgs(DateTime time, int exp)
             : base(time)
         {
-            if (exp < 0)
-            {
-                exp = 0;
-            }
-
-            _Exp = exp;
+            Exp = exp;
         }
     }
 
     public class KinahEventArgs : LogEventArgs
     {
-        private int _Kinah;
-
         public int Kinah
         {
-            get
-            {
-                return _Kinah;
-            }
+            get;
+            private set;
         }
 
         public KinahEventArgs(DateTime time, int kinah)
             : base(time)
         {
-            if (kinah < 0)
-            {
-                kinah = 0;
-            }
-
-            _Kinah = kinah;
+            Kinah = kinah;
         }
     }
 
     public class AbyssPointsEventArgs : LogEventArgs
     {
-        private int _Points;
-
         public int Points
         {
-            get
-            {
-                return _Points;
-            }
+            get;
+            private set;
         }
 
         public AbyssPointsEventArgs(DateTime time, int points)
             : base(time)
         {
-            if (points < 0)
-            {
-                points = 0;
-            }
-
-            _Points = points;
+            Points = points;
         }
     }
 
-    public class JoinedRegionChannelEventArgs : LogEventArgs
+    public class RegionEventArgs : LogEventArgs
     {
-        private string _Region;
-
         public string Region
         {
-            get
-            {
-                return _Region;
-            }
+            get;
+            private set;
         }
 
-        public JoinedRegionChannelEventArgs(DateTime time, string regionName)
+        public RegionEventArgs(DateTime time, string region)
             : base(time)
         {
-            _Region = regionName;
+            Region = region;
         }
     }
 
-    /// <summary>
-    /// Provides data for the KingsDamageMeter.AionLogParser.DamageInflicted event.
-    /// </summary>
-    public class PlayerDamageEventArgs : PlayerEventArgs
-    {
-        private int _Damage;
-
-        /// <summary>
-        /// Get the value indicating the amount of damage inflicted.
-        /// </summary>
-        public int Damage
-        {
-            get
-            {
-                return _Damage;
-            }
-        }
-
-        private string _Target;
-
-        /// <summary>
-        /// Get the target of damage
-        /// </summary>
-        public string Target
-        {
-            get
-            {
-                return _Target;
-            }
-        }
-
-        /// <summary>
-        /// Provides data for the KingsDamageMeter.AionLogParser.DamageInflicted event.
-        /// </summary>
-        /// <param name="name">The name of the player inflicting damage.</param>
-        /// <param name="damage">The amount of damage inflicted.</param>
-        public PlayerDamageEventArgs(DateTime time, string name, string target, int damage)
-            : base(time, name)
-        {
-            if (damage < 0)
-            {
-                damage = 0;
-            }
-
-            _Damage = damage;
-            _Target = target;
-        }
-    }
-
-    public class PlayerSkillDamageEventArgs : PlayerDamageEventArgs
-    {
-        private string _Skill;
-
-        public string Skill
-        {
-            get
-            {
-                return _Skill;
-            }
-        }
-
-        public PlayerSkillDamageEventArgs(DateTime time, string name, string target, int damage, string skill)
-            : base(time, name, target, damage)
-        {
-            if (String.IsNullOrEmpty(skill))
-            {
-                skill = "Unknown";
-            }
-
-            _Skill = skill;
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     public class PlayerEventArgs : LogEventArgs
     {
-        private string _Name;
-
         public string Name
         {
-            get
-            {
-                return _Name;
-            }
+            get;
+            private set;
         }
 
         public PlayerEventArgs(DateTime time, string name)
             : base(time)
         {
-            if (String.IsNullOrEmpty(name))
-            {
-                name = "Unknown Player";
-            }
-
-            _Name = name;
+            Name = name;
         }
     }
 
-    public class PetEventArgs : LogEventArgs
+    public class DamageEventArgs : PlayerEventArgs
     {
-        private string _Name;
-        private string _Owner;
-
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-        }
-
-        public string Owner
-        {
-            get
-            {
-                return _Owner;
-            }
-        }
-
-        public PetEventArgs(DateTime time, string name, string owner)
-            : base(time)
-        {
-            if (String.IsNullOrEmpty(name))
-            {
-                name = "Unknown Pet";
-            }
-            if (String.IsNullOrEmpty(owner))
-            {
-                owner = "Unknown Owner";
-            }
-
-            _Name = name;
-            _Owner = owner;
-        }
-    }
-
-    public class PetDamageEventArgs : PetEventArgs
-    {
-        private int _Damage;
-
         public int Damage
         {
-            get
-            {
-                return _Damage;
-            }
+            get;
+            private set;
         }
 
-        public PetDamageEventArgs(DateTime time, string name, string owner, int damage)
-            : base(time, name, owner)
+        public string Target
         {
-            if (damage < 0)
-            {
-                damage = 0;
-            }
+            get;
+            private set;
+        }
 
-            _Damage = damage;
+        public DamageEventArgs(DateTime time, string name, string target, int damage)
+            : base(time, name)
+        {
+            Damage = damage;
+            Target = target;
+        }
+    }
+
+    public class SkillDamageEventArgs : DamageEventArgs
+    {
+        public string Skill
+        {
+            get;
+            private set;
+        }
+
+        public SkillDamageEventArgs(DateTime time, string name, string target, int damage, string skill)
+            : base(time, name, target, damage)
+        {
+            Skill = skill;
+        }
+    }
+
+    public class HealEventArgs : PlayerEventArgs
+    {
+        public int Health
+        {
+            get;
+            private set;
+        }
+
+        public HealEventArgs(DateTime time, string name, int health)
+            : base(time, name)
+        {
+        }
+    }
+
+    public class HealOtherEventArgs : HealEventArgs
+    {
+        public string Target
+        {
+            get;
+            private set;
+        }
+
+        public HealOtherEventArgs(DateTime time, string name, int health, string target)
+            : base(time, name, health)
+        {
+            Target = target;
         }
     }
 }

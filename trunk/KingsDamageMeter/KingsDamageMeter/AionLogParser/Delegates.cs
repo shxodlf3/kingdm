@@ -19,20 +19,14 @@
 
 namespace KingsDamageMeter
 {
-    /// <summary>
-    /// Represents the method that will handle the KingsDamageMeter.AionLogParser.DamageInflicted event of a KingsDamageMeter.AionLogParser
-    /// </summary>
-    public delegate void DamageInflictedEventHandler(object sender, PlayerDamageEventArgs e);
-
-    public delegate void SkillDamageInflictedEventHandler(object sender, PlayerSkillDamageEventArgs e);
-
+    public delegate void SessionEventHandler(object sender, LogEventArgs e);
+    public delegate void DamageEventHandler(object sender, DamageEventArgs e);
+    public delegate void SkillDamageEventHandler(object sender, SkillDamageEventArgs e);
     public delegate void PlayerEventHandler(object sender, PlayerEventArgs e);
-
     public delegate void ExpEventHandler(object sender, ExpEventArgs e);
-
     public delegate void KinahEventHandler(object sender, KinahEventArgs e);
-
     public delegate void AbyssPointsEventHandler(object sender, AbyssPointsEventArgs e);
-
-    public delegate void JoinedRegionChannelEventHandler(object sender, JoinedRegionChannelEventArgs e);
+    public delegate void RegionEventHandler(object sender, RegionEventArgs e);
+    public delegate void HealEventHandler(object sender, HealEventArgs e);
+    public delegate void HealOtherEventHandler(object sender, HealOtherEventArgs e);
 }

@@ -359,9 +359,9 @@ namespace KingsDamageMeter
 
         private void InitializeLogParser()
         {
-            _LogParser.DamageInflicted += OnDamageInflicted;
-            _LogParser.CriticalInflicted += OnDamageInflicted;
-            _LogParser.SkillDamageInflicted += OnSkillDamageInflicted;
+            _LogParser.PlayerInflictedDamage += OnDamageInflicted;
+            _LogParser.PlayerInflictedCriticalDamage += OnDamageInflicted;
+            _LogParser.PlayerInflictedSkillDamage += OnSkillDamageInflicted;
             _LogParser.FileNotFound += OnFileNotFound;
             _LogParser.PlayerJoinedGroup += OnPlayerJoinedGroup;
             _LogParser.PlayerLeftGroup += OnPlayerLeftGroup;
@@ -371,7 +371,7 @@ namespace KingsDamageMeter
             _LogParser.KinahEarned += OnKinahEarned;
             _LogParser.KinahSpent += OnKinahSpent;
             _LogParser.AbyssPointsGained += OnAbyssPointsGained;
-            _LogParser.JoinedRegionChannel += OnJoinedRegionChannel;
+            _LogParser.RegionChanged += OnJoinedRegionChannel;
             _LogParser.Start(Settings.Default.AionLogPath);
         }
 
@@ -381,11 +381,11 @@ namespace KingsDamageMeter
         }
 
 
-        private void OnDamageInflicted(object sender, PlayerDamageEventArgs e)
+        private void OnDamageInflicted(object sender, DamageEventArgs e)
         {
             if (!Application.Current.Dispatcher.CheckAccess())
             {
-                Application.Current.Dispatcher.Invoke(new Action<object, PlayerDamageEventArgs>(OnDamageInflicted),
+                Application.Current.Dispatcher.Invoke(new Action<object, DamageEventArgs>(OnDamageInflicted),
                                                       sender, e);
             }
             else
@@ -394,11 +394,11 @@ namespace KingsDamageMeter
             }
         }
 
-        private void OnSkillDamageInflicted(object sender, PlayerSkillDamageEventArgs e)
+        private void OnSkillDamageInflicted(object sender, SkillDamageEventArgs e)
         {
             if (!Application.Current.Dispatcher.CheckAccess())
             {
-                Application.Current.Dispatcher.Invoke(new Action<object, PlayerSkillDamageEventArgs>(OnSkillDamageInflicted),
+                Application.Current.Dispatcher.Invoke(new Action<object, SkillDamageEventArgs>(OnSkillDamageInflicted),
                                                       sender, e);
             }
             else
@@ -490,11 +490,11 @@ namespace KingsDamageMeter
             }
         }
 
-        private void OnJoinedRegionChannel(object sender, JoinedRegionChannelEventArgs e)
+        private void OnJoinedRegionChannel(object sender, RegionEventArgs e)
         {
             if (!Application.Current.Dispatcher.CheckAccess())
             {
-                Application.Current.Dispatcher.Invoke(new Action<object, JoinedRegionChannelEventArgs>(OnJoinedRegionChannel),
+                Application.Current.Dispatcher.Invoke(new Action<object, RegionEventArgs>(OnJoinedRegionChannel),
                                                       sender, e);
             }
             else

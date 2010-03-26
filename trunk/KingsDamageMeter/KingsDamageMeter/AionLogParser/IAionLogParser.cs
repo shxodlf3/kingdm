@@ -28,21 +28,32 @@ namespace KingsDamageMeter
             get;
         }
 
+        void Start(string file);
+        void Stop();
+
         event EventHandler Starting;
         event EventHandler Started;
         event EventHandler Stopping;
         event EventHandler Stopped;
+
         event EventHandler FileNotFound;
-        event DamageInflictedEventHandler DamageInflicted;
-        event DamageInflictedEventHandler CriticalInflicted;
-        event SkillDamageInflictedEventHandler SkillDamageInflicted;
+
+        event KinahEventHandler KinahEarned;
+        event KinahEventHandler KinahSpent;
+        event AbyssPointsEventHandler AbyssPointsGained;
+        event ExpEventHandler ExpGained;
+
+        event SessionEventHandler SessionStarted;
+        event RegionEventHandler RegionChanged;
         event PlayerEventHandler PlayerJoinedGroup;
         event PlayerEventHandler PlayerLeftGroup;
-        event DamageInflictedEventHandler DamageReceived;
-        event ExpEventHandler ExpGained;
-        event KinahEventHandler KinahEarned;
 
-        void Start(string file);
-        void Stop();
+        event DamageEventHandler PlayerInflictedDamage;
+        event DamageEventHandler PlayerInflictedCriticalDamage;
+        event SkillDamageEventHandler PlayerInflictedSkillDamage;
+        event DamageEventHandler PlayerReceivedDamage;
+        event SkillDamageEventHandler PlayerReceivedSkillDamage;
+        event HealEventHandler PlayerHealed;
+        event HealOtherEventHandler PlayerHealedOther;
     }
 }
