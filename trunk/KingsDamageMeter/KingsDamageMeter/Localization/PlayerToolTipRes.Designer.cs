@@ -88,6 +88,15 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to taken.
+        /// </summary>
+        internal static string PlayerToolTipTaken {
+            get {
+                return ResourceManager.GetString("PlayerToolTipTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to total.
         /// </summary>
         internal static string PlayerToolTipTotal {

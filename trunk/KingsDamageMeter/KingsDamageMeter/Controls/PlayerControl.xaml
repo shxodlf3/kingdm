@@ -65,11 +65,11 @@
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipDps}"/>
             </StackPanel>
-            <!--StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding PeakDps, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.DamagePerSecond}}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding DamageTaken, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Damage}}"/>
                 <TextBlock Text=" "/>
-                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipPeak}"/>
-            </StackPanel-->
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipTaken}"/>
+            </StackPanel>
             <TextBlock/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding BiggestHit, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Damage}}"/>

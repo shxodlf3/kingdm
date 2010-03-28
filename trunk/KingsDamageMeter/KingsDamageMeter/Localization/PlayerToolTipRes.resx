@@ -126,6 +126,9 @@
   <data name="PlayerToolTipPeak" xml:space="preserve">
     <value>peak</value>
   </data>
+  <data name="PlayerToolTipTaken" xml:space="preserve">
+    <value>taken</value>
+  </data>
   <data name="PlayerToolTipTotal" xml:space="preserve">
     <value>total</value>
   </data>

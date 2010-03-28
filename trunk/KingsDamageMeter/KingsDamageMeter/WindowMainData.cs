@@ -362,6 +362,7 @@ namespace KingsDamageMeter
             _LogParser.PlayerInflictedDamage += OnDamageInflicted;
             _LogParser.PlayerInflictedCriticalDamage += OnDamageInflicted;
             _LogParser.PlayerInflictedSkillDamage += OnSkillDamageInflicted;
+            _LogParser.PlayerReceivedDamage += OnReceivedDamage;
             _LogParser.FileNotFound += OnFileNotFound;
             _LogParser.PlayerJoinedGroup += OnPlayerJoinedGroup;
             _LogParser.PlayerLeftGroup += OnPlayerLeftGroup;
@@ -373,6 +374,19 @@ namespace KingsDamageMeter
             _LogParser.AbyssPointsGained += OnAbyssPointsGained;
             _LogParser.RegionChanged += OnJoinedRegionChannel;
             _LogParser.Start(Settings.Default.AionLogPath);
+        }
+
+        private void OnReceivedDamage(object sender, DamageEventArgs e)
+        {
+            if (!Application.Current.Dispatcher.CheckAccess())
+            {
+                Application.Current.Dispatcher.Invoke(new Action<object, DamageEventArgs>(OnReceivedDamage),
+                                                      sender, e);
+            }
+            else
+            {
+                UpdateReceivedDamage(e.Target, e.Damage);
+            }
         }
 
         private static void OnFileNotFound(object sender, EventArgs e)
@@ -575,6 +589,11 @@ namespace KingsDamageMeter
 
             timeoutTimer.Stop();
             timeoutTimer.Start();
+        }
+
+        private void UpdateReceivedDamage(string name, int damage)
+        {
+            // Need to update damage taken.
         }
 
         private void EndEncounter(object sender, ElapsedEventArgs e)

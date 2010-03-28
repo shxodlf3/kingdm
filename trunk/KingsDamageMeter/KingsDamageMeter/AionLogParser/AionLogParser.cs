@@ -675,6 +675,14 @@ namespace KingsDamageMeter
                     int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
                     string target = matches[0].Groups[_TargetGroupName].Value;
 
+                    if (!name.Contains(" "))
+                    {
+                        if (PlayerReceivedDamage != null)
+                        {
+                            PlayerReceivedDamage(this, new DamageEventArgs(time, name, target, damage));
+                        }
+                    }
+
                     matched = true;
                     regex = "_OtherReceivedRegex";
                     return;
@@ -687,6 +695,14 @@ namespace KingsDamageMeter
                     string name = matches[0].Groups[_NameGroupName].Value;
                     int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
                     string skill = matches[0].Groups[_SkillGroupName].Value;
+
+                    if (!name.Contains(" "))
+                    {
+                        if (PlayerReceivedDamage != null)
+                        {
+                            PlayerReceivedDamage(this, new DamageEventArgs(time, skill, name, damage));
+                        }
+                    }
 
                     if (_Dots.ContainsKey(skill))
                     {
