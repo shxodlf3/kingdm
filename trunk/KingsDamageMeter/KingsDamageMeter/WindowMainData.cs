@@ -72,12 +72,21 @@ namespace KingsDamageMeter
                         selectedEncounter.IsSelected = false;
                     }
                     selectedEncounter = value;
-                    if(selectedEncounter != null)
+                    if (selectedEncounter != null)
                     {
                         selectedEncounter.IsSelected = true;
-                        if(selectedEncounter.Name == WindowMainRes.AllEncounterName)
+                        if (selectedEncounter is AllEncounters)
                         {
-                            //Calculate
+                            var allRegion = (AllEncounters)selectedEncounter;
+                            allRegion.Data.Clear();
+                            foreach (var region in Regions.Where(o=>o != allRegion))
+                            {
+                                foreach (var encounter in region.Encounters)
+                                {
+                                    allRegion.Data.Add(encounter);
+                                }
+                            }
+                            allRegion.IsExpanded = false;
                         }
                     }
 
@@ -314,15 +323,15 @@ namespace KingsDamageMeter
             InitializeCommands();
             DetectAvailableLanguages();
 
-            Regions.Add(new Region {Name = WindowMainRes.AllEncounterName});
+            Regions.Add(new AllEncounters());
         }
 
         private void InitializeCommands()
         {
             Commands.RemoveEncounterCommand = new RelayCommand<IEncounter>(RemoveEncounter,
-                                                                           encounter => encounter != null && encounter.Name != WindowMainRes.AllEncounterName);
+                                                                           encounter => encounter != null && !(encounter is AllEncounters));
             Commands.RemoveAllEncountersCommand = new ObjectRelayCommand(o => RemoveAllEncounters(),
-                                                                         o => Regions.Where(x => x.Name != WindowMainRes.AllEncounterName).Count() > 0);
+                                                                         o => Regions.Where(x => !(x is AllEncounters)).Count() > 0);
             Commands.RemovePlayerCommand = new RelayCommand<Player>(RemovePlayer, player => player != null && SelectedEncounter is Encounter);
             Commands.IgnorePlayerCommand = new RelayCommand<Player>(IgnorePlayer, player => player != null);
             Commands.CopyToClipboardCommand = new RelayCommand<ClipboardCopyType>(o=>CopyToClipboard(o, null));
@@ -341,11 +350,6 @@ namespace KingsDamageMeter
         {
             switch (e.PropertyName)
             {
-                case "IsGroupOnly":
-                case "IsHideOthers":
-                    //SetFilter();
-                    //UpdatePercents();
-                    break;
                 case "SelectedLogLanguage":
                     _LogParser.Initialize();
                     break;
@@ -385,7 +389,7 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdateReceivedDamage(e.Target, e.Damage);
+                UpdateReceivedDamage(e.Target, e.Damage, e.Name);
             }
         }
 
@@ -540,9 +544,54 @@ namespace KingsDamageMeter
         /// <param name="damage">The total damage the player has dealt</param>
         public void UpdatePlayerDamage(string name, string target, int damage, string skill)
         {
-            if (Settings.Default.IgnoreList.Contains(name))
+            if(!IsValidPlayer(name))
             {
                 return;
+            }
+
+            StartEncounterIfNeeded(target);
+
+            if(LastEncounter != null)
+            {
+                bool isGroupMember = name == Settings.Default.YouAlias ||
+                                     GroupMembers.Contains(name) ||
+                                     Settings.Default.FriendList.Contains(name);
+                LastEncounter.UpdatePlayerDamage(name, damage, skill, isGroupMember);
+            }
+
+            lastDamageInflictedTime = DateTime.Now;
+            expGainedTimer.Stop();
+
+            timeoutTimer.Stop();
+            timeoutTimer.Start();
+        }
+
+        private void UpdateReceivedDamage(string name, int damage, string from)
+        {
+            if (!IsValidPlayer(name))
+            {
+                return;
+            }
+
+            StartEncounterIfNeeded(from);
+
+            if (LastEncounter != null)
+            {
+                LastEncounter.UpdatePlayerReceivedDamage(name, damage);
+            }
+
+            lastDamageInflictedTime = DateTime.Now;
+            expGainedTimer.Stop();
+
+            timeoutTimer.Stop();
+            timeoutTimer.Start();
+        }
+
+        private bool IsValidPlayer(string name)
+        {
+            if (Settings.Default.IgnoreList.Contains(name))
+            {
+                return false;
             }
 
             bool isGroupMember = name == Settings.Default.YouAlias ||
@@ -550,16 +599,20 @@ namespace KingsDamageMeter
                                  Settings.Default.FriendList.Contains(name);
             if (Settings.Default.IsHideOthers && name != Settings.Default.YouAlias)
             {
-                return;
+                return false;
             }
             if (Settings.Default.IsGroupOnly && !isGroupMember)
             {
-                return;
+                return false;
             }
+            return true;
+        }
 
+        private void StartEncounterIfNeeded(string encounterName)
+        {
             if (LastRegion == null || LastRegion.Name != CurrentRegionName)
             {
-                LastRegion = new Region {Name = CurrentRegionName, IsExpanded = true};
+                LastRegion = new Region { Name = CurrentRegionName, IsExpanded = true };
                 Regions.Add(LastRegion);
             }
             var lastEncounter = LastEncounter;
@@ -568,9 +621,9 @@ namespace KingsDamageMeter
                 LastEncounter = new Encounter(LastRegion);
                 timeoutTimer.Start();
 
-                if (!string.IsNullOrEmpty(target))
+                if (!string.IsNullOrEmpty(encounterName))
                 {
-                    LastEncounter.Name = target;
+                    LastEncounter.Name = encounterName;
                 }
                 else
                 {
@@ -582,18 +635,10 @@ namespace KingsDamageMeter
             {
                 SelectedEncounter = LastEncounter;
             }
-            LastEncounter.UpdatePlayerDamage(name, damage, skill, isGroupMember);
-
-            lastDamageInflictedTime = DateTime.Now;
-            expGainedTimer.Stop();
-
-            timeoutTimer.Stop();
-            timeoutTimer.Start();
-        }
-
-        private void UpdateReceivedDamage(string name, int damage)
-        {
-            // Need to update damage taken.
+            if (LastEncounter.Name == "Unknown" && encounterName != "Unknown")
+            {
+                LastEncounter.Name = encounterName;
+            }
         }
 
         private void EndEncounter(object sender, ElapsedEventArgs e)

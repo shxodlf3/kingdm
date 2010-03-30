@@ -127,7 +127,7 @@
     <value>пиковый</value>
   </data>
   <data name="PlayerToolTipTaken" xml:space="preserve">
-    <value>taken</value>
+    <value>повреждений получено</value>
   </data>
   <data name="PlayerToolTipTotal" xml:space="preserve">
     <value>всего</value>

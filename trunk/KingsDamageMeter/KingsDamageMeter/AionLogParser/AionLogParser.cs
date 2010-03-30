@@ -172,6 +172,10 @@ namespace KingsDamageMeter
             _YouSpentKinahRegex = new Regex(_TimestampRegex + Localization.Regex.YouSpentKinahRegex, RegexOptions.Compiled);
             _YouGainedApRegex = new Regex(_TimestampRegex + Localization.Regex.YouGainedApRegex, RegexOptions.Compiled);
             _YouHaveJoinedChannelRegex = new Regex(_TimestampRegex + Localization.Regex.YouHaveJoinedChannelRegex, RegexOptions.Compiled);
+
+            //string str = "Канибал использует: Стремительный удар V. Вулкан Панука получает 1 216 ед. урона.";
+            //var regex = new Regex("(?<name>.+) использует: (?<skill>.+)\\. (?<target>.+) получает (?<damage>[^a-zA-Z]+) ед\\. урона\\.", RegexOptions.Compiled);
+            //var result = regex.Match(str);
         }
 
         /// <summary>

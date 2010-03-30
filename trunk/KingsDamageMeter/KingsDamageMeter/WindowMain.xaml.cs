@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.ComponentModel;
 using System.Windows.Controls;
@@ -95,7 +96,7 @@ namespace KingsDamageMeter
         {
             WindowMainData data = (WindowMainData)DataContext;
 
-            if (data.Regions.Count > 0)
+            if (data.Regions.Where(o=>!(o is AllEncounters)).Count() > 0)
             {
                 string message = Localization.WindowMainRes.ConfirmCloseMessage;
                 string caption = Localization.WindowMainRes.ConfirmCloseCaption;

@@ -14,7 +14,20 @@ namespace KingsDamageMeter.Controls
 {
     public class Encounter : NotifyPropertyChangedBase, IEncounter
     {
-        public string Name { get; set; }
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if(name != value)
+                {
+                    name = value;
+                    NotifyPropertyChanged("Name");
+                }
+            }
+        }
+
         public ICollection<Player> Players { get; private set; }
 
         public Region Parent { get; private set; }
@@ -221,6 +234,20 @@ namespace KingsDamageMeter.Controls
         {
             IsEnded = true;
             Time = (encounterEndTime - startEncounterTime).TotalSeconds;
+        }
+
+        public void UpdatePlayerReceivedDamage(string name, int damage)
+        {
+            if (!PlayerExists(name))
+            {
+                AddPlayer(name, false);
+            }
+
+            var player = Players.FirstOrDefault(o => o.PlayerName == name);
+            if (player != null)
+            {
+                player.DamageTaken += damage;
+            }
         }
     }
 }

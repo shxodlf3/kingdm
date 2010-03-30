@@ -47,5 +47,58 @@ namespace KingsDamageMeter.Helpers
             }
         }
 
+        public static ICollection<Player> CalculatePlayersData(IEnumerable<Encounter> encounters)
+        {
+            var players = new Dictionary<string, Player>();
+            double totalTime = 0;
+            foreach (var encounter in encounters)
+            {
+                totalTime += encounter.Time;
+                foreach (var player in encounter.Players)
+                {
+                    Player findedPlayer;
+                    if (!players.TryGetValue(player.PlayerName, out findedPlayer))
+                    {
+                        findedPlayer = new Player
+                        {
+                            PlayerName = player.PlayerName,
+                            PlayerClass = player.PlayerClass,
+                            IsGroupMember = player.IsGroupMember,
+                            IsFriend = player.IsFriend,
+                        };
+                        players.Add(player.PlayerName, findedPlayer);
+                    }
+                    //Save BiggestHit, because increment damage will increment biggest hit
+                    int biggestHit = findedPlayer.BiggestHit;
+
+                    findedPlayer.Damage += player.Damage;
+                    findedPlayer.DamageTaken += player.DamageTaken;
+                    foreach (var skill in player.Skills)
+                    {
+                        findedPlayer.Skills.Incriment(skill);
+                    }
+
+
+                    //Restore currect biggest hit
+                    if (player.BiggestHit > biggestHit)
+                    {
+                        findedPlayer.BiggestHit = player.BiggestHit;
+                    }
+                    else
+                    {
+                        findedPlayer.BiggestHit = biggestHit;
+                    }
+                }
+            }
+
+            CalculateTopDamagePercents(players.Values);
+            CalculateGroupDamagePercents(players.Values);
+            if (totalTime > 0)
+            {
+                CalculateDps(players.Values, totalTime);
+            }
+
+            return players.Values;
+        }
     }
 }

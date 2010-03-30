@@ -66,6 +66,15 @@
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipDps}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
+                <StackPanel.Style>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding DamageTaken}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
                 <TextBlock Text="{Binding DamageTaken, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Damage}}"/>
                 <TextBlock Text=" "/>
                 <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipTaken}"/>
