@@ -151,6 +151,15 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (?&lt;target&gt;.+) became poisoned because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\..
+        /// </summary>
+        internal static string OtherPoisonEffectRegex {
+            get {
+                return ResourceManager.GetString("OtherPoisonEffectRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (?&lt;name&gt;.+) received (?&lt;damage&gt;[^a-zA-Z]+) bleeding damage after you used (?&lt;skill&gt;.+)\..
         /// </summary>
         internal static string OtherReceivedBleedRegex {

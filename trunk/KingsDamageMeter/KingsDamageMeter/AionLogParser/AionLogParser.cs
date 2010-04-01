@@ -77,6 +77,7 @@ namespace KingsDamageMeter
         private Regex _YouHaveJoinedChannelRegex;
         private Regex _YouReceivedSkillRegex;
         private Regex _OtherDelayedRegex;
+        private Regex _OtherPoisonEffectRegex;
 
         public event KinahEventHandler KinahEarned;
         public event KinahEventHandler KinahSpent;
@@ -135,6 +136,7 @@ namespace KingsDamageMeter
             _YouHaveJoinedChannelRegex = new Regex(_TimestampRegex + Localization.Regex.YouHaveJoinedChannelRegex, RegexOptions.Compiled);
             _YouReceivedSkillRegex = new Regex(_TimestampRegex + Localization.Regex.YouReceivedSkillRegex, RegexOptions.Compiled);
             _OtherDelayedRegex = new Regex(_TimestampRegex + Localization.Regex.OtherDelayedRegex, RegexOptions.Compiled);
+            _OtherPoisonEffectRegex = new Regex(_TimestampRegex + Localization.Regex.OtherPoisonEffectRegex, RegexOptions.Compiled);
 
             //string str = "Канибал использует: Стремительный удар V. Вулкан Панука получает 1 216 ед. урона.";
             //var regex = new Regex("(?<name>.+) использует: (?<skill>.+)\\. (?<target>.+) получает (?<damage>[^a-zA-Z]+) ед\\. урона\\.", RegexOptions.Compiled);
@@ -227,11 +229,17 @@ namespace KingsDamageMeter
                     int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
                     string target = matches[0].Groups[_TargetGroupName].Value;
                     string effect = matches[0].Groups[_EffectGroupName].Value;
+                    string name = You;
+
+                    if (_Effects.ContainsKey(effect))
+                    {
+                        name = _Effects[effect];
+                    }
 
                     if (PlayerInflictedSkillDamage != null)
                     {
                         PlayerInflictedSkillDamage(this,
-                                             new SkillDamageEventArgs(time, You, target, damage,
+                                             new SkillDamageEventArgs(time, name, target, damage,
                                                                             effect));
                     }
 
@@ -253,7 +261,6 @@ namespace KingsDamageMeter
                             _Effects[effect] = You;
                         }
                     }
-
                     else
                     {
                         _Effects.Add(effect, You);
@@ -361,7 +368,6 @@ namespace KingsDamageMeter
                             _Pets[pet] = You;
                         }
                     }
-
                     else
                     {
                         _Pets.Add(pet, You);
@@ -387,7 +393,6 @@ namespace KingsDamageMeter
                             _Pets[pet] = You;
                         }
                     }
-
                     else
                     {
                         _Pets.Add(pet, You);
@@ -424,7 +429,6 @@ namespace KingsDamageMeter
                             }
                         }
                     }
-
                     else
                     {
                         if (PlayerInflictedSkillDamage != null)
@@ -464,7 +468,6 @@ namespace KingsDamageMeter
                             }
                         }
                     }
-
                     else
                     {
                         if (PlayerInflictedDamage != null)
@@ -529,7 +532,6 @@ namespace KingsDamageMeter
                                 }
                             }
                         }
-
                         else
                         {
                             if (PlayerInflictedSkillDamage != null)
@@ -589,7 +591,6 @@ namespace KingsDamageMeter
                                 }
                             }
                         }
-
                         else
                         {
                             if (PlayerInflictedSkillDamage != null)
@@ -620,7 +621,6 @@ namespace KingsDamageMeter
                             _Dots[skill] = name;
                         }
                     }
-
                     else
                     {
                         _Dots.Add(skill, name);
@@ -628,6 +628,31 @@ namespace KingsDamageMeter
 
                     matched = true;
                     regex = "_OtherContinuousRegex";
+                    return;
+                }
+
+                matches = _OtherPoisonEffectRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+
+                    if (_Dots.ContainsKey(skill))
+                    {
+                        if (_Effects[skill] != name)
+                        {
+                            _Effects[skill] = name;
+                        }
+                    }
+                    else
+                    {
+                        _Effects.Add(skill, name);
+                    }
+
+                    matched = true;
+                    regex = "_OtherPoisonEffectRegex";
                     return;
                 }
 
@@ -646,7 +671,6 @@ namespace KingsDamageMeter
                             _Dots[skill] = name;
                         }
                     }
-
                     else
                     {
                         _Dots.Add(skill, name);
@@ -672,7 +696,6 @@ namespace KingsDamageMeter
                             _Dots[skill] = name;
                         }
                     }
-
                     else
                     {
                         _Dots.Add(skill, name);
@@ -699,7 +722,6 @@ namespace KingsDamageMeter
                             _Pets[pet] = name;
                         }
                     }
-
                     else
                     {
                         _Pets.Add(pet, name);
@@ -725,7 +747,6 @@ namespace KingsDamageMeter
                             _Pets[pet] = name;
                         }
                     }
-
                     else
                     {
                         _Pets.Add(pet, name);
