@@ -56,9 +56,9 @@ namespace KingsDamageMeter
                 f.Exception = exception;
                 f.ShowDialog();
             }
-
             finally
             {
+                NotifyIcon.Hide();
                 Application.Current.Shutdown();
             }
         }

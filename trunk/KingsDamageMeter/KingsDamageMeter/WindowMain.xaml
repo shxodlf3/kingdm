@@ -25,7 +25,7 @@
         MouseUp="Window_MouseUp" 
         Closing="Window_Closing" 
         Background="Transparent"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded" StateChanged="Window_StateChanged">
     <Window.Resources>
         <LinearGradientBrush x:Key="BorderBrush" StartPoint="0,0.5" EndPoint="1,0.5">
             <GradientStop Color="#CCC" Offset="0.4" />

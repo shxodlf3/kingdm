@@ -27,6 +27,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Threading;
 using KingsDamageMeter.Controls;
 using KingsDamageMeter.Converters;
 using KingsDamageMeter.Enums;
@@ -59,6 +60,9 @@ namespace KingsDamageMeter
             }
 
             Settings.Default.PropertyChanged += OnSettingsChanged;
+            NotifyIcon.Clicked += OnNotifyIconClicked;
+            NotifyIcon.ShowHideClicked += OnNotifyShowHideClicked;
+            NotifyIcon.CloseClicked += OnNotifyCloseClicked;
         }
 
         private bool _Dragging;
@@ -370,6 +374,47 @@ namespace KingsDamageMeter
         {
             ((TreeViewItem) sender).IsSelected = true;
             e.Handled = true;
+        }
+
+        private void OnNotifyIconClicked(object sender, EventArgs e)
+        {
+            ToggleVisibility();
+        }
+
+        private void ToggleVisibility()
+        {
+            if (Visibility == Visibility.Hidden)
+            {
+                Visibility = Visibility.Visible;
+                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
+                    new Action(delegate()
+                    {
+                        WindowState = WindowState.Normal;
+                    })
+                );
+            }
+            else
+            {
+                Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void OnNotifyShowHideClicked(object sender, EventArgs e)
+        {
+            ToggleVisibility();
+        }
+
+        private void OnNotifyCloseClicked(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
