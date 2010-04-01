@@ -79,7 +79,7 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All.
+        ///   Looks up a localized string similar to Encounters.
         /// </summary>
         internal static string AllEncounterName {
             get {
