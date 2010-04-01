@@ -160,10 +160,10 @@
     <value>Kinah</value>
   </data>
   <data name="KinahSpentToolTip" xml:space="preserve">
-    <value>Gastar :</value>
+    <value>Gastar:</value>
   </data>
   <data name="LanguageMenuHeader" xml:space="preserve">
-    <value>Lenguaje</value>
+    <value>Lenguaje Vista</value>
   </data>
   <data name="LocateLogMenuHeader" xml:space="preserve">
     <value>Encontrar Chat.log</value>
@@ -175,7 +175,7 @@
     <value>Reducir</value>
   </data>
   <data name="NameTakenMessage" xml:space="preserve">
-    <value>A player with this name already exists.</value>
+    <value>Este nombre existe ya.</value>
   </data>
   <data name="OpacitySliderToolTip" xml:space="preserve">
     <value>Opaco</value>
@@ -217,21 +217,21 @@
     <value>De encima</value>
   </data>
   <data name="LogLanguageMenuHeader" xml:space="preserve">
-    <value>XXXXXXX</value>
+    <value>Lengua del fichero de diario</value>
   </data>
   <data name="RemoveAllEncountersMenuHeader" xml:space="preserve">
-    <value>XXXX</value>
+    <value>Quite Todos</value>
   </data>
   <data name="RemoveEncounterMenuHeader" xml:space="preserve">
-    <value>XXXX</value>
+    <value>Quitar</value>
   </data>
   <data name="ResetAllMenuHeader" xml:space="preserve">
-    <value>XXXX</value>
+    <value>Comenzar Todos</value>
   </data>
   <data name="ResetMenuHeader" xml:space="preserve">
-    <value>XXXX</value>
+    <value>A Empezar</value>
   </data>
   <data name="AllEncounterName" xml:space="preserve">
-    <value>XXXX</value>
+    <value>Todo</value>
   </data>
 </root>
