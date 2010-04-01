@@ -75,6 +75,7 @@ namespace KingsDamageMeter
         private Regex _YouSpentKinahRegex;
         private Regex _YouGainedApRegex;
         private Regex _YouHaveJoinedChannelRegex;
+        private Regex _YouReceivedSkillRegex;
 
         public event KinahEventHandler KinahEarned;
         public event KinahEventHandler KinahSpent;
@@ -131,6 +132,7 @@ namespace KingsDamageMeter
             _YouSpentKinahRegex = new Regex(_TimestampRegex + Localization.Regex.YouSpentKinahRegex, RegexOptions.Compiled);
             _YouGainedApRegex = new Regex(_TimestampRegex + Localization.Regex.YouGainedApRegex, RegexOptions.Compiled);
             _YouHaveJoinedChannelRegex = new Regex(_TimestampRegex + Localization.Regex.YouHaveJoinedChannelRegex, RegexOptions.Compiled);
+            _YouReceivedSkillRegex = new Regex(_TimestampRegex + Localization.Regex.YouReceivedSkillRegex, RegexOptions.Compiled);
 
             //string str = "Канибал использует: Стремительный удар V. Вулкан Панука получает 1 216 ед. урона.";
             //var regex = new Regex("(?<name>.+) использует: (?<skill>.+)\\. (?<target>.+) получает (?<damage>[^a-zA-Z]+) ед\\. урона\\.", RegexOptions.Compiled);
@@ -274,6 +276,23 @@ namespace KingsDamageMeter
 
                     matched = true;
                     regex = "_YouReceivedRegex";
+                    return;
+                }
+
+                matches = _YouReceivedSkillRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+
+                    if (PlayerReceivedDamage != null)
+                    {
+                        PlayerReceivedDamage(this, new DamageEventArgs(time, target, You, damage));
+                    }
+
+                    matched = true;
+                    regex = "_YouReceivedSkillRegex";
                     return;
                 }
 

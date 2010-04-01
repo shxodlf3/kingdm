@@ -198,6 +198,9 @@
   <data name="YouReceivedRegex" xml:space="preserve">
     <value>You received (?&lt;damage&gt;[^a-zA-Z]+) damage from (?&lt;target&gt;.+)\.</value>
   </data>
+  <data name="YouReceivedSkillRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) has inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage on you by using (?&lt;skill&gt;.+)\.</value>
+  </data>
   <data name="YouSpentKinahRegex" xml:space="preserve">
     <value>You spent (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\.</value>
   </data>
