@@ -17,6 +17,7 @@
  * 
 \**************************************************************************/
 
+using System;
 using System.Collections.Generic;
 using KingsDamageMeter.Localization;
 
@@ -50,20 +51,25 @@ namespace KingsDamageMeter
         {
             foreach(string skill in skills)
             {
-                _Skills.Add(skill, classType);
+                if (!_Skills.ContainsKey(skill))
+                {
+                    string s = skill.Trim();
+                    _Skills.Add(s, classType);
+                }
             }
         }
 
         private static void PopulateDictionary()
         {
-            PopulateFromArray(SkillLists.Cleric.Split(','), ClassType.Cleric);
-            PopulateFromArray(SkillLists.Chanter.Split(','), ClassType.Chanter);
-            PopulateFromArray(SkillLists.Assassin.Split(','), ClassType.Assassin);
-            PopulateFromArray(SkillLists.Ranger.Split(','), ClassType.Ranger);
-            PopulateFromArray(SkillLists.Templar.Split(','), ClassType.Templar);
-            PopulateFromArray(SkillLists.Gladiator.Split(','), ClassType.Gladiator);
-            PopulateFromArray(SkillLists.Sorcerer.Split(','), ClassType.Sorcerer);
-            PopulateFromArray(SkillLists.Spiritmaster.Split(','), ClassType.Spiritmaster);
+            char[] sep = new char[] { ',' };
+            PopulateFromArray(SkillLists.Cleric.Split(sep, StringSplitOptions.RemoveEmptyEntries), ClassType.Cleric);
+            PopulateFromArray(SkillLists.Chanter.Split(sep, StringSplitOptions.RemoveEmptyEntries), ClassType.Chanter);
+            PopulateFromArray(SkillLists.Assassin.Split(sep, StringSplitOptions.RemoveEmptyEntries), ClassType.Assassin);
+            PopulateFromArray(SkillLists.Ranger.Split(sep, StringSplitOptions.RemoveEmptyEntries), ClassType.Ranger);
+            PopulateFromArray(SkillLists.Templar.Split(sep, StringSplitOptions.RemoveEmptyEntries), ClassType.Templar);
+            PopulateFromArray(SkillLists.Gladiator.Split(sep, StringSplitOptions.RemoveEmptyEntries), ClassType.Gladiator);
+            PopulateFromArray(SkillLists.Sorcerer.Split(sep, StringSplitOptions.RemoveEmptyEntries), ClassType.Sorcerer);
+            PopulateFromArray(SkillLists.Spiritmaster.Split(sep, StringSplitOptions.RemoveEmptyEntries), ClassType.Spiritmaster);
         }
     }
 }

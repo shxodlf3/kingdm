@@ -291,7 +291,6 @@ namespace KingsDamageMeter
                             _Dots[skill] = You;
                         }
                     }
-
                     else
                     {
                         _Dots.Add(skill, You);
@@ -316,7 +315,6 @@ namespace KingsDamageMeter
                             _Dots[skill] = You;
                         }
                     }
-
                     else
                     {
                         _Dots.Add(skill, You);
