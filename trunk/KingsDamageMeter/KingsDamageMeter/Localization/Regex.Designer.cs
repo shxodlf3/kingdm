@@ -115,6 +115,15 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (?&lt;target&gt;.+) received the delayed explosion effect because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\..
+        /// </summary>
+        internal static string OtherDelayedRegex {
+            get {
+                return ResourceManager.GetString("OtherDelayedRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (?&lt;target&gt;.+) is bleeding because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\..
         /// </summary>
         internal static string OtherInflictedBleedRegex {

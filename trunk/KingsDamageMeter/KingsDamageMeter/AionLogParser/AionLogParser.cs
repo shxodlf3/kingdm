@@ -76,6 +76,7 @@ namespace KingsDamageMeter
         private Regex _YouGainedApRegex;
         private Regex _YouHaveJoinedChannelRegex;
         private Regex _YouReceivedSkillRegex;
+        private Regex _OtherDelayedRegex;
 
         public event KinahEventHandler KinahEarned;
         public event KinahEventHandler KinahSpent;
@@ -133,6 +134,7 @@ namespace KingsDamageMeter
             _YouGainedApRegex = new Regex(_TimestampRegex + Localization.Regex.YouGainedApRegex, RegexOptions.Compiled);
             _YouHaveJoinedChannelRegex = new Regex(_TimestampRegex + Localization.Regex.YouHaveJoinedChannelRegex, RegexOptions.Compiled);
             _YouReceivedSkillRegex = new Regex(_TimestampRegex + Localization.Regex.YouReceivedSkillRegex, RegexOptions.Compiled);
+            _OtherDelayedRegex = new Regex(_TimestampRegex + Localization.Regex.OtherDelayedRegex, RegexOptions.Compiled);
 
             //string str = "Канибал использует: Стремительный удар V. Вулкан Панука получает 1 216 ед. урона.";
             //var regex = new Regex("(?<name>.+) использует: (?<skill>.+)\\. (?<target>.+) получает (?<damage>[^a-zA-Z]+) ед\\. урона\\.", RegexOptions.Compiled);
@@ -626,6 +628,32 @@ namespace KingsDamageMeter
 
                     matched = true;
                     regex = "_OtherContinuousRegex";
+                    return;
+                }
+
+                matches = _OtherDelayedRegex.Matches(line);
+                if (matches.Count > 0)
+                {
+                    DateTime time = matches[0].Groups[_TimeGroupName].Value.GetTime(_TimeFormat);
+                    string name = matches[0].Groups[_NameGroupName].Value;
+                    string skill = matches[0].Groups[_SkillGroupName].Value;
+                    string target = matches[0].Groups[_TargetGroupName].Value;
+
+                    if (_Dots.ContainsKey(skill))
+                    {
+                        if (_Dots[skill] != name)
+                        {
+                            _Dots[skill] = name;
+                        }
+                    }
+
+                    else
+                    {
+                        _Dots.Add(skill, name);
+                    }
+
+                    matched = true;
+                    regex = "_OtherDelayedRegex";
                     return;
                 }
 

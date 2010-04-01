@@ -135,6 +135,9 @@
   <data name="OtherContinuousRegex" xml:space="preserve">
     <value>(?&lt;name&gt;.+) used (?&lt;skill&gt;.+) to inflict the continuous damage effect on (?&lt;target&gt;.+)\.</value>
   </data>
+  <data name="OtherDelayedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) received the delayed explosion effect because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\.</value>
+  </data>
   <data name="OtherInflictedBleedRegex" xml:space="preserve">
     <value>(?&lt;target&gt;.+) is bleeding because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\.</value>
   </data>
