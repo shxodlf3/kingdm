@@ -18,61 +18,21 @@
 \**************************************************************************/
 
 using System;
-using System.ComponentModel;
-using System.Configuration;
-using System.IO;
-using System.Threading;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+
 using KingsDamageMeter.Properties;
 
 namespace KingsDamageMeter
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class AionLogParser : IAionLogParser
+    public class AionLogParser : LogReader
     {
-        public AionLogParser()
-        {
-            Initialize();
-            _OldYouAlias = Settings.Default.YouAlias;
-            Settings.Default.PropertyChanged += SettingsChanged;
-        }
-
-        private void SettingsChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "YouAlias")
-            {
-                //Here we change name of old YouAlias
-                foreach (var pet in _Pets)
-                {
-                    if (pet.Value == _OldYouAlias)
-                    {
-                        _Pets[pet.Key] = Settings.Default.YouAlias;
-                        _OldYouAlias = Settings.Default.YouAlias;
-                        break;
-                    }
-                }
-            }
-        }
-
-        private bool _Running = false;
-        private FileStream _FileStream;
-        private StreamReader _StreamReader;
-
-        private string _TimeFormat = KingsDamageMeter.Properties.Settings.Default.LogTimeFormat;
+        public const string You = "YOU";
+        private string _TimeFormat = Settings.Default.LogTimeFormat;
 
         private Dictionary<string, string> _Dots = new Dictionary<string, string>();
         private Dictionary<string, string> _Pets = new Dictionary<string, string>();
         private Dictionary<string, string> _Effects = new Dictionary<string, string>();
-
-        private Thread _Worker;
-        private object _LockObject = new object();
-
-        private string _OldYouAlias;
-
-        private string _LogPath = String.Empty;
 
         private string _NameGroupName = "name";
         private string _DamageGroupName = "damage";
@@ -116,13 +76,6 @@ namespace KingsDamageMeter
         private Regex _YouGainedApRegex;
         private Regex _YouHaveJoinedChannelRegex;
 
-        public event EventHandler Starting;
-        public event EventHandler Started;
-        public event EventHandler Stopping;
-        public event EventHandler Stopped;
-
-        public event EventHandler FileNotFound;
-
         public event KinahEventHandler KinahEarned;
         public event KinahEventHandler KinahSpent;
         public event AbyssPointsEventHandler AbyssPointsGained;
@@ -141,7 +94,13 @@ namespace KingsDamageMeter
         public event HealEventHandler PlayerHealed;
         public event HealOtherEventHandler PlayerHealedOther;
 
-        public void Initialize()
+        public AionLogParser()
+        {
+            InitializeRegexes();
+            DataRead += OnDataRead;
+        }
+
+        public void InitializeRegexes()
         {
             _TimestampRegex = Localization.Regex.TimestampRegex;
             _ChatRegex = new Regex(Localization.Regex.Chat, RegexOptions.Compiled);
@@ -178,180 +137,9 @@ namespace KingsDamageMeter
             //var result = regex.Match(str);
         }
 
-        /// <summary>
-        /// Gets the running status of the parser.
-        /// </summary>
-        public bool Running
+        private void OnDataRead(object sender, ReadEventArgs e)
         {
-            get
-            {
-                return _Running;
-            }
-        }
-
-        /// <summary>
-        /// Start the parser.
-        /// </summary>
-        public void Start(string file)
-        {
-            if (_Running)
-            {
-                return;
-            }
-
-            if (Starting != null)
-            {
-                Starting(this, EventArgs.Empty);
-            }
-
-            if ((_FileStream = OpenFileStream(file)) != null)
-            {
-                _Running = true;
-                _FileStream.Position = _FileStream.Length;
-                _StreamReader = GetStreamReader(_FileStream);
-                StartWorker();
-
-                if (Started != null)
-                {
-                    Started(this, EventArgs.Empty);
-                }
-            }
-            else
-            {
-                if (Stopped != null)
-                {
-                    Stopped(this, EventArgs.Empty);
-                }
-            }
-
-            DebugLogger.Write("Log parser initialized: \"" + _LogPath + "\"");
-        }
-
-        /// <summary>
-        /// Stop the parser.
-        /// </summary>
-        public void Stop()
-        {
-            if (!_Running)
-            {
-                return;
-            }
-
-            else
-            {
-                _Running = false;
-            }
-
-            if (Stopping != null)
-            {
-                Stopping(this, EventArgs.Empty);
-            }
-
-            // Working out how to avoid Abort()
-            if (_Worker != null)
-            {
-                _Worker.Abort();
-                _Worker = null;
-            }
-
-            if (_StreamReader != null)
-            {
-                _StreamReader.Close();
-                _StreamReader = null;
-            }
-
-            if (_FileStream != null)
-            {
-                _FileStream.Close();
-                _FileStream = null;
-            }
-
-            if (Stopped != null)
-            {
-                Stopped(this, EventArgs.Empty);
-            }
-
-            DebugLogger.Write("Log parser stopped.");
-        }
-
-        /// <summary>
-        /// Open a System.IO.FileStream for the specified file with the FileMode Open, FileAccess Read and FileShare ReadWrite
-        /// </summary>
-        /// <param name="file">The file.</param>
-        /// <returns></returns>
-        private FileStream OpenFileStream(string file)
-        {
-            FileStream stream = null;
-            _LogPath = file;
-
-            try
-            {
-                stream = File.Open(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            }
-
-            catch (Exception e)
-            {
-                if (e is FileNotFoundException)
-                {
-                    if (FileNotFound != null)
-                    {
-                        FileNotFound(this, EventArgs.Empty);
-                    }
-                }
-
-                DebugLogger.Write("Error opening Chat.Log: " + Environment.NewLine + e.Message);
-            }
-
-            return stream;
-        }
-
-        /// <summary>
-        /// Initialize a new instance of System.IO.StreamReader for the specified stream.
-        /// </summary>
-        /// <param name="stream">The file stream.</param>
-        /// <returns></returns>
-        private StreamReader GetStreamReader(FileStream stream)
-        {
-            if (stream != null)
-            {
-                return new StreamReader(stream, System.Text.Encoding.Default);
-            }
-
-            else
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Start the parser's worker thread.
-        /// </summary>
-        private void StartWorker()
-        {
-            _Worker = new Thread
-            (
-                delegate()
-                {
-                    lock (_LockObject)
-                    {
-                        while (_Running)
-                        {
-                            string line = _StreamReader.ReadLine();
-
-                            if (!String.IsNullOrEmpty(line))
-                            {
-                                ParseLine(line);
-                            }
-
-                            // Oops yah, it was eating up cpu without this.
-                            Thread.Sleep(1);
-                        }
-                    }
-                }
-            );
-
-            _Worker.IsBackground = true;
-            _Worker.Start();
+            ParseLine(e.Data);
         }
 
         private void ParseLine(string line)
@@ -385,7 +173,7 @@ namespace KingsDamageMeter
                     if (PlayerInflictedSkillDamage != null)
                     {
                         PlayerInflictedSkillDamage(this,
-                                             new SkillDamageEventArgs(time, Settings.Default.YouAlias, target, damage,
+                                             new SkillDamageEventArgs(time, You, target, damage,
                                                                             skill));
                     }
 
@@ -403,7 +191,7 @@ namespace KingsDamageMeter
 
                     if (PlayerInflictedDamage != null)
                     {
-                        PlayerInflictedDamage(this, new DamageEventArgs(time, Settings.Default.YouAlias, target, damage));
+                        PlayerInflictedDamage(this, new DamageEventArgs(time, You, target, damage));
                     }
 
                     matched = true;
@@ -420,7 +208,7 @@ namespace KingsDamageMeter
 
                     if (PlayerInflictedCriticalDamage != null)
                     {
-                        PlayerInflictedCriticalDamage(this, new DamageEventArgs(time, Settings.Default.YouAlias, target, damage));
+                        PlayerInflictedCriticalDamage(this, new DamageEventArgs(time, You, target, damage));
                     }
 
                     matched = true;
@@ -439,7 +227,7 @@ namespace KingsDamageMeter
                     if (PlayerInflictedSkillDamage != null)
                     {
                         PlayerInflictedSkillDamage(this,
-                                             new SkillDamageEventArgs(time, Settings.Default.YouAlias, target, damage,
+                                             new SkillDamageEventArgs(time, You, target, damage,
                                                                             effect));
                     }
 
@@ -456,15 +244,15 @@ namespace KingsDamageMeter
 
                     if (_Effects.ContainsKey(effect))
                     {
-                        if (_Effects[effect] != Settings.Default.YouAlias)
+                        if (_Effects[effect] != You)
                         {
-                            _Effects[effect] = Settings.Default.YouAlias;
+                            _Effects[effect] = You;
                         }
                     }
 
                     else
                     {
-                        _Effects.Add(effect, Settings.Default.YouAlias);
+                        _Effects.Add(effect, You);
                     }
 
                     matched = true;
@@ -481,7 +269,7 @@ namespace KingsDamageMeter
 
                     if (PlayerReceivedDamage != null)
                     {
-                        PlayerReceivedDamage(this, new DamageEventArgs(time, target, Settings.Default.YouAlias, damage));
+                        PlayerReceivedDamage(this, new DamageEventArgs(time, target, You, damage));
                     }
 
                     matched = true;
@@ -498,15 +286,15 @@ namespace KingsDamageMeter
 
                     if (_Dots.ContainsKey(skill))
                     {
-                        if (_Dots[skill] != Settings.Default.YouAlias)
+                        if (_Dots[skill] != You)
                         {
-                            _Dots[skill] = Settings.Default.YouAlias;
+                            _Dots[skill] = You;
                         }
                     }
 
                     else
                     {
-                        _Dots.Add(skill, Settings.Default.YouAlias);
+                        _Dots.Add(skill, You);
                     }
 
                     matched = true;
@@ -523,15 +311,15 @@ namespace KingsDamageMeter
 
                     if (_Dots.ContainsKey(skill))
                     {
-                        if (_Dots[skill] != Settings.Default.YouAlias)
+                        if (_Dots[skill] != You)
                         {
-                            _Dots[skill] = Settings.Default.YouAlias;
+                            _Dots[skill] = You;
                         }
                     }
 
                     else
                     {
-                        _Dots.Add(skill, Settings.Default.YouAlias);
+                        _Dots.Add(skill, You);
                     }
 
                     matched = true;
@@ -549,15 +337,15 @@ namespace KingsDamageMeter
 
                     if (_Pets.ContainsKey(pet))
                     {
-                        if (_Pets[pet] != Settings.Default.YouAlias)
+                        if (_Pets[pet] != You)
                         {
-                            _Pets[pet] = Settings.Default.YouAlias;
+                            _Pets[pet] = You;
                         }
                     }
 
                     else
                     {
-                        _Pets.Add(pet, Settings.Default.YouAlias);
+                        _Pets.Add(pet, You);
                     }
 
                     matched = true;
@@ -575,15 +363,15 @@ namespace KingsDamageMeter
 
                     if (_Pets.ContainsKey(pet))
                     {
-                        if (_Pets[pet] != Settings.Default.YouAlias)
+                        if (_Pets[pet] != You)
                         {
-                            _Pets[pet] = Settings.Default.YouAlias;
+                            _Pets[pet] = You;
                         }
                     }
 
                     else
                     {
-                        _Pets.Add(pet, Settings.Default.YouAlias);
+                        _Pets.Add(pet, You);
                     }
 
                     matched = true;

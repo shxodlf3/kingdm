@@ -163,6 +163,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AionLogParser\LogReader.cs" />
     <Compile Include="Controls\AllEncounters.cs" />
     <Compile Include="Controls\Encounter.cs" />
     <Compile Include="Controls\IEncounter.cs" />
@@ -197,7 +198,6 @@
     <Compile Include="AionLogParser\AionLogParser.cs" />
     <Compile Include="AionLogParser\Delegates.cs" />
     <Compile Include="AionLogParser\EventArgs.cs" />
-    <Compile Include="AionLogParser\IAionLogParser.cs" />
     <Compile Include="Controls\SkinButton.cs" />
     <Compile Include="Controls\PlayerControl.xaml.cs">
       <DependentUpon>PlayerControl.xaml</DependentUpon>

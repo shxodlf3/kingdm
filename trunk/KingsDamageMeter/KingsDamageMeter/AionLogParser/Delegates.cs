@@ -19,6 +19,7 @@
 
 namespace KingsDamageMeter
 {
+    public delegate void ReadEventHandler(object sender, ReadEventArgs e);
     public delegate void SessionEventHandler(object sender, LogEventArgs e);
     public delegate void DamageEventHandler(object sender, DamageEventArgs e);
     public delegate void SkillDamageEventHandler(object sender, SkillDamageEventArgs e);

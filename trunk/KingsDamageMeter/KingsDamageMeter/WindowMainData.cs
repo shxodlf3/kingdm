@@ -351,7 +351,7 @@ namespace KingsDamageMeter
             switch (e.PropertyName)
             {
                 case "SelectedLogLanguage":
-                    _LogParser.Initialize();
+                    _LogParser.InitializeRegexes();
                     break;
                 case "SelectedLanguage":
                     NotifyPropertyChanged("PowerButtonToolTip");
@@ -377,7 +377,7 @@ namespace KingsDamageMeter
             _LogParser.KinahSpent += OnKinahSpent;
             _LogParser.AbyssPointsGained += OnAbyssPointsGained;
             _LogParser.RegionChanged += OnJoinedRegionChannel;
-            _LogParser.Start(Settings.Default.AionLogPath);
+            _LogParser.Open(Settings.Default.AionLogPath);
         }
 
         private void OnReceivedDamage(object sender, DamageEventArgs e)
@@ -389,7 +389,8 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdateReceivedDamage(e.Target, e.Damage, e.Name);
+                string target = (e.Target == AionLogParser.You) ? Settings.Default.YouAlias : e.Target;
+                UpdateReceivedDamage(target, e.Damage, e.Name);
             }
         }
 
@@ -408,7 +409,8 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerDamage(e.Name, e.Target, e.Damage, Resources.WhiteDamageSkillName);
+                string name = (e.Name == AionLogParser.You) ? Settings.Default.YouAlias : e.Name;
+                UpdatePlayerDamage(name, e.Target, e.Damage, Resources.WhiteDamageSkillName);
             }
         }
 
@@ -421,7 +423,8 @@ namespace KingsDamageMeter
             }
             else
             {
-                UpdatePlayerDamage(e.Name, e.Target, e.Damage, e.Skill);
+                string name = (e.Name == AionLogParser.You) ? Settings.Default.YouAlias : e.Name;
+                UpdatePlayerDamage(name, e.Target, e.Damage, e.Skill);
             }
         }
 
@@ -523,9 +526,9 @@ namespace KingsDamageMeter
 
         public void ChangeLogFile(string fileName)
         {
-            _LogParser.Stop();
+            _LogParser.Close();
             Settings.Default.AionLogPath = fileName;
-            _LogParser.Start(Settings.Default.AionLogPath);
+            _LogParser.Open(Settings.Default.AionLogPath);
         }
 
         #endregion
@@ -534,7 +537,7 @@ namespace KingsDamageMeter
 
         public void OnClose()
         {
-            _LogParser.Stop();
+            _LogParser.Close();
         }
 
         /// <summary>
@@ -842,11 +845,11 @@ namespace KingsDamageMeter
         {
             if (_LogParser.Running)
             {
-                _LogParser.Stop();
+                _LogParser.Close();
             }
             else
             {
-                _LogParser.Start(Settings.Default.AionLogPath);
+                _LogParser.Open(Settings.Default.AionLogPath);
             }
             NotifyPropertyChanged("IsEnabled");
             NotifyPropertyChanged("PowerButtonToolTip");

@@ -21,6 +21,20 @@ using System;
 
 namespace KingsDamageMeter
 {
+    public class ReadEventArgs : EventArgs
+    {
+        public string Data
+        {
+            get;
+            private set;
+        }
+
+        public ReadEventArgs(string data)
+        {
+            Data = data;
+        }
+    }
+
     public class LogEventArgs : EventArgs
     {
         public DateTime Time
