@@ -338,7 +338,7 @@ namespace KingsDamageMeter
                                                                            encounter => encounter != null && !(encounter is AllEncounters));
             Commands.RemoveAllEncountersCommand = new ObjectRelayCommand(o => RemoveAllEncounters(),
                                                                          o => Regions.Where(x => !(x is AllEncounters)).Count() > 0);
-            Commands.RemovePlayerCommand = new RelayCommand<Player>(RemovePlayer, player => player != null && SelectedEncounter is Encounter);
+            Commands.RemovePlayerCommand = new RelayCommand<Player>(RemovePlayer, player => player != null);
             Commands.IgnorePlayerCommand = new RelayCommand<Player>(IgnorePlayer, player => player != null);
             Commands.CopyToClipboardCommand = new RelayCommand<ClipboardCopyType>(o=>CopyToClipboard(o, null));
             Commands.CopySelectedToClipboardCommand = new RelayCommand<Player>(o=>CopyToClipboard(ClipboardCopyType.OnlySelected, o));

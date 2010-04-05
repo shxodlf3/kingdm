@@ -338,7 +338,8 @@
                             </ItemsControl.Template>
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel IsItemsHost="True" />
+                                    <WrapPanel IsItemsHost="True"
+                                               Orientation="Horizontal"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>

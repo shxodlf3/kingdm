@@ -11,7 +11,8 @@ namespace KingsDamageMeter.Controls
     public class AllEncounters : EncounterBase
     {
         public ObservableCollection<Region> Regions { get; private set; }
-       
+        private bool IsPlayerRemovedInternally { get; set; }
+
         public AllEncounters()
         {
             Name = WindowMainRes.AllEncounterName;
@@ -54,8 +55,31 @@ namespace KingsDamageMeter.Controls
             UpdateSort();
         }
 
+        public override void RemovePlayer(string playerName)
+        {
+            try
+            {
+                IsPlayerRemovedInternally = true;
+                base.RemovePlayer(playerName);
+                foreach (var region in Regions)
+                {
+                    region.RemovePlayer(playerName);
+                }
+                UpdatePercents();
+            }
+            finally
+            {
+                IsPlayerRemovedInternally = false;
+            }
+        }
+
         public void RecalculatePlayersData()
         {
+            if(IsPlayerRemovedInternally)
+            {
+                return;
+            }
+
             Players.Clear();
             var newPlayersData = PlayerCalculationHelper.CalculatePlayersData(Regions);
             foreach (var player in newPlayersData)

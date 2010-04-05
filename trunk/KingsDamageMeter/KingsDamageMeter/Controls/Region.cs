@@ -98,6 +98,7 @@ namespace KingsDamageMeter.Controls
                     encounter.RemovePlayer(playerName);
                 }
                 UpdatePercents();
+                Parent.RecalculatePlayersData();
             }
             finally
             {
