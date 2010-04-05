@@ -33,7 +33,6 @@
         </LinearGradientBrush>
         <Converters:PlayerSortTypeToBoolConverter x:Key="PlayerSortTypeToBoolConverter"/>
         <Converters:DisplayTypeToBoolConverter x:Key="DisplayTypeToBoolConverter"/>
-        <Converters:DisplayTypeToVisibilityConverter x:Key="DisplayTypeToVisibilityConverter"/>
         <Converters:DataToFormattedDataConverter x:Key="DataToFormattedDataConverter"/>
         <Style x:Key="NotUncheckedMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}" >
             <Style.Triggers>
@@ -260,6 +259,12 @@
                                                       Command="{x:Static local:Commands.RemoveAllEncountersCommand}"/>
                                         </ContextMenu>
                                         <Style TargetType="TreeViewItem">
+                                            <Style.Resources>
+                                                <!--SelectedItem with focus-->
+                                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Gray"/>
+                                                <!--SelectedItem without focus-->
+                                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Gray"/>
+                                            </Style.Resources>
                                             <Setter Property="IsSelected" Value="{Binding Path=IsSelected}"/>
                                             <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded}"/>
                                             <Setter Property="Helpers:TreeViewItemBehaviour.IsBroughtIntoViewWhenSelected" Value="True" />
@@ -279,8 +284,21 @@
                                                        Style="{StaticResource MainWindowTextStyle}"/>
                                             <HierarchicalDataTemplate.ItemTemplate>
                                                 <HierarchicalDataTemplate> <!-- Encounters -->
-                                                    <TextBlock Text="{Binding Name}"
-                                                               Style="{StaticResource MainWindowTextStyle}"/>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="*">
+                                                            <TextBlock.Style>
+                                                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MainWindowTextStyle}">
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding IsEnded}" Value="True">
+                                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </TextBlock.Style>
+                                                        </TextBlock>
+                                                        <TextBlock Text="{Binding Name}"
+                                                                   Style="{StaticResource MainWindowTextStyle}"/>
+                                                    </StackPanel>
                                                 </HierarchicalDataTemplate>
                                             </HierarchicalDataTemplate.ItemTemplate>
                                         </HierarchicalDataTemplate>

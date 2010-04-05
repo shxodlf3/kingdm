@@ -30,7 +30,6 @@ using System.Diagnostics;
 using System.Windows.Threading;
 using KingsDamageMeter.Controls;
 using KingsDamageMeter.Converters;
-using KingsDamageMeter.Enums;
 using KingsDamageMeter.Forms;
 using KingsDamageMeter.Localization;
 using KingsDamageMeter.Properties;
@@ -59,7 +58,6 @@ namespace KingsDamageMeter
                 expanderEncaunters_Expanded(encauntersExpander, new RoutedEventArgs());
             }
 
-            Settings.Default.PropertyChanged += OnSettingsChanged;
             NotifyIcon.Clicked += OnNotifyIconClicked;
             NotifyIcon.ShowHideClicked += OnNotifyShowHideClicked;
             NotifyIcon.CloseClicked += OnNotifyCloseClicked;
@@ -335,39 +333,7 @@ namespace KingsDamageMeter
 
         private void encountersTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            ((WindowMainData) DataContext).SelectedEncounter = (IEncounter) e.NewValue;
-            UpdatePlayersSort();
-        }
-
-        private void OnSettingsChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if(e.PropertyName == "SortType")
-            {
-                UpdatePlayersSort();
-            }
-        }
-        
-        private void UpdatePlayersSort()
-        {
-            var view = (CollectionView)CollectionViewSource.GetDefaultView(playersItemsControl.ItemsSource);
-            if (view != null)
-            {
-                view.SortDescriptions.Clear();
-                switch (Settings.Default.SortType)
-                {
-                    case PlayerSortType.Damage:
-                        view.SortDescriptions.Add(new SortDescription("Damage", ListSortDirection.Descending));
-                        break;
-                    case PlayerSortType.Name:
-                        view.SortDescriptions.Add(new SortDescription("PlayerName", ListSortDirection.Ascending));
-                        break;
-                    case PlayerSortType.DamagePerSecond:
-                        view.SortDescriptions.Add(new SortDescription("DamagePerSecond",
-                                                                      ListSortDirection.Descending));
-                        break;
-                }
-                view.Refresh();
-            }
+            ((WindowMainData) DataContext).SelectedEncounter = (EncounterBase) e.NewValue;
         }
 
         private void TreeViewItem_MouseRightButtonDown(object sender, MouseButtonEventArgs e)

@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -54,13 +55,13 @@ namespace KingsDamageMeter
         }
 
         public List<string> GroupMembers { get; private set; }
-        public ObservableCollection<Region> Regions { get; private set; }
+        public ObservableCollection<EncounterBase> Regions { get; private set; }
 
         public ObservableCollection<CultureInfo> AvailableLanguages { get; private set; }
         public ObservableCollection<CultureInfo> AvailableLogLanguages { get; private set; }
 
-        private IEncounter selectedEncounter;
-        public IEncounter SelectedEncounter
+        private EncounterBase selectedEncounter;
+        public EncounterBase SelectedEncounter
         {
             get { return selectedEncounter; }
             set
@@ -75,19 +76,6 @@ namespace KingsDamageMeter
                     if (selectedEncounter != null)
                     {
                         selectedEncounter.IsSelected = true;
-                        if (selectedEncounter is AllEncounters)
-                        {
-                            var allRegion = (AllEncounters)selectedEncounter;
-                            allRegion.Data.Clear();
-                            foreach (var region in Regions.Where(o=>o != allRegion))
-                            {
-                                foreach (var encounter in region.Encounters)
-                                {
-                                    allRegion.Data.Add(encounter);
-                                }
-                            }
-                            allRegion.IsExpanded = false;
-                        }
                     }
 
                     NotifyPropertyChanged("SelectedEncounter");
@@ -120,6 +108,7 @@ namespace KingsDamageMeter
         private DateTime lastExpGainedTime;
         private DateTime lastDamageInflictedTime;
         private DateTime startTime = DateTime.Now;
+        private AllEncounters AllEncounters { get; set; }
 
         private int exp;
         public int Exp
@@ -264,8 +253,8 @@ namespace KingsDamageMeter
 
         public WindowMainData()
         {
-            Regions = new ObservableCollection<Region>();
-
+            Regions = new ObservableCollection<EncounterBase>();
+            Regions.CollectionChanged += OnRegionsCollectionChanged;
             //Note: This is a test
             //Regions.Add(new Region { Name = "Some region" });
             //Regions[0].Encounters.Add(new Encounter { Name = "Encounter 1" });
@@ -323,12 +312,29 @@ namespace KingsDamageMeter
             InitializeCommands();
             DetectAvailableLanguages();
 
-            Regions.Add(new AllEncounters());
+            AllEncounters = new AllEncounters();
+            Regions.Add(AllEncounters);
+        }
+
+        private void OnRegionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems != null)
+                    {
+                        foreach (Region region in e.OldItems)
+                        {
+                            AllEncounters.Regions.Remove(region);
+                        }
+                    }
+                    break;
+            }
         }
 
         private void InitializeCommands()
         {
-            Commands.RemoveEncounterCommand = new RelayCommand<IEncounter>(RemoveEncounter,
+            Commands.RemoveEncounterCommand = new RelayCommand<EncounterBase>(RemoveEncounter,
                                                                            encounter => encounter != null && !(encounter is AllEncounters));
             Commands.RemoveAllEncountersCommand = new ObjectRelayCommand(o => RemoveAllEncounters(),
                                                                          o => Regions.Where(x => !(x is AllEncounters)).Count() > 0);
@@ -615,7 +621,7 @@ namespace KingsDamageMeter
         {
             if (LastRegion == null || LastRegion.Name != CurrentRegionName)
             {
-                LastRegion = new Region { Name = CurrentRegionName, IsExpanded = true };
+                LastRegion = new Region(AllEncounters) { Name = CurrentRegionName, IsExpanded = true };
                 Regions.Add(LastRegion);
             }
             var lastEncounter = LastEncounter;
@@ -632,7 +638,6 @@ namespace KingsDamageMeter
                 {
                     LastEncounter.Name = "Encounter " + LastRegion.Encounters.Count + 1;
                 }
-                LastRegion.Encounters.Add(LastEncounter);
             }
             if (SelectedEncounter == null || SelectedEncounter == lastEncounter)
             {
@@ -670,7 +675,7 @@ namespace KingsDamageMeter
 
         private void RemovePlayer(Player player)
         {
-            ((Encounter)SelectedEncounter).RemovePlayer(player);
+            SelectedEncounter.RemovePlayer(player.PlayerName);
         }
 
         private void IgnorePlayer(Player player)
@@ -685,17 +690,7 @@ namespace KingsDamageMeter
                 Settings.Default.IgnoreList.Add(player.PlayerName);
             }
 
-            foreach (var region in Regions)
-            {
-                foreach (var encounter in region.Encounters)
-                {
-                    var findedPlayer = encounter.Players.FirstOrDefault(o => o.PlayerName == player.PlayerName);
-                    if(findedPlayer != null)
-                    {
-                        encounter.RemovePlayer(findedPlayer);
-                    }
-                }
-            }
+            AllEncounters.RemovePlayer(player.PlayerName);
         }
 
         /// <summary>
@@ -705,141 +700,8 @@ namespace KingsDamageMeter
         /// <returns>bool</returns>
         public bool PlayerExists(string name)
         {
-            foreach (var region in Regions)
-            {
-                foreach (var encounter in region.Encounters)
-                {
-                    if(encounter.Players.Any(o => o.PlayerName == name))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return AllEncounters.Players.Any(o => o.PlayerName == name);
         }
-
-        //private void SetFilter()
-        //{
-        //    if (Settings.Default.IsHideOthers)
-        //    {
-        //        //ToList() here is copy data to temp list for allow to us delete permission for Players collection
-        //        foreach (var player in Players.ToList())
-        //        {
-        //            if(player.PlayerName != Settings.Default.YouAlias)
-        //            {
-        //                Players.Remove(player);
-        //            }
-        //        }
-        //    }
-        //    else if(Settings.Default.IsGroupOnly)
-        //    {
-        //        foreach (var player in Players.ToList())
-        //        {
-        //            if (!player.IsGroupMember)
-        //            {
-        //                Players.Remove(player);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void UpdatePercents()
-        //{
-        //    CalculateGroupDamagePercents();
-        //    CalculateTopDamagePercents();
-        //}
-
-        //private void CalculateTopDamagePercents()
-        //{
-        //    if(Players.Count == 0)
-        //    {
-        //        return;
-        //    }
-
-        //    var topDamagePlayer = Players.Where(o => o.Damage == Players.Max(x => x.Damage)).First();
-        //    topDamagePlayer.PercentFromTopDamage = 1;
-        //    foreach (var player in Players)
-        //    {
-        //        if(topDamagePlayer != player)
-        //        {
-        //            player.PercentFromTopDamage = (double)player.Damage / topDamagePlayer.Damage;
-        //        }
-        //    }
-        //}
-
-        //private void CalculateGroupDamagePercents()
-        //{
-        //    long total = Players.Sum(o => o.Damage);
-
-        //    foreach (Player p in Players)
-        //    {
-        //        //What for need that formula?
-        //        //double percent = (((double) (p.Damage - total)/total) + 1);
-
-        //        //Isn't player damage percent from total is:
-        //        p.PercentFromGroupDamages = (double)p.Damage / total;
-        //    }
-        //}
-
-        //private void UpdateSort()
-        //{
-        //    // Think timer is elapsed while exit. This should be fix the problem.
-        //    if (Application.Current == null)
-        //    {
-        //        return;
-        //    }
-        //    if (!Application.Current.Dispatcher.CheckAccess())
-        //    {
-        //        Application.Current.Dispatcher.Invoke(new Action(UpdateSort));
-        //    }
-        //    else
-        //    {
-        //        ICollectionView view = CollectionViewSource.GetDefaultView(Players);
-        //        if (view != null)
-        //        {
-        //            view.SortDescriptions.Clear();
-        //            switch (Settings.Default.SortType)
-        //            {
-        //                case PlayerSortType.Damage:
-        //                    view.SortDescriptions.Add(new SortDescription("Damage", ListSortDirection.Descending));
-        //                    break;
-        //                case PlayerSortType.Name:
-        //                    view.SortDescriptions.Add(new SortDescription("PlayerName", ListSortDirection.Descending));
-        //                    break;
-        //                case PlayerSortType.DamagePerSecond:
-        //                    view.SortDescriptions.Add(new SortDescription("DamagePerSecond",
-        //                                                                  ListSortDirection.Descending));
-        //                    break;
-        //            }
-        //            view.Refresh();
-        //        }
-        //    }
-        //}
-
-        //private void RemoveGroupMember(string name)
-        //{
-        //    if(Settings.Default.FriendList.Contains(name))
-        //    {
-        //        return;
-        //    }
-
-        //    var player = Players.FirstOrDefault(o => o.PlayerName == name);
-        //    if (player != null)
-        //    {
-        //        player.IsGroupMember = false;
-        //        SetFilter();
-        //        UpdatePercents();
-        //        UpdateSort();
-        //    }
-        //}
-
-        //private void ResetDamage()
-        //{
-        //    foreach (var player in Players)
-        //    {
-        //        player.Reset();
-        //    }
-        //}
 
         private void ChangePower()
         {
@@ -855,29 +717,30 @@ namespace KingsDamageMeter
             NotifyPropertyChanged("PowerButtonToolTip");
         }
 
-        //private void ClearAll()
-        //{
-        //    Players.Clear();
-        //}
-
         public void Rename(string newName, string oldName)
         {
-            foreach (var region in Regions)
+            var player = AllEncounters.Players.FirstOrDefault(o => o.PlayerName == oldName);
+            if (player != null)
             {
+                player.PlayerName = newName;
+            }
+
+            foreach (var region in AllEncounters.Regions)
+            {
+                player = region.Players.FirstOrDefault(o => o.PlayerName == oldName);
+                if (player != null)
+                {
+                    player.PlayerName = newName;
+                }
                 foreach (var encounter in region.Encounters)
                 {
-                    var player = encounter.Players.FirstOrDefault(o => o.PlayerName == oldName);
+                    player = encounter.Players.FirstOrDefault(o => o.PlayerName == oldName);
                     if (player != null)
                     {
                         player.PlayerName = newName;
                     }
                 }
             }
-            //var player = Players.FirstOrDefault(o => o.PlayerName == oldName);
-            //if (player != null)
-            //{
-            //    player.PlayerName = newName;
-            //}
         }
 
         public void AddGroupMemberPlayer(string name)
@@ -996,22 +859,6 @@ namespace KingsDamageMeter
                     ICollectionView view = CollectionViewSource.GetDefaultView(SelectedEncounter.Players);
                     if (view != null)
                     {
-                        view.SortDescriptions.Clear();
-                        switch (Settings.Default.SortType)
-                        {
-                            case PlayerSortType.Damage:
-                                view.SortDescriptions.Add(new SortDescription("Damage", ListSortDirection.Descending));
-                                break;
-                            case PlayerSortType.Name:
-                                view.SortDescriptions.Add(new SortDescription("PlayerName", ListSortDirection.Ascending));
-                                break;
-                            case PlayerSortType.DamagePerSecond:
-                                view.SortDescriptions.Add(new SortDescription("DamagePerSecond",
-                                                                              ListSortDirection.Descending));
-                                break;
-                        }
-                        view.Refresh();
-
                         var sb = new StringBuilder();
                         foreach (Player player in view)
                         {
@@ -1024,27 +871,39 @@ namespace KingsDamageMeter
             }
         }
 
-        private void IsGroupMemberChanged(Player player)
+        private void IsGroupMemberChanged(Player groupMember)
         {
-            if (player.IsGroupMember)
+            if (groupMember.IsGroupMember)
             {
-                if (!GroupMembers.Contains(player.PlayerName))
+                if (!GroupMembers.Contains(groupMember.PlayerName))
                 {
-                    GroupMembers.Add(player.PlayerName);
+                    GroupMembers.Add(groupMember.PlayerName);
                 }
             }
             else
             {
-                GroupMembers.Remove(player.PlayerName);
+                GroupMembers.Remove(groupMember.PlayerName);
             }
-            foreach (var region in Regions)
+            
+            var player = AllEncounters.Players.FirstOrDefault(o => o.PlayerName == groupMember.PlayerName);
+            if (player != null)
             {
+                player.IsGroupMember = groupMember.IsGroupMember;
+            }
+
+            foreach (var region in AllEncounters.Regions)
+            {
+                player = region.Players.FirstOrDefault(o => o.PlayerName == groupMember.PlayerName);
+                if (player != null)
+                {
+                    player.IsGroupMember = groupMember.IsGroupMember;
+                }
                 foreach (var encounter in region.Encounters)
                 {
-                    var findedPlayer = encounter.Players.FirstOrDefault(o => o.PlayerName == player.PlayerName);
-                    if(findedPlayer != null)
+                    player = encounter.Players.FirstOrDefault(o => o.PlayerName == groupMember.PlayerName);
+                    if (player != null)
                     {
-                        findedPlayer.IsGroupMember = player.IsGroupMember;
+                        player.IsGroupMember = groupMember.IsGroupMember;
                     }
                 }
             }
@@ -1054,25 +913,15 @@ namespace KingsDamageMeter
         {
             if(player.IsFriend)
             {
-                foreach (var region in Regions)
-                {
-                    foreach (var encounter in region.Encounters)
-                    {
-                        var findedPlayer = encounter.Players.FirstOrDefault(o => o.PlayerName == player.PlayerName);
-                        if (findedPlayer != null)
-                        {
-                            findedPlayer.IsGroupMember = player.IsFriend;
-                        }
-                    }
-                }
+                IsGroupMemberChanged(player);
             }
         }
 
-        private void RemoveEncounter(IEncounter encounter)
+        private void RemoveEncounter(EncounterBase encounter)
         {
             if(encounter is Region)
             {
-                Regions.Remove((Region)encounter);
+                Regions.Remove(encounter);
                 if(LastRegion == encounter)
                 {
                     LastRegion = null;
@@ -1096,7 +945,8 @@ namespace KingsDamageMeter
             LastRegion = null;
             LastEncounter = null;
             SelectedEncounter = null;
-            Regions.Add(new Region { Name = WindowMainRes.AllEncounterName });
+            AllEncounters = new AllEncounters();
+            Regions.Add(AllEncounters);
         }
 
         private void Reset(DisplayType displayType)

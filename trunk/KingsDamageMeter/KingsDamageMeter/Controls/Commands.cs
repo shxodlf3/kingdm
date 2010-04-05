@@ -23,7 +23,7 @@ namespace KingsDamageMeter.Controls
 {
     public static class Commands
     {
-        public static RelayCommand<IEncounter> RemoveEncounterCommand { get; set; }
+        public static RelayCommand<EncounterBase> RemoveEncounterCommand { get; set; }
         public static ObjectRelayCommand RemoveAllEncountersCommand { get; set; }
         public static RelayCommand<Player> RemovePlayerCommand { get; set; }
         public static RelayCommand<Player> IgnorePlayerCommand { get; set; }

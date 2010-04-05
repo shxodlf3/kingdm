@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2ED927CC-AF2E-4190-AF56-7B18F8C2B8AC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -166,7 +166,7 @@
     <Compile Include="AionLogParser\LogReader.cs" />
     <Compile Include="Controls\AllEncounters.cs" />
     <Compile Include="Controls\Encounter.cs" />
-    <Compile Include="Controls\IEncounter.cs" />
+    <Compile Include="Controls\EncounterBase.cs" />
     <Compile Include="Controls\Region.cs" />
     <Compile Include="Helpers\NotifyPropertyChangedBase.cs" />
     <Compile Include="Helpers\PlayerCalculationHelper.cs" />

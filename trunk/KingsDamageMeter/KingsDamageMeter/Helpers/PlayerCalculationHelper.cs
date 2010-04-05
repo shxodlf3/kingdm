@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using KingsDamageMeter.Controls;
 
@@ -47,7 +50,7 @@ namespace KingsDamageMeter.Helpers
             }
         }
 
-        public static ICollection<Player> CalculatePlayersData(IEnumerable<Encounter> encounters)
+        public static IEnumerable<Player> CalculatePlayersData(IEnumerable<Encounter> encounters)
         {
             var players = new Dictionary<string, Player>();
             double totalTime = 0;
@@ -56,37 +59,32 @@ namespace KingsDamageMeter.Helpers
                 totalTime += encounter.Time;
                 foreach (var player in encounter.Players)
                 {
-                    Player findedPlayer;
-                    if (!players.TryGetValue(player.PlayerName, out findedPlayer))
-                    {
-                        findedPlayer = new Player
-                        {
-                            PlayerName = player.PlayerName,
-                            PlayerClass = player.PlayerClass,
-                            IsGroupMember = player.IsGroupMember,
-                            IsFriend = player.IsFriend,
-                        };
-                        players.Add(player.PlayerName, findedPlayer);
-                    }
-                    //Save BiggestHit, because increment damage will increment biggest hit
-                    int biggestHit = findedPlayer.BiggestHit;
+                    IncrementPlayerData(players, player);
+                }
+            }
 
-                    findedPlayer.Damage += player.Damage;
-                    findedPlayer.DamageTaken += player.DamageTaken;
-                    foreach (var skill in player.Skills)
-                    {
-                        findedPlayer.Skills.Incriment(skill);
-                    }
+            CalculateTopDamagePercents(players.Values);
+            CalculateGroupDamagePercents(players.Values);
+            if (totalTime > 0)
+            {
+                CalculateDps(players.Values, totalTime);
+            }
 
+            return players.Values;
+        }
 
-                    //Restore currect biggest hit
-                    if (player.BiggestHit > biggestHit)
+        public static IEnumerable<Player> CalculatePlayersData(ObservableCollection<Region> regions)
+        {
+            var players = new Dictionary<string, Player>();
+            double totalTime = 0;
+            foreach (var region in regions)
+            {
+                foreach (var encounter in region.Encounters)
+                {
+                    totalTime += encounter.Time;
+                    foreach (var player in encounter.Players)
                     {
-                        findedPlayer.BiggestHit = player.BiggestHit;
-                    }
-                    else
-                    {
-                        findedPlayer.BiggestHit = biggestHit;
+                        IncrementPlayerData(players, player);
                     }
                 }
             }
@@ -99,6 +97,42 @@ namespace KingsDamageMeter.Helpers
             }
 
             return players.Values;
+        }
+        
+        private static void IncrementPlayerData(IDictionary<string, Player> players, Player player)
+        {
+            Player findedPlayer;
+            if (!players.TryGetValue(player.PlayerName, out findedPlayer))
+            {
+                findedPlayer = new Player
+                {
+                    PlayerName = player.PlayerName,
+                    PlayerClass = player.PlayerClass,
+                    IsGroupMember = player.IsGroupMember,
+                    IsFriend = player.IsFriend,
+                };
+                players.Add(player.PlayerName, findedPlayer);
+            }
+            //Save BiggestHit, because increment damage will increment biggest hit
+            int biggestHit = findedPlayer.BiggestHit;
+
+            findedPlayer.Damage += player.Damage;
+            findedPlayer.DamageTaken += player.DamageTaken;
+            foreach (var skill in player.Skills)
+            {
+                findedPlayer.Skills.Incriment(skill);
+            }
+
+
+            //Restore currect biggest hit
+            if (player.BiggestHit > biggestHit)
+            {
+                findedPlayer.BiggestHit = player.BiggestHit;
+            }
+            else
+            {
+                findedPlayer.BiggestHit = biggestHit;
+            }
         }
     }
 }
