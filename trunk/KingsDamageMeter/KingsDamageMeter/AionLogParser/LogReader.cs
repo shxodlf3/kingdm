@@ -72,8 +72,10 @@ namespace KingsDamageMeter
 
             Filename = filename;
 
-            if ((_StreamReader = new StreamReader(GetFileStream())) != null)
+            Stream stream = GetFileStream();
+            if (stream != null)
             {
+                _StreamReader = new StreamReader(stream);
                 Running = true;
                 StartWorker();
 
