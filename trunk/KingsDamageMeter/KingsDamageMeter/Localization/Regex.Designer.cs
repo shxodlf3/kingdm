@@ -232,6 +232,15 @@ namespace KingsDamageMeter.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (?&lt;target&gt;.+) received the delayed explosion effect as you used (?&lt;skill&gt;.+)\..
+        /// </summary>
+        internal static string YouDelayedRegex {
+            get {
+                return ResourceManager.GetString("YouDelayedRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have earned (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\..
         /// </summary>
         internal static string YouEarnedKinahRegex {

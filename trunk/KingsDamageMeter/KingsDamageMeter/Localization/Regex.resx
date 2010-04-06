@@ -174,6 +174,9 @@
   <data name="YouCriticalRegex" xml:space="preserve">
     <value>Critical Hit! You inflicted (?&lt;damage&gt;[^a-zA-Z]+) critical damage on (?&lt;target&gt;.+)\.</value>
   </data>
+  <data name="YouDelayedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) received the delayed explosion effect as you used (?&lt;skill&gt;.+)\.</value>
+  </data>
   <data name="YouEarnedKinahRegex" xml:space="preserve">
     <value>You have earned (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\.</value>
   </data>
