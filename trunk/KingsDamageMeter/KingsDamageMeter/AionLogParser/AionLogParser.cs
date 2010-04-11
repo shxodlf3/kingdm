@@ -30,9 +30,8 @@ namespace KingsDamageMeter
         public const string You = "YOU";
         private string _TimeFormat = Settings.Default.LogTimeFormat;
 
-        private Dictionary<string, string> _Dots = new Dictionary<string, string>();
-        private Dictionary<string, string> _Pets = new Dictionary<string, string>();
         private Dictionary<string, string> _Effects = new Dictionary<string, string>();
+        private Dictionary<string, string> _Pets = new Dictionary<string, string>();
 
         private string _NameGroupName = "name";
         private string _DamageGroupName = "damage";
@@ -314,16 +313,16 @@ namespace KingsDamageMeter
                     string target = matches[0].Groups[_TargetGroupName].Value;
                     string skill = matches[0].Groups[_SkillGroupName].Value;
 
-                    if (_Dots.ContainsKey(skill))
+                    if (_Effects.ContainsKey(skill))
                     {
-                        if (_Dots[skill] != You)
+                        if (_Effects[skill] != You)
                         {
-                            _Dots[skill] = You;
+                            _Effects[skill] = You;
                         }
                     }
                     else
                     {
-                        _Dots.Add(skill, You);
+                        _Effects.Add(skill, You);
                     }
 
                     matched = true;
@@ -338,16 +337,16 @@ namespace KingsDamageMeter
                     string target = matches[0].Groups[_TargetGroupName].Value;
                     string skill = matches[0].Groups[_SkillGroupName].Value;
 
-                    if (_Dots.ContainsKey(skill))
+                    if (_Effects.ContainsKey(skill))
                     {
-                        if (_Dots[skill] != You)
+                        if (_Effects[skill] != You)
                         {
-                            _Dots[skill] = You;
+                            _Effects[skill] = You;
                         }
                     }
                     else
                     {
-                        _Dots.Add(skill, You);
+                        _Effects.Add(skill, You);
                     }
 
                     matched = true;
@@ -412,16 +411,16 @@ namespace KingsDamageMeter
                     string target = matches[0].Groups[_TargetGroupName].Value;
                     string skill = matches[0].Groups[_SkillGroupName].Value;
 
-                    if (_Dots.ContainsKey(skill))
+                    if (_Effects.ContainsKey(skill))
                     {
-                        if (_Dots[skill] != You)
+                        if (_Effects[skill] != You)
                         {
-                            _Dots[skill] = You;
+                            _Effects[skill] = You;
                         }
                     }
                     else
                     {
-                        _Dots.Add(skill, You);
+                        _Effects.Add(skill, You);
                     }
 
                     matched = true;
@@ -544,16 +543,16 @@ namespace KingsDamageMeter
                         }
                     }
 
-                    if (_Dots.ContainsKey(skill))
+                    if (_Effects.ContainsKey(skill))
                     {
-                        if (_Dots[skill].Contains(" "))
+                        if (_Effects[skill].Contains(" "))
                         {
-                            if (_Pets.ContainsKey(_Dots[skill]))
+                            if (_Pets.ContainsKey(_Effects[skill]))
                             {
                                 if (PlayerInflictedSkillDamage != null)
                                 {
                                     PlayerInflictedSkillDamage(this,
-                                                         new SkillDamageEventArgs(time, _Pets[_Dots[skill]], name,
+                                                         new SkillDamageEventArgs(time, _Pets[_Effects[skill]], name,
                                                                                         damage, skill));
                                 }
                             }
@@ -563,7 +562,7 @@ namespace KingsDamageMeter
                             if (PlayerInflictedSkillDamage != null)
                             {
                                 PlayerInflictedSkillDamage(this,
-                                                     new SkillDamageEventArgs(time, _Dots[skill], name, damage, skill));
+                                                     new SkillDamageEventArgs(time, _Effects[skill], name, damage, skill));
                             }
                         }
                     }
@@ -603,16 +602,16 @@ namespace KingsDamageMeter
                     int damage = matches[0].Groups[_DamageGroupName].Value.GetDigits();
                     string skill = matches[0].Groups[_SkillGroupName].Value;
 
-                    if (_Dots.ContainsKey(skill))
+                    if (_Effects.ContainsKey(skill))
                     {
-                        if (_Dots[skill].Contains(" "))
+                        if (_Effects[skill].Contains(" "))
                         {
-                            if (_Pets.ContainsKey(_Dots[skill]))
+                            if (_Pets.ContainsKey(_Effects[skill]))
                             {
                                 if (PlayerInflictedSkillDamage != null)
                                 {
                                     PlayerInflictedSkillDamage(this,
-                                                         new SkillDamageEventArgs(time, _Pets[_Dots[skill]], name,
+                                                         new SkillDamageEventArgs(time, _Pets[_Effects[skill]], name,
                                                                                         damage, skill));
                                 }
                             }
@@ -622,7 +621,7 @@ namespace KingsDamageMeter
                             if (PlayerInflictedSkillDamage != null)
                             {
                                 PlayerInflictedSkillDamage(this,
-                                                     new SkillDamageEventArgs(time, _Dots[skill], name, damage, skill));
+                                                     new SkillDamageEventArgs(time, _Effects[skill], name, damage, skill));
                             }
                         }
                     }
@@ -640,16 +639,16 @@ namespace KingsDamageMeter
                     string skill = matches[0].Groups[_SkillGroupName].Value;
                     string target = matches[0].Groups[_TargetGroupName].Value;
 
-                    if (_Dots.ContainsKey(skill))
+                    if (_Effects.ContainsKey(skill))
                     {
-                        if (_Dots[skill] != name)
+                        if (_Effects[skill] != name)
                         {
-                            _Dots[skill] = name;
+                            _Effects[skill] = name;
                         }
                     }
                     else
                     {
-                        _Dots.Add(skill, name);
+                        _Effects.Add(skill, name);
                     }
 
                     matched = true;
@@ -665,7 +664,7 @@ namespace KingsDamageMeter
                     string skill = matches[0].Groups[_SkillGroupName].Value;
                     string target = matches[0].Groups[_TargetGroupName].Value;
 
-                    if (_Dots.ContainsKey(skill))
+                    if (_Effects.ContainsKey(skill))
                     {
                         if (_Effects[skill] != name)
                         {
@@ -690,16 +689,16 @@ namespace KingsDamageMeter
                     string skill = matches[0].Groups[_SkillGroupName].Value;
                     string target = matches[0].Groups[_TargetGroupName].Value;
 
-                    if (_Dots.ContainsKey(skill))
+                    if (_Effects.ContainsKey(skill))
                     {
-                        if (_Dots[skill] != name)
+                        if (_Effects[skill] != name)
                         {
-                            _Dots[skill] = name;
+                            _Effects[skill] = name;
                         }
                     }
                     else
                     {
-                        _Dots.Add(skill, name);
+                        _Effects.Add(skill, name);
                     }
 
                     matched = true;
@@ -715,16 +714,16 @@ namespace KingsDamageMeter
                     string skill = matches[0].Groups[_SkillGroupName].Value;
                     string target = matches[0].Groups[_TargetGroupName].Value;
 
-                    if (_Dots.ContainsKey(skill))
+                    if (_Effects.ContainsKey(skill))
                     {
-                        if (_Dots[skill] != name)
+                        if (_Effects[skill] != name)
                         {
-                            _Dots[skill] = name;
+                            _Effects[skill] = name;
                         }
                     }
                     else
                     {
-                        _Dots.Add(skill, name);
+                        _Effects.Add(skill, name);
                     }
 
                     matched = true;
