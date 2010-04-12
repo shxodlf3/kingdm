@@ -1,11 +1,16 @@
-﻿Version -TBD- Beta 7
+﻿Version 1.6.0 Beta 7
 	Added: Completed multilanguage regex support.
-	Added: Player classes are now detected based on unique skills. Tested in english only. Should be working for german and french.
+	Added: Player classes are now detected based on unique skills. Tested in english only.
 	Added: The user will now be asked to confirm closing if players exist in the window.
+	Added: Combat is now broken up into encounters.
+	Added: Damage player received.
+	Added: Notify icon and ability to "minimize to the tray."
 	Fixed: Player pecentage in the tooltip will show as the total from group.
 	Fixed: Percentages should no longer appear as NaN when the value should be 0.
 	Fixed: The provided system.ovr file should now work properly.
 	Fixed: An issue in the parser caused an out of memory exception when loading a large log file.
+	Fixed: Magma Eruption.
+	Fixed: Poison Arrow.
 
 Version 1.5.0 Beta 6
 	Added: Right click on a player and "Skills..." will now show a breakdown of their skills and how much damage each contributes.
