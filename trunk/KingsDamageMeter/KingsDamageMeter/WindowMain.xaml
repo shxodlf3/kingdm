@@ -242,9 +242,8 @@
 								  Expanded="expanderEncaunters_Expanded"
 								  Collapsed="expanderEncaunters_Collapsed"
 								  IsExpanded="{Binding IsEncountersExpanded, Source={x:Static Properties:Settings.Default}}">
-							<Border BorderBrush="{StaticResource BorderBrush}" 
+                            <Border BorderBrush="{StaticResource BorderBrush}" 
                                     BorderThickness="1"
-                                    CornerRadius="10,10,0,10"
                                     Padding="2">
                                 <TreeView Background="Transparent"
                                           BorderBrush="Transparent"
@@ -279,11 +278,13 @@
                                         </ContextMenu>
                                     </TreeView.ContextMenu>
                                     <TreeView.ItemTemplate>
-                                        <HierarchicalDataTemplate ItemsSource="{Binding Encounters}"> <!-- Regions -->
+                                        <HierarchicalDataTemplate ItemsSource="{Binding Encounters}">
+                                            <!-- Regions -->
                                             <TextBlock Text="{Binding Name}"
                                                        Style="{StaticResource MainWindowTextStyle}"/>
                                             <HierarchicalDataTemplate.ItemTemplate>
-                                                <HierarchicalDataTemplate> <!-- Encounters -->
+                                                <HierarchicalDataTemplate>
+                                                    <!-- Encounters -->
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock Text="*">
                                                             <TextBlock.Style>
@@ -305,207 +306,209 @@
                                     </TreeView.ItemTemplate>
                                 </TreeView>
                             </Border>
-						</Expander>
-						<GridSplitter x:Name="encounersSplitter" Grid.Column="1"
+                        </Expander>
+                        <GridSplitter x:Name="encounersSplitter" Grid.Column="1"
                                       HorizontalAlignment="Stretch"
                                       VerticalAlignment="Stretch"
 									  Background="Transparent"
                                       MinWidth="3"
                                       Margin="3">
-							<GridSplitter.Style>
-								<Style TargetType="{x:Type GridSplitter}">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding IsExpanded, ElementName=encauntersExpander}" Value="True">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</GridSplitter.Style>
-						</GridSplitter>
-                        <ItemsControl x:Name="playersItemsControl"
-                                      Grid.Column="2"
+                            <GridSplitter.Style>
+                                <Style TargetType="{x:Type GridSplitter}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsExpanded, ElementName=encauntersExpander}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </GridSplitter.Style>
+                        </GridSplitter>
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ItemsControl x:Name="playersItemsControl"
+                                      Grid.Row="0"
                                       ItemsSource="{Binding SelectedEncounter.Players}">
-                            <ItemsControl.Template>
-                                <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                    <ScrollViewer Style="{DynamicResource PlayerScrollViewer}" 
+                                <ItemsControl.Template>
+                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                        <ScrollViewer Style="{DynamicResource PlayerScrollViewer}" 
                                                   BorderThickness="1" 
                                                   BorderBrush="{StaticResource BorderBrush}"
                                                   HorizontalAlignment="Stretch">
-                                        <ItemsPresenter />
-                                    </ScrollViewer>
-                                </ControlTemplate>
-                            </ItemsControl.Template>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel IsItemsHost="True"
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </ItemsControl.Template>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel IsItemsHost="True"
                                                Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <local:PlayerControl/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
-                    <Border Grid.Row="2"
-                            BorderBrush="{StaticResource BorderBrush}"
-                            BorderThickness="1,0,1,1"
-                            CornerRadius="0,0,0,10"
-                            Width="{Binding ActualWidth, ElementName=playersItemsControl}"
-                            HorizontalAlignment="Right"
-                            Margin="5,0,5,0">
-                        <Border.Style>
-                            <Style TargetType="{x:Type Border}">
-                                <Style.Triggers>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding KinahEarned}" Value="0"/>
-                                            <Condition Binding="{Binding TotalKinah}" Value="0"/>
-                                            <Condition Binding="{Binding Exp}" Value="0"/>
-                                            <Condition Binding="{Binding Ap}" Value="0"/>
-                                        </MultiDataTrigger.Conditions>
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                    </MultiDataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <!-- Fake border to move text to right from scrollbar -->
-                            <Border Grid.Column="0"
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <local:PlayerControl/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Border Grid.Row="1"
+                                    BorderBrush="{StaticResource BorderBrush}"
+                                    BorderThickness="1,0,1,1">
+                                <Border.Style>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding KinahEarned}" Value="0"/>
+                                                    <Condition Binding="{Binding TotalKinah}" Value="0"/>
+                                                    <Condition Binding="{Binding Exp}" Value="0"/>
+                                                    <Condition Binding="{Binding Ap}" Value="0"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <!-- Fake border to move text to right from scrollbar -->
+                                    <Border Grid.Column="0"
                                     MinWidth="{x:Static SystemParameters.VerticalScrollBarWidth}"/>
-                            <!--                                                  -->
-                            <WrapPanel Grid.Column="1"
+                                    <!--                                                  -->
+                                    <WrapPanel Grid.Column="1"
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Center">
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetMenuHeader}"
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetMenuHeader}"
                                                       Command="{Binding ResetCommand}"
                                                       CommandParameter="{x:Static Enums:DisplayType.Kinah}"/>
-                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetAllMenuHeader}"
+                                                    <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetAllMenuHeader}"
                                                       Command="{Binding ResetAllCommand}"/>
-                                        </ContextMenu>
-                                    </StackPanel.ContextMenu>
-                                    <StackPanel.Style>
-                                        <Style TargetType="{x:Type StackPanel}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding TotalKinah}" Value="0">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static Enums:DisplayType.Kinah}}" 
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                            <StackPanel.Style>
+                                                <Style TargetType="{x:Type StackPanel}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding TotalKinah}" Value="0">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static Enums:DisplayType.Kinah}}" 
                                                              Value="False">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </StackPanel.Style>
-                                    <StackPanel.ToolTip>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <TextBlock Grid.Column="0"
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+                                            <StackPanel.ToolTip>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Grid.Column="0"
                                                        Grid.Row="0"
                                                        Text="{LocText KingsDamageMeter:WindowMainRes:KinahEarnedToolTip}"
                                                        Margin="2"/>
-                                            <TextBlock Grid.Column="1"
+                                                    <TextBlock Grid.Column="1"
                                                        Grid.Row="0"
                                                        Text="{Binding KinahEarned, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Kinah}}"
                                                        Margin="2"/>
-                                            <TextBlock Grid.Column="0"
+                                                    <TextBlock Grid.Column="0"
                                                        Grid.Row="1"
                                                        Text="{LocText KingsDamageMeter:WindowMainRes:KinahSpentToolTip}"
                                                        Margin="2"/>
-                                            <TextBlock Grid.Column="1"
+                                                    <TextBlock Grid.Column="1"
                                                        Grid.Row="1"
                                                        Text="{Binding KinahSpent, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Kinah}}"
                                                        Margin="2"/>
-                                        </Grid>
-                                    </StackPanel.ToolTip>
-                                    <TextBlock Text="{Binding TotalKinah, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Kinah}}"
+                                                </Grid>
+                                            </StackPanel.ToolTip>
+                                            <TextBlock Text="{Binding TotalKinah, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Kinah}}"
                                                Style="{StaticResource MainWindowTextStyle}"
                                                Margin="2"/>
-                                    <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Coin-32x32.png" Width="16" Height="16" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetMenuHeader}"
+                                            <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Coin-32x32.png" Width="16" Height="16" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetMenuHeader}"
                                                       Command="{Binding ResetCommand}"
                                                       CommandParameter="{x:Static Enums:DisplayType.Experience}"/>
-                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetAllMenuHeader}"
+                                                    <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetAllMenuHeader}"
                                                       Command="{Binding ResetAllCommand}"/>
-                                        </ContextMenu>
-                                    </StackPanel.ContextMenu>
-                                    <StackPanel.Style>
-                                        <Style TargetType="{x:Type StackPanel}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Exp}" Value="0">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static Enums:DisplayType.Experience}}" 
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                            <StackPanel.Style>
+                                                <Style TargetType="{x:Type StackPanel}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Exp}" Value="0">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static Enums:DisplayType.Experience}}" 
                                                              Value="False">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </StackPanel.Style>
-                                    <StackPanel.ToolTip>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:ExpPerHourToolTip}"
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+                                            <StackPanel.ToolTip>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:ExpPerHourToolTip}"
                                                        Margin="2"/>
-                                            <TextBlock Text="{Binding ExpPerHour, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Experience}}"
+                                                    <TextBlock Text="{Binding ExpPerHour, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Experience}}"
                                                        Margin="2"/>
-                                        </StackPanel>
-                                    </StackPanel.ToolTip>
-                                    <TextBlock Text="{Binding Exp, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Experience}}"
+                                                </StackPanel>
+                                            </StackPanel.ToolTip>
+                                            <TextBlock Text="{Binding Exp, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.Experience}}"
                                                Style="{StaticResource MainWindowTextStyle}"
                                                Margin="2"/>
-                                    <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Book-32x32.png" Width="16" Height="16" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetMenuHeader}"
+                                            <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Book-32x32.png" Width="16" Height="16" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetMenuHeader}"
                                                       Command="{Binding ResetCommand}"
                                                       CommandParameter="{x:Static Enums:DisplayType.AbyssPoints}"/>
-                                            <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetAllMenuHeader}"
+                                                    <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:ResetAllMenuHeader}"
                                                       Command="{Binding ResetAllCommand}"/>
-                                        </ContextMenu>
-                                    </StackPanel.ContextMenu>
-                                    <StackPanel.Style>
-                                        <Style TargetType="{x:Type StackPanel}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Ap}" Value="0">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static Enums:DisplayType.AbyssPoints}}" 
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                            <StackPanel.Style>
+                                                <Style TargetType="{x:Type StackPanel}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Ap}" Value="0">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static Enums:DisplayType.AbyssPoints}}" 
                                                              Value="False">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </StackPanel.Style>
-                                    <TextBlock Text="{Binding Ap, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.AbyssPoints}}"
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </StackPanel.Style>
+                                            <TextBlock Text="{Binding Ap, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Enums:DisplayType.AbyssPoints}}"
                                                Style="{StaticResource MainWindowTextStyle}"
                                                Margin="2"/>
-                                    <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Swords-32x32.png" Width="16" Height="16" />
-                                </StackPanel>
-                            </WrapPanel>
+                                            <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Swords-32x32.png" Width="16" Height="16" />
+                                        </StackPanel>
+                                    </WrapPanel>
+                                </Grid>
+                            </Border>
                         </Grid>
-                    </Border>
+                    </Grid>
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
