@@ -27,10 +27,10 @@
       <Value Profile="(Default)">Documentation.pdf</Value>
     </Setting>
     <Setting Name="WindowMainWidth" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">196</Value>
+      <Value Profile="(Default)">232</Value>
     </Setting>
     <Setting Name="WindowMainHeight" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">105</Value>
+      <Value Profile="(Default)">117</Value>
     </Setting>
     <Setting Name="LogTimeFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">yyyy.MM.dd hh:mm:ss</Value>

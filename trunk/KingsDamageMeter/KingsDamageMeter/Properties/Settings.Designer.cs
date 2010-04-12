@@ -119,7 +119,7 @@ namespace KingsDamageMeter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("196")]
+        [global::System.Configuration.DefaultSettingValueAttribute("232")]
         public int WindowMainWidth {
             get {
                 return ((int)(this["WindowMainWidth"]));
@@ -131,7 +131,7 @@ namespace KingsDamageMeter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("105")]
+        [global::System.Configuration.DefaultSettingValueAttribute("117")]
         public int WindowMainHeight {
             get {
                 return ((int)(this["WindowMainHeight"]));
