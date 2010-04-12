@@ -117,22 +117,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PlayerToolTipBiggestHit" xml:space="preserve">
-    <value>höchster Treffer</value>
+  <data name="Chat" xml:space="preserve">
+    <value>\[charname:</value>
   </data>
-  <data name="PlayerToolTipDps" xml:space="preserve">
-    <value>dps</value>
+  <data name="Effect" xml:space="preserve">
+    <value> Effekt</value>
   </data>
-  <data name="PlayerToolTipExpPerHour" xml:space="preserve">
-    <value>EP/Stunde</value>
+  <data name="JoinedGroupRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) ist Eurer Gruppe beigetreten\.</value>
   </data>
-  <data name="PlayerToolTipKinah" xml:space="preserve">
-    <value>Kinah</value>
+  <data name="KickedFromGroupRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) wurde aus Eurer Gruppe geworfen\.</value>
   </data>
-  <data name="PlayerToolTipPeak" xml:space="preserve">
-    <value>Höchstwert</value>
+  <data name="LeftGroupRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) hat Eure Gruppe verlassen\.</value>
   </data>
-  <data name="PlayerToolTipTotal" xml:space="preserve">
-    <value>Gesamt</value>
+  <data name="OtherContinuousRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) hat (?&lt;skill&gt;.+) eingesetzt und (?&lt;target&gt;.+) erleidet fortwährend Schaden\.</value>
+  </data>
+  <data name="OtherDelayedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) received the delayed explosion effect because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="OtherInflictedBleedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) blutet, weil (?&lt;name&gt;.+) (?&lt;skill&gt;.+) eingesetzt hat\.</value>
+  </data>
+  <data name="OtherInflictedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) hat (?&lt;target&gt;.+) (?&lt;damage&gt;[^a-zA-Z]+) Schaden zugefügt\.</value>
+  </data>
+  <data name="OtherInflictedSkillRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) hat (?&lt;target&gt;.+) durch Benutzung von (?&lt;skill&gt;.+) (?&lt;damage&gt;[^a-zA-Z]+) Schaden zugefügt\.</value>
+  </data>
+  <data name="OtherPoisonEffectRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) became poisoned because (?&lt;name&gt;.+) used (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="OtherReceivedBleedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) erhält (?&lt;damage&gt;[^a-zA-Z]+) Blutungsschaden, nachdem Ihr (?&lt;skill&gt;.+) benutzt habt\.</value>
+  </data>
+  <data name="OtherReceivedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) hat (?&lt;name&gt;.+) (?&lt;damage&gt;[^a-zA-Z]+) Schaden zugefügt\.</value>
+  </data>
+  <data name="OtherReceivedSkillRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) erhält durch (?&lt;skill&gt;.+) (?&lt;damage&gt;[^a-zA-Z]+) Schaden\.</value>
+  </data>
+  <data name="OtherSummonedAttackRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) hat (?&lt;pet&gt;.+) durch (?&lt;skill&gt;.+) zum Angriff von (?&lt;target&gt;.+) herbeigerufen\.</value>
+  </data>
+  <data name="OtherSummonedRegex" xml:space="preserve">
+    <value>(?&lt;name&gt;.+) hat Beschwörung: (?&lt;pet&gt;.+)t durch Beschwörung: (?&lt;skill&gt;.+) herbeigerufen\.</value>
+  </data>
+  <data name="TimestampRegex" xml:space="preserve">
+    <value>(?&lt;time&gt;[^a-zA-Z]+) : </value>
+  </data>
+  <data name="YouContinuousRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) durch (?&lt;skill&gt;.+) vergiftet\.</value>
+  </data>
+  <data name="YouCriticalRegex" xml:space="preserve">
+    <value>Kritischer Treffer! Ihr habt (?&lt;target&gt;.+) (?&lt;damage&gt;[^a-zA-Z]+) kritischen Schaden zugefügt\.</value>
+  </data>
+  <data name="YouDelayedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) received the delayed explosion effect as you used (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="YouEarnedKinahRegex" xml:space="preserve">
+    <value>Ihr habt (?&lt;kinah&gt;[^a-zA-Z]+) Kinah erhalten\.</value>
+  </data>
+  <data name="YouEffectDamageRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) erhält (?&lt;damage&gt;[^a-zA-Z]+) Giftschaden, nachdem Ihr (?&lt;effect&gt;.+) benutzt habt\.</value>
+  </data>
+  <data name="YouGainedApRegex" xml:space="preserve">
+    <value>Ihr habt (?&lt;ap&gt;[^a-zA-Z]+) Abyss-Punkte erhalten\.</value>
+  </data>
+  <data name="YouGainedEffectRegex" xml:space="preserve">
+    <value>Ihr erhaltet den Effekt durch (?&lt;effect&gt;.+)\.</value>
+  </data>
+  <data name="YouGainedExpRegex" xml:space="preserve">
+    <value>Ihr habt(?&lt;exp&gt;[^a-zA-Z]+) EP von (?&lt;target&gt;.+) erhalten\.</value>
+  </data>
+  <data name="YouHaveJoinedChannelRegex" xml:space="preserve">
+    <value>You have joined the (?&lt;region&gt;.+) region channel\.</value>
+  </data>
+  <data name="YouInflictedBleedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) durch (?&lt;skill&gt;.+) zum Bluten gebracht\.</value>
+  </data>
+  <data name="YouInflictedRegex" xml:space="preserve">
+    <value>hr habt (?&lt;target&gt;.+) (?&lt;damage&gt;[^a-zA-Z]+) Schaden zugefügt\.</value>
+  </data>
+  <data name="YouInflictedSkillRegex" xml:space="preserve">
+    <value>hr habt (?&lt;target&gt;.+) durch Benutzung von (?&lt;skill&gt;.+) (?&lt;damage&gt;[^a-zA-Z]+) Schaden zugefügt\.</value>
+  </data>
+  <data name="YouReceivedRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) hat Euch (?&lt;damage&gt;[^a-zA-Z]+) Schaden zugefügt\.</value>
+  </data>
+  <data name="YouReceivedSkillRegex" xml:space="preserve">
+    <value>(?&lt;target&gt;.+) has inflicted (?&lt;damage&gt;[^a-zA-Z]+) damage on you by using (?&lt;skill&gt;.+)\.</value>
+  </data>
+  <data name="YouSpentKinahRegex" xml:space="preserve">
+    <value>Ihr zahlt (?&lt;kinah&gt;[^a-zA-Z]+) Kinah\.</value>
+  </data>
+  <data name="YouSummonedAttackRegex" xml:space="preserve">
+    <value>(?&lt;pet&gt;.+) durch (?&lt;skill&gt;.+) zum Angriff auf (?&lt;target&gt;.+) herbeigerufen\.</value>
+  </data>
+  <data name="YouSummonedRegex" xml:space="preserve">
+    <value>(?&lt;pet&gt;.+) durch (?&lt;skill&gt;.+) herbeigerufen\.</value>
   </data>
 </root>

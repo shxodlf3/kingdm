@@ -123,9 +123,6 @@
   <data name="AddByNameMenuHeader" xml:space="preserve">
     <value>Gruppenmitglied hinzufügen</value>
   </data>
-  <data name="AllEncounterName" xml:space="preserve">
-    <value>XXXX</value>
-  </data>
   <data name="CloseBtnToolTip" xml:space="preserve">
     <value>Schliessen</value>
   </data>
@@ -165,9 +162,6 @@
   <data name="LocateLogMenuHeader" xml:space="preserve">
     <value>LOG Datein auswählen...</value>
   </data>
-  <data name="LogLanguageMenuHeader" xml:space="preserve">
-    <value>LOG Sprache</value>
-  </data>
   <data name="MainViewMenuHeader" xml:space="preserve">
     <value>Hauptansicht</value>
   </data>
@@ -190,22 +184,10 @@
     <value>Prozent</value>
   </data>
   <data name="PowerOffBtnTooltip" xml:space="preserve">
-    <value>Ausschalten</value>
+    <value>deaktiviert</value>
   </data>
   <data name="PowerOnBtnTooltip" xml:space="preserve">
-    <value>Einschalten</value>
-  </data>
-  <data name="RemoveAllEncountersMenuHeader" xml:space="preserve">
-    <value>XXXX</value>
-  </data>
-  <data name="RemoveEncounterMenuHeader" xml:space="preserve">
-    <value>XXXX</value>
-  </data>
-  <data name="ResetAllMenuHeader" xml:space="preserve">
-    <value>XXXX</value>
-  </data>
-  <data name="ResetMenuHeader" xml:space="preserve">
-    <value>XXXX</value>
+    <value>aktiviert / läuft...</value>
   </data>
   <data name="ResizeThumbToolTip" xml:space="preserve">
     <value>Größe ändern</value>

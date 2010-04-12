@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2ED927CC-AF2E-4190-AF56-7B18F8C2B8AC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -337,6 +337,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\ClassList.es.resx" />
     <EmbeddedResource Include="Localization\ClassList.ru.resx" />
+    <EmbeddedResource Include="Localization\Regex.de.resx" />
     <EmbeddedResource Include="Localization\Regex.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
