@@ -295,11 +295,11 @@ namespace KingsDamageMeter
 
 			if (IsLoaded)
 			{
-				var size = Settings.Default.EncountersWidth - EncountersColumn.MinWidth - EncounersSplitter.MinWidth;
+                var size = Settings.Default.EncountersWidth - EncountersColumn.MinWidth - EncountersSplitter.Width;
 				Left -= size;
 				Width += size;
 			}
-			EncountersColumn.Width = new GridLength(Settings.Default.EncountersWidth - EncounersSplitter.MinWidth);
+            EncountersColumn.Width = new GridLength(Settings.Default.EncountersWidth - EncountersSplitter.Width);
 
 			var dpd = DependencyPropertyDescriptor.FromProperty(ColumnDefinition.WidthProperty, typeof(ColumnDefinition));
 			if (dpd != null)
@@ -310,7 +310,7 @@ namespace KingsDamageMeter
 
 		private void EncountersExpander_Collapsed(object sender, RoutedEventArgs e)
 		{
-			var size = Settings.Default.EncountersWidth - EncountersColumn.MinWidth - EncounersSplitter.MinWidth;
+            var size = Settings.Default.EncountersWidth - EncountersColumn.MinWidth - EncountersSplitter.Width;
 			Width -= size;
 			Left += size;
 

@@ -45,7 +45,7 @@
     <Border CornerRadius="10,10,0,10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
         <Grid HorizontalAlignment="Stretch" ShowGridLines="False">
             <Border Name="Mask" CornerRadius="10,10,0,10">
-               <Border.Background>
+                <Border.Background>
                     <ImageBrush ImageSource="./Themes/BlackPearl/Images/MainFormBackground.bmp" TileMode="Tile" />
                 </Border.Background>
                 <Grid>
@@ -307,12 +307,11 @@
                                 </TreeView>
                             </Border>
                         </Expander>
-                        <GridSplitter x:Name="EncounersSplitter" Grid.Column="1"
+                        <GridSplitter x:Name="EncountersSplitter" Grid.Column="1"
                                       HorizontalAlignment="Stretch"
                                       VerticalAlignment="Stretch"
 									  Background="Transparent"
-                                      MinWidth="3"
-                                      Margin="3">
+                                      Width="5">
                             <GridSplitter.Style>
                                 <Style TargetType="{x:Type GridSplitter}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
