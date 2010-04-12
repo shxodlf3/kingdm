@@ -55,7 +55,7 @@ namespace KingsDamageMeter
 
             if (Settings.Default.IsEncountersExpanded)
             {
-                expanderEncaunters_Expanded(encauntersExpander, new RoutedEventArgs());
+                EncountersExpander_Expanded(EncountersExpander, new RoutedEventArgs());
             }
 
             NotifyIcon.Clicked += OnNotifyIconClicked;
@@ -286,7 +286,7 @@ namespace KingsDamageMeter
             mergedDicts.Add(skinDict);
         }
 
-		private void expanderEncaunters_Expanded(object sender, RoutedEventArgs e)
+		private void EncountersExpander_Expanded(object sender, RoutedEventArgs e)
 		{
 			if (isInitializing)
 			{
@@ -295,43 +295,43 @@ namespace KingsDamageMeter
 
 			if (IsLoaded)
 			{
-				var size = Settings.Default.EncountersWidth - colEncounters.MinWidth - encounersSplitter.MinWidth;
+				var size = Settings.Default.EncountersWidth - EncountersColumn.MinWidth - EncounersSplitter.MinWidth;
 				Left -= size;
 				Width += size;
 			}
-			colEncounters.Width = new GridLength(Settings.Default.EncountersWidth - encounersSplitter.MinWidth);
+			EncountersColumn.Width = new GridLength(Settings.Default.EncountersWidth - EncounersSplitter.MinWidth);
 
 			var dpd = DependencyPropertyDescriptor.FromProperty(ColumnDefinition.WidthProperty, typeof(ColumnDefinition));
 			if (dpd != null)
 			{
-				dpd.AddValueChanged(colEncounters, EncountersColumnWidthChanged);
+				dpd.AddValueChanged(EncountersColumn, EncountersColumnWidthChanged);
 			}
 		}
 
-		private void expanderEncaunters_Collapsed(object sender, RoutedEventArgs e)
+		private void EncountersExpander_Collapsed(object sender, RoutedEventArgs e)
 		{
-			var size = Settings.Default.EncountersWidth - colEncounters.MinWidth - encounersSplitter.MinWidth;
+			var size = Settings.Default.EncountersWidth - EncountersColumn.MinWidth - EncounersSplitter.MinWidth;
 			Width -= size;
 			Left += size;
 
-			colEncounters.Width = new GridLength(colEncounters.MinWidth);
+			EncountersColumn.Width = new GridLength(EncountersColumn.MinWidth);
 			
 			var dpd = DependencyPropertyDescriptor.FromProperty(ColumnDefinition.WidthProperty, typeof(ColumnDefinition));
 			if (dpd != null)
 			{
-				dpd.RemoveValueChanged(colEncounters, EncountersColumnWidthChanged);
+				dpd.RemoveValueChanged(EncountersColumn, EncountersColumnWidthChanged);
 			}
 		}
 	
 		private void EncountersColumnWidthChanged(object sender, EventArgs e)
 		{
-			if (encauntersExpander.IsExpanded)
+			if (EncountersExpander.IsExpanded)
 			{
-				Settings.Default.EncountersWidth = colEncounters.Width.Value;
+				Settings.Default.EncountersWidth = EncountersColumn.Width.Value;
 			}
 		}
 
-        private void encountersTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void EncountersTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             ((WindowMainData) DataContext).SelectedEncounter = (EncounterBase) e.NewValue;
         }

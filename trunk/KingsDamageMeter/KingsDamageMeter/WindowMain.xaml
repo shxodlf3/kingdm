@@ -226,21 +226,21 @@
                                               HorizontalAlignment="Left"/>
                         </StackPanel>
                     </Grid>
-                    <Grid x:Name="dataGrid"
+                    <Grid x:Name="ContentGrid"
                           Grid.Row="1"
                           Margin="5,3,5,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="colEncounters"
+                            <ColumnDefinition x:Name="EncountersColumn"
 											  Width="Auto"
 											  MinWidth="23"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"
                                               MinWidth="188"/>
                         </Grid.ColumnDefinitions>
-                        <Expander x:Name="encauntersExpander" ExpandDirection="Left"
+                        <Expander x:Name="EncountersExpander" ExpandDirection="Left"
                                   Grid.Column="0"
-								  Expanded="expanderEncaunters_Expanded"
-								  Collapsed="expanderEncaunters_Collapsed"
+								  Expanded="EncountersExpander_Expanded"
+								  Collapsed="EncountersExpander_Collapsed"
 								  IsExpanded="{Binding IsEncountersExpanded, Source={x:Static Properties:Settings.Default}}">
                             <Border BorderBrush="{StaticResource BorderBrush}" 
                                     BorderThickness="1"
@@ -248,7 +248,7 @@
                                 <TreeView Background="Transparent"
                                           BorderBrush="Transparent"
                                           ItemsSource="{Binding Regions}"
-                                          SelectedItemChanged="encountersTree_SelectedItemChanged">
+                                          SelectedItemChanged="EncountersTree_SelectedItemChanged">
                                     <TreeView.Resources>
                                         <ContextMenu x:Key="TreeViewItemContextMenu">
                                             <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:RemoveEncounterMenuHeader}"
@@ -307,7 +307,7 @@
                                 </TreeView>
                             </Border>
                         </Expander>
-                        <GridSplitter x:Name="encounersSplitter" Grid.Column="1"
+                        <GridSplitter x:Name="EncounersSplitter" Grid.Column="1"
                                       HorizontalAlignment="Stretch"
                                       VerticalAlignment="Stretch"
 									  Background="Transparent"
@@ -317,7 +317,7 @@
                                 <Style TargetType="{x:Type GridSplitter}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsExpanded, ElementName=encauntersExpander}" Value="True">
+                                        <DataTrigger Binding="{Binding IsExpanded, ElementName=EncountersExpander}" Value="True">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -329,7 +329,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ItemsControl x:Name="playersItemsControl"
+                            <ItemsControl x:Name="PlayersItemsControl"
                                       Grid.Row="0"
                                       ItemsSource="{Binding SelectedEncounter.Players}">
                                 <ItemsControl.Template>
