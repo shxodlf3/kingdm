@@ -68,8 +68,6 @@ namespace KingsDamageMeter
 
 #if DEBUG
             Settings.Default.Debug = true;
-#else
-            Settings.Default.Debug = false;
 #endif
 
             if (Settings.Default.IgnoreList == null)
