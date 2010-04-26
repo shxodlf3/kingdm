@@ -1,0 +1,434 @@
+﻿<Window x:Class="KingsDamageMeter.WindowMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:KingsDamageMeter.Controls"
+        xmlns:Properties="clr-namespace:KingsDamageMeter.Properties"
+        xmlns:Converters="clr-namespace:KingsDamageMeter.Converters"
+        Title="KingsDamageMeter" 
+        MinWidth="198" 
+        MinHeight="102" 
+        Left="{Binding WindowMainX, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}"
+        Top="{Binding WindowMainY, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}"
+        Height="{Binding WindowMainHeight, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}" 
+        Width="{Binding WindowMainWidth, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}" 
+        Topmost="{Binding WindowMainTopMost, Source={x:Static Properties:Settings.Default}}" 
+        Opacity="{Binding WindowMainOpacity, Source={x:Static Properties:Settings.Default}}"
+        WindowStyle="None" 
+        Foreground="White" 
+        ResizeMode="NoResize" 
+        AllowsTransparency="True" 
+        Icon="/KingsDamageMeter;component/Lion.ico" 
+        MouseDown="Window_MouseDown" 
+        MouseMove="Window_MouseMove" 
+        MouseUp="Window_MouseUp" 
+        Closing="Window_Closing" 
+        Background="Transparent"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="BorderBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="#CCC" Offset="0.4" />
+            <GradientStop Color="#888" Offset="1" />
+        </LinearGradientBrush>
+        <Converters:PlayerSortTypeToBoolConverter x:Key="PlayerSortTypeToBoolConverter"/>
+        <Converters:DisplayTypeToBoolConverter x:Key="DisplayTypeToBoolConverter"/>
+        <Converters:DisplayTypeToVisibilityConverter x:Key="DisplayTypeToVisibilityConverter"/>
+        <Converters:DataToFormattedDataConverter x:Key="DataToFormattedDataConverter"/>
+        <Style x:Key="NotUncheckedMenuItemStyle" TargetType="{x:Type MenuItem}">
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Border CornerRadius="10,10,0,10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+        <Grid HorizontalAlignment="Stretch" ShowGridLines="False">
+            <Border Name="Mask" CornerRadius="10,10,0,10">
+               <Border.Background>
+                    <ImageBrush ImageSource="./Themes/BlackPearl/Images/MainFormBackground.bmp" TileMode="Tile" />
+                </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0"
+                          Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <local:SkinButton x:Name="PowerButton"
+                                          Command="{Binding ChangePowerCommand}"
+                                          Width="20" Height="20"
+                                          Grid.Column="0"
+                                          HorizontalAlignment="Left"
+                                          Margin="5,0"
+                                          ToolTip="{Binding PowerButtonToolTip}">
+                            <local:SkinButton.Style>
+                                <Style TargetType="{x:Type local:SkinButton}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                            <Setter Property="MouseUpImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp"/>
+                                            <Setter Property="MouseDownImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OnButtonPress.bmp"/>
+                                            <Setter Property="MouseOverImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OnButton.bmp"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                            <Setter Property="MouseUpImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp"/>
+                                            <Setter Property="MouseDownImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OffButtonPress.bmp"/>
+                                            <Setter Property="MouseOverImage" Value="pack://application:,,,/Themes/BlackPearl/Images/OffButton.bmp"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </local:SkinButton.Style>
+                        </local:SkinButton>
+                        <!--
+                        <Label Grid.Column="1"
+                               Name="LabelMain"
+                               Style="{DynamicResource TitleLabel}"
+                               FontFamily="Verdana"
+                               FontWeight="Bold"
+                               Margin="4,0,8,0" 
+                               VerticalContentAlignment="Center"
+                               Content="KDM"/>
+                        -->
+                        <TextBlock Grid.Column="1"
+                               Style="{StaticResource MainWindowTitleTextStyle}"
+                               Text="KDM"
+                               VerticalAlignment="Center"
+                               FontFamily="Verdana"
+                               FontWeight="Bold"
+                               Margin="4,0,8,0"/>
+                        <StackPanel Grid.Column="2"
+                                    Orientation="Horizontal"
+                                    Margin="5,0">
+                            <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonClick.bmp" 
+                                              MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButtonHover.bmp" 
+                                              MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/MinimizeButton.bmp" 
+                                              ToolTip="{LocText KingsDamageMeter:WindowMainRes:MinimizeBtnToolTip}" 
+                                              Click="MinimizeButton_Click" 
+                                              Grid.Column="5" 
+                                              Width="20" Height="20" />
+                            <!--Button Style="{StaticResource RoundButton}"
+                                    ToolTip="{LocText KingsDamageMeter:WindowMainRes:MinimizeBtnToolTip}"
+                                    Click="MinimizeButton_Click"
+                                    Grid.Column="5"
+                                    Content="~"
+                                    Width="16" Height="16" /-->
+                            <local:SkinButton MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonClick.bmp" 
+                                              MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButtonHover.bmp"
+                                              MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/OptionsButton.bmp"
+                                              Click="MenuButton_Click"
+                                              ToolTip="{LocText KingsDamageMeter:WindowMainRes:OptionsBtnToolTip}"
+                                              Grid.Column="6"
+                                              Width="20" Height="20">
+                                <local:SkinButton.ContextMenu>
+                                    <ContextMenu x:Name="MainContextMenu" 
+                                                 Foreground="Gold" 
+                                                 HasDropShadow="True" 
+                                                 FontFamily="Verdana" 
+                                                 FontSize="9"
+                                                 DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=PlacementTarget.DataContext}">
+                                        <MenuItem Name="MainContextMenuLocateLog" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:LocateLogMenuHeader}" 
+                                                  Click="MainContextMenuLocateLog_Click"
+                                                  ToolTip="{Binding AionLogPath, Source={x:Static Properties:Settings.Default}}"/>
+                                        <MenuItem Name="MainContextMenuIgnoreList" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:IgnoreListMenuHeader}" 
+                                                  Click="MainContextMenuIgnoreList_Click" />
+                                        <MenuItem Name="MainContextMenuSetYouAlias" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:SetYouAliasMenuHeader}" 
+                                                  Click="MainContextMenuSetYouAlias_Click" />
+                                        <Separator />
+                                        <MenuItem Name="MainContextView"  
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:MainViewMenuHeader}">
+                                            <!--MenuItem Name="MainContextViewDamage" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:DamageMainViewMenuHeader}" 
+                                                      IsCheckable="True" 
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Damage}}"
+                                                      Style="{StaticResource NotUncheckedMenuItemStyle}"/-->
+                                            <MenuItem Name="MainContextViewDps" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:DpsMainViewMenuHeader}" 
+                                                      IsCheckable="True" 
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.DamagePerSecond}}"/>
+                                            <MenuItem Name="MainContextViewPercent" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:PercentMainViewMenuHeader}" 
+                                                      IsCheckable="True" 
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Percent}}"/>
+                                            <MenuItem Name="MainContextViewExperience" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:ExperienceMainViewMenuHeader}" 
+                                                      IsCheckable="True" 
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}"/>
+                                            <MenuItem Name="MainContextViewKinah" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:KinahMainViewMenuHeader}" 
+                                                      IsCheckable="True" 
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"/>
+                                            <MenuItem Name="MainContextViewAp" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:ApMainViewMenuHeader}" 
+                                                      IsCheckable="True" 
+                                                      IsChecked="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.AbyssPoints}}"/>
+                                        </MenuItem>
+                                        <MenuItem Name="MainContextSorting"
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:SortingMenuHeader}">
+                                            <MenuItem Name="MenuItemSortByName"
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByNameMenuHeader}" 
+                                                      IsCheckable="True"
+                                                      IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.Name}}"/>
+                                            <MenuItem Name="MenuItemSortByDamage" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByDamageMenuHeader}" 
+                                                      IsCheckable="True"
+                                                      IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.Damage}}"/>
+                                            <MenuItem Name="MenuItemSortByDPS" 
+                                                      Header="{LocText KingsDamageMeter:WindowMainRes:SortByDpsMenuHeader}" 
+                                                      IsCheckable="True"
+                                                      IsChecked="{Binding SortType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource PlayerSortTypeToBoolConverter}, ConverterParameter={x:Static local:PlayerSortType.DamagePerSecond}}"/>
+                                        </MenuItem>
+                                        <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:HideOthersMenuHeader}" 
+                                                  IsCheckable="True" 
+                                                  IsChecked="{Binding IsHideOthers, Source={x:Static Properties:Settings.Default}}"/>
+                                        <MenuItem Header="{LocText KingsDamageMeter:WindowMainRes:GroupOnlyMenuHeader}" 
+                                                  IsCheckable="True" 
+                                                  IsChecked="{Binding IsGroupOnly, Source={x:Static Properties:Settings.Default}}"/>
+                                        <MenuItem Name="MenuItemAddGroupMemberByName" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:AddByNameMenuHeader}"
+                                                  Click="MenuItemAddGroupMemberByName_Click"/>
+                                        <Separator />
+                                        <!-- Here is we place language selection. But menu fill is implemented in WindowMain.xaml.cs -->
+                                        <MenuItem Name="MainContextMenuHelp" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:HelpMenuHeader}" 
+                                                  Click="MainContextMenuHelp_Click"/>
+                                        <MenuItem Name="MainContextMenuAbout" 
+                                                  Header="{LocText KingsDamageMeter:WindowMainRes:AboutMenuHeader}" 
+                                                  Click="MainContextMenuAbout_Click" />
+                                    </ContextMenu>
+                                </local:SkinButton.ContextMenu>
+                            </local:SkinButton>
+                            <local:SkinButton Grid.Column="0"
+                                              MouseDownImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButtonClick.bmp"
+                                              MouseOverImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButtonHover.bmp"
+                                              MouseUpImage="pack://application:,,,/Themes/BlackPearl/Images/CloseButton.bmp"
+                                              Click="CloseButton_Click"
+                                              ToolTip="{LocText KingsDamageMeter:WindowMainRes:CloseBtnToolTip}"
+                                              Width="20"
+                                              Height="20"
+                                              HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1"
+                          Margin="5,3,5,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl x:Name="playersItemsControl"
+                                      Grid.Column="0"
+                                      ItemsSource="{Binding Players}">
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                    <ScrollViewer Style="{DynamicResource PlayerScrollViewer}" 
+                                                  BorderThickness="1" 
+                                                  BorderBrush="{StaticResource BorderBrush}"
+                                                  HorizontalAlignment="Stretch">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <local:PlayerControl/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!--GridSplitter Grid.Column="1"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"
+                                      MinWidth="3"
+                                      Margin="3">
+                            
+                        </GridSplitter>
+                        <Expander ExpandDirection="Left"
+                                  Grid.Column="2">
+                            <Border BorderBrush="{StaticResource BorderBrush}" 
+                                    BorderThickness="1"
+                                    CornerRadius="0,10,0,0"/>
+                        </Expander-->
+                    </Grid>
+                    <Border Grid.Row="2"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="1,0,1,1"
+                            CornerRadius="0,0,0,10"
+                            Width="{Binding ActualWidth, ElementName=playersItemsControl}"
+                            HorizontalAlignment="Left"
+                            Margin="5,0,0,0">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding You}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Fake border to move text to right from scrollbar -->
+                            <Border Grid.Column="0"
+                                    MinWidth="{x:Static SystemParameters.VerticalScrollBarWidth}"/>
+                            <!--                                                  -->
+                            <WrapPanel Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Style>
+                                        <Style TargetType="{x:Type StackPanel}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding You.TotalKinah}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}" 
+                                                             Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <StackPanel.ToolTip>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Column="0"
+                                                       Grid.Row="0"
+                                                       Text="{LocText KingsDamageMeter:WindowMainRes:KinahEarnedToolTip}"
+                                                       Margin="2"/>
+                                            <TextBlock Grid.Column="1"
+                                                       Grid.Row="0"
+                                                       Text="{Binding You.KinahEarned, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"
+                                                       Margin="2"/>
+                                            <TextBlock Grid.Column="0"
+                                                       Grid.Row="1"
+                                                       Text="{LocText KingsDamageMeter:WindowMainRes:KinahSpentToolTip}"
+                                                       Margin="2"/>
+                                            <TextBlock Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       Text="{Binding You.KinahSpent, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"
+                                                       Margin="2"/>
+                                        </Grid>
+                                    </StackPanel.ToolTip>
+                                    <TextBlock Text="{Binding You.TotalKinah, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Kinah}}"
+                                               Style="{StaticResource MainWindowTextStyle}"
+                                               Margin="2"/>
+                                    <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Coin-32x32.png" Width="16" Height="16" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Style>
+                                        <Style TargetType="{x:Type StackPanel}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding You.Exp}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}" 
+                                                             Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <StackPanel.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{LocText KingsDamageMeter:WindowMainRes:ExpPerHourToolTip}"
+                                                       Margin="2"/>
+                                            <TextBlock Text="{Binding You.ExpPerHour, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}"
+                                                       Margin="2"/>
+                                        </StackPanel>
+                                    </StackPanel.ToolTip>
+                                    <TextBlock Text="{Binding You.Exp, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.Experience}}"
+                                               Style="{StaticResource MainWindowTextStyle}"
+                                               Margin="2"/>
+                                    <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Book-32x32.png" Width="16" Height="16" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Style>
+                                        <Style TargetType="{x:Type StackPanel}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding You.Ap}" Value="0">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToBoolConverter}, ConverterParameter={x:Static local:DisplayType.AbyssPoints}}" 
+                                                             Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <TextBlock Text="{Binding You.Ap, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static local:DisplayType.AbyssPoints}}"
+                                               Style="{StaticResource MainWindowTextStyle}"
+                                               Margin="2"/>
+                                    <Image Source="pack://application:,,,/Themes/BlackPearl/Images/Swords-32x32.png" Width="16" Height="16" />
+                                </StackPanel>
+                            </WrapPanel>
+                        </Grid>
+                    </Border>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Slider Grid.Column="0"
+                                Name="OpacitySlider" 
+                                VerticalAlignment="Center" 
+                                Minimum="0.3" 
+                                Maximum="1" 
+                                LargeChange="0.1" 
+                                TickFrequency="0.01" 
+                                TickPlacement="None" 
+                                Value="{Binding WindowMainOpacity, Source={x:Static Properties:Settings.Default}}" 
+                                Style="{StaticResource PerfectSlider}" 
+                                SmallChange="0.01" 
+                                ToolTip="{LocText KingsDamageMeter:WindowMainRes:OpacitySliderToolTip}" 
+                                HorizontalAlignment="Stretch" Margin="10,0,5,0" />
+                        <CheckBox Grid.Column="1"
+                                  Style="{StaticResource PerfectCheckBox}"
+                                  Name="CheckTopMost"
+                                  VerticalAlignment="Center"
+                                  FlowDirection="RightToLeft"
+                                  Foreground="Gold"
+                                  FontSize="9"
+                                  FontFamily="Verdana"
+                                  IsChecked="{Binding WindowMainTopMost, Source={x:Static Properties:Settings.Default}}"
+                                  ToolTip="{LocText KingsDamageMeter:WindowMainRes:TopMostCheckBoxToolTip}"
+                                  HorizontalAlignment="Center" Margin="5,0" />
+                        <Thumb Grid.Column="2"
+                               Cursor="SizeNWSE"
+                               Name="ResizeThumb" 
+                               DragDelta="ThumbResize_DragDelta" 
+                               OverridesDefaultStyle="False" 
+                               HorizontalAlignment="Right" 
+                               VerticalAlignment="Bottom" 
+                               Width="15" 
+                               Height="15" 
+                               ToolTip="{LocText KingsDamageMeter:WindowMainRes:ResizeThumbToolTip}" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

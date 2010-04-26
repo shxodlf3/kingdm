@@ -1,0 +1,60 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KingsDamageMeter.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WindowMainX" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WindowMainY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WindowMainOpacity" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="WindowMainTopMost" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AionLogPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\NCSoft\Aion\Chat.log</Value>
+    </Setting>
+    <Setting Name="IgnoreList" Type="System.Collections.ObjectModel.ObservableCollection`1[System.String]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FriendList" Type="System.Collections.ObjectModel.ObservableCollection`1[System.String]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HelpFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Documentation.pdf</Value>
+    </Setting>
+    <Setting Name="WindowMainWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">196</Value>
+    </Setting>
+    <Setting Name="WindowMainHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">105</Value>
+    </Setting>
+    <Setting Name="LogTimeFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">yyyy.MM.dd hh:mm:ss</Value>
+    </Setting>
+    <Setting Name="Debug" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DebugFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Debug.log</Value>
+    </Setting>
+    <Setting Name="IsGroupOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SortType" Type="KingsDamageMeter.Controls.PlayerSortType" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="DisplayType" Type="KingsDamageMeter.Controls.DisplayType" Scope="User">
+      <Value Profile="(Default)">Damage</Value>
+    </Setting>
+    <Setting Name="IsHideOthers" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="YouAlias" Type="System.String" Scope="User">
+      <Value Profile="(Default)">You</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

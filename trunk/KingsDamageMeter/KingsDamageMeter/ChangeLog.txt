@@ -1,0 +1,83 @@
+﻿Version 1.5.5 Beta 6
+	Removed: Multilanguage support.
+	Removed: Sessions and Encounters.
+	Added: Player classes are now detected based on unique skills.
+	Added: The user will now be asked to confirm closing if players exist in the window.
+	Fixed: Delayed effects such as Magma Eruption should work now.
+	Fixed: The elusive Poison Arrow.
+	Fixed: Player pecentage in the tooltip will show as the total from group.
+	Fixed: Percentages should no longer appear as NaN when the value should be 0.
+	Fixed: The provided system.ovr file should now work properly.
+	Fixed: An issue in the parser caused an out of memory exception when loading a large log file.
+
+Version 1.5.0 Beta 6
+	Added: Right click on a player and "Skills..." will now show a breakdown of their skills and how much damage each contributes.
+	Added: Now keeps track of Kinah spent/earned, EXP and Abyss Points gained.
+	Added: Player controls can now display damage, dps and percentage.
+	Added: The You alias can now be changed from the options menu.
+	Added: The zip package now comes with a basic system.ovr file.
+	Added: The Copy All function is now Copy Macro. This allows you to copy all the players to the clipboard and paste into an ingame macro.
+	Added: You can now flag players as friends. This will automatically add them to your group when they appear in the player list.
+	Fixed: Interface translations are now accessible from the Options menu. This does not change the parser language.
+	Fixed: Effect damage should be captured.
+	Fixed: Sorting will now continue as the list is updated.
+	Fixed: Moved some menu items to the main options menu.
+	Fixed: Added some formatting to the numbers.
+	Fixed: Reset Damage is now Reset Counts because it applies to more than just damage.
+	Fixed: Made the checkboxes in the context menus a bit darker.
+	Other: Probably some I forgot.
+
+Version 1.3.5 Beta 5
+	Added: Debug logging functionality. Disabled by default, this log can provide information vital for development and debugging.
+	Added: "You" alias for languages that don't use "You."
+	Fixed: Revised regular expressions.
+	Fixed: Power button will now stay in sync with the parser.
+	Fixed: "Copy All" will now only copy visible players.
+	Fixed: Copy to clipboard features have been shortened.
+	Fixed: Unhandled exceptions will now be reported.
+	Fixed: Assassin poisons are now captured.
+	Fixed: All pets should now be captured properly.
+
+Version 1.3.1 Beta 4
+	Fixed: An encoding issue that prevented the parser from reading special characters properly. This should resolve any issues with translations.
+
+Version 1.3.0 Beta 4
+	Added: You can now reset every one's damage and dps from the Options Menu without clearing them from the player list.
+	Added: A rounded border to the interface.
+	Added: A power on/off button that starts and stops the parser.
+	Added: "Reset All Damage" to the player context menu. This resets every one's statistics without having to clear them from the player list.
+	Fixed: Player and pet damage should now be properly parsed from the log.
+	Fixed: A bug caused the program to crash when the main context menu opened with no players in the player view.
+	Fixed: A bug caused the program to crash if you remove a player from the group that has 0% contributed damage.
+	Fixed: New players should no longer appear while "Group Only" is checked.
+	Fixed: The parser will now start when you "Locate Log" like it's supposed to.
+	Fixed: The regular expressions now exist in kingsdamagemeter.exe.config for translations to support other client languages.
+
+Version 1.2.0 Beta 3
+	Added: Group member tracking. (Understatement)
+	Fixed: Players will now receive credit for the damage their pets inflict.
+	Fixed: "Copy" now shows the current DPS in place of the Peak DPS.
+	Fixed: A bug in the ignore list editor that could crash the program.
+	Fixed: The text field on the ignore list editor now accepts the "Enter" key.
+	Fixed: Peak DPS will not be calculated until at least 5 seconds of activity.
+
+Version 1.1.2 Beta 2
+	Added: Multi-language support.
+	Fixed: "You" will now be added even if removed while "Hide Others" is enabled.
+	Added: A resize thumb for the main window.
+	Fixed: Many other interface adjustments and additions.
+	Fixed: Peak DPS will now be more reliable.
+
+Version 1.1.1 Beta 2
+	Fixed: Damage percentages will now properly update when a player is removed or ignored.
+	Fixed: AionLogParser should no longer unnecessarily use up cpu.
+
+Version 1.1.0 Beta 2
+	Fixed: Incorrectly showing other players when Hide Others is enabled.
+	Added: A minimize button for the main window.
+	Fixed: Critical hits now show up in damage.
+	Added: Tracking for damage per second.
+	Added: Better support for DoTs.
+	Added: Sorting for player view by damage and name.
+	Added: Name, Total Damage, Dps, Peak Dps and Biggest Hit to player tooltip.
+	Fixed: Made the ToolTip background darker so the text is easier to see.

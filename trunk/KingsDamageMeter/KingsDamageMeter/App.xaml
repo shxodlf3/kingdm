@@ -1,0 +1,25 @@
+﻿<Application x:Class="KingsDamageMeter.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="WindowMain.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/BlackPearl/ContextMenu.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/MenuItem.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/ProgressBar.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/Slider.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/PlayerControl.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/Scrollbar.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/CheckBox.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/MenuItem.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/PlayerScrollViewer.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/TitleLabel.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/ToolTip.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/Thumb.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl/RoundButton.xaml" />
+                <ResourceDictionary Source="Themes/BlackPearl.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
