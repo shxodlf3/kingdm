@@ -1,0 +1,181 @@
+﻿<UserControl x:Class="KingsDamageMeter.Controls.PlayerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Converters="clr-namespace:KingsDamageMeter.Converters"
+             xmlns:Controls="clr-namespace:KingsDamageMeter.Controls"
+             xmlns:Properties="clr-namespace:KingsDamageMeter.Properties"
+             MinHeight="38" MinWidth="150"
+             Margin="2">
+    <UserControl.Resources>
+        <Converters:DataToFormattedDataConverter x:Key="DataToFormattedDataConverter"/>
+        <Converters:DisplayTypeToVisibilityConverter x:Key="DisplayTypeToVisibilityConverter"/>
+        <Style x:Key="DisabledYouMenuItemStyle" TargetType="{x:Type MenuItem}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding PlayerName, Mode=OneWay, Converter={StaticResource DetectYouConverter}}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ClassIconStyle" TargetType="{x:Type Ellipse}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding PlayerClass, Mode=OneWay}" Value="None">
+                    <Setter Property="Fill" Value="{DynamicResource ClassTypeNoneBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerClass, Mode=OneWay}" Value="Cleric">
+                    <Setter Property="Fill" Value="{DynamicResource ClassTypeClericBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerClass, Mode=OneWay}" Value="Chanter">
+                    <Setter Property="Fill" Value="{DynamicResource ClassTypeChanterBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerClass, Mode=OneWay}" Value="Assassin">
+                    <Setter Property="Fill" Value="{DynamicResource ClassTypeAssassinBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerClass, Mode=OneWay}" Value="Ranger">
+                    <Setter Property="Fill" Value="{DynamicResource ClassTypeRangerBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerClass, Mode=OneWay}" Value="Templar">
+                    <Setter Property="Fill" Value="{DynamicResource ClassTypeTemplarBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerClass, Mode=OneWay}" Value="Gladiator">
+                    <Setter Property="Fill" Value="{DynamicResource ClassTypeGladiatorBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerClass, Mode=OneWay}" Value="Sorcerer">
+                    <Setter Property="Fill" Value="{DynamicResource ClassTypeSorcererBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding PlayerClass, Mode=OneWay}" Value="Spiritmaster">
+                    <Setter Property="Fill" Value="{DynamicResource ClassTypeSpiritmasterBrush}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.ToolTip>
+        <StackPanel>
+            <TextBlock Text="{Binding PlayerName}"/>
+            <TextBlock Text="{Binding PlayerClass}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Damage, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipTotal}"/>
+            </StackPanel>
+            <TextBlock Text="{Binding PercentFromGroupDamages, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"/>
+            <TextBlock/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding DamagePerSecond, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipDps}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding PeakDps, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipPeak}"/>
+            </StackPanel>
+            <TextBlock/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding BiggestHit, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{LocText KingsDamageMeter:PlayerToolTipRes:PlayerToolTipBiggestHit}"/>
+            </StackPanel>
+        </StackPanel>
+    </UserControl.ToolTip>
+    <UserControl.ContextMenu>
+        <ContextMenu FontSize="9" FontFamily="Verdana">
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMenuHeader}" 
+                      Command="{x:Static Controls:Commands.CopySelectedToClipboardCommand}"
+                      CommandParameter="{Binding}"/>
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroMenuHeader}">
+                <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroGroupMenuHeader}"
+                      Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
+                      CommandParameter="{x:Static Controls:ClipboardCopyType.ToPartyChat}"/>
+                <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroAllianceMenuHeader}"
+                      Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
+                      CommandParameter="{x:Static Controls:ClipboardCopyType.ToAllianceChat}"/>
+                <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:CopyMacroLegionMenuHeader}"
+                      Command="{x:Static Controls:Commands.CopyToClipboardCommand}"
+                      CommandParameter="{x:Static Controls:ClipboardCopyType.ToLegionChat}"/>
+            </MenuItem>
+            <Separator />
+            <MenuItem Name="MenuItemViewSkills" 
+                      Header="{LocText KingsDamageMeter:PlayerControlRes:ViewSkillsMenuHeader}" 
+                      Click="MenuItemViewSkills_Click" />
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:GroupMemeberMenuHeader}" 
+                      IsCheckable="True"
+                      IsChecked="{Binding IsGroupMember}">
+                <MenuItem.Style>
+                    <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource DisabledYouMenuItemStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsFriend}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:FriendMenuHeader}" 
+                      IsCheckable="True"
+                      IsChecked="{Binding IsFriend}"
+                      Style="{StaticResource DisabledYouMenuItemStyle}"/>
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:RemoveMenuHeader}"
+                      Command="{x:Static Controls:Commands.RemovePlayerCommand}"
+                      CommandParameter="{Binding}"/>
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:IgnorePlayerMenuHeader}" 
+                      Command="{x:Static Controls:Commands.IgnorePlayerCommand}"
+                      CommandParameter="{Binding}"
+                      Style="{StaticResource DisabledYouMenuItemStyle}"/>
+            <Separator />
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:ResetCountsMenuHeader}"
+                      Command="{x:Static Controls:Commands.ResetCountsCommand}"/>
+            <MenuItem Header="{LocText KingsDamageMeter:PlayerControlRes:ClearListMenuHeader}"
+                      Command="{x:Static Controls:Commands.ClearAllCommand}"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    <Border Style="{DynamicResource PlayerControlBorderStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse x:Name="ClassIcon" Style="{DynamicResource ClassIconStyle}" Width="9" Height="9" Margin="2,4,2,2" VerticalAlignment="Top">
+                    <Ellipse.ToolTip>
+                        <ToolTip Content="{Binding PlayerClass}"/>
+                    </Ellipse.ToolTip>
+                </Ellipse>
+                <TextBlock Text="{Binding PlayerName}"
+                           VerticalAlignment="Center"
+                           Margin="2,0,0,0"
+                           Style="{DynamicResource PlayerNameTextStyle}"
+                           Grid.Column="1" />
+                <StackPanel Grid.Column="1"
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            Margin="0,0,4,0"
+                            HorizontalAlignment="Right">
+                    <TextBlock HorizontalAlignment="Right"
+                               Style="{DynamicResource PlayerControlTextStyle}"
+                               Text="{Binding Damage, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Damage}}"/>
+                    <TextBlock HorizontalAlignment="Right"
+                               Style="{DynamicResource PlayerControlTextStyle}"
+                               Text="{Binding DamagePerSecond, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"
+                               Visibility="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToVisibilityConverter}, ConverterParameter={x:Static Controls:DisplayType.DamagePerSecond}}"/>
+                </StackPanel>
+            </Grid>
+            <ProgressBar Grid.Row="1"
+                         VerticalAlignment="Center" 
+                         Value="{Binding PercentFromTopDamage}" 
+                         Maximum="1" 
+                         SmallChange="0.01" 
+                         LargeChange="0.1" 
+                         Margin="5,0,5,2"/>
+            <TextBlock Grid.Row="1"
+                       Style="{DynamicResource PlayerControlTextStyle}"
+                       Text="{Binding PercentFromGroupDamages, Converter={StaticResource DataToFormattedDataConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"
+                       HorizontalAlignment="Center"
+                       Visibility="{Binding DisplayType, Source={x:Static Properties:Settings.Default}, Converter={StaticResource DisplayTypeToVisibilityConverter}, ConverterParameter={x:Static Controls:DisplayType.Percent}}"/>
+        </Grid>
+    </Border>
+</UserControl>
